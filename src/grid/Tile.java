@@ -9,10 +9,10 @@ import org.lwjgl.util.vector.Vector2f;
 public class Tile {
 	
 	//the location of this tile in the grid
-	private Vector2f locInGrid;
+	protected Vector2f locInGrid;
 	
 	//the units contained within this tile
-	private ArrayList<Unit> unitsContained;
+	protected ArrayList<Unit> unitsContained;
 	
 	protected int hp;
 	
@@ -57,6 +57,10 @@ public class Tile {
 			this.hp = MAXHP;
 		else
 			this.hp += trains;
+	}
+	
+	public int getHp(){
+		return this.hp;
 	}
 
 
