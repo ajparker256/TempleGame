@@ -20,10 +20,13 @@ public class Tile {
 	
 	protected boolean passable;
 	
+	protected Grid gr;
+	
 	//creates a tile in location loc
-	public Tile(Vector2f loc){
+	public Tile(Vector2f loc, Grid gr){
 		
 		this.locInGrid = loc;
+		this.gr = gr;
 		
 	}
 	
@@ -61,6 +64,10 @@ public class Tile {
 	
 	public int getHp(){
 		return this.hp;
+	}
+	
+	public Grid getGrid(){
+		return this.gr;
 	}
 
 

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class PitfallTrap extends Tile{
 
-	public PitfallTrap(Vector2f loc) {
-		super(loc);
+	public PitfallTrap(Vector2f loc, Grid gr) {
+		super(loc, gr);
 		this.passable = true;
 		this.hp = 0;
 		init();

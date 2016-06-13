@@ -9,8 +9,8 @@ import org.lwjgl.util.vector.Vector2f;
 public class Void extends Tile{
 	
 	
-	public Void(Vector2f loc) {
-		super(loc);
+	public Void(Vector2f loc, Grid gr) {
+		super(loc, gr);
 		this.passable = true;
 		this.hp = 0;
 		init();
