@@ -1,5 +1,6 @@
 package main;
 
+import grid.Grid;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -22,10 +23,13 @@ import org.lwjgl.util.vector.Vector2f;
 
 
 
+
+
 import entities.Camera;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import sound.Sound;
+import tools.MathM;
 //Main game loop
 public class Main {
 	//Amount of ambient light
@@ -40,6 +44,7 @@ public static int money;
 	DisplayManager.createDisplay();
 	Loader loader = new Loader();
 	Random random = new Random();
+	Grid grid = new Grid(new Vector2f(0f,0f),new Vector2f(0.5f,0.5f),10);
 
 /*
 SoundLibrary.music = Sound.loadSound("song");
@@ -84,96 +89,7 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	Sound.loopSound(SoundLibrary.music);
 	
 	while(!Display.isCloseRequested()){
-		if(money%10==0){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num0, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==1){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num1, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==2){
-		
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num2, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==3){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num3, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==4){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num4, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==5){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num5, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==6){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num6, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==7){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num7, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==8){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num8, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}else 	if(money%10==9){
-			dynamicGuis.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(0.9f,-0.9f), new Vector2f(0.1f,0.1f)));
-		}
-		if((money%100)-money%10==0){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num0, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==10){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num1, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==20){
-			
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num2, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==30){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num3, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==40){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num4, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==50){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num5, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==60){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num6, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==70){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num7, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==80){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num8, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%100)-money%10==90){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}
-		
-			if((money%1000)-money%100-money%10==0){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num0, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==100){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num1, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==200){
-			
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num2, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==300){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num3, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==400){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num4, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==500){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num5, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==600){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num6, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==700){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num7, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==800){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num8, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%1000)-money%100==900){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(0.7f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}
-
-			if((money%10000)-money%100-money%10==0){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num0, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==1000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num1, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==2000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num2, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==3000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num3, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==4000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num4, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==5000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num5, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==6000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num6, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==7000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num7, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==8000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num8, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}else 	if((money%10000)-money%1000==9000){
-				dynamicGuis.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
-			}
-
+		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
 		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);

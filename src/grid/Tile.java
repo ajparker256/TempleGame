@@ -1,7 +1,12 @@
 package grid;
 
 import entities.Unit;
+import gui.GuiTexture;
+
 import java.util.ArrayList;
+
+import librarys.TextureLibrary;
+
 import org.lwjgl.util.vector.Vector2f;
 
 // This is the superclass for all tiles contained in a grid
@@ -10,10 +15,9 @@ public class Tile {
 	
 	//the location of this tile in the grid
 	private Vector2f locInGrid;
-	
+	private int texture;
 	//the units contained within this tile
 	private ArrayList<Unit> unitsContained;
-	
 	protected int hp;
 	
 	protected int MAXHP;
@@ -22,9 +26,8 @@ public class Tile {
 	
 	//creates a tile in location loc
 	public Tile(Vector2f loc){
-		
+		this.texture=TextureLibrary.Num0;
 		this.locInGrid = loc;
-		
 	}
 	
 	protected void init(){
@@ -58,6 +61,8 @@ public class Tile {
 		else
 			this.hp += trains;
 	}
+
+
 
 
 }

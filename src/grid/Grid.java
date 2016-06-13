@@ -91,7 +91,7 @@ public class Grid {
 	
 	private Vector2f[] getAdjacent(Vector2f loc) {
 		//An array of the locations that an object can move to assuming 4 way motion only
-		//This gets the adjacent locations if possible and leaves -1, -1 if they do not exist
+		//This gets the adjacent locations if pos sible and leaves -1, -1 if they do not exist
 		Vector2f[] adjacents = new Vector2f[4];
 		//Left side
 		if(loc.x!=0) {
