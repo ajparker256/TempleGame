@@ -26,4 +26,12 @@ public class Tile {
 		return this.unitsContained;
 	}
 	
+	public void add(Unit u){
+		this.unitsContained.add(u);
+	}
+	
+	public Vector2f getLoc(){
+		return this.locInGrid;
+	}
+
 }
