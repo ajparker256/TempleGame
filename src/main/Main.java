@@ -33,18 +33,15 @@ public static final float ambient = 0.5f;
 public static int money;
 
 	public static void main(String[] args) throws FileNotFoundException {
+
 		money=1327;
-		
+
 	Camera camera = new Camera();
 	DisplayManager.createDisplay();
 	Loader loader = new Loader();
 	Random random = new Random();
 
-//BlueLadybug
-	
-
 /*
-
 SoundLibrary.music = Sound.loadSound("song");
 SoundLibrary.gunSound1 = Sound.loadSound("shot");
 SoundLibrary.gunSound2 = Sound.loadSound("shot");
@@ -84,14 +81,6 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	GuiLibrary.nextWave = loader.loadTexture("nextWave");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
-
-	
-
-	//
-	//player
-	//
-	 
-	
 	Sound.loopSound(SoundLibrary.music);
 	
 	while(!Display.isCloseRequested()){
@@ -184,18 +173,12 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 			}else 	if((money%10000)-money%1000==9000){
 				dynamicGuis.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(0.6f,-0.9f), new Vector2f(0.1f,0.1f)));
 			}
-		
+
 		//enemy update stuff
 		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
-		
-		
-		
-		
-			
-		
 	}
 	
 	guiRenderer.cleanUp();
