@@ -19,9 +19,8 @@ public class Grid {
 	//This is the location in relation to the page spawned.
 	private Vector2f location;
 	
-	//This is the array that represents locations that are occupied 0 == null, 1 == wall, 2 == ghostWall
-	//Ghost walls can be placed upon, but cannot be moved through.
-	private int[][] gr;
+	//This is the 2d array that contains all of the locations in the grid represented by tiles
+	private Tile[][] gr;
 	
 	//This acts as a unifying number so that groups don't get the same id within the grid.
 	private int idCount;
@@ -30,7 +29,7 @@ public class Grid {
 	public Grid(Vector2f l, Vector2f s, int r) {
 		size = s;
 		location = l;
-		gr = new int[r][r];
+		gr = new Tile[r][r];
 		idCount = 1;
 		GRID_UNIT = new Vector2f(size.x/r, size.y/r);
 	}
@@ -39,28 +38,28 @@ public class Grid {
 	public Grid(Vector2f l, Vector2f s, int r, int c){
 		size = s;
 		location = l;
-		gr = new int[r][c];
+		gr = new Tile[r][c];
 		idCount = 1;
 		GRID_UNIT = new Vector2f(size.x/r, size.y/c);
 	}
 	
 	//Changes the value of a piece of the array.
-	public void change(int r, int c, int b) {
+	public void change(int r, int c, Tile b) {
 		gr[r][c] = b;
 	}
 	
 	//Checks the value at r,c.
-	public int get(int r, int c) {
+	public Tile get(int r, int c) {
 		return gr[r][c];
 	}
 	
-	//Gives grid position based off a vector.
-	public int get(Vector2f r) {
+	//Gives grid value based off a vector.
+	public Tile get(Vector2f r) {
 		return gr[(int)r.x][(int)r.y];
 	}
 	
 	//Returns the grid
-	public int[][] getGrid() {
+	public Tile[][] getGrid() {
 		return gr;
 	}
 	
