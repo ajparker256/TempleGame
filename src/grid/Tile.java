@@ -14,11 +14,21 @@ public class Tile {
 	//the units contained within this tile
 	private ArrayList<Unit> unitsContained;
 	
+	protected int hp;
+	
+	protected int MAXHP;
+	
+	protected boolean passable;
+	
 	//creates a tile in location loc
 	public Tile(Vector2f loc){
 		
 		this.locInGrid = loc;
 		
+	}
+	
+	protected void init(){
+		this.MAXHP = this.hp;
 	}
 	
 	//returns the arraylist of units contained within the tile
@@ -33,5 +43,21 @@ public class Tile {
 	public Vector2f getLoc(){
 		return this.locInGrid;
 	}
+	
+	//subtracts a pterodactyl amount of hp from the dirt
+	public void dealDamage(int pterodactyl){
+		if(this.hp - pterodactyl < 0)
+			this.hp = 0;
+		else
+			this.hp -= pterodactyl;
+	}
+	
+	public void repair(int trains){
+		if(this.hp + trains > MAXHP)
+			this.hp = MAXHP;
+		else
+			this.hp += trains;
+	}
+
 
 }
