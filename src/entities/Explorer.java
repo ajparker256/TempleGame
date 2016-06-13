@@ -12,8 +12,8 @@ public class Explorer extends Unit{
 	
 	//This finds if the explorer has an interaction with the given tile
 	public boolean canInteract(int r, int c, Grid gr) {
-		//TODO Stub, to be implemented individually
-		if(gr.get(r,c) == 0) {
+		//TODO Stub, to be implemented individually to determine if with specialty can disarm the trap
+		if(gr.get(r,c).equals(null)) {
 			return false;
 		}
 		else return true;
