@@ -26,6 +26,18 @@ public class StringLibrary {
 		TextureLibrary.Num8= loader.loadTexture("Num8");
 		TextureLibrary.Num9= loader.loadTexture("Num9");
 		TextureLibrary.Num0= loader.loadTexture("Num0");
+		TextureLibrary.A = loader.loadTexture("A");
+		TextureLibrary.B = loader.loadTexture("B");
+		TextureLibrary.C = loader.loadTexture("C");
+		TextureLibrary.D = loader.loadTexture("D");
+		TextureLibrary.E = loader.loadTexture("E");
+		TextureLibrary.F = loader.loadTexture("F");
+		TextureLibrary.G = loader.loadTexture("G");
+		TextureLibrary.H = loader.loadTexture("H");
+		TextureLibrary.I = loader.loadTexture("I");
+		TextureLibrary.J = loader.loadTexture("J");
+		TextureLibrary.K = loader.loadTexture("K");
+		
 
 	}
 	
@@ -63,9 +75,32 @@ public class StringLibrary {
 		
 		
 		//Return letter textures
-		if(c == 'a') {
-		//	return TextureLibrary.a;
-		}
+		if(c == 'A') 
+			return TextureLibrary.A;
+		if(c == 'B') 
+			return TextureLibrary.B;
+		if(c == 'C') 
+			return TextureLibrary.C;
+		if(c == 'D') 
+			return TextureLibrary.D;
+		if(c == 'E') 
+			return TextureLibrary.E;
+		if(c == 'F') 
+			return TextureLibrary.F;
+		if(c == 'G') 
+			return TextureLibrary.G;
+		if(c == 'H') 
+			return TextureLibrary.H;
+		if(c == 'I') 
+			return TextureLibrary.I;
+		if(c == 'J') 
+			return TextureLibrary.J;
+		if(c == 'K') 
+			return TextureLibrary.K;
+		if(c == 'L') 
+			return TextureLibrary.L;
+		if(c == 'M') 
+			return TextureLibrary.M;
 		
 		//Else return -1 showing error
 		return 0;
