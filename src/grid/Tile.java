@@ -14,20 +14,26 @@ import org.lwjgl.util.vector.Vector2f;
 public class Tile {
 	
 	//the location of this tile in the grid
-	private Vector2f locInGrid;
-	private int texture;
+	protected Vector2f locInGrid;
+	
 	//the units contained within this tile
-	private ArrayList<Unit> unitsContained;
+	protected ArrayList<Unit> unitsContained;
+	
 	protected int hp;
 	
 	protected int MAXHP;
 	
 	protected boolean passable;
 	
+	protected Grid gr;
+	
 	//creates a tile in location loc
-	public Tile(Vector2f loc){
-		this.texture=TextureLibrary.Num0;
+
+	public Tile(Vector2f loc, Grid gr){
+		
 		this.locInGrid = loc;
+		this.gr = gr;
+
 	}
 	
 	protected void init(){
@@ -60,6 +66,14 @@ public class Tile {
 			this.hp = MAXHP;
 		else
 			this.hp += trains;
+	}
+	
+	public int getHp(){
+		return this.hp;
+	}
+	
+	public Grid getGrid(){
+		return this.gr;
 	}
 
 
