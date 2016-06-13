@@ -31,4 +31,20 @@ public class Unit {
 	public void render() {
 		//TODO AJ help... explain gui
 	}
+	
+	public int getHp() {
+		return hp;
+	}
+	
+	public Vector2f getLoc() {
+		return location;
+	}
+	
+	public Vector2f getVel() {
+		return velocity;
+	}
+	
+	public int getId(){
+		return id;
+	}
 }
