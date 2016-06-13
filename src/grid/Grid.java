@@ -91,28 +91,28 @@ public class Grid {
 	
 	private Vector2f[] getAdjacent(Vector2f loc) {
 		//An array of the locations that an object can move to assuming 4 way motion only
-		//This gets the adjacent locations if possible and leaves null if they do not exist
+		//This gets the adjacent locations if possible and leaves -1, -1 if they do not exist
 		Vector2f[] adjacents = new Vector2f[4];
 		//Left side
-		if(loc.x!=0 && (gr[(int)loc.x-1][(int)loc.y] == 0 || gr[(int)loc.x-1][(int)loc.y] == 100)) {
+		if(loc.x!=0) {
 			adjacents[0] = new Vector2f(loc.x-1, loc.y);
 		}else {
 			adjacents[0] = new Vector2f(-1, -1);
 		}
 		//Top side
-		if(loc.y!=0 && (gr[(int)loc.x][(int)loc.y-1] == 0|| gr[(int)loc.x][(int)loc.y-1] == 100)) {
+		if(loc.y!=0) {
 			adjacents[1] = new Vector2f(loc.x, loc.y-1);
 		}else {
 			adjacents[1] = new Vector2f(-1, -1);
 		}
 		//Right side
-		if(loc.x!=gr.length-1 && (gr[(int)loc.x+1][(int)loc.y] == 0 || gr[(int)loc.x+1][(int)loc.y] == 100)) {
+		if(loc.x!=gr.length-1) {
 			adjacents[2] = new Vector2f(loc.x+1, loc.y);
 		}else {
 			adjacents[2] = new Vector2f(-1, -1);
 		}
 		//Bottom side
-		if(loc.y!=gr[0].length-1 && (gr[(int)loc.x][(int)loc.y+1] == 0 || gr[(int)loc.x][(int)loc.y+1] == 100)) {
+		if(loc.y!=gr[0].length-1) {
 			adjacents[3] = new Vector2f(loc.x, loc.y+1);
 		}else {
 			adjacents[3] = new Vector2f(-1, -1);
