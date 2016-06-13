@@ -2,13 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/AJ/Desktop/workspace/Copy/lib/jars/lwjgl.jar">
+	<classpathentry kind="lib" path="C:/Users/Jackson/workspace/TempleGame/lib/jars/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="TempleGame/lib/natives-win"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Jackson/workspace/TempleGame/lib/natives-win"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/AJ/Desktop/workspace/Copy/lib/jars/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="C:/Users/AJ/Desktop/workspace/Copy/lib/jars/PNGDecoder.jar"/>
-	<classpathentry kind="lib" path="C:/Users/AJ/Desktop/workspace/Copy/lib/jars/slick-util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jackson/workspace/TempleGame/lib/jars/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jackson/workspace/TempleGame/lib/jars/PNGDecoder.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jackson/workspace/TempleGame/lib/jars/slick-util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
