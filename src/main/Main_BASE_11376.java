@@ -32,19 +32,16 @@ private static float spawnRate=0;
 private static int sides=1;
 
 	public static void main(String[] args) throws FileNotFoundException {
+		
 	Camera camera = new Camera();
 	DisplayManager.createDisplay();
 	Loader loader = new Loader();
 	Random random = new Random();
-<<<<<<< HEAD
-//Blue ladybug
-=======
 
-//BlueLadybug
-	
+//yarrrrrr
 
->>>>>>> a8861e1fb1a59cf07a93521a5d4ba7b54d64f437
 /*
+
 SoundLibrary.music = Sound.loadSound("song");
 SoundLibrary.gunSound1 = Sound.loadSound("shot");
 SoundLibrary.gunSound2 = Sound.loadSound("shot");
@@ -75,13 +72,31 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	GuiLibrary.nextWave = loader.loadTexture("nextWave");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
+
+	
+
+	//
+	//player
+	//
+	 
+	
 	Sound.loopSound(SoundLibrary.music);
 	while(!Display.isCloseRequested()){
+
+		
+		
+
 		//enemy update stuff
 		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
+		
+		
+		
+		
+			
+		
 	}
 	
 	guiRenderer.cleanUp();

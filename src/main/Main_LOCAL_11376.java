@@ -36,14 +36,7 @@ private static int sides=1;
 	DisplayManager.createDisplay();
 	Loader loader = new Loader();
 	Random random = new Random();
-<<<<<<< HEAD
 //Blue ladybug
-=======
-
-//BlueLadybug
-	
-
->>>>>>> a8861e1fb1a59cf07a93521a5d4ba7b54d64f437
 /*
 SoundLibrary.music = Sound.loadSound("song");
 SoundLibrary.gunSound1 = Sound.loadSound("shot");
