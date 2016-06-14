@@ -109,6 +109,7 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
+		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		guiRenderer.render(guis);
 		
 		guiRenderer.render(test);

@@ -56,6 +56,10 @@ public class Tile {
 		this.unitsContained.add(u);
 	}
 	
+	public void remove(Unit u) {
+		this.unitsContained.remove(u);
+	}
+	
 	public Vector2f getLoc(){
 		return this.locInGrid;
 	}
