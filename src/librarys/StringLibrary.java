@@ -56,6 +56,35 @@ public class StringLibrary {
 		TextureLibrary.Y = loader.loadTexture("Y");
 		TextureLibrary.Z = loader.loadTexture("Z");
 		
+		//Loads lowercase letters
+		//TODO Make special sizes for thin letters so that they can be printed closer together. Also make a getWidth(char c) method.
+		TextureLibrary.la = loader.loadTexture("la");
+		TextureLibrary.lb = loader.loadTexture("lb");
+		TextureLibrary.lc = loader.loadTexture("lc");
+		TextureLibrary.ld = loader.loadTexture("ld");
+		TextureLibrary.le = loader.loadTexture("le");
+		TextureLibrary.lf = loader.loadTexture("lf");
+		TextureLibrary.lg = loader.loadTexture("lg");
+		TextureLibrary.lh = loader.loadTexture("lh");
+		TextureLibrary.li = loader.loadTexture("li");
+		TextureLibrary.lj = loader.loadTexture("lj");
+		TextureLibrary.lk = loader.loadTexture("lk");
+		TextureLibrary.ll = loader.loadTexture("ll");
+		TextureLibrary.lm = loader.loadTexture("lm");
+		TextureLibrary.ln = loader.loadTexture("ln");
+		TextureLibrary.lo = loader.loadTexture("lo");
+		TextureLibrary.lp = loader.loadTexture("lp");
+		TextureLibrary.lq = loader.loadTexture("lq");
+		TextureLibrary.lr = loader.loadTexture("lr");
+		TextureLibrary.ls = loader.loadTexture("ls");
+		TextureLibrary.lt = loader.loadTexture("lt");
+		TextureLibrary.lu = loader.loadTexture("lu");
+		TextureLibrary.lv = loader.loadTexture("lv");
+		TextureLibrary.lw = loader.loadTexture("lw");
+		TextureLibrary.lx = loader.loadTexture("lx");
+		TextureLibrary.ly = loader.loadTexture("ly");
+		TextureLibrary.lz = loader.loadTexture("lz");
+		
 
 	}
 	
@@ -68,10 +97,13 @@ public class StringLibrary {
 		return string;
 	}
 	
+	//TODO make a getWidth(char c) method
+	
 	public static int getLetter(char c) {
+		//Potential optimization: Order in terms of frequency to reduce lag time in this method.
+		
 		//Return number textures
 		if(c == '0') {
-			System.out.println("0");
 			return TextureLibrary.Num0;
 			
 		}
@@ -148,6 +180,60 @@ public class StringLibrary {
 			return TextureLibrary.Y;
 		if(c == 'Z') 
 			return TextureLibrary.Z;
+		
+		//Lower Case Letters
+		if(c == 'a') 
+			return TextureLibrary.la;
+		if(c == 'b') 
+			return TextureLibrary.lb;
+		if(c == 'c') 
+			return TextureLibrary.lc;
+		if(c == 'd') 
+			return TextureLibrary.ld;
+		if(c == 'e') 
+			return TextureLibrary.le;
+		if(c == 'f') 
+			return TextureLibrary.lf;
+		if(c == 'g') 
+			return TextureLibrary.lg;
+		if(c == 'h') 
+			return TextureLibrary.lh;
+		if(c == 'i') 
+			return TextureLibrary.li;
+		if(c == 'j') 
+			return TextureLibrary.lj;
+		if(c == 'k') 
+			return TextureLibrary.lk;
+		if(c == 'l') 
+			return TextureLibrary.ll;
+		if(c == 'm') 
+			return TextureLibrary.lm;
+		if(c == 'n') 
+			return TextureLibrary.ln;
+		if(c == 'o') 
+			return TextureLibrary.lo;
+		if(c == 'p') 
+			return TextureLibrary.lp;
+		if(c == 'q') 
+			return TextureLibrary.lq;
+		if(c == 'r') 
+			return TextureLibrary.lr;
+		if(c == 's') 
+			return TextureLibrary.ls;
+		if(c == 't') 
+			return TextureLibrary.lt;
+		if(c == 'u') 
+			return TextureLibrary.lu;
+		if(c == 'v') 
+			return TextureLibrary.lv;
+		if(c == 'w') 
+			return TextureLibrary.lw;
+		if(c == 'x') 
+			return TextureLibrary.lx;
+		if(c == 'y') 
+			return TextureLibrary.ly;
+		if(c == 'z') 
+			return TextureLibrary.lz;
 		
 		//Else return -1 showing error
 		return 0;

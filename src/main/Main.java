@@ -98,7 +98,7 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	Sound.loopSound(SoundLibrary.music);
 	List<GuiTexture> test;
 	StringLibrary.setSize(new Vector2f(.02f, .02f));
-	test = StringLibrary.drawString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", new Vector2f(-.9f,-.7f));
+	test = StringLibrary.drawString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", new Vector2f(-.98f,-.7f));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));

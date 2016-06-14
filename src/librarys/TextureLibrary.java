@@ -40,4 +40,32 @@ public static int X;
 public static int Y;
 public static int Z;
 
+
+//Lower Case letters
+public static int la;
+public static int lb;
+public static int lc;
+public static int ld;
+public static int le;
+public static int lf;
+public static int lg;
+public static int lh;
+public static int li;
+public static int lj;
+public static int lk;
+public static int ll;
+public static int lm;
+public static int ln;
+public static int lo;
+public static int lp;
+public static int lq;
+public static int lr;
+public static int ls;
+public static int lt;
+public static int lu;
+public static int lv;
+public static int lw;
+public static int lx;
+public static int ly;
+public static int lz;
 }
