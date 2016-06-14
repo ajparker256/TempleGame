@@ -11,6 +11,7 @@ import java.util.Random;
 
 import librarys.GuiLibrary;
 import librarys.SoundLibrary;
+import librarys.StringLibrary;
 import librarys.TextureLibrary;
 
 import org.lwjgl.BufferUtils;
@@ -62,7 +63,7 @@ SoundLibrary.zombieSound = Sound.loadSound("splat");
 SoundLibrary.reloadSound = Sound.loadSound("reload");
 */
 	//gui
-	TextureLibrary.Num1= loader.loadTexture("Num1");
+	/*TextureLibrary.Num1= loader.loadTexture("Num1");
 	TextureLibrary.Num2= loader.loadTexture("Num2");
 	TextureLibrary.Num3= loader.loadTexture("Num3");
 	TextureLibrary.Num4= loader.loadTexture("Num4");
@@ -71,28 +72,39 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	TextureLibrary.Num7= loader.loadTexture("Num7");
 	TextureLibrary.Num8= loader.loadTexture("Num8");
 	TextureLibrary.Num9= loader.loadTexture("Num9");
-	TextureLibrary.Num0= loader.loadTexture("Num0");
+	TextureLibrary.Num0= loader.loadTexture("Num0"); */
+	
+	StringLibrary.init(loader);
+	
 	List<GuiTexture> guis = new ArrayList<GuiTexture>();
 	List<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
+	
 	GuiLibrary.gun = new GuiTexture (loader.loadTexture("gun"),new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f));
 //	guis.add(GuiLibrary.gun);
 	GuiLibrary.crosshair = new GuiTexture (loader.loadTexture("crosshair"),new Vector2f(0.025f,-0.025f), new Vector2f(0.1f,0.1f));
 //	guis.add(GuiLibrary.crosshair);
 	GuiLibrary.bulletTexture=loader.loadTexture("bulletTexture");
 	GuiLibrary.health=loader.loadTexture("test");
+	
+	
 	//shop
 	GuiLibrary.background = loader.loadTexture("background");
+	guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
 	GuiLibrary.shop = loader.loadTexture("shop");
 	GuiLibrary.nextWave = loader.loadTexture("nextWave");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
-	
+	List<GuiTexture> test = new ArrayList<GuiTexture>();
+	test = StringLibrary.drawString("ABCDEFGHIJK", new Vector2f(0,0));
+	guis.addAll(test);
 	while(!Display.isCloseRequested()){
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
+		
 		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);
+		guiRenderer.render(test);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
 	}

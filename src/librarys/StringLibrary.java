@@ -14,6 +14,7 @@ public class StringLibrary {
 	public static Vector2f size;
 	
 	public static void init(Loader loader) {
+		size = new Vector2f(.1f, .1f);
 		
 		nums = new GuiTexture[10];
 		TextureLibrary.Num1= loader.loadTexture("Num1");
@@ -45,8 +46,9 @@ public class StringLibrary {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
-			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+i*size.x, loc.y+i*size.y), new Vector2f(size.x,size.y)));
+			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+i*size.x+2, loc.y), new Vector2f(size.x,size.y)));
 		}
+		System.out.println("we did it");
 		return string;
 	}
 	
