@@ -80,7 +80,7 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	List<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	
 	GuiLibrary.background = loader.loadTexture("background");
-	guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
+	//guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
 	GuiLibrary.gun = new GuiTexture (loader.loadTexture("gun"),new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f));
 //	guis.add(GuiLibrary.gun);
 	GuiLibrary.crosshair = new GuiTexture (loader.loadTexture("crosshair"),new Vector2f(0.025f,-0.025f), new Vector2f(0.1f,0.1f));
@@ -91,7 +91,7 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	
 	//shop
 	
-	GuiLibrary.shop = loader.loadTexture("shop");
+	//GuiLibrary.shop = loader.loadTexture("shop");
 	GuiLibrary.nextWave = loader.loadTexture("nextWave");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
@@ -105,8 +105,9 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 		//enemy update stuff
 		dynamicGuis.addAll(test);
 		guiRenderer.render(guis);
-		guiRenderer.render(dynamicGuis);
+		
 		guiRenderer.render(test);
+		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
 	}
