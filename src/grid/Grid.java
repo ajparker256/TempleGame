@@ -77,6 +77,10 @@ public class Grid {
 		return idCount;
 	}
 	
+	public Vector2f getGridUnit(){
+		return GRID_UNIT;
+	}
+	
 	public void render() {
 		//TODO render the grid
 	}
