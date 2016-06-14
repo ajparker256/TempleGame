@@ -34,7 +34,7 @@ import tools.MathM;
 //Main game loop
 public class Main {
 	//Amount of ambient light
-public static final float ambient = 0.5f;
+public static final float ambient = 1f;
 public static int money;
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -96,17 +96,23 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
-	List<GuiTexture> test = new ArrayList<GuiTexture>();
-	test = StringLibrary.drawString("0ABCDEFGHIJK", new Vector2f(-0.6f,-.5f));
+	List<GuiTexture> test;
+	test = StringLibrary.drawString("ABCDEFGHIJK", new Vector2f(-.6f,-.7f));
+	//Makes the background white
+	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
-
+	for(int i = 0; i<test.size(); i++) {
+		dynamicGuis.add(test.get(i));
+	}
 	while(!Display.isCloseRequested()){
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
-		dynamicGuis.addAll(test);
+		//Renders from TOP TO BOTTOM!
 		guiRenderer.render(guis);
 		
 		guiRenderer.render(test);
+
+		
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
