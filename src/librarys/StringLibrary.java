@@ -40,6 +40,21 @@ public class StringLibrary {
 		TextureLibrary.I = loader.loadTexture("I");
 		TextureLibrary.J = loader.loadTexture("J");
 		TextureLibrary.K = loader.loadTexture("K");
+		TextureLibrary.L = loader.loadTexture("L");
+		TextureLibrary.M = loader.loadTexture("M");
+		TextureLibrary.N = loader.loadTexture("N");
+		TextureLibrary.O = loader.loadTexture("O");
+		TextureLibrary.P = loader.loadTexture("P");
+		TextureLibrary.Q = loader.loadTexture("Q");
+		TextureLibrary.R = loader.loadTexture("R");
+		TextureLibrary.S = loader.loadTexture("S");
+		TextureLibrary.T = loader.loadTexture("T");
+		TextureLibrary.U = loader.loadTexture("U");
+		TextureLibrary.V = loader.loadTexture("V");
+		TextureLibrary.W = loader.loadTexture("W");
+		TextureLibrary.X = loader.loadTexture("X");
+		TextureLibrary.Y = loader.loadTexture("Y");
+		TextureLibrary.Z = loader.loadTexture("Z");
 		
 
 	}
@@ -48,7 +63,7 @@ public class StringLibrary {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
-			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+i*size.x*3/2, loc.y), new Vector2f(size.x,size.y)));
+			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+i*size.x*8/5, loc.y), new Vector2f(size.x,size.y)));
 		}
 		return string;
 	}
@@ -80,7 +95,7 @@ public class StringLibrary {
 			return TextureLibrary.Num9;
 		
 		
-		//Return letter textures
+		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
 			return TextureLibrary.A;
 		if(c == 'B') 
@@ -107,6 +122,32 @@ public class StringLibrary {
 			return TextureLibrary.L;
 		if(c == 'M') 
 			return TextureLibrary.M;
+		if(c == 'N') 
+			return TextureLibrary.N;
+		if(c == 'O') 
+			return TextureLibrary.O;
+		if(c == 'P') 
+			return TextureLibrary.P;
+		if(c == 'Q') 
+			return TextureLibrary.Q;
+		if(c == 'R') 
+			return TextureLibrary.R;
+		if(c == 'S') 
+			return TextureLibrary.S;
+		if(c == 'T') 
+			return TextureLibrary.T;
+		if(c == 'U') 
+			return TextureLibrary.U;
+		if(c == 'V') 
+			return TextureLibrary.V;
+		if(c == 'W') 
+			return TextureLibrary.W;
+		if(c == 'X') 
+			return TextureLibrary.X;
+		if(c == 'Y') 
+			return TextureLibrary.Y;
+		if(c == 'Z') 
+			return TextureLibrary.Z;
 		
 		//Else return -1 showing error
 		return 0;
