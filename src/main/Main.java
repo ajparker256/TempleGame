@@ -79,6 +79,8 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	List<GuiTexture> guis = new ArrayList<GuiTexture>();
 	List<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	
+	GuiLibrary.background = loader.loadTexture("background");
+	guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
 	GuiLibrary.gun = new GuiTexture (loader.loadTexture("gun"),new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f));
 //	guis.add(GuiLibrary.gun);
 	GuiLibrary.crosshair = new GuiTexture (loader.loadTexture("crosshair"),new Vector2f(0.025f,-0.025f), new Vector2f(0.1f,0.1f));
@@ -88,20 +90,20 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	
 	
 	//shop
-	GuiLibrary.background = loader.loadTexture("background");
-	guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
+	
 	GuiLibrary.shop = loader.loadTexture("shop");
 	GuiLibrary.nextWave = loader.loadTexture("nextWave");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
 	List<GuiTexture> test = new ArrayList<GuiTexture>();
-	test = StringLibrary.drawString("ABCDEFGHIJK", new Vector2f(0,0));
-	guis.addAll(test);
+	test = StringLibrary.drawString("0ABCDEFGHIJK", new Vector2f(-0.6f,-.5f));
+	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
+
 	while(!Display.isCloseRequested()){
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
-		
+		dynamicGuis.addAll(test);
 		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);
 		guiRenderer.render(test);
