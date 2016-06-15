@@ -125,6 +125,13 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	DisplayManager.closeDisplay();
 		
 	}
+	
+	public void update() {
+		//TODO Test traps
+		//TODO Update Explorer AI
+		//TODO Update player input such as placing traps
+		//TODO Update ArrayLists of explorers, traps, Tiles, etc. if not already done so.
+	}
 }
 	
 
