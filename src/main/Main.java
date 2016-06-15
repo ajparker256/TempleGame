@@ -27,6 +27,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 
 import entities.Camera;
+import entities.Explorer;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import sound.Sound;
@@ -36,6 +37,7 @@ public class Main {
 	//Amount of ambient light
 public static final float ambient = 1f;
 public static int money;
+public static ArrayList<Explorer> wave;
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -96,11 +98,15 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
+	
+	//This is the string tester
 	List<GuiTexture> test;
 	StringLibrary.setSize(new Vector2f(.02f, .02f));
 	test = StringLibrary.drawString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", new Vector2f(-.98f,-.7f));
+	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, .5f)));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
+	
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
 		dynamicGuis.add(test.get(i));

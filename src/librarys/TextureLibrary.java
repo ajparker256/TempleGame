@@ -1,6 +1,11 @@
 package librarys;
 
 public class TextureLibrary {
+//Space
+public static int space;
+	
+	
+//Numbers stored here
 public static int Num0;
 public static int Num1;
 public static int Num2;

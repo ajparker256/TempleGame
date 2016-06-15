@@ -19,6 +19,8 @@ public class StringLibrary {
 		size = new Vector2f(.1f, .1f);
 		load = loader;
 		nums = new GuiTexture[10];
+		TextureLibrary.space = loader.loadTexture("space");
+		
 		TextureLibrary.Num1= loader.loadTexture("Num1");
 		TextureLibrary.Num2= loader.loadTexture("Num2");
 		TextureLibrary.Num3= loader.loadTexture("Num3");
@@ -99,9 +101,154 @@ public class StringLibrary {
 	
 	//TODO make a getWidth(char c) method
 	
+	public static int getWidth(char c) {
+		if(c == ' ') {
+			return (int)size.x;
+		}
+		//Return number textures
+		if(c == '0') {
+			return (int)size.x;
+			
+		}
+		if(c == '1') 
+			return (int)size.x;
+		if(c == '2') 
+			return (int)size.x;;
+		if(c == '3') 
+			return (int)size.x;;
+		if(c == '4') 
+			return (int)size.x;;
+		if(c == '5') 
+			return (int)size.x;;
+		if(c == '6') 
+			return (int)size.x;;
+		if(c == '7') 
+			return (int)size.x;;
+		if(c == '8') 
+			return (int)size.x;;
+		if(c == '9') 
+			return (int)size.x;;
+		
+		
+		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
+		if(c == 'A') 
+			return (int)size.x;;
+		if(c == 'B') 
+			return (int)size.x;;
+		if(c == 'C') 
+			return (int)size.x;;
+		if(c == 'D') 
+			return (int)size.x;;
+		if(c == 'E') 
+			return (int)size.x;;
+		if(c == 'F') 
+			return (int)size.x;;
+		if(c == 'G') 
+			return (int)size.x;;
+		if(c == 'H') 
+			return (int)size.x;;
+		if(c == 'I') 
+			return (int)size.x;;
+		if(c == 'J') 
+			return (int)size.x;;
+		if(c == 'K') 
+			return (int)size.x;;
+		if(c == 'L') 
+			return (int)size.x;;
+		if(c == 'M') 
+			return (int)size.x;;
+		if(c == 'N') 
+			return (int)size.x;;
+		if(c == 'O') 
+			return (int)size.x;;
+		if(c == 'P') 
+			return (int)size.x;;
+		if(c == 'Q') 
+			return (int)size.x;;
+		if(c == 'R') 
+			return (int)size.x;;
+		if(c == 'S') 
+			return (int)size.x;;
+		if(c == 'T') 
+			return (int)size.x;;
+		if(c == 'U') 
+			return (int)size.x;;
+		if(c == 'V') 
+			return (int)size.x;;
+		//Possibly make this one have more space than the others to accomodate its obscene breadth
+		if(c == 'W') 
+			return (int)size.x;;
+		if(c == 'X') 
+			return (int)size.x;;
+		if(c == 'Y') 
+			return (int)size.x;;
+		if(c == 'Z') 
+			return (int)size.x;;
+		
+		//Lower Case Letters
+		if(c == 'a') 
+			return (int)size.x;;
+		if(c == 'b') 
+			return (int)size.x;;
+		if(c == 'c') 
+			return (int)size.x;;
+		if(c == 'd') 
+			return (int)size.x;;
+		if(c == 'e') 
+			return (int)size.x;;
+		if(c == 'f') 
+			return (int)size.x;;
+		if(c == 'g') 
+			return (int)size.x;;
+		if(c == 'h') 
+			return (int)size.x;;
+		if(c == 'i') 
+			return (int)size.x;;
+		if(c == 'j') 
+			return (int)size.x;;
+		if(c == 'k') 
+			return (int)size.x;;
+		if(c == 'l') 
+			return (int)size.x;;
+		if(c == 'm') 
+			return (int)size.x;;
+		if(c == 'n') 
+			return (int)size.x;;
+		if(c == 'o') 
+			return (int)size.x;;
+		if(c == 'p') 
+			return (int)size.x;;
+		if(c == 'q') 
+			return (int)size.x;;
+		if(c == 'r') 
+			return (int)size.x;;
+		if(c == 's') 
+			return (int)size.x;;
+		if(c == 't') 
+			return (int)size.x;;
+		if(c == 'u') 
+			return (int)size.x;;
+		if(c == 'v') 
+			return (int)size.x;;
+		if(c == 'w') 
+			return (int)size.x;;
+		if(c == 'x') 
+			return (int)size.x;;
+		if(c == 'y') 
+			return (int)size.x;;
+		if(c == 'z') 
+			return (int)size.x;;
+		
+		
+		return 0;
+	}
+	
+	
 	public static int getLetter(char c) {
 		//Potential optimization: Order in terms of frequency to reduce lag time in this method.
-		
+		if(c == ' ') {
+			return TextureLibrary.space;
+		}
 		//Return number textures
 		if(c == '0') {
 			return TextureLibrary.Num0;
@@ -236,7 +383,7 @@ public class StringLibrary {
 			return TextureLibrary.lz;
 		
 		//Else return -1 showing error
-		return 0;
+		return -1;
 	}
 		
 	
