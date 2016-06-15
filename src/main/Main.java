@@ -1,7 +1,6 @@
 package main;
 
 import grid.Grid;
-import gui.Button;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -23,10 +22,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
-
-
-
-
+import buttons.Button;
 import entities.Camera;
 import entities.Explorer;
 import renderEngine.DisplayManager;

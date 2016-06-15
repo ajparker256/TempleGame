@@ -1,6 +1,8 @@
-package gui;
+package buttons;
 
 import org.lwjgl.util.vector.Vector2f;
+
+import gui.GuiTexture;
 
 public class Button {
 	//This is a list of the top left corners of hitboxes
