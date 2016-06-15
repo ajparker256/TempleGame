@@ -109,6 +109,10 @@ public static ArrayList<Button> buttons;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
 	
+	//Test for Animation and moving the Unit. This is independent of a Unit class
+	//TODO Attach the animation to the explorer so that it is done in tandem. 
+	//Currently displaying and movement are taken care of in the while loop below. 
+	
 	GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
