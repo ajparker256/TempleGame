@@ -1,6 +1,7 @@
 package main;
 
 import grid.Grid;
+import gui.Button;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -37,33 +38,35 @@ public class Main {
 	//Amount of ambient light
 public static final float ambient = 1f;
 public static int money;
-public static ArrayList<Explorer> wave;
+public static ArrayList<Explorer> group;
+public static ArrayList<Button> buttons;
 
 	public static void main(String[] args) throws FileNotFoundException {
 
 		money=1327;
+		buttons = new ArrayList<Button>();
+		group = new ArrayList<Explorer>();
+		Camera camera = new Camera();
+		DisplayManager.createDisplay();
+		Loader loader = new Loader();
+		Random random = new Random();
+		Grid grid = new Grid(new Vector2f(0f,0f),new Vector2f(0.5f,0.5f),10);
 
-	Camera camera = new Camera();
-	DisplayManager.createDisplay();
-	Loader loader = new Loader();
-	Random random = new Random();
-	Grid grid = new Grid(new Vector2f(0f,0f),new Vector2f(0.5f,0.5f),10);
-
-/*
-SoundLibrary.music = Sound.loadSound("song");
-SoundLibrary.gunSound1 = Sound.loadSound("shot");
-SoundLibrary.gunSound2 = Sound.loadSound("shot");
-SoundLibrary.gunSound3 = Sound.loadSound("shot");
-SoundLibrary.gunSound4= Sound.loadSound("shot");
-SoundLibrary.gunSound5 = Sound.loadSound("shot");
-SoundLibrary.gunSound6 = Sound.loadSound("shot");
-SoundLibrary.gunSound7 = Sound.loadSound("shot");
-SoundLibrary.gunSound8 = Sound.loadSound("shot");
-SoundLibrary.gunSound9= Sound.loadSound("shot");
-SoundLibrary.gunSound10= Sound.loadSound("shot");
-SoundLibrary.zombieSound = Sound.loadSound("splat");
-SoundLibrary.reloadSound = Sound.loadSound("reload");
-*/
+		/*
+	SoundLibrary.music = Sound.loadSound("song");
+	SoundLibrary.gunSound1 = Sound.loadSound("shot");
+	SoundLibrary.gunSound2 = Sound.loadSound("shot");
+	SoundLibrary.gunSound3 = Sound.loadSound("shot");
+	SoundLibrary.gunSound4= Sound.loadSound("shot");
+	SoundLibrary.gunSound5 = Sound.loadSound("shot");
+	SoundLibrary.gunSound6 = Sound.loadSound("shot");
+	SoundLibrary.gunSound7 = Sound.loadSound("shot");
+	SoundLibrary.gunSound8 = Sound.loadSound("shot");
+	SoundLibrary.gunSound9= Sound.loadSound("shot");
+	SoundLibrary.gunSound10= Sound.loadSound("shot");
+	SoundLibrary.zombieSound = Sound.loadSound("splat");
+	SoundLibrary.reloadSound = Sound.loadSound("reload");
+	*/
 	//gui
 	/*TextureLibrary.Num1= loader.loadTexture("Num1");
 	TextureLibrary.Num2= loader.loadTexture("Num2");
@@ -137,6 +140,17 @@ SoundLibrary.reloadSound = Sound.loadSound("reload");
 		//TODO Update Explorer AI
 		//TODO Update player input such as placing traps
 		//TODO Update ArrayLists of explorers, traps, Tiles, etc. if not already done so.
+	}
+	
+	public void updateMouse() {
+		int mouseX = Mouse.getX();
+		int mouseY = Mouse.getY();
+		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
+		for(Button b : buttons) {
+			if(b.isClicked(mouseX, mouseY)) {
+				//TODO;
+			}
+		}
 	}
 }
 	
