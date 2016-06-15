@@ -142,11 +142,7 @@ public static ArrayList<Button> buttons;
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
-		for(Button b : buttons) {
-			if(b.isClicked(mouseX, mouseY)) {
-				//TODO;
-			}
-		}
+		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
 	}
 }
 	
