@@ -13,7 +13,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class Tile {
 	
-	//the location of this tile in the grid, stores row then column (x then y)
+	//the location of this tile in the grid, stores column then row (x then y)
 	protected Vector2f locInGrid;
 	
 	//the units contained within this tile
@@ -28,17 +28,17 @@ public class Tile {
 	protected Grid gr;
 	
 	protected Vector2f position;
-	//creates a tile in location loc
-
-	public Tile(Vector2f loc, Grid gr){
+	
+	//creates a tile in location loc, give location in column then row
+	public Tile(Vector2f locInGrid, Grid gr){
 		
-		this.locInGrid = loc;
+		this.locInGrid = locInGrid;
 		this.gr = gr;
 		//this code declaring position is under the assumption that position for guitextures is
 		//in the upper left of the image
 		this.position = new Vector2f(
-			gr.getLoc().x + gr.getGridUnit().x * this.locInGrid.y,
-			gr.getLoc().y + gr.getGridUnit().y * this.locInGrid.x
+			gr.getLoc().x + gr.getGridUnit().x * this.locInGrid.x + gr.GRID_UNIT.x / 2,
+			gr.getLoc().y + gr.getGridUnit().y * this.locInGrid.y + gr.GRID_UNIT.y / 2
 		);
 
 	}

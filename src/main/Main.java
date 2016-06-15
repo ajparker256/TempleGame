@@ -117,7 +117,7 @@ public static ArrayList<Button> buttons;
 	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingL, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
 	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
 	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingR, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
-	explorerWalk.setDelay(10);
+	explorerWalk.setDelay(60);
 	
 	
 	//This is the string tester
