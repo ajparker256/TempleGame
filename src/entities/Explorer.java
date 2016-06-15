@@ -5,9 +5,9 @@ import grid.Grid;
 
 public class Explorer extends Unit{
 	
-	Explorer(int hp, Vector2f location, Vector2f velocity, int id) {
-		//Hit points, location in Pixels, Velocity in Pixels, id to recognize later
-		super(hp, location, velocity, id);
+	Explorer(int hp, Vector2f location, Vector2f velocity, Vector2f size, int id, int texture) {
+		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
+		super(hp, location, velocity, size, id, texture);
 	}
 	
 	//This finds if the explorer has an interaction with the given tile
