@@ -1,6 +1,7 @@
 package main;
 
 import grid.Grid;
+import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -48,6 +49,10 @@ public static ArrayList<Button> buttons;
 		Random random = new Random();
 		Grid grid = new Grid(new Vector2f(0f,0f),new Vector2f(0.5f,0.5f),10);
 
+		
+		
+		
+		
 		/*
 	SoundLibrary.music = Sound.loadSound("song");
 	SoundLibrary.gunSound1 = Sound.loadSound("shot");
@@ -77,8 +82,14 @@ public static ArrayList<Button> buttons;
 	
 	StringLibrary.init(loader);
 	
+	
+	
 	List<GuiTexture> guis = new ArrayList<GuiTexture>();
 	List<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
+	
+	
+	
+	
 	
 	GuiLibrary.background = loader.loadTexture("background");
 	//guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
@@ -98,6 +109,17 @@ public static ArrayList<Button> buttons;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
 	
+	GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
+	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
+	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
+	Animation explorerWalk = new Animation(new Vector2f(.5f, -.5f));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingL, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingR, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
+	explorerWalk.setDelay(10);
+	
+	
 	//This is the string tester
 	List<GuiTexture> test;
 	StringLibrary.setSize(new Vector2f(.02f, .02f));
@@ -106,10 +128,14 @@ public static ArrayList<Button> buttons;
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	
+	
+	
+	
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
 		dynamicGuis.add(test.get(i));
 	}
+	
 	while(!Display.isCloseRequested()){
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
@@ -117,7 +143,7 @@ public static ArrayList<Button> buttons;
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
-
+		explorerWalk.run(guiRenderer);
 		
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();

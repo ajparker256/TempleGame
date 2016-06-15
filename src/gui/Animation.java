@@ -48,6 +48,10 @@ public class Animation {
 		update();
 	}
 	
+	public Vector2f getLoc() {
+		return location;
+	}
+	
 	//Adds frame to the end of the list
 	public void addFrame(GuiTexture g) {
 		frames.add(g);
@@ -68,17 +72,21 @@ public class Animation {
 		return frames;
 	}
 	
+	public void setDelay(int i) {
+		frameDelay = i;
+	}
+	
 	//This displays the current frame
 	public void run(GuiRenderer g) {
 		//This makes it so that only the current frame displays
 		currentFrame.clear();
-		currentFrame.add(frames.get(count));
+		currentFrame.add(frames.get(count/frameDelay));
 		
 		//This renders the frame
 		g.render(currentFrame);
 		
 		//This moves to the next frame or loops
-		if(count>frames.size()*frameDelay) {
+		if(count>frames.size()*frameDelay-2) {
 			count = 0;
 		} else {
 			count++;

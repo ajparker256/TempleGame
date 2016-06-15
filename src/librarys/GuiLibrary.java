@@ -12,8 +12,8 @@ public static int shop;
 public static int nextWave;
 public static int health;
 
-
-public static GuiTexture explorerStanding;
-public static GuiTexture explorerWalkingL;
-public static GuiTexture explorerWalkingR;
+//Explorer's basic images for standing and walking
+public static int explorerStanding;
+public static int explorerWalkingL;
+public static int explorerWalkingR;
 }
