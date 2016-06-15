@@ -144,6 +144,7 @@ public static ArrayList<Button> buttons;
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		explorerWalk.run(guiRenderer);
+		explorerWalk.setLoc(new Vector2f(explorerWalk.getLoc().x, explorerWalk.getLoc().y + .001f));
 		
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
