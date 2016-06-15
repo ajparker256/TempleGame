@@ -116,7 +116,6 @@ public static ArrayList<Button> buttons;
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		guiRenderer.render(guis);
-		
 		guiRenderer.render(test);
 
 		
