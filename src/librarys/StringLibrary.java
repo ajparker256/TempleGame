@@ -100,7 +100,7 @@ public class StringLibrary {
 	}
 	
 	//TODO make a getWidth(char c) method
-	
+	//This returns the width of the image based off of the character making it so that the text can be correctly positioned next to one another
 	public static int getWidth(char c) {
 		if(c == ' ') {
 			return (int)size.x;
