@@ -65,9 +65,17 @@ public class Unit {
 		size = s;
 	}
 	
+	public void setAlive(boolean b) {
+		isAlive = b;
+	}
+	
 	//Returns current health
 	public int getHp() {
 		return hp;
+	}
+	
+	public void setHp(int h) {
+		hp = h;
 	}
 	
 	//Returns current size

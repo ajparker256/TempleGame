@@ -25,7 +25,9 @@ public class PitfallTrap extends Tile{
 	
 	public void trigger(){
 		for(Unit u: unitsContained){
-			//KILL THE UNIT IN HERE<<<<<<<<<<<<<<<<<<<<<<----------------
+			u.setAlive(false);
+			u.setHp(0);
+			gr.get((int)locInGrid.x, (int)locInGrid.y).remove(u);
 		}
 		this.unitsContained.clear();
 	}
