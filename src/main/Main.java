@@ -92,19 +92,13 @@ public static ArrayList<Button> buttons;
 	
 	
 	GuiLibrary.background = loader.loadTexture("background");
-	//guis.add(new GuiTexture(GuiLibrary.background, new Vector2f(0, 0), new Vector2f(2f, 2f)));
-	GuiLibrary.gun = new GuiTexture (loader.loadTexture("gun"),new Vector2f(0.8f,-0.9f), new Vector2f(0.1f,0.1f));
-//	guis.add(GuiLibrary.gun);
-	GuiLibrary.crosshair = new GuiTexture (loader.loadTexture("crosshair"),new Vector2f(0.025f,-0.025f), new Vector2f(0.1f,0.1f));
-//	guis.add(GuiLibrary.crosshair);
-	GuiLibrary.bulletTexture=loader.loadTexture("bulletTexture");
-	GuiLibrary.health=loader.loadTexture("test");
+
 	
 	
 	//shop
 	
 	//GuiLibrary.shop = loader.loadTexture("shop");
-	GuiLibrary.nextWave = loader.loadTexture("nextWave");
+
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
@@ -117,11 +111,11 @@ public static ArrayList<Button> buttons;
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	Animation explorerWalk = new Animation(new Vector2f(.5f, -.5f));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingL, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingR, explorerWalk.getLoc(), new Vector2f(.2f, .2f)));
-	explorerWalk.setDelay(60);
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingL, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
+	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingR, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
+	explorerWalk.setDelay(25);
 	
 	
 	//This is the string tester
