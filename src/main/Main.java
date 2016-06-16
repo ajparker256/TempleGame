@@ -47,7 +47,8 @@ public static ArrayList<Button> buttons;
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
 		Random random = new Random();
-		Grid grid = new Grid(new Vector2f(0f,0f),new Vector2f(0.5f,0.5f),10);
+		new TextureLibrary(loader);
+		Grid grid= new Grid(new Vector2f(0,0),0.1f,10);
 
 		
 		
@@ -100,7 +101,7 @@ public static ArrayList<Button> buttons;
 	
 	
 	
-	
+
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
 		dynamicGuis.add(test.get(i));
@@ -111,6 +112,7 @@ public static ArrayList<Button> buttons;
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
+		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		guiRenderer.render(bob.getWalkingAnimation(loader, 30).getFrame());

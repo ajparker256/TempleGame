@@ -14,78 +14,22 @@ import org.lwjgl.util.vector.Vector2f;
 public class Tile {
 	
 	//the location of this tile in the grid, stores column then row (x then y)
-	protected Vector2f locInGrid;
-	
 	//the units contained within this tile
-	protected ArrayList<Unit> unitsContained;
-	
-	protected int hp;
-	
-	protected int MAXHP;
-	
-	protected boolean passable;
-	
-	protected Grid gr;
-	
+		
 	protected Vector2f position;
+	private int texture;
+	private GuiTexture guiTexture;
 	
 	//creates a tile in location loc, give location in column then row
-	public Tile(Vector2f locInGrid, Grid gr){
-		
-		this.locInGrid = locInGrid;
-		this.gr = gr;
-		//this code declaring position is under the assumption that position for guitextures is
-		//in the upper left of the image
-		this.position = new Vector2f(
-			gr.getLoc().x + gr.getGridUnit().x * this.locInGrid.x + gr.GRID_UNIT.x / 2,
-			gr.getLoc().y + gr.getGridUnit().y * this.locInGrid.y + gr.GRID_UNIT.y / 2
-		);
-
+	public Tile(int x, int y, float size, Vector2f location){
+		this.position=new Vector2f (location.x+((x-5)*size),location.y+((y-5)*size));
+		this.texture=1;
+		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,size)));
+	}
+	public GuiTexture drawTile(){
+		return guiTexture;
 	}
 	
-	protected void init(){
-		this.MAXHP = this.hp;
-	}
-	
-	//returns the arraylist of units contained within the tile
-	public ArrayList<Unit> getUnits(){
-		return this.unitsContained;
-	}
-	
-	public void add(Unit u){
-		this.unitsContained.add(u);
-	}
-	
-	public void remove(Unit u) {
-		this.unitsContained.remove(u);
-	}
-	
-	public Vector2f getLoc(){
-		return this.locInGrid;
-	}
-	
-	//subtracts a pterodactyl amount of hp from the dirt
-	public void dealDamage(int pterodactyl){
-		if(this.hp - pterodactyl < 0)
-			this.hp = 0;
-		else
-			this.hp -= pterodactyl;
-	}
-	
-	public void repair(int trains){
-		if(this.hp + trains > MAXHP)
-			this.hp = MAXHP;
-		else
-			this.hp += trains;
-	}
-	
-	public int getHp(){
-		return this.hp;
-	}
-	
-	public Grid getGrid(){
-		return this.gr;
-	}
 
 
 
