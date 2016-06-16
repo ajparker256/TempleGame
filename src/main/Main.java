@@ -37,6 +37,7 @@ public static final float ambient = 1f;
 public static int money;
 public static ArrayList<Explorer> group;
 public static ArrayList<Button> buttons;
+public static long milli;
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -87,7 +88,7 @@ public static ArrayList<Button> buttons;
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
-	Explorer bob = new Explorer(20, new Vector2f(.5f,-.5f), new Vector2f(0, 0), new Vector2f(.02f, .02f));
+	Explorer bob = new Explorer(20, new Vector2f(.5f,-.5f), new Vector2f(0, .1f), new Vector2f(.02f, .02f));
 	
 	
 	//This is the string tester
@@ -106,7 +107,10 @@ public static ArrayList<Button> buttons;
 		dynamicGuis.add(test.get(i));
 	}
 	
+
+	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
+		milli = System.currentTimeMillis() - milli;
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
@@ -114,11 +118,15 @@ public static ArrayList<Button> buttons;
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		guiRenderer.render(bob.getWalkingAnimation(loader, 30).getFrame());
-		bob.setLoc(new Vector2f(bob.getLoc().x, bob.getLoc().y + .001f));
+		bob.move((int)milli);
+		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
+		milli = System.currentTimeMillis();
 		
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
+		
+		
 	}
 	
 	guiRenderer.cleanUp();
