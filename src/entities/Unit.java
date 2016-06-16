@@ -38,7 +38,7 @@ public class Unit {
 	
 	//Move according to the velocity of the unit relative to time passed
 	public void move(int milli) {
-		location = new Vector2f(location.x+(velocity.x*milli/1000), location.y+(velocity.y*milli/1000));
+		setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
 	}
 	
 	//This prints the unit at its location, with its design and with its size
