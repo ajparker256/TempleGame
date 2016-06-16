@@ -1,5 +1,6 @@
 package main;
 
+import grid.DartTrap;
 import grid.Grid;
 import gui.Animation;
 import gui.GuiRenderer;
@@ -108,7 +109,7 @@ public static long milli;
 	for(int i = 0; i<test.size(); i++) {
 		dynamicGuis.add(test.get(i));
 	}
-	
+	DartTrap testTrap = new DartTrap(new Vector2f(0,0), .02f, new Vector2f(-.9f,-.1f), new Vector2f(1,0), loader);
 
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
@@ -122,6 +123,9 @@ public static long milli;
 		guiRenderer.render(test);
 		guiRenderer.render(bob.getWalkingAnimation(loader, 30).getFrame());
 		bob.move((int)milli);
+		
+		guiRenderer.render(testTrap.getAnimation().getFrame());
+		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		

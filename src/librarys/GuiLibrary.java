@@ -16,4 +16,17 @@ public static int health;
 public static int explorerStanding;
 public static int explorerWalkingL;
 public static int explorerWalkingR;
+
+
+//Dart Trap Arrow Animation
+public static int arrow1;
+public static int arrow2;
+public static int arrow3;
+public static int arrow4;
+public static int arrow5;
+public static int arrow6;
+public static int arrow7;
+public static int arrow8;
+public static int arrow9;
+public static int arrow10;
 }
