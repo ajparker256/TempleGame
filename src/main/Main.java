@@ -89,14 +89,15 @@ public static long milli;
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
-	Explorer bob = new Explorer(20, new Vector2f(.5f,-.5f), new Vector2f(0, .1f), new Vector2f(.02f, .02f));
+	Explorer bob = new Explorer(20, new Vector2f(.55f,-.5f), new Vector2f(0, .2f), new Vector2f(.02f, .02f));
 	
 	
 	//This is the string tester
 	List<GuiTexture> test;
 	StringLibrary.setSize(new Vector2f(.02f, .02f));
-	test = StringLibrary.drawString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", new Vector2f(-.98f,-.7f));
-	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, .5f)));
+	//ABCDEFGHIJKLMNOPQRSTUVWXYZ defghijklmnopqrstuvwxyz
+	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
+	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, -.8f)));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	

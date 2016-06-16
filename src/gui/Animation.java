@@ -57,6 +57,11 @@ public class Animation {
 		frames.add(g);
 	}
 	
+	//This unites animations
+	public void addAll(Animation addOn) {
+		frames.addAll(addOn.getFrames());
+	}
+	
 	//This adds a frame at the given location
 	public void addFrame(GuiTexture g, int i) {
 		frames.add(i, g);

@@ -15,6 +15,10 @@ public class StringLibrary {
 	
 	public static Loader load;
 	
+	public static float currentLength;
+	
+	public static float spacing;
+	
 	public static void init(Loader loader) {
 		size = new Vector2f(.1f, .1f);
 		load = loader;
@@ -92,152 +96,155 @@ public class StringLibrary {
 	
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
+		spacing = .001f;
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
-			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+i*size.x*8/5, loc.y), new Vector2f(size.x,size.y)));
+			//8/5
+			currentLength += getWidth(letter)+spacing;
+			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+currentLength, loc.y), new Vector2f(size.x,size.y)));
 		}
 		return string;
 	}
 	
 	//TODO make a getWidth(char c) method
 	//This returns the width of the image based off of the character making it so that the text can be correctly positioned next to one another
-	public static int getWidth(char c) {
+	public static float getWidth(char c) {
 		if(c == ' ') {
-			return (int)size.x;
+			return size.x*3/2;
 		}
 		//Return number textures
 		if(c == '0') {
-			return (int)size.x;
+			return size.x*3/2;
 			
 		}
 		if(c == '1') 
-			return (int)size.x;
+			return size.x*3/2;
 		if(c == '2') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '3') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '4') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '5') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '6') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '7') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '8') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == '9') 
-			return (int)size.x;;
+			return size.x*3/2;
 		
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'B') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'C') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'D') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'E') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'F') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'G') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'H') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'I') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'J') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'K') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'L') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'M') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'N') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'O') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'P') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'Q') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'R') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'S') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'T') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'U') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'V') 
-			return (int)size.x;;
+			return size.x*3/2;
 		//Possibly make this one have more space than the others to accomodate its obscene breadth
 		if(c == 'W') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'X') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'Y') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'Z') 
-			return (int)size.x;;
+			return size.x*3/2;
 		
 		//Lower Case Letters
 		if(c == 'a') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'b') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'c') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'd') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'e') 
-			return (int)size.x;;
+			return size.x*4/3;
 		if(c == 'f') 
-			return (int)size.x;;
+			return size.x*2/3;
 		if(c == 'g') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'h') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'i') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'j') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'k') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'l') 
-			return (int)size.x;;
+			return size.x*4/5;
 		if(c == 'm') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'n') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'o') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'p') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'q') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'r') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 's') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 't') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'u') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'v') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'w') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'x') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'y') 
-			return (int)size.x;;
+			return size.x*3/2;
 		if(c == 'z') 
-			return (int)size.x;;
+			return size.x*3/2;
 		
 		
 		return 0;
