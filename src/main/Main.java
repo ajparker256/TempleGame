@@ -95,8 +95,9 @@ public static long milli;
 	//This is the string tester
 	List<GuiTexture> test;
 	StringLibrary.setSize(new Vector2f(.02f, .02f));
-	test = StringLibrary.drawString("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", new Vector2f(-.98f,-.7f));
-	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, .5f)));
+	//ABCDEFGHIJKLMNOPQRSTUVWXYZ defghijklmnopqrstuvwxyz
+	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
+	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, -.8f)));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	
