@@ -79,6 +79,7 @@ public class Animation {
 	public ArrayList<GuiTexture> getFrame() {
 		currentFrame.clear();
 		currentFrame.add(frames.get(count/frameDelay));
+		run();
 		return currentFrame;
 	}
 	
@@ -90,6 +91,16 @@ public class Animation {
 		
 		//This renders the frame
 		g.render(currentFrame);
+		
+		//This moves to the next frame or loops
+		if(count>frames.size()*frameDelay-2) {
+			count = 0;
+		} else {
+			count++;
+		}
+	}
+	
+	public void run() {
 		
 		//This moves to the next frame or loops
 		if(count>frames.size()*frameDelay-2) {
