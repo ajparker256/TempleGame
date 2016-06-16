@@ -47,15 +47,12 @@ public class Grid {
 
 	
 	public ArrayList<GuiTexture> render() {
-		int count =0;
 		ArrayList<GuiTexture> toRender= new ArrayList<GuiTexture>();
 		for(Tile[]line:grid){
 			for(Tile tile:line){
-				count++;
 				toRender.add(tile.drawTile());
 			}
 		}
-		System.out.println(count);
 		return toRender;
 	}
 	
