@@ -9,6 +9,8 @@ import librarys.TextureLibrary;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import renderEngine.DisplayManager;
+
 // This is the superclass for all tiles contained in a grid
 
 public class Tile {
@@ -22,10 +24,10 @@ public class Tile {
 	
 	//creates a tile in location loc, give location in column then row
 	public Tile(int x, int y, float size, Vector2f location){
-		this.position=new Vector2f (location.x+((x-5)*size),location.y+((y-5)*size));
+		this.position=new Vector2f (location.x+((x-size/2)*size*2),(float) (location.y+((y-size/2)*(size*2*DisplayManager.getAspectratio()))));
 		this.texture=1;
-		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,size)));
-	}
+		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		}
 	public GuiTexture drawTile(){
 		return guiTexture;
 	}

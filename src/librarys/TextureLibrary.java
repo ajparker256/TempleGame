@@ -8,8 +8,8 @@ import gui.GuiTexture;
 public class TextureLibrary {
 	public TextureLibrary(Loader loader){
 		TextureLibrary.tiles=new ArrayList<Integer>();
-		tiles.add(loader.loadTexture("tiles/blank"));
-		tiles.add(loader.loadTexture("tiles/dirt"));
+		tiles.add(loader.loadTexture("tiles/Blank"));
+		tiles.add(loader.loadTexture("tiles/Dirt"));
 		
 	}
 //Space

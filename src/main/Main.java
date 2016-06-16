@@ -49,7 +49,7 @@ public static long milli;
 		Loader loader = new Loader();
 		Random random = new Random();
 		new TextureLibrary(loader);
-		Grid grid= new Grid(new Vector2f(0,0),0.1f,10);
+		Grid grid= new Grid(new Vector2f(0f,-1),0.05f,10);
 
 		
 		

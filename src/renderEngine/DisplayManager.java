@@ -17,7 +17,7 @@ public class DisplayManager {
 	public static final int WIDTH = 1366;
 	public static final int HEIGHT = 768;
 	private static final int FPSCAP= 120;
-	
+	private static final float ASPECTRATIO=((float)WIDTH)/((float)HEIGHT);
 	private static long lastFrameTime;
 	private static float dTime;
 	public static void createDisplay(){
@@ -70,6 +70,9 @@ public class DisplayManager {
 	
 	private static long getCurrentTime(){
 		return Sys.getTime()*1000/Sys.getTimerResolution();
+	}
+	public static double getAspectratio() {
+		return ASPECTRATIO;
 	}
 		
 	
