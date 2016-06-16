@@ -15,7 +15,7 @@ public class Unit {
 	private int hp;
 	
 	//This is a unit's location relative to the screen in pixels from the top left corner.
-	private Vector2f location;
+	protected Vector2f location;
 	
 	//This is a unit's speed in x and y on the screen.
 	private Vector2f velocity;
@@ -23,24 +23,16 @@ public class Unit {
 	//This is the size of the unit on the screen in x and y
 	private Vector2f size;
 	
-	//This is a number used to identify what type of unit it is on the grid.
-	private int id;
-	
 	//This dictates functions that happen while alive/while dead
 	protected boolean isAlive;
 	
-	//This is the image identity for the unit
-	protected int design;
-	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
-	public Unit(int h, Vector2f loc, Vector2f vel, Vector2f size, int i, int texture) {
+	public Unit(int h, Vector2f loc, Vector2f vel, Vector2f size) {
 		hp = h;
 		location = loc;
 		velocity = vel;
-		id = i;
 		isAlive = true;
-		design = texture;
 		this.size = size;		
 	}
 	
@@ -53,9 +45,9 @@ public class Unit {
 	//Optimization strategy: Return the GuiTexture instead and render only one arrayList so as to avoid
 	//Any excess memory usage.
 	public void render(GuiRenderer g) {
+		//STUB TODO either make an overall method, or just keep this for the invocation
 		if(isAlive) {
 			List<GuiTexture> d = new ArrayList<GuiTexture>();
-			d.add(new GuiTexture(design, location, size));
 			g.render(d);
 		}
 	}
@@ -93,8 +85,8 @@ public class Unit {
 		return velocity;
 	}
 	
-	//Returns current id number
-	public int getId(){
-		return id;
+	public void setLoc(Vector2f loc) {
+		location = loc;
 	}
+	
 }

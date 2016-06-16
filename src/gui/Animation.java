@@ -76,6 +76,12 @@ public class Animation {
 		frameDelay = i;
 	}
 	
+	public ArrayList<GuiTexture> getFrame() {
+		currentFrame.clear();
+		currentFrame.add(frames.get(count/frameDelay));
+		return currentFrame;
+	}
+	
 	//This displays the current frame
 	public void run(GuiRenderer g) {
 		//This makes it so that only the current frame displays

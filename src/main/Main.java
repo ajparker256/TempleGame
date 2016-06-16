@@ -53,32 +53,8 @@ public static ArrayList<Button> buttons;
 		
 		
 		
-		/*
+		
 	SoundLibrary.music = Sound.loadSound("song");
-	SoundLibrary.gunSound1 = Sound.loadSound("shot");
-	SoundLibrary.gunSound2 = Sound.loadSound("shot");
-	SoundLibrary.gunSound3 = Sound.loadSound("shot");
-	SoundLibrary.gunSound4= Sound.loadSound("shot");
-	SoundLibrary.gunSound5 = Sound.loadSound("shot");
-	SoundLibrary.gunSound6 = Sound.loadSound("shot");
-	SoundLibrary.gunSound7 = Sound.loadSound("shot");
-	SoundLibrary.gunSound8 = Sound.loadSound("shot");
-	SoundLibrary.gunSound9= Sound.loadSound("shot");
-	SoundLibrary.gunSound10= Sound.loadSound("shot");
-	SoundLibrary.zombieSound = Sound.loadSound("splat");
-	SoundLibrary.reloadSound = Sound.loadSound("reload");
-	*/
-	//gui
-	/*TextureLibrary.Num1= loader.loadTexture("Num1");
-	TextureLibrary.Num2= loader.loadTexture("Num2");
-	TextureLibrary.Num3= loader.loadTexture("Num3");
-	TextureLibrary.Num4= loader.loadTexture("Num4");
-	TextureLibrary.Num5= loader.loadTexture("Num5");
-	TextureLibrary.Num6= loader.loadTexture("Num6");
-	TextureLibrary.Num7= loader.loadTexture("Num7");
-	TextureLibrary.Num8= loader.loadTexture("Num8");
-	TextureLibrary.Num9= loader.loadTexture("Num9");
-	TextureLibrary.Num0= loader.loadTexture("Num0"); */
 	
 	StringLibrary.init(loader);
 	
@@ -97,7 +73,6 @@ public static ArrayList<Button> buttons;
 	
 	//shop
 	
-	//GuiLibrary.shop = loader.loadTexture("shop");
 
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
@@ -107,15 +82,12 @@ public static ArrayList<Button> buttons;
 	//TODO Attach the animation to the explorer so that it is done in tandem. 
 	//Currently displaying and movement are taken care of in the while loop below. 
 	
+	//Initializes Explorer frames for later
 	GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
-	Animation explorerWalk = new Animation(new Vector2f(.5f, -.5f));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingL, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
-	explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingR, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
-	explorerWalk.setDelay(25);
+	
+	Explorer bob = new Explorer(20, new Vector2f(.5f,-.5f), new Vector2f(0, 0), new Vector2f(.02f, .02f));
 	
 	
 	//This is the string tester
@@ -141,8 +113,8 @@ public static ArrayList<Button> buttons;
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
-		explorerWalk.run(guiRenderer);
-		explorerWalk.setLoc(new Vector2f(explorerWalk.getLoc().x, explorerWalk.getLoc().y + .001f));
+		guiRenderer.render(bob.getWalkingAnimation(loader, 30).getFrame());
+		bob.setLoc(new Vector2f(bob.getLoc().x, bob.getLoc().y + .001f));
 		
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
