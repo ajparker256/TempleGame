@@ -89,7 +89,7 @@ public static long milli;
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
-	Explorer bob = new Explorer(20, new Vector2f(.5f,-.5f), new Vector2f(0, .1f), new Vector2f(.02f, .02f));
+	Explorer bob = new Explorer(20, new Vector2f(.55f,-.5f), new Vector2f(0, .2f), new Vector2f(.02f, .02f));
 	
 	
 	//This is the string tester
