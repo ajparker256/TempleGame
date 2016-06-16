@@ -3,7 +3,6 @@ package buttons;
 import org.lwjgl.util.vector.Vector2f;
 
 import gui.GuiTexture;
-import librarys.TrapLibrary;
 
 public class ShopButton extends Button{
 

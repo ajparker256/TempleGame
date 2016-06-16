@@ -1,9 +1,20 @@
 package librarys;
 
+import java.util.ArrayList;
+
+import renderEngine.Loader;
+import gui.GuiTexture;
+
 public class TextureLibrary {
+	public TextureLibrary(Loader loader){
+		TextureLibrary.tiles=new ArrayList<Integer>();
+		tiles.add(loader.loadTexture("tiles/blank"));
+		tiles.add(loader.loadTexture("tiles/dirt"));
+		
+	}
 //Space
 public static int space;
-	
+public static ArrayList<Integer> tiles;
 	
 //Numbers stored here
 public static int Num0;
@@ -73,4 +84,8 @@ public static int lw;
 public static int lx;
 public static int ly;
 public static int lz;
+
+public static int getTile(int texture) {
+	return tiles.get(texture);
+}
 }
