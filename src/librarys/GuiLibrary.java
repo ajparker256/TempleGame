@@ -11,4 +11,9 @@ public static int background;
 public static int shop;
 public static int nextWave;
 public static int health;
+
+//Explorer's basic images for standing and walking
+public static int explorerStanding;
+public static int explorerWalkingL;
+public static int explorerWalkingR;
 }

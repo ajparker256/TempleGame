@@ -40,7 +40,7 @@ public class Grid {
 		location = l;
 		gr = new Tile[r][c];
 		idCount = 1;
-		GRID_UNIT = new Vector2f(size.x/r, size.y/c);
+		GRID_UNIT = new Vector2f(size.x/c, size.y/r);
 	}
 	
 	//Changes the value of a piece of the array.

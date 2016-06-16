@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class PitfallTrap extends Tile{
 	
+	//TODO Convince sid to make relevant names for his variables
 	private final int HEATDEATHOFTHEUNIVERSE;
 
 	public PitfallTrap(Vector2f loc, Grid gr) {
@@ -25,8 +26,11 @@ public class PitfallTrap extends Tile{
 	
 	public void trigger(){
 		for(Unit u: unitsContained){
-			//KILL THE UNIT IN HERE<<<<<<<<<<<<<<<<<<<<<<----------------
+			u.setAlive(false);
+			u.setHp(0);
+			gr.get((int)locInGrid.x, (int)locInGrid.y).remove(u);
 		}
+		//Trigger its trigger animation
 		this.unitsContained.clear();
 	}
 	
