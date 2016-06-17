@@ -49,24 +49,30 @@ public class Unit {
 				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
 				if(location.x>destination.x){
 					location.x=destination.x;
+					velocity.x=0;
 				}
 			}else if(location.x>destination.x){
 				velocity.x=-0.1f;
 				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
 				if(location.x<destination.x){
 					location.x=destination.x;
+					velocity.x=0;
 				}
 			}	else if(location.y<destination.y){
+				
 				velocity.y=0.1f;
 				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
 				if(location.y>destination.y){
 					location.y=destination.y;
+					velocity.y=0;
 				}
 			}else if(location.y>destination.y){
+			
 				velocity.y=-0.1f;
 				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
-				if(location.y>destination.y){
+				if(location.y<destination.y){
 					location.y=destination.y;
+					velocity.y=0;
 				}
 			}
 		}

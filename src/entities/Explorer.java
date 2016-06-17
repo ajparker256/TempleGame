@@ -29,7 +29,6 @@ public class Explorer extends Unit{
 	}
 	
 	public Animation getWalkingAnimation(Loader loader, int delay) {
-		
 		explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
 		explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingL, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
 		explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
