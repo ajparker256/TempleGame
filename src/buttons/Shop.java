@@ -31,8 +31,16 @@ public class Shop {
 		}
 	}
 	
+	public int[] getShopItem(int mouseX, int mouseY) {
+		int[] xy = new int[2];
+		xy[0] = mouseX / (int)(location.x/size.x);
+		xy[1] = mouseY / (int)(location.y/size.y);
+		return xy;
+	}	
+	
 	public Tile purchase(int row, int column) {
-		Ti
+		//In main use money -= tile.getPrice();
+		return traps[row][column];
 	}
 
 }
