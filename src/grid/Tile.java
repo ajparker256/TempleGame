@@ -22,6 +22,7 @@ public class Tile {
 	private int texture;
 	private GuiTexture guiTexture;
 	private String name;
+	private int price;
 	
 	//creates a tile in location loc, give location in column then row
 	public Tile(int x, int y, float size, Vector2f location){
@@ -29,6 +30,8 @@ public class Tile {
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		name = "Default_Name";
+		//Should be overwritten in every case
+		price = -1;
 	}
 	
 	public GuiTexture drawTile(){
@@ -37,6 +40,14 @@ public class Tile {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+	
+	public void setPrice(int newPrice) {
+		price = newPrice;
 	}
 	
 

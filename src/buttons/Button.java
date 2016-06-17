@@ -11,13 +11,9 @@ public class Button {
 		//This is a list of the Bottom Right corners of the hitboxes
 		private Vector2f hitBoxesBR;
 		
-		//This is the image that displays for the button
-		private GuiTexture design;
-		
-		public Button(Vector2f TopLeft, Vector2f BottomRight, GuiTexture g) {
+		public Button(Vector2f TopLeft, Vector2f BottomRight) {
 			hitBoxesTL = TopLeft;
 			hitBoxesBR = BottomRight;
-			design = g;
 		}
 		
 		public void setTL(Vector2f tl) {
@@ -30,10 +26,6 @@ public class Button {
 				
 		public Vector2f getTL() {
 			return hitBoxesTL;
-		}
-		
-		public GuiTexture getDesign() {
-			return design;
 		}
 		
 		public Vector2f getBR() {
