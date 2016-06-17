@@ -43,8 +43,10 @@ public class Grid {
 	public Vector2f getLoc() {
 		return location;
 	}
+	public Tile getTile(int x,int y){
+		return grid[x][y];
+	}
 	
-
 	
 
 	

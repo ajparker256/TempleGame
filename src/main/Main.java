@@ -90,7 +90,7 @@ public static long milli;
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
-	Explorer bob = new Explorer(20, new Vector2f(.55f,-.5f), new Vector2f(0, .2f), new Vector2f(.02f, .02f));
+	Explorer bob = new Explorer(20, new Vector2f(.55f,-.5f), new Vector2f(.02f, .02f));
 	
 	
 	//This is the string tester
@@ -134,11 +134,9 @@ public static long milli;
 		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
-		guiRenderer.render(bob.getWalkingAnimation(loader, 30).getFrame());
-		bob.move((int)milli);
-		
+		dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
+		bob.move((int)milli,grid);
 		guiRenderer.render(arrows.getFrame());
-		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		

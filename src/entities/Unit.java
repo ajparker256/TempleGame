@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import grid.Grid;
+import grid.Tile;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -25,20 +27,50 @@ public class Unit {
 	
 	//This dictates functions that happen while alive/while dead
 	protected boolean isAlive;
+	protected int xInGrid;
+	protected int yInGrid;
 	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
-	public Unit(int h, Vector2f loc, Vector2f vel, Vector2f size) {
+	public Unit(int h, Vector2f loc,  Vector2f size) {
+		velocity=new Vector2f(0,0);
 		hp = h;
 		location = loc;
-		velocity = vel;
 		isAlive = true;
 		this.size = size;		
 	}
 	
 	//Move according to the velocity of the unit relative to time passed
-	public void move(int milli) {
-		setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+	public void move(int milli,Grid grid) {
+		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
+		if(!location.equals(destination)){
+			if(location.x<destination.x){
+				velocity.x=0.1f;
+				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				if(location.x>destination.x){
+					location.x=destination.x;
+				}
+			}else if(location.x>destination.x){
+				velocity.x=-0.1f;
+				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				if(location.x<destination.x){
+					location.x=destination.x;
+				}
+			}	else if(location.y<destination.y){
+				velocity.y=0.1f;
+				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				if(location.y>destination.y){
+					location.y=destination.y;
+				}
+			}else if(location.y>destination.y){
+				velocity.y=-0.1f;
+				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				if(location.y>destination.y){
+					location.y=destination.y;
+				}
+			}
+		}
+		
 	}
 	
 	//This prints the unit at its location, with its design and with its size

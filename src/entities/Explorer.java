@@ -12,11 +12,10 @@ public class Explorer extends Unit{
 	
 	Animation explorerWalk;
 	
-	public Explorer(int hp, Vector2f location, Vector2f velocity, Vector2f size) {
+	public Explorer(int hp, Vector2f location, Vector2f size) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
-		super(hp, location, velocity, size);
+		super(hp, location, size);
 		explorerWalk = new Animation(location);
-		
 	}
 	
 	//This finds if the explorer has an interaction with the given tile
@@ -36,7 +35,6 @@ public class Explorer extends Unit{
 		explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerStanding, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
 		explorerWalk.addFrame(new GuiTexture(GuiLibrary.explorerWalkingR, explorerWalk.getLoc(), new Vector2f(.05f, .05f)));
 		explorerWalk.setDelay(delay);
-		
 		return explorerWalk;
 	}
 	

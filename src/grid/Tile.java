@@ -49,6 +49,9 @@ public class Tile {
 	public void setPrice(int newPrice) {
 		price = newPrice;
 	}
+	public Vector2f getLocation(){
+		return position;
+	}
 	
 
 
