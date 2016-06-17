@@ -103,13 +103,25 @@ public static long milli;
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	
 	
-	
+	Animation arrows = new Animation(new Vector2f(-.8f,-.5f));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows2"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows3"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows4"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows5"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows6"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows7"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows8"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"), arrows.getLoc(), new Vector2f(.2f, .2f)));
+	arrows.setDelay(10);
 
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
 		dynamicGuis.add(test.get(i));
 	}
-	DartTrap testTrap = new DartTrap(new Vector2f(0,0), .02f, new Vector2f(-.9f,-.1f), new Vector2f(1,0), loader);
+	
+	DartTrap testTrap = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
@@ -118,13 +130,14 @@ public static long milli;
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
+		//The screen is -1 to 1 for x and 0 to -1 for y in floats
 		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		guiRenderer.render(bob.getWalkingAnimation(loader, 30).getFrame());
 		bob.move((int)milli);
 		
-		guiRenderer.render(testTrap.getAnimation().getFrame());
+		guiRenderer.render(arrows.getFrame());
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
