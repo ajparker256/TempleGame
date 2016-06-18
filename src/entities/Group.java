@@ -34,6 +34,8 @@ public class Group {
 	
 	public Vector2f getNextLoc(Grid currentFloor) {
 		//If no one has reached the goal
+		int totalOdds = 100;
+		int[] individualOdds = new int[4];
 		if(!group.isEmpty()) {
 			//And no one has reached the goal yet
 			if(!currentFloor.getGoalReached()) {
@@ -42,11 +44,17 @@ public class Group {
 				int numberOfOptions = 0;
 				for(Tile currentTile : adjacents) {
 					if(!currentTile.equals(null)) {
+						
 						//TODO Add logic here for each individual type or interaction
 						//TODO Incorporate the types of exlorers involved in the party
+						//Each interaction grants bonuses to individualOdds of the cooresponding location
+						//Then you subtract what you awarded to the individual tile from the total
+						//The remainder is added to all by dividing it by number of Options. 
+						
 						numberOfOptions++;
 					}
 				}
+				//
 			} 
 			//If someone has found the goal
 			else {
