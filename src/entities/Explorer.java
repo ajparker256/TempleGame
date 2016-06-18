@@ -12,9 +12,10 @@ public class Explorer extends Unit{
 	
 	Animation explorerWalk;
 	
-	public Explorer(int hp, Vector2f location, Vector2f size) {
+	public Explorer(int hp, Vector2f location, Vector2f size, Vector2f velocity) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(hp, location, size);
+		this.velocity = velocity;
 		explorerWalk = new Animation(location);
 	}
 	
@@ -53,6 +54,51 @@ public class Explorer extends Unit{
 		location = loc;
 		explorerWalk.setLoc(loc);
 	}
+	
+	public void move(int milli,Grid grid) {
+		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
+		Vector2f tempVelocity= new Vector2f();
+		//If you aren't there yet, go somewhere
+		if(!location.equals(destination)){
+			//If the destination is to the right, go right
+			if(location.x<destination.x){
+				tempVelocity.x = velocity.x;
+				setLoc(new Vector2f(getLoc().x+tempVelocity.x*milli/1000f, getLoc().y));
+				//If you would overshoot, don't
+				if(location.x>destination.x){
+					location.x=destination.x;
+					
+				}
+			//If the destination is to the left, go left
+			}else if(location.x>destination.x){
+				tempVelocity = new Vector2f(velocity.x*-1, 0);
+				setLoc(new Vector2f(getLoc().x+tempVelocity.x*milli/1000f, getLoc().y));
+				if(location.x<destination.x){
+					location.x=destination.x;
+					
+				}
+			//If the destination is above you, go up
+			}else if(location.y<destination.y){
+				tempVelocity.y = velocity.y;
+				setLoc(new Vector2f(getLoc().x, getLoc().y+(tempVelocity.y*milli/1000f)));
+				if(location.y>destination.y){
+					location.y=destination.y;
+					
+				}
+				
+			//If the destination is below you, go down
+			}else if(location.y>destination.y){
+				tempVelocity.y = -1*velocity.y;
+				setLoc(new Vector2f(getLoc().x, getLoc().y+(tempVelocity.y*milli/1000f)));
+				if(location.y<destination.y){
+					location.y=destination.y;
+					velocity.y=0;
+					
+				}
+			}
+		}
+		
+	} 
 	
 	
 }

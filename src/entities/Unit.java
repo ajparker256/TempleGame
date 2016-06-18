@@ -20,7 +20,7 @@ public class Unit {
 	protected Vector2f location;
 	
 	//This is a unit's speed in x and y on the screen.
-	private Vector2f velocity;
+	protected Vector2f velocity;
 	
 	//This is the size of the unit on the screen in x and y
 	private Vector2f size;
@@ -43,33 +43,32 @@ public class Unit {
 	//Move according to the velocity of the unit relative to time passed
 	public void move(int milli,Grid grid) {
 		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
+		Vector2f tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){
 			if(location.x<destination.x){
-				velocity.x=0.1f;
-				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				tempVelocity.x = velocity.x;
+				setLoc(new Vector2f(getLoc().x+tempVelocity.x*milli/1000f, getLoc().y));
 				if(location.x>destination.x){
 					location.x=destination.x;
-					velocity.x=0;
 				}
 			}else if(location.x>destination.x){
-				velocity.x=-0.1f;
-				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				tempVelocity.x = velocity.x*-1;
+				setLoc(new Vector2f(getLoc().x+tempVelocity.x*milli/1000f, getLoc().y));
 				if(location.x<destination.x){
 					location.x=destination.x;
-					velocity.x=0;
 				}
-			}	else if(location.y<destination.y){
 				
-				velocity.y=0.1f;
-				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+			}else if(location.y<destination.y){
+				tempVelocity.y = velocity.y;
+				setLoc(new Vector2f(getLoc().x, getLoc().y+(tempVelocity.y*milli/1000f)));
 				if(location.y>destination.y){
 					location.y=destination.y;
-					velocity.y=0;
 				}
+				
 			}else if(location.y>destination.y){
 			
-				velocity.y=-0.1f;
-				setLoc(new Vector2f(getLoc().x+velocity.x*milli/1000, getLoc().y+(velocity.y*milli/1000)));
+				tempVelocity.y = -1*velocity.y;
+				setLoc(new Vector2f(getLoc().x, getLoc().y+(tempVelocity.y*milli/1000f)));
 				if(location.y<destination.y){
 					location.y=destination.y;
 					velocity.y=0;
