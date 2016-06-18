@@ -89,6 +89,11 @@ public class Unit {
 		}
 	}
 	
+	public Vector2f getLocInGrid(Grid gr) {
+		Vector2f locInGrid = new Vector2f((int)(location.x-gr.getLoc().x)/(int)gr.getTileCount().x, (int)(location.y - gr.getLoc().y)/(int)gr.getTileCount().y);
+		return locInGrid;
+	}
+	
 	//Use to rescale the Unit
 	public void setSize(Vector2f s) {
 		size = s;

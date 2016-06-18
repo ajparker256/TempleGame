@@ -2,6 +2,11 @@ package entities;
 
 import java.util.ArrayList;
 
+import org.lwjgl.util.vector.Vector2f;
+
+import grid.Grid;
+import grid.Tile;
+
 public class Group {
 
 	//This is the group of explorers traveling together on a tile
@@ -25,6 +30,32 @@ public class Group {
 	
 	public void add(Explorer e) {
 		group.add(e);
+	}
+	
+	public Vector2f getNextLoc(Grid currentFloor) {
+		//If no one has reached the goal
+		if(!group.isEmpty()) {
+			//And no one has reached the goal yet
+			if(!currentFloor.getGoalReached()) {
+				Tile[] adjacents = currentFloor.getAdjacent(group.get(0).getLocInGrid(currentFloor));
+				//This is the number of possible adjacent locations there are. Used to determine baseline stats (4 = 25% 3 = 33% 2 = 50%)
+				int numberOfOptions = 0;
+				for(Tile currentTile : adjacents) {
+					if(!currentTile.equals(null)) {
+						//TODO Add logic here for each individual type or interaction
+						//TODO Incorporate the types of exlorers involved in the party
+						numberOfOptions++;
+					}
+				}
+			} 
+			//If someone has found the goal
+			else {
+				//TODO send them onto the person who found the goal's path
+			}
+		}
+		//Error case where the group is empty
+		return null;
+		
 	}
 	
 }
