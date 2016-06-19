@@ -35,6 +35,8 @@ public class Group {
 	public Vector2f getNextLoc(Grid currentFloor) {
 		//If no one has reached the goal
 		int totalOdds = 100;
+		//These are the odds for each individual option (Capped to 4 since there are 4 options)
+		//The order is 0 = Right 1 = Left 2 = Down 3 = Up
 		int[] individualOdds = new int[4];
 		if(!group.isEmpty()) {
 			//And no one has reached the goal yet

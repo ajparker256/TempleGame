@@ -3,6 +3,7 @@ package grid;
 import org.lwjgl.util.vector.Vector2f;
 
 import gui.Animation;
+import gui.GuiRenderer;
 import gui.GuiTexture;
 import renderEngine.Loader;
 
@@ -54,8 +55,12 @@ public class DartTrap extends Tile{
 		arrows.setDelay(10);
 	}
 	
-	public void trigger() {
-		//TODO create pew pew animation. Then after the animation would hit, deal the damage
+	public void trigger(GuiRenderer g, int milli) {
+		if(Math.abs(arrows.getLoc().x-location.x)<range && Math.abs(arrows.getLoc().y-location.y)<range) {
+			g.render(arrows.getFrame());
+			arrows.setLoc(new Vector2f(arrows.getLoc().x+attackVelocity.x*milli/1000, arrows.getLoc().y+attackVelocity.y*milli/1000));
+			//TODO add collision mechanic of some sort to do damage.
+		}
 	}
 	
 	public Animation getAnimation() {
