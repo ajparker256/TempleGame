@@ -1,7 +1,9 @@
 package main;
 
 import grid.DartTrap;
+import grid.Dirt;
 import grid.Grid;
+import grid.Tile;
 import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
@@ -25,6 +27,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
 import buttons.Button;
+import buttons.Shop;
 import entities.Camera;
 import entities.Explorer;
 import renderEngine.DisplayManager;
@@ -90,7 +93,13 @@ public static Grid grid;
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
 	Explorer bob = new Explorer(20, new Vector2f(.55f,-.5f), new Vector2f(.05f, .05f), new Vector2f(.1f,.1f));
-	
+	Tile[][] traps = new Tile[4][2];
+	for(int i = 0; i<traps.length; i++) {
+		for(int j = 0; j<traps[0].length; j++) {
+			traps[i][j] = new Dirt( i, j, .01f, new Vector2f(-.9f+j*.01f, -.5f+i*.01f));
+		}
+	}
+	Shop epicShopofEpicness = new Shop(4,2, new Vector2f(-.9f, -.5f), new Vector2f(.25f, .25f), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -136,6 +145,9 @@ public static Grid grid;
 		dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
 		bob.move((int)milli,grid);
 		guiRenderer.render(arrows.getFrame());
+		
+		epicShopofEpicness.render(guiRenderer);
+		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		

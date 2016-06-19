@@ -29,8 +29,10 @@ public class Shop {
 	
 	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Tile[][] traps) {
 		this.location = location;
+		renderedTraps = new ArrayList<GuiTexture>();
 		this.size = size;
 		buttons = new Button[numberOfRows][numberOfColumns];
+		this.traps = traps;
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
 				//Y position then X position
