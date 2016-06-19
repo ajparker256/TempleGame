@@ -39,6 +39,7 @@ public static int money;
 public static ArrayList<Explorer> group;
 public static ArrayList<Button> buttons;
 public static long milli;
+public static Grid grid;
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -50,7 +51,7 @@ public static long milli;
 		Loader loader = new Loader();
 		Random random = new Random();
 		new TextureLibrary(loader);
-		Grid grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10);
+		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10);
 
 		
 		
@@ -75,8 +76,6 @@ public static long milli;
 	
 	
 	//shop
-	
-
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);

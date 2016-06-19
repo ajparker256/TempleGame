@@ -56,6 +56,7 @@ public class Explorer extends Unit{
 	}
 	
 	public void move(int milli,Grid grid) {
+		if(grid.getTile(xInGrid, yInGrid).passable){
 		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		//If you aren't there yet, go somewhere
@@ -97,8 +98,11 @@ public class Explorer extends Unit{
 				}
 			}
 		}
+	} else{
+		 grid.getTile(xInGrid, yInGrid).interact();
+	}
 		
-	} 
+	}
 	
 	
 }

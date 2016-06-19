@@ -38,7 +38,7 @@ public class Grid {
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
 			for(int k=0;k<rows;k++){
-				grid[k][i]=new Tile(k,i,size,location);
+				grid[k][i]=new Dirt(k,i,size,location);
 			}
 		}
 	}
@@ -62,6 +62,9 @@ public class Grid {
 	}
 	public Tile getTile(int x,int y){
 		return grid[x][y];
+	}
+	public void setTile(int x, int y,Tile tile){
+		grid[x][y]=tile;
 	}
 	
 	
@@ -103,14 +106,10 @@ public class Grid {
 		
 		return adjacents;
 	}
-
 	
 
 	
-	
-	
-	
-	
+
 	
 	
 }
