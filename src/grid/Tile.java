@@ -58,6 +58,11 @@ public class Tile {
 	public Vector2f getLocation(){
 		return position;
 	}
+	
+	public void setLocation(Vector2f loc) {
+		location = loc;
+		guiTexture.setPosition(loc);
+	}
 
 	public void interact() {
 		// TODO Auto-generated method stub

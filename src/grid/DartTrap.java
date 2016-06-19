@@ -40,6 +40,7 @@ public class DartTrap extends Tile{
 		reloadTime = 10000; //milliseconds or 10 seconds
 		range = 3; //Tiles
 		attackPosition = location;
+		this.guiTexture = new GuiTexture(loader.loadTexture("tiles/Dirt2"), locationRelativeToScreen, new Vector2f(size,size));
 		
 		arrows = new Animation(position);
 		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"), attackPosition, new Vector2f(size, size)));

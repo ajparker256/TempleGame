@@ -43,6 +43,7 @@ public static ArrayList<Explorer> group;
 public static ArrayList<Button> buttons;
 public static long milli;
 public static Grid grid;
+public static Shop epicShopofEpicness;
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -99,7 +100,8 @@ public static Grid grid;
 			traps[i][j] = new Dirt( i, j, .01f, new Vector2f(-.9f+j*.01f, -.5f+i*.01f));
 		}
 	}
-	Shop epicShopofEpicness = new Shop(4,2, new Vector2f(-.9f, -.5f), new Vector2f(.25f, .25f), traps);
+	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
+	epicShopofEpicness = new Shop(4, 2, new Vector2f(-.9f, -.5f), new Vector2f(.25f, .25f), new Vector2f(4,4), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -129,7 +131,7 @@ public static Grid grid;
 		dynamicGuis.add(test.get(i));
 	}
 	
-	DartTrap testTrap = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
+	
 
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
@@ -165,6 +167,7 @@ public static Grid grid;
 	}
 	
 	public void update() {
+		updateMouse();
 		//TODO Test traps
 		//TODO Update Explorer AI
 		//TODO Update player input such as placing traps
@@ -174,6 +177,12 @@ public static Grid grid;
 	public void updateMouse() {
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
+		if(epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
+			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
+			if(selectedTrap.getPrice()<=money) {
+				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
+			}
+		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
 	}

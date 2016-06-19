@@ -11,6 +11,9 @@ import librarys.StringLibrary;
 
 public class Shop {
 	
+	//This is the tile clicked on to initialize the shop. It is where the traps are placed on the grid
+	Vector2f locationOfTrapPlacement;
+	
 	//This is the bottom left corner of the shop
 	Vector2f location;
 	
@@ -27,12 +30,13 @@ public class Shop {
 	
 	Button shopHitbox;
 	
-	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Tile[][] traps) {
+	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Vector2f locationOfTrapPlacement, Tile[][] traps) {
 		this.location = location;
 		renderedTraps = new ArrayList<GuiTexture>();
 		this.size = size;
 		buttons = new Button[numberOfRows][numberOfColumns];
 		this.traps = traps;
+		this.locationOfTrapPlacement = locationOfTrapPlacement;
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
 				//Y position then X position
@@ -64,6 +68,10 @@ public class Shop {
 	//Returns true if the mouse is on top of the shop when called.
 	public boolean shopIsClicked(int mouseX, int mouseY) {
 		return shopHitbox.isClicked(mouseX, mouseY);
+	}
+	
+	public Vector2f getPlacementLoc() {
+		return locationOfTrapPlacement;
 	}
 	
 	public Tile getShopItem(int mouseX, int mouseY) {
