@@ -106,6 +106,11 @@ public class StringLibrary {
 		return string;
 	}
 	
+	public static float getWidth(String s) {
+		//TODO returns the width of a whole string, currently non-func.
+		return 0;
+	}
+	
 	//TODO make a getWidth(char c) method
 	//This returns the width of the image based off of the character making it so that the text can be correctly positioned next to one another
 	public static float getWidth(char c) {

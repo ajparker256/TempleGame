@@ -26,28 +26,31 @@ public class Shop {
 	//Tile array containing the available traps for sale
 	Tile[][] traps;
 	
-	ArrayList<GuiTexture> renderedTraps;
+	//0 = Row start, 1 = Row end, 2 = Col start 3 = Col end. This is the range shown on screen at any time. Subject to scrolling
+	int[] visibilityRange;
 	
+	//Checks if the shop has been clicked at all
 	Button shopHitbox;
 	
 	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Vector2f locationOfTrapPlacement, Tile[][] traps) {
 		this.location = location;
-		renderedTraps = new ArrayList<GuiTexture>();
 		this.size = size;
 		buttons = new Button[numberOfRows][numberOfColumns];
 		this.traps = traps;
 		this.locationOfTrapPlacement = locationOfTrapPlacement;
+		visibilityRange = new int[4];
+		visibilityRange[1] = 4;
+		visibilityRange[2] = 2;
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
+				
 				//Y position then X position
 				buttons[i][j] = new Button(new Vector2f(location.x+i*location.x/size.x, location.y+j*location.y/size.y), 
 						new Vector2f(location.x*(i+1)*location.x/size.x, location.y*(j+1)*location.y/size.y));
-				//This is the desired output, can be done here or in the Tile constructor. TODO
-				//trapTexture, new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+.5f)*(size.y/traps.length)), 
-				//new Vector2f(size.x/traps[0].length, size.y/traps.length)
+				
 				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+.5f)*(size.y/traps.length));
+				
 				traps[i][j].drawTile().setPosition(shopItemPosition);
-				renderedTraps.add(traps[i][j].drawTile());
 			}
 		}
 		
@@ -55,12 +58,12 @@ public class Shop {
 	}
 	
 	//This renders all traps in the shop at their given locations.
-	public void render(GuiRenderer g) {
-		for(int i = 0; i<traps[0].length; i++) {
-			for(int j = 0; j<traps.length; j++) {
-				g.render(renderedTraps);
+	public void render(ArrayList<GuiTexture> guis) {
+		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
+			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				//TODO Add Tile Naming system instead of toString Below!!!
-				StringLibrary.drawString(traps[j][i].toString(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)));
+				guis.add(traps[j][i].drawTile());
+				StringLibrary.drawString(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)));
 			}
 		}
 	}
