@@ -15,7 +15,7 @@ public class Dirt extends Tile{
 		super(x, y, size, location);
 		super.passable=false;
 		super.canInteract=true;
-		this.hp=100;
+		this.hp=1000;
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 	}

@@ -27,7 +27,8 @@ public class Group {
 	public Group() {
 		nextLoc=new Point(0,0);
 		nextPos=0;
-		location=Main.grid.getTile(0,0).getLocation();
+		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
+		location.x=location.x-0.1f;
 		velocity=new Vector2f(0.1f,0.1f);
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
@@ -49,7 +50,7 @@ public class Group {
 	public Point getNextLoc(Grid currentFloor) {
 		
 		
-		return new Point (nextLoc.x+1,(nextLoc.y));
+		return new Point (nextLoc.x,(nextLoc.y+1));
 		/*
 		//If no one has reached the goal
 		int totalOdds = 100;
@@ -90,6 +91,9 @@ public class Group {
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
+			for(Explorer e: group){
+				e.rotate(direction);
+			}
 			 grid.getTile(nextLoc.x, nextLoc.y).interact();
 		}else{
 		//If you aren't there yet, go somewhere
@@ -136,11 +140,32 @@ public class Group {
 					
 				}
 			}
+			
 		}else {
+			Point nextLocTemp=getNextLoc(Main.grid);
+			Vector2f locationNext=grid.getTile(nextLocTemp.x, nextLocTemp.y).getLocation();
+			if(location.x<locationNext.x){
+			direction=2;
+			
+		}else if(location.x>locationNext.x){
+			direction=4;
+
+			
+		}else if(location.y<locationNext.y){
+			direction=1;
+		
+			
+
+		}else if(location.y>locationNext.y){
+			direction=3;
+
+		}
+		
+			
 			for(Explorer e: group){
 				e.rotate(direction);
 			}
-			nextLoc=getNextLoc(Main.grid);
+			nextLoc=nextLocTemp;
 		}
 		
 		}
