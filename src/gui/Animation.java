@@ -17,8 +17,6 @@ public class Animation {
 	//This holds all of the textures for the animation cycle
 	private ArrayList<GuiTexture> frames;
 	
-	private ArrayList<GuiTexture> currentFrame;
-	
 	private Vector2f location;
 	
 	public Animation(Vector2f loc) {
@@ -26,15 +24,6 @@ public class Animation {
 		count = 0;
 		location = loc;
 		frames = new ArrayList<GuiTexture>();
-		currentFrame = new ArrayList<GuiTexture>();
-	}
-	
-	public Animation(Vector2f loc, ArrayList<GuiTexture> fs) {
-		frameDelay = 1;
-		count = 0;
-		location = loc;
-		frames = new ArrayList<GuiTexture>();
-		currentFrame = fs;
 	}
 	
 	private void update() {
@@ -81,28 +70,10 @@ public class Animation {
 		frameDelay = i;
 	}
 	
-	public ArrayList<GuiTexture> getFrame() {
-		currentFrame.clear();
-		currentFrame.add(frames.get(count/frameDelay));
+	public GuiTexture getFrame() {
+		GuiTexture currentFrame = frames.get(count/frameDelay);
 		run();
 		return currentFrame;
-	}
-	
-	//This displays the current frame
-	public void run(GuiRenderer g) {
-		//This makes it so that only the current frame displays
-		currentFrame.clear();
-		currentFrame.add(frames.get(count/frameDelay));
-		
-		//This renders the frame
-		g.render(currentFrame);
-		
-		//This moves to the next frame or loops
-		if(count>frames.size()*frameDelay-2) {
-			count = 0;
-		} else {
-			count++;
-		}
 	}
 	
 	public void run() {
