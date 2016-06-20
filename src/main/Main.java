@@ -96,6 +96,9 @@ public static Shop epicShopofEpicness;
 	GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
+	GuiLibrary.explorerStanding1 = loader.loadTexture("BasicExplorerR");
+	GuiLibrary.explorerWalkingL1 = loader.loadTexture("BasicExplorer WalkingR1");
+	GuiLibrary.explorerWalkingR1 = loader.loadTexture("BasicExplorer WalkingR2");
 	AnimationLibrary.init(loader);
 	
 	Group group1 = new Group();
