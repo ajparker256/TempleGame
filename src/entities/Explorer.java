@@ -24,6 +24,7 @@ public class Explorer extends Unit{
 		System.out.println(position);
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
 		super.animation=new Animation(AnimationLibrary.explorer,location,new Vector2f(0.045f,0.045f));
+		super.animation.setDelay(25);
 		this.velocity = velocity;
 		
 	}
@@ -60,6 +61,7 @@ public class Explorer extends Unit{
 	switch(group.getDirection()){
 	case 0:
 		idle.setPosition(location);
+		super.animation.resetCount();
 		return idle;
 	case 1:
 		animation.setLoc(location);

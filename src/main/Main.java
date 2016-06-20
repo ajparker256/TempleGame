@@ -117,6 +117,9 @@ public static Shop epicShopofEpicness;
 	StringLibrary.setSize(new Vector2f(.02f, .02f));
 	//ABCDEFGHIJKLMNOPQRSTUVWXYZ defghijklmnopqrstuvwxyz
 	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
+	test = StringLibrary.drawString("0123456789abcdefghijklmnopqrstuvwxyz", new Vector2f(-.98f,-.3f));
+	test.addAll(StringLibrary.drawString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", new Vector2f(-.98f,-.6f)));
+	test.addAll(StringLibrary.drawString("asdfweqrlkxjvnmzpoitubnlkwqrw", new Vector2f(-.98f,-.4f)));
 	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, -.8f)));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));

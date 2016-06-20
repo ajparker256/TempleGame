@@ -96,13 +96,15 @@ public class StringLibrary {
 	
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
-		spacing = .001f;
+		spacing = size.x*5/10;
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
-			//8/5
-			currentLength += getWidth(letter)+spacing;
+			
 			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+currentLength, loc.y), new Vector2f(size.x,size.y)));
+			
+			currentLength += getWidth(letter)+spacing;
 		}
+		currentLength = 0;
 		return string;
 	}
 	
@@ -115,31 +117,31 @@ public class StringLibrary {
 	//This returns the width of the image based off of the character making it so that the text can be correctly positioned next to one another
 	public static float getWidth(char c) {
 		if(c == ' ') {
-			return size.x*3/2;
+			return size.x;
 		}
 		//Return number textures
 		if(c == '0') {
-			return size.x*3/2;
+			return size.x;
 			
 		}
 		if(c == '1') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '2') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '3') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '4') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '5') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '6') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '7') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '8') 
-			return size.x*3/2;
+			return size.x;
 		if(c == '9') 
-			return size.x*3/2;
+			return size.x;
 		
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
@@ -199,57 +201,58 @@ public class StringLibrary {
 		
 		//Lower Case Letters
 		if(c == 'a') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'b') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'c') 
-			return size.x*3/2;
+			return size.x*90/113;
 		if(c == 'd') 
-			return size.x*3/2;
+			return size.x*80/113;
 		if(c == 'e') 
-			return size.x*4/3;
+			return size.x*80/113;
 		if(c == 'f') 
-			return size.x*2/3;
+			return size.x*70/113;
+		//Got to here with fixing it
 		if(c == 'g') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'h') 
-			return size.x*3/2;
+			return size.x*95/113;
 		if(c == 'i') 
-			return size.x*3/2;
+			return size.x*55/113;
 		if(c == 'j') 
-			return size.x*3/2;
+			return size.x*45/113;
 		if(c == 'k') 
-			return size.x*3/2;
+			return size.x*75/113;
 		if(c == 'l') 
-			return size.x*4/5;
+			return size.x*55/113;
 		if(c == 'm') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'n') 
-			return size.x*3/2;
+			return size.x*115/113;
 		if(c == 'o') 
-			return size.x*3/2;
+			return size.x*80/113;
 		if(c == 'p') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'q') 
-			return size.x*3/2;
+			return size.x*90/113;
 		if(c == 'r') 
-			return size.x*3/2;
+			return size.x*65/113;
 		if(c == 's') 
-			return size.x*3/2;
+			return size.x*55/113;
 		if(c == 't') 
-			return size.x*3/2;
+			return size.x*55/113;
 		if(c == 'u') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'v') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'w') 
-			return size.x*3/2;
+			return size.x*120/113;
 		if(c == 'x') 
-			return size.x*3/2;
+			return size.x*90/113;
 		if(c == 'y') 
-			return size.x*3/2;
+			return size.x*85/113;
 		if(c == 'z') 
-			return size.x*3/2;
+			return size.x*75/113;
 		
 		
 		return 0;

@@ -102,4 +102,8 @@ public class Animation {
 			count++;
 		}
 	}
+	
+	public void resetCount() {
+		count = 0;
+	}
 }
