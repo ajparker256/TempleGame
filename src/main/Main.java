@@ -58,6 +58,7 @@ public static Shop epicShopofEpicness;
 		Loader loader = new Loader();
 		Random random = new Random();
 		new TextureLibrary(loader);
+	
 		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10);
 
 		
@@ -66,7 +67,7 @@ public static Shop epicShopofEpicness;
 		
 		
 	SoundLibrary.music = Sound.loadSound("song");
-	AnimationLibrary.init(loader);
+
 	StringLibrary.init(loader);
 	
 	
@@ -95,6 +96,7 @@ public static Shop epicShopofEpicness;
 	GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
+	AnimationLibrary.init(loader);
 	
 	Group group1 = new Group();
 	group1.add(new Explorer (group1));
