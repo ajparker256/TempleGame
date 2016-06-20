@@ -150,6 +150,9 @@ public static Shop epicShopofEpicness;
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
 		milli = System.currentTimeMillis() - milli;
+		update();
+		if(epicShopofEpicness.isOn())
+			epicShopofEpicness.render(dynamicGuis);
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
@@ -163,7 +166,7 @@ public static Shop epicShopofEpicness;
 		dynamicGuis.addAll(group1.render());
 		//guiRenderer.render(arrows.getFrame());
 		
-		epicShopofEpicness.render(dynamicGuis);
+		
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
@@ -181,7 +184,7 @@ public static Shop epicShopofEpicness;
 		
 	}
 	
-	public void update() {
+	public static void update() {
 		updateMouse();
 		//TODO Test traps
 		//TODO Update Explorer AI
@@ -189,9 +192,14 @@ public static Shop epicShopofEpicness;
 		//TODO Update ArrayLists of explorers, traps, Tiles, etc. if not already done so.
 	}
 	
-	public void updateMouse() {
+	public static void updateMouse() {
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
+		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
+			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
+											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));
+			epicShopofEpicness.setOn(true);
+		}
 		if(epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selectedTrap.getPrice()<=money) {
