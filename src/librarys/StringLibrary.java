@@ -227,7 +227,7 @@ public class StringLibrary {
 		if(c == 'h') 
 			return size.x*55/113;
 		if(c == 'i') 
-			return size.x*25/113;
+			return size.x*35/113;
 		if(c == 'j') 
 			return size.x*50/113;
 		if(c == 'k') 
@@ -245,7 +245,7 @@ public class StringLibrary {
 		if(c == 'q') 
 			return size.x*70/113;
 		if(c == 'r') 
-			return size.x*60/113;
+			return size.x*45/113;
 		if(c == 's') 
 			return size.x*65/113;
 		if(c == 't') 
@@ -259,7 +259,7 @@ public class StringLibrary {
 		if(c == 'x') 
 			return size.x*90/113;
 		if(c == 'y') 
-			return size.x*85/113;
+			return size.x*65/113;
 		if(c == 'z') 
 			return size.x*75/113;
 		
