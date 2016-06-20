@@ -31,13 +31,20 @@ public class Unit {
 	
 	//This dictates functions that happen while alive/while dead
 	protected boolean isAlive;
+	
+	//This is the destination x
 	protected int xInGrid;
+	
+	//This is the destination y
 	protected int yInGrid;
-	private int formation;
+	
+	//This is the animation for movement
 	protected Animation animation;
-
+	
+	//This is the standing still image
 	protected GuiTexture idle;
-
+	
+	//This is the velocity used to go from point A to point B
 	protected Vector2f tempVelocity;
 	
 	
