@@ -17,10 +17,10 @@ public class AnimationLibrary {
 		explorerY.add(GuiLibrary.explorerStanding);
 		explorerY.add(GuiLibrary.explorerWalkingR);
 		explorerX=new ArrayList<Integer>();
-		explorerX.add(GuiLibrary.explorerStanding);
-		explorerX.add(GuiLibrary.explorerWalkingL);
-		explorerX.add(GuiLibrary.explorerStanding);
-		explorerX.add(GuiLibrary.explorerWalkingR);
+		explorerX.add(GuiLibrary.explorerStanding1);
+		explorerX.add(GuiLibrary.explorerWalkingL1);
+		explorerX.add(GuiLibrary.explorerStanding1);
+		explorerX.add(GuiLibrary.explorerWalkingR1);
 
 	}
 

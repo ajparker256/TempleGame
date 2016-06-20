@@ -13,7 +13,6 @@ import renderEngine.Loader;
 
 public class Explorer extends Unit{
 	private int position;
-	Animation explorerWalk;
 	private Group group;
 	
 	public Explorer(Group group) {
@@ -40,9 +39,7 @@ public class Explorer extends Unit{
 	}
 	
 
-	public void setLoc(Vector2f loc) {
-		explorerWalk.setLoc(loc);
-	}
+
 	
 	public GuiTexture render(Vector2f location) {
 		
@@ -90,13 +87,16 @@ public class Explorer extends Unit{
 	}
 
 	public void rotate(int direction) {
+		System.out.println(direction);
 		switch(group.getDirection()){
 		case 11:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
+		
 		break;
 			
 			
 
 		case 12:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,new Vector2f(0.045f,0.045f));
+		super.animation=new Animation(AnimationLibrary.explorerX,location,new Vector2f(0.045f,0.045f));
 		break;
 			
 		case 13:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
@@ -110,7 +110,6 @@ public class Explorer extends Unit{
 		break;
 		
 		case 2:super.animation=new Animation(AnimationLibrary.explorerX,location,new Vector2f(0.045f,0.045f));
-		System.out.println("plz");
 		break;
 
 		case 3:super.animation=new Animation(AnimationLibrary.explorerY,location,new Vector2f(0.045f,0.045f));

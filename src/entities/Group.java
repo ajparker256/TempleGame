@@ -48,6 +48,7 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		
+		
 		return new Point (nextLoc.x+1,(nextLoc.y));
 		/*
 		//If no one has reached the goal
@@ -95,7 +96,6 @@ public class Group {
 		if(!(location.x==destination.x&&location.y==destination.y)){
 			//If the destination is to the right, go right
 			if(location.x<destination.x){
-				System.out.println("yes");
 				direction=2;
 				tempVelocity.x = velocity.x;
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
