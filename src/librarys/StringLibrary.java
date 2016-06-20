@@ -1,8 +1,11 @@
 package librarys;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.lwjgl.util.vector.Vector2f;
+import org.newdawn.slick.Color;
+
 
 import gui.GuiTexture;
 import renderEngine.Loader;
@@ -97,6 +100,7 @@ public class StringLibrary {
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		float tempHeight = 0;
+		currentLength = 0;
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
 			if(i!=s.length()-1) {
@@ -123,12 +127,47 @@ public class StringLibrary {
 		return string;
 	}
 	
-	public static float getWidth(String s) {
-		//TODO returns the width of a whole string, currently non-func.
-		return 0;
+	//This fits a string into a given length, wrapping the text
+	public static ArrayList<GuiTexture> makeItFit(String s, Vector2f locationOfTopLeftCorner, float width) {
+		Scanner scan = new Scanner(s);
+		ArrayList<GuiTexture> words = new ArrayList<GuiTexture>();
+		int totalHeight = 0;
+		float totalLength = 0;
+		while(scan.hasNext()) {
+			String nextWord = scan.next()+" ";
+			float wLength = getWidth(nextWord);
+			if(totalLength+wLength<width) {
+				totalLength+=wLength;
+			} else {
+				totalHeight++;
+				totalLength = wLength;
+			}
+			words.addAll(drawString(nextWord, new Vector2f(locationOfTopLeftCorner.x+totalLength-wLength, locationOfTopLeftCorner.y-totalHeight*size.y*2)));
+		}
+		scan.close();
+		return words;
 	}
 	
-	//TODO make a getWidth(char c) method
+	//This returns the width of a string, allowing centering of strings regardless of length
+	public static float getWidth(String s) {
+		currentLength = 0;
+		for(int i = 0; i<s.length(); i++) {
+			char letter = s.charAt(i);
+			if(i!=s.length()-1) {
+				char nextChar = s.charAt(i+1);
+				if(nextChar == 'w' || nextChar == 'm') {
+					spacing = size.x*6/7;
+				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
+					spacing = size.x/4;
+				} else {
+					spacing = size.x/2;
+				}
+			}
+			currentLength += getWidth(letter)+spacing;
+		}
+		return currentLength;
+	}
+	
 	//This returns the width of the image based off of the character making it so that the text can be correctly positioned next to one another
 	public static float getWidth(char c) {
 		if(c == ' ') {
@@ -252,7 +291,7 @@ public class StringLibrary {
 		if(c == 'r') 
 			return size.x*45/113;
 		if(c == 's') 
-			return size.x*65/113;
+			return size.x*85/113;
 		if(c == 't') 
 			return size.x*55/113;
 		if(c == 'u') 
