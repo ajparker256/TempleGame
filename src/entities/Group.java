@@ -22,13 +22,16 @@ public class Group {
 	private Vector2f location;
 	private Vector2f velocity;
 	private int nextPos;
+	private int direction=0;
+
 	public Group() {
 		nextLoc=new Point(0,0);
 		nextPos=0;
 		location=Main.grid.getTile(0,0).getLocation();
-		velocity=new Vector2f(0,0);
+		velocity=new Vector2f(0.1f,0.1f);
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
+		
 	}
 	
 	public int getMaxSize() {
@@ -45,7 +48,7 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		
-		return new Point (nextLoc.x,nextLoc.y+1);
+		return new Point (nextLoc.x,(nextLoc.y+1));
 		/*
 		//If no one has reached the goal
 		int totalOdds = 100;
@@ -82,17 +85,17 @@ public class Group {
 		*/
 	}
 	public void move(int milli,Grid grid) {
-		
+		direction=0;
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			 grid.getTile(nextLoc.x, nextLoc.y).interact();
 		}else{
-		
 		//If you aren't there yet, go somewhere
-		if(!location.equals(destination)){
+		if(!(location.x==destination.x&&location.y==destination.y)){
 			//If the destination is to the right, go right
 			if(location.x<destination.x){
+				direction=2;
 				tempVelocity.x = velocity.x;
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 				//If you would overshoot, don't
@@ -102,6 +105,7 @@ public class Group {
 				}
 			//If the destination is to the left, go left
 			}else if(location.x>destination.x){
+				direction=4;
 				tempVelocity = new Vector2f(velocity.x*-1, 0);
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 				if(location.x<destination.x){
@@ -110,6 +114,7 @@ public class Group {
 				}
 			//If the destination is above you, go up
 			}else if(location.y<destination.y){
+				direction=1;
 				tempVelocity.y = velocity.y;
 				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 				if(location.y>destination.y){
@@ -119,6 +124,7 @@ public class Group {
 				
 			//If the destination is below you, go down
 			}else if(location.y>destination.y){
+				direction=3;
 				tempVelocity.y = -1*velocity.y;
 				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 				if(location.y<destination.y){
@@ -128,7 +134,6 @@ public class Group {
 				}
 			}
 		}else {nextLoc=getNextLoc(Main.grid);
-		System.out.println("this");
 		}
 		
 		}
@@ -161,6 +166,11 @@ public class Group {
 		nextPos++;
 		return nextPos;
 	}
+
+	public int getDirection() {
+		return direction;
+	}
+
 
 	
 }

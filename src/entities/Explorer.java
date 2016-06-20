@@ -14,10 +14,12 @@ import renderEngine.Loader;
 public class Explorer extends Unit{
 	private int position;
 	Animation explorerWalk;
+	private Group group;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		this.group=group;
 		position=group.getPosition();
 		System.out.println(position);
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
@@ -42,7 +44,7 @@ public class Explorer extends Unit{
 	}
 	
 	public GuiTexture render(Vector2f location) {
-	
+		
 		switch(position){
 		case 1:location=new Vector2f(location.x-0.025f+0.01f,location.y+0.04f);
 		break;
@@ -52,14 +54,15 @@ public class Explorer extends Unit{
 		break;
 		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.04f);
 		break;
-			
 		}
-		if(tempVelocity.x==0&&tempVelocity.y==0){
-			idle.setPosition(location);
-			return idle;
-		}
-		
+		idle.setPosition(location);
 		animation.setLoc(location);
+	switch(group.getDirection()){
+	case 0:return idle;
+	case 1:return animation.getFrame();
+	}
+		
+		
 		return animation.getFrame();
 	}
 	
