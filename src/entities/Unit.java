@@ -31,20 +31,13 @@ public class Unit {
 	
 	//This dictates functions that happen while alive/while dead
 	protected boolean isAlive;
-	
-	//This is the destination x
 	protected int xInGrid;
-	
-	//This is the destination y
 	protected int yInGrid;
-	
-	//This is the animation for movement
+	private int formation;
 	protected Animation animation;
-	
-	//This is the standing still image
+
 	protected GuiTexture idle;
-	
-	//This is the velocity used to go from point A to point B
+
 	protected Vector2f tempVelocity;
 	
 	
@@ -60,6 +53,7 @@ public class Unit {
 	
 	//Move according to the velocity of the unit relative to time passed
 	public void move(int milli,Grid grid) {
+		System.out.println("Plz no");
 		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
 		 tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){

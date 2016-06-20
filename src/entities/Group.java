@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import main.Main;
 
 import org.lwjgl.util.vector.Vector2f;
+import java.awt.Point;
 
 import grid.Grid;
 import grid.Tile;
@@ -17,14 +18,12 @@ public class Group {
 	
 	//This is the room on a tile for members to exist (generally 2-4 explorers or 1 big thing like a drill)
 	private final int MAX_SIZE;
-	private int xInGrid=0;
-	private int yInGrid=0;
+	private Point nextLoc;
 	private Vector2f location;
 	private Vector2f velocity;
 	private int nextPos;
-
-	
 	public Group() {
+		nextLoc=new Point(0,0);
 		nextPos=0;
 		location=Main.grid.getTile(0,0).getLocation();
 		velocity=new Vector2f(0,0);
@@ -44,7 +43,10 @@ public class Group {
 		group.add(e);
 	}
 	
-	public Vector2f getNextLoc(Grid currentFloor) {
+	public Point getNextLoc(Grid currentFloor) {
+		
+		return new Point (nextLoc.x,nextLoc.y+1);
+		/*
 		//If no one has reached the goal
 		int totalOdds = 100;
 		//These are the odds for each individual option (Capped to 4 since there are 4 options)
@@ -77,12 +79,16 @@ public class Group {
 		}
 		//Error case where the group is empty
 		return null;
-		
+		*/
 	}
 	public void move(int milli,Grid grid) {
-		if(grid.getTile(xInGrid, yInGrid).passable){
-		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
+		
+		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
+		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
+			 grid.getTile(nextLoc.x, nextLoc.y).interact();
+		}else{
+		
 		//If you aren't there yet, go somewhere
 		if(!location.equals(destination)){
 			//If the destination is to the right, go right
@@ -121,12 +127,20 @@ public class Group {
 					
 				}
 			}
+		}else {nextLoc=getNextLoc(Main.grid);
+		System.out.println("this");
 		}
-	} else{
-		 grid.getTile(xInGrid, yInGrid).interact();
-	}
 		
-	}
+		}
+		
+		
+		}
+			
+		
+		
+	
+		
+	
 
 	private void setLoc(Vector2f location) {
 		this.location=location;

@@ -141,7 +141,11 @@ public static Shop epicShopofEpicness;
 		dynamicGuis.add(test.get(i));
 	}
 	
-	
+	for(int y=0;y<10;y++){
+		for(int x=0;x<10;x++){
+			System.out.println(grid.getTile(x, y).getLocation().x);
+		}
+	}
 
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
