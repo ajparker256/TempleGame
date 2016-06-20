@@ -96,21 +96,26 @@ public class StringLibrary {
 	
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
+		float tempHeight = 0;
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
 			if(i!=s.length()-1) {
 				char nextChar = s.charAt(i+1);
 				if(nextChar == 'w' || nextChar == 'm') {
-					spacing = size.x*4/5;
+					spacing = size.x*6/7;
 				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
 					spacing = size.x/4;
 				} else {
 					spacing = size.x/2;
 				}
 			}
-
+			if(letter == 'g' || letter == 'q' || letter == 'p' || letter == 'y') {
+				tempHeight = loc.y-size.y*2/5;
+			} else {
+				tempHeight = loc.y;
+			}
 			
-			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+currentLength, loc.y), new Vector2f(size.x,size.y)));
+			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+currentLength, tempHeight), new Vector2f(size.x,size.y)));
 			
 			currentLength += getWidth(letter)+spacing;
 		}
@@ -127,7 +132,7 @@ public class StringLibrary {
 	//This returns the width of the image based off of the character making it so that the text can be correctly positioned next to one another
 	public static float getWidth(char c) {
 		if(c == ' ') {
-			return size.x;
+			return size.x/4;
 		}
 		//Return number textures
 		if(c == '0') {
@@ -156,60 +161,60 @@ public class StringLibrary {
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'B') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'C') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'D') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'E') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'F') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'G') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'H') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'I') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'J') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'K') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'L') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'M') 
 			return size.x*11/10;
 		if(c == 'N') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'O') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'P') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'Q') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'R') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'S') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'T') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'U') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'V') 
-			return size.x;
+			return size.x*6/7;
 		//Possibly make this one have more space than the others to accomodate its obscene breadth
 		if(c == 'W') 
-			return size.x*11/10;
+			return size.x;
 		if(c == 'X') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'Y') 
-			return size.x;
+			return size.x*6/7;
 		if(c == 'Z') 
-			return size.x;
+			return size.x*6/7;
 		
-		//Lower Case Letters
+		//Lower Case Letters (113 is the width of the images)
 		if(c == 'a') 
 			return size.x*75/113;
 		if(c == 'b') 
@@ -225,7 +230,7 @@ public class StringLibrary {
 		if(c == 'g') 
 			return size.x*85/113;
 		if(c == 'h') 
-			return size.x*55/113;
+			return size.x*90/113;
 		if(c == 'i') 
 			return size.x*35/113;
 		if(c == 'j') 
