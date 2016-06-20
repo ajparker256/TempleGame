@@ -8,6 +8,9 @@ import org.lwjgl.util.vector.Vector2f;
 //Implied default of %1 == 0 but can be raised.
 public class Animation {
 	
+	//If true, the animation will loop, otherwise it stops until this is changed to true
+	private boolean loop;
+	
 	//This keeps track of the current animation image
 	private int count;
 	
@@ -24,6 +27,7 @@ public class Animation {
 		count = 0;
 		location = new Vector2f(0,0);
 		frames = new ArrayList<GuiTexture>();
+		loop = true;
 	}
 	
 	private void update() {
@@ -74,6 +78,16 @@ public class Animation {
 		GuiTexture currentFrame = frames.get(count/frameDelay);
 		run();
 		return currentFrame;
+	}
+	
+	//This only runs once.
+	public GuiTexture getFrameNoLoop() {
+		if(!(count>frames.size()*frameDelay-3)){
+			GuiTexture currentFrame = frames.get(count/frameDelay);
+			run();
+			return currentFrame;
+		}
+		else return null;
 	}
 	
 	public void run() {
