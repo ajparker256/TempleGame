@@ -95,7 +95,10 @@ public class StringLibrary {
 		TextureLibrary.lz = loader.loadTexture("letters/lz");
 		
 		//This loads the punctuation
-		
+		TextureLibrary.period = loader.loadTexture("letters/period");
+		TextureLibrary.exclamationPoint = loader.loadTexture("letters/exclamationPoint");
+		TextureLibrary.questionMark = loader.loadTexture("letters/questionMark");
+		TextureLibrary.comma = loader.loadTexture("letters/comma");
 
 	}
 	
@@ -319,6 +322,16 @@ public class StringLibrary {
 		if(c == 'z') 
 			return size.x*75/113;
 		
+		//Punctuation Width
+		if(c == '.')
+			return size.x*40/113;
+		if(c == '!') 
+			return size.x*40/113;
+		if(c == '?') 
+			return size.x*70/113;
+		if(c == ',') 
+			return size.x*40/113;
+		
 		
 		return 0;
 	}
@@ -461,6 +474,15 @@ public class StringLibrary {
 			return TextureLibrary.ly;
 		if(c == 'z') 
 			return TextureLibrary.lz;
+		
+		if(c == '.') 
+			return TextureLibrary.period;
+		if(c == '!')
+			return TextureLibrary.exclamationPoint;
+		if(c == '?') 
+			return TextureLibrary.questionMark;
+		if(c == ',') 
+			return TextureLibrary.comma;
 		
 		//Else return -1 showing error
 		return -1;

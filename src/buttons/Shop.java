@@ -63,7 +63,7 @@ public class Shop {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				//TODO Add Tile Naming system instead of toString Below!!!
 				guis.add(traps[j][i].drawTile());
-				StringLibrary.drawString(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)));
+				StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)), size.x/(traps[0].length));
 			}
 		}
 	}
