@@ -56,9 +56,8 @@ public class DartTrap extends Tile{
 		arrows.setDelay(10);
 	}
 	
-	public void trigger(GuiRenderer g, int milli) {
+	public void trigger(int milli) {
 		if(Math.abs(arrows.getLoc().x-location.x)<range && Math.abs(arrows.getLoc().y-location.y)<range) {
-			g.render(arrows.getFrame());
 			arrows.setLoc(new Vector2f(arrows.getLoc().x+attackVelocity.x*milli/1000, arrows.getLoc().y+attackVelocity.y*milli/1000));
 			//TODO add collision mechanic of some sort to do damage.
 		}
