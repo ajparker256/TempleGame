@@ -23,7 +23,7 @@ public class Animation {
 	private Vector2f location;
 	
 	public Animation(ArrayList<Integer> list,Vector2f location,Vector2f size) {
-		frameDelay = 1;
+		frameDelay = 60;
 		count = 0;
 		location = new Vector2f(0,0);
 		frames = new ArrayList<GuiTexture>();

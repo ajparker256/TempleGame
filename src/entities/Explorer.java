@@ -20,7 +20,8 @@ public class Explorer extends Unit{
 		super(group);
 		position=group.getPosition();
 		System.out.println(position);
-		super.animation=new Animation(AnimationLibrary.explorer,location,size);
+		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
+		super.animation=new Animation(AnimationLibrary.explorer,location,new Vector2f(0.045f,0.045f));
 		this.velocity = velocity;
 		
 	}
@@ -41,18 +42,23 @@ public class Explorer extends Unit{
 	}
 	
 	public GuiTexture render(Vector2f location) {
-		
+	
 		switch(position){
-		case 1:location=new Vector2f(location.x-0.02f,location.y+0.05f);
+		case 1:location=new Vector2f(location.x-0.025f+0.01f,location.y+0.04f);
 		break;
-		case 2:location=new Vector2f(location.x+0.02f,location.y+0.05f);
+		case 2:location=new Vector2f(location.x+0.025f+0.01f,location.y+0.04f);
 		break;
-		case 3:location=new Vector2f(location.x-0.02f,location.y-0.05f);
+		case 3:location=new Vector2f(location.x-0.025f+0.01f,location.y-0.04f);
 		break;
-		case 4:location=new Vector2f(location.x+0.02f,location.y-0.05f);
+		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.04f);
 		break;
 			
 		}
+		if(tempVelocity.x==0&&tempVelocity.y==0){
+			idle.setPosition(location);
+			return idle;
+		}
+		
 		animation.setLoc(location);
 		return animation.getFrame();
 	}

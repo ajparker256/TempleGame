@@ -35,10 +35,15 @@ public class Unit {
 	protected int yInGrid;
 	private int formation;
 	protected Animation animation;
+
+	protected GuiTexture idle;
+
+	protected Vector2f tempVelocity;
 	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
+		tempVelocity=new Vector2f(0, 0);
 		this.animation=new Animation(AnimationLibrary.explorer,location,size);
 		velocity=new Vector2f(0,0);
 		location = group.getLocation();
@@ -49,7 +54,7 @@ public class Unit {
 	//Move according to the velocity of the unit relative to time passed
 	public void move(int milli,Grid grid) {
 		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
-		Vector2f tempVelocity= new Vector2f(0, 0);
+		 tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){
 			if(location.x<destination.x){
 				tempVelocity.x = velocity.x;
@@ -88,6 +93,7 @@ public class Unit {
 	//Optimization strategy: Return the GuiTexture instead and render only one arrayList so as to avoid
 	//Any excess memory usage.
 	public GuiTexture render(Vector2f location) {
+
 		animation.setLoc(location);
 		return animation.getFrame();
 	}
