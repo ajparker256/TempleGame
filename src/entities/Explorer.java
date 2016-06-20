@@ -55,11 +55,15 @@ public class Explorer extends Unit{
 		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.04f);
 		break;
 		}
-		idle.setPosition(location);
-		animation.setLoc(location);
+	
+		
 	switch(group.getDirection()){
-	case 0:return idle;
-	case 1:return animation.getFrame();
+	case 0:
+		idle.setPosition(location);
+		return idle;
+	case 1:
+		animation.setLoc(location);
+		return animation.getFrame();
 	}
 		
 		
