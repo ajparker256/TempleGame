@@ -72,8 +72,8 @@ public static Shop epicShopofEpicness;
 	
 	
 	
-	List<GuiTexture> guis = new ArrayList<GuiTexture>();
-	List<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
+	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
+	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	
 	
 	
@@ -156,7 +156,7 @@ public static Shop epicShopofEpicness;
 		dynamicGuis.addAll(group1.render());
 		//guiRenderer.render(arrows.getFrame());
 		
-		epicShopofEpicness.render(guiRenderer);
+		epicShopofEpicness.render(dynamicGuis);
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
