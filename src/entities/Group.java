@@ -48,7 +48,7 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		
-		return new Point (nextLoc.x,(nextLoc.y+1));
+		return new Point (nextLoc.x+1,(nextLoc.y));
 		/*
 		//If no one has reached the goal
 		int totalOdds = 100;
@@ -85,7 +85,7 @@ public class Group {
 		*/
 	}
 	public void move(int milli,Grid grid) {
-		direction=0;
+		
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
@@ -95,12 +95,14 @@ public class Group {
 		if(!(location.x==destination.x&&location.y==destination.y)){
 			//If the destination is to the right, go right
 			if(location.x<destination.x){
+				System.out.println("yes");
 				direction=2;
 				tempVelocity.x = velocity.x;
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 				//If you would overshoot, don't
 				if(location.x>destination.x){
 					location.x=destination.x;
+					direction=12;
 					
 				}
 			//If the destination is to the left, go left
@@ -110,6 +112,7 @@ public class Group {
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 				if(location.x<destination.x){
 					location.x=destination.x;
+					direction=14;
 					
 				}
 			//If the destination is above you, go up
@@ -119,7 +122,7 @@ public class Group {
 				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 				if(location.y>destination.y){
 					location.y=destination.y;
-					
+					direction=11;
 				}
 				
 			//If the destination is below you, go down
@@ -129,11 +132,15 @@ public class Group {
 				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 				if(location.y<destination.y){
 					location.y=destination.y;
-					velocity.y=0;
+					direction=13;
 					
 				}
 			}
-		}else {nextLoc=getNextLoc(Main.grid);
+		}else {
+			for(Explorer e: group){
+				e.rotate(direction);
+			}
+			nextLoc=getNextLoc(Main.grid);
 		}
 		
 		}

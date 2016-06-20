@@ -8,14 +8,19 @@ public class AnimationLibrary {
 
 	
 	
-	
-	public static ArrayList<Integer> explorer;
+	public static ArrayList<Integer> explorerX;
+	public static ArrayList<Integer> explorerY;
 	public static void init(Loader loader){
-		explorer=new ArrayList<Integer>();
-		explorer.add(GuiLibrary.explorerStanding);
-		explorer.add(GuiLibrary.explorerWalkingL);
-		explorer.add(GuiLibrary.explorerStanding);
-		explorer.add(GuiLibrary.explorerWalkingR);
+		explorerY=new ArrayList<Integer>();
+		explorerY.add(GuiLibrary.explorerStanding);
+		explorerY.add(GuiLibrary.explorerWalkingL);
+		explorerY.add(GuiLibrary.explorerStanding);
+		explorerY.add(GuiLibrary.explorerWalkingR);
+		explorerX=new ArrayList<Integer>();
+		explorerX.add(GuiLibrary.explorerStanding);
+		explorerX.add(GuiLibrary.explorerWalkingL);
+		explorerX.add(GuiLibrary.explorerStanding);
+		explorerX.add(GuiLibrary.explorerWalkingR);
 
 	}
 

@@ -45,7 +45,7 @@ public class Unit {
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
 		tempVelocity=new Vector2f(0, 0);
-		this.animation=new Animation(AnimationLibrary.explorer,location,size);
+		this.animation=new Animation(AnimationLibrary.explorerY,location,size);
 		velocity=new Vector2f(0,0);
 		location = group.getLocation();
 		isAlive = true;

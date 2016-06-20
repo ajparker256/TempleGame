@@ -23,7 +23,7 @@ public class Explorer extends Unit{
 		position=group.getPosition();
 		System.out.println(position);
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
-		super.animation=new Animation(AnimationLibrary.explorer,location,new Vector2f(0.045f,0.045f));
+		super.animation=new Animation(AnimationLibrary.explorerY,location,new Vector2f(0.045f,0.045f));
 		super.animation.setDelay(25);
 		this.velocity = velocity;
 		
@@ -59,17 +59,68 @@ public class Explorer extends Unit{
 	
 		
 	switch(group.getDirection()){
-	case 0:
+	case 11:
+		idle.setPosition(location);
+		super.animation.resetCount();
+		return idle;
+	case 12:
+		idle.setPosition(location);
+		super.animation.resetCount();
+		return idle;
+	case 13:
+		idle.setPosition(location);
+		super.animation.resetCount();
+		return idle;
+	case 14:
 		idle.setPosition(location);
 		super.animation.resetCount();
 		return idle;
 	case 1:
 		animation.setLoc(location);
 		return animation.getFrame();
-	}
-		
-		
+	
+	case 2:animation.setLoc(location);
 		return animation.getFrame();
+	case 3:animation.setLoc(location);
+	return animation.getFrame();
+	case 4:animation.setLoc(location);
+	return animation.getFrame();
+	}
+	return animation.getFrame();
+	}
+
+	public void rotate(int direction) {
+		switch(group.getDirection()){
+		case 11:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
+		break;
+			
+			
+
+		case 12:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,new Vector2f(0.045f,0.045f));
+		break;
+			
+		case 13:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
+		break;
+			
+		case 14:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,new Vector2f(0.045f,0.045f));
+		break;
+		
+
+		case 1:super.animation=new Animation(AnimationLibrary.explorerY,location,new Vector2f(0.045f,0.045f));
+		break;
+		
+		case 2:super.animation=new Animation(AnimationLibrary.explorerX,location,new Vector2f(0.045f,0.045f));
+		System.out.println("plz");
+		break;
+
+		case 3:super.animation=new Animation(AnimationLibrary.explorerY,location,new Vector2f(0.045f,0.045f));
+		break;
+		
+		case 4:super.animation=new Animation(AnimationLibrary.explorerX,location,new Vector2f(0.045f,0.045f));
+		break;
+		}
+		
+		
 	}
 	
 	
