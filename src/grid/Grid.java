@@ -16,6 +16,8 @@ import renderEngine.DisplayManager;
 public class Grid {
 	
 	
+	public static final Vector2f UNITSIZE = new Vector2f(0.2f,0.2f);
+
 	//This is the boolean that determines if groups redirect to the path of the group that made it to the end
 	private boolean goalReached;
 	

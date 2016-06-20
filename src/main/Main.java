@@ -30,6 +30,8 @@ import buttons.Button;
 import buttons.Shop;
 import entities.Camera;
 import entities.Explorer;
+import entities.Group;
+import entities.Unit;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import sound.Sound;
@@ -93,7 +95,8 @@ public static Shop epicShopofEpicness;
 	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
-	Explorer bob = new Explorer(20, new Vector2f(.55f,-.5f), new Vector2f(.05f, .05f), new Vector2f(.1f,.1f));
+	Group group1 = new Group();
+	group.add(new Explorer (group1));
 	Tile[][] traps = new Tile[4][2];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
@@ -144,8 +147,8 @@ public static Shop epicShopofEpicness;
 		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
-		dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
-		bob.move((int)milli,grid);
+		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
+		 group1.move((int)milli,grid);
 		guiRenderer.render(arrows.getFrame());
 		
 		epicShopofEpicness.render(guiRenderer);

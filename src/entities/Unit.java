@@ -3,6 +3,8 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.Main;
+
 import org.lwjgl.util.vector.Vector2f;
 
 import grid.Grid;
@@ -29,15 +31,15 @@ public class Unit {
 	protected boolean isAlive;
 	protected int xInGrid;
 	protected int yInGrid;
+	private int formation;
 	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
-	public Unit(int h, Vector2f loc,  Vector2f size) {
+	public Unit(Group group) {
 		velocity=new Vector2f(0,0);
-		hp = h;
-		location = loc;
+		location = group.getLocation();
 		isAlive = true;
-		this.size = size;		
+		this.size = Main.grid.UNITSIZE;	
 	}
 	
 	//Move according to the velocity of the unit relative to time passed
