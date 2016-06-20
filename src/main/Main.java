@@ -119,7 +119,7 @@ public static Shop epicShopofEpicness;
 	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
 	test = StringLibrary.drawString("0123456789abcdefghijklmnopqrstuvwxyz", new Vector2f(-.98f,-.3f));
 	test.addAll(StringLibrary.drawString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", new Vector2f(-.98f,-.6f)));
-	test.addAll(StringLibrary.drawString("asdfweqrlkxjvnmzpoitubnlkwqrw", new Vector2f(-.98f,-.4f)));
+	test.addAll(StringLibrary.drawString("Jackson made this string system work", new Vector2f(-.98f,-.4f)));
 	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, -.8f)));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
@@ -151,7 +151,7 @@ public static Shop epicShopofEpicness;
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		//The screen is -1 to 1 for x and 0 to -1 for y in floats
-		dynamicGuis.addAll(grid.render());
+		//dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
