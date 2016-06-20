@@ -96,9 +96,19 @@ public class StringLibrary {
 	
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
-		spacing = size.x*5/10;
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
+			if(i!=s.length()-1) {
+				char nextChar = s.charAt(i+1);
+				if(nextChar == 'w' || nextChar == 'm') {
+					spacing = size.x*4/5;
+				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
+					spacing = size.x/4;
+				} else {
+					spacing = size.x/2;
+				}
+			}
+
 			
 			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+currentLength, loc.y), new Vector2f(size.x,size.y)));
 			
@@ -146,62 +156,62 @@ public class StringLibrary {
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'B') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'C') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'D') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'E') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'F') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'G') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'H') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'I') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'J') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'K') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'L') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'M') 
-			return size.x*3/2;
+			return size.x*11/10;
 		if(c == 'N') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'O') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'P') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'Q') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'R') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'S') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'T') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'U') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'V') 
-			return size.x*3/2;
+			return size.x;
 		//Possibly make this one have more space than the others to accomodate its obscene breadth
 		if(c == 'W') 
-			return size.x*3/2;
+			return size.x*11/10;
 		if(c == 'X') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'Y') 
-			return size.x*3/2;
+			return size.x;
 		if(c == 'Z') 
-			return size.x*3/2;
+			return size.x;
 		
 		//Lower Case Letters
 		if(c == 'a') 
-			return size.x*85/113;
+			return size.x*75/113;
 		if(c == 'b') 
 			return size.x*85/113;
 		if(c == 'c') 
@@ -212,45 +222,44 @@ public class StringLibrary {
 			return size.x*80/113;
 		if(c == 'f') 
 			return size.x*70/113;
-		//Got to here with fixing it
 		if(c == 'g') 
 			return size.x*85/113;
 		if(c == 'h') 
-			return size.x*95/113;
+			return size.x*55/113;
 		if(c == 'i') 
-			return size.x*55/113;
+			return size.x*35/113;
 		if(c == 'j') 
-			return size.x*45/113;
+			return size.x*50/113;
 		if(c == 'k') 
-			return size.x*75/113;
+			return size.x*65/113;
 		if(c == 'l') 
-			return size.x*55/113;
+			return size.x*45/113;
 		if(c == 'm') 
 			return size.x;
 		if(c == 'n') 
-			return size.x*115/113;
+			return size.x*75/113;
 		if(c == 'o') 
 			return size.x*80/113;
 		if(c == 'p') 
-			return size.x*85/113;
-		if(c == 'q') 
 			return size.x*90/113;
+		if(c == 'q') 
+			return size.x*70/113;
 		if(c == 'r') 
-			return size.x*65/113;
+			return size.x*45/113;
 		if(c == 's') 
-			return size.x*55/113;
+			return size.x*65/113;
 		if(c == 't') 
 			return size.x*55/113;
 		if(c == 'u') 
-			return size.x*85/113;
+			return size.x*80/113;
 		if(c == 'v') 
-			return size.x*85/113;
+			return size.x*75/113;
 		if(c == 'w') 
 			return size.x*120/113;
 		if(c == 'x') 
 			return size.x*90/113;
 		if(c == 'y') 
-			return size.x*85/113;
+			return size.x*65/113;
 		if(c == 'z') 
 			return size.x*75/113;
 		
