@@ -43,6 +43,7 @@ public class Grid {
 				grid[k][i]=new Dirt(k,i,size,location);
 			}
 		}
+		grid[0][0]=new Blank(0,0,size,location);
 	}
 	
 	public Vector2f getTileCount() {

@@ -8,16 +8,19 @@ import gui.GuiRenderer;
 import gui.GuiTexture;
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
+import main.Main;
 import renderEngine.Loader;
 
 public class Explorer extends Unit{
-	
+	private int position;
 	Animation explorerWalk;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
-		super.animation=AnimationLibrary.explorer;
+		position=group.getPosition();
+		System.out.println(position);
+		super.animation=new Animation(AnimationLibrary.explorer,location,size);
 		this.velocity = velocity;
 		
 	}
@@ -34,11 +37,25 @@ public class Explorer extends Unit{
 	
 
 	public void setLoc(Vector2f loc) {
-		location = loc;
 		explorerWalk.setLoc(loc);
 	}
 	
-	
+	public GuiTexture render(Vector2f location) {
+		
+		switch(position){
+		case 1:location=new Vector2f(location.x-0.02f,location.y+0.05f);
+		break;
+		case 2:location=new Vector2f(location.x+0.02f,location.y+0.05f);
+		break;
+		case 3:location=new Vector2f(location.x-0.02f,location.y-0.05f);
+		break;
+		case 4:location=new Vector2f(location.x+0.02f,location.y-0.05f);
+		break;
+			
+		}
+		animation.setLoc(location);
+		return animation.getFrame();
+	}
 	
 	
 }

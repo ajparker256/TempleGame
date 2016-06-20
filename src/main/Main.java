@@ -100,6 +100,9 @@ public static Shop epicShopofEpicness;
 	
 	Group group1 = new Group();
 	group1.add(new Explorer (group1));
+	group1.add(new Explorer (group1));
+	group1.add(new Explorer (group1));
+	group1.add(new Explorer (group1));
 	Tile[][] traps = new Tile[4][2];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {

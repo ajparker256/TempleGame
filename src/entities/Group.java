@@ -21,9 +21,11 @@ public class Group {
 	private int yInGrid=0;
 	private Vector2f location;
 	private Vector2f velocity;
+	private int nextPos;
 
 	
 	public Group() {
+		nextPos=0;
 		location=Main.grid.getTile(0,0).getLocation();
 		velocity=new Vector2f(0,0);
 		group = new ArrayList<Explorer>();
@@ -140,5 +142,11 @@ public class Group {
 		}
 		return toRender;
 	}
+
+	public int getPosition() {
+		nextPos++;
+		return nextPos;
+	}
+
 	
 }

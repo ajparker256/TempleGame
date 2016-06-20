@@ -27,7 +27,7 @@ public class Unit {
 	protected Vector2f velocity;
 	
 	//This is the size of the unit on the screen in x and y
-	private Vector2f size;
+	protected Vector2f size;
 	
 	//This dictates functions that happen while alive/while dead
 	protected boolean isAlive;
@@ -39,7 +39,7 @@ public class Unit {
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
-		this.animation=AnimationLibrary.explorer;
+		this.animation=new Animation(AnimationLibrary.explorer,location,size);
 		velocity=new Vector2f(0,0);
 		location = group.getLocation();
 		isAlive = true;
