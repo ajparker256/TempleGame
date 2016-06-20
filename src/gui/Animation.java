@@ -19,10 +19,10 @@ public class Animation {
 	
 	private Vector2f location;
 	
-	public Animation(Vector2f loc) {
+	public Animation() {
 		frameDelay = 1;
 		count = 0;
-		location = loc;
+		location = new Vector2f(0,0);
 		frames = new ArrayList<GuiTexture>();
 	}
 	

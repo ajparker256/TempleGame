@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
@@ -65,7 +66,7 @@ public static Shop epicShopofEpicness;
 		
 		
 	SoundLibrary.music = Sound.loadSound("song");
-	
+	AnimationLibrary.init(loader);
 	StringLibrary.init(loader);
 	
 	
@@ -96,7 +97,7 @@ public static Shop epicShopofEpicness;
 	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
 	
 	Group group1 = new Group();
-	group.add(new Explorer (group1));
+	group1.add(new Explorer (group1));
 	Tile[][] traps = new Tile[4][2];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
@@ -115,7 +116,7 @@ public static Shop epicShopofEpicness;
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	
-	
+	/*
 	Animation arrows = new Animation(new Vector2f(-.8f,-.5f));
 	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"), arrows.getLoc(), new Vector2f(.2f, .2f)));
 	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows2"), arrows.getLoc(), new Vector2f(.2f, .2f)));
@@ -128,6 +129,7 @@ public static Shop epicShopofEpicness;
 	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"), arrows.getLoc(), new Vector2f(.2f, .2f)));
 	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"), arrows.getLoc(), new Vector2f(.2f, .2f)));
 	arrows.setDelay(10);
+	*/
 
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
@@ -148,8 +150,9 @@ public static Shop epicShopofEpicness;
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
-		 group1.move((int)milli,grid);
-		guiRenderer.render(arrows.getFrame());
+		group1.move((int)milli,grid);
+		dynamicGuis.addAll(group1.render());
+		//guiRenderer.render(arrows.getFrame());
 		
 		epicShopofEpicness.render(guiRenderer);
 		

@@ -3,12 +3,14 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import librarys.AnimationLibrary;
 import main.Main;
 
 import org.lwjgl.util.vector.Vector2f;
 
 import grid.Grid;
 import grid.Tile;
+import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -32,10 +34,12 @@ public class Unit {
 	protected int xInGrid;
 	protected int yInGrid;
 	private int formation;
+	protected Animation animation;
 	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
+		this.animation=AnimationLibrary.explorer;
 		velocity=new Vector2f(0,0);
 		location = group.getLocation();
 		isAlive = true;
@@ -83,12 +87,9 @@ public class Unit {
 	//This prints the unit at its location, with its design and with its size
 	//Optimization strategy: Return the GuiTexture instead and render only one arrayList so as to avoid
 	//Any excess memory usage.
-	public void render(GuiRenderer g) {
-		//STUB TODO either make an overall method, or just keep this for the invocation
-		if(isAlive) {
-			List<GuiTexture> d = new ArrayList<GuiTexture>();
-			g.render(d);
-		}
+	public GuiTexture render(Vector2f location) {
+		animation.setLoc(location);
+		return animation.getFrame();
 	}
 	
 	public Vector2f getLocInGrid(Grid gr) {

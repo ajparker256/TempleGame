@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import grid.Grid;
 import grid.Tile;
+import gui.GuiTexture;
 
 public class Group {
 
@@ -131,6 +132,13 @@ public class Group {
 	}
 	public Vector2f getLocation(){
 		return location;
+	}
+	public ArrayList<GuiTexture> render(){
+		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
+		for(Explorer explorer:group){
+			toRender.add(explorer.render(location));
+		}
+		return toRender;
 	}
 	
 }
