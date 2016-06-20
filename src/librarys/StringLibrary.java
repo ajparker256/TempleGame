@@ -94,9 +94,12 @@ public class StringLibrary {
 		TextureLibrary.ly = loader.loadTexture("letters/ly");
 		TextureLibrary.lz = loader.loadTexture("letters/lz");
 		
+		//This loads the punctuation
+		
 
 	}
 	
+	//This returns a list of instructions to draw letters in the shape of the string.
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		float tempHeight = 0;
@@ -131,20 +134,29 @@ public class StringLibrary {
 	public static ArrayList<GuiTexture> makeItFit(String s, Vector2f locationOfTopLeftCorner, float width) {
 		Scanner scan = new Scanner(s);
 		ArrayList<GuiTexture> words = new ArrayList<GuiTexture>();
+		//This is used to control line breaks
 		int totalHeight = 0;
+		//This is used to control width
 		float totalLength = 0;
 		while(scan.hasNext()) {
+			//This is the next word plus a space so that it fits well
 			String nextWord = scan.next()+" ";
+			//This is the width of the next word
 			float wLength = getWidth(nextWord);
+			//If the word does not exceed the given width, add it to the line
 			if(totalLength+wLength<width) {
 				totalLength+=wLength;
+				//Otherwise move it to the next line
 			} else {
 				totalHeight++;
 				totalLength = wLength;
 			}
+			//Add the word to the list of strings to draw at the given locations
 			words.addAll(drawString(nextWord, new Vector2f(locationOfTopLeftCorner.x+totalLength-wLength, locationOfTopLeftCorner.y-totalHeight*size.y*2)));
 		}
+		//Restore the memory
 		scan.close();
+		//Return the list of letter images in the proper locations
 		return words;
 	}
 	

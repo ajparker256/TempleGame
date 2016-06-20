@@ -155,7 +155,7 @@ public static Shop epicShopofEpicness;
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		//The screen is -1 to 1 for x and 0 to -1 for y in floats
-		//dynamicGuis.addAll(grid.render());
+		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));

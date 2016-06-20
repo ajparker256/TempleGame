@@ -87,7 +87,6 @@ public class Explorer extends Unit{
 	}
 
 	public void rotate(int direction) {
-		System.out.println(direction);
 		switch(group.getDirection()){
 		case 11:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,new Vector2f(0.045f,0.045f));
 		super.animation=new Animation(AnimationLibrary.explorerY,location,new Vector2f(0.045f,0.045f));
