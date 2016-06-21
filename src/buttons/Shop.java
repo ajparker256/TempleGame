@@ -43,7 +43,7 @@ public class Shop {
 		this.locationOfTrapPlacement = locationOfTrapPlacement;
 		visibilityRange = new int[4];
 		visibilityRange[1] = 4;
-		visibilityRange[2] = 2;
+		visibilityRange[3] = 2;
 		isOn = false;
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
@@ -65,15 +65,14 @@ public class Shop {
 	public void render(ArrayList<GuiTexture> guis) {
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
-				//TODO Add Tile Naming system instead of toString Below!!!
 				guis.add(traps[j][i].drawTile());
-				StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)), size.x/(traps[0].length));
+				guis.addAll(StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)), size.x/(traps[0].length)));
 			}
 		}
 	}
 	
 	//Returns true if the mouse is on top of the shop when called.
-	public boolean shopIsClicked(int mouseX, int mouseY) {
+	public boolean shopIsClicked(float mouseX, float mouseY) {
 		return shopHitbox.isClicked(mouseX, mouseY);
 	}
 	
@@ -81,7 +80,7 @@ public class Shop {
 		return locationOfTrapPlacement;
 	}
 	
-	public Tile getShopItem(int mouseX, int mouseY) {
+	public Tile getShopItem(float mouseX, float mouseY) {
 		//Goes through the buttons in the shop until it finds where it is clicked, then returns the item.
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {

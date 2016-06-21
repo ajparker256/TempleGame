@@ -33,7 +33,7 @@ public class Button {
 		}
 		
 		//Returns true if the mouseX and mouseY are within the confines of the button
-		public boolean isClicked(int x, int y) {
-			return (x>hitBoxesTL.x && x<hitBoxesBR.x && y>hitBoxesTL.y && y<hitBoxesBR.y);
+		public boolean isClicked(float x, float y) {
+			return (x>hitBoxesTL.x && x<hitBoxesBR.x && y<hitBoxesTL.y && y>hitBoxesBR.y);
 		}
 }

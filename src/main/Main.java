@@ -151,8 +151,10 @@ public static Shop epicShopofEpicness;
 	while(!Display.isCloseRequested()){
 		milli = System.currentTimeMillis() - milli;
 		update();
-		if(epicShopofEpicness.isOn())
+		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
+			System.out.println("Rendered");
+		}
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
@@ -193,14 +195,18 @@ public static Shop epicShopofEpicness;
 	}
 	
 	public static void updateMouse() {
-		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
+		//This scales mouseX to be in the range of 1 to -1;
+		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
+		//This scales mouseY to be in the range of 0 at the top and -1 at the bottom
+		float mouseY = (1-(float)Mouse.getY()/DisplayManager.HEIGHT)*-1;
+		System.out.println(grid.getGridButton().isClicked(mouseX, mouseY) +" "+mouseX+" "+mouseY);
+		System.out.println(grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y);
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));
 			epicShopofEpicness.setOn(true);
 		}
-		if(epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
+		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
