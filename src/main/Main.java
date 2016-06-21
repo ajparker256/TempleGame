@@ -106,18 +106,19 @@ public static Shop epicShopofEpicness;
 	group1.add(new Explorer (group1));
 	group1.add(new Explorer (group1));
 	group1.add(new Explorer (group1));
-	Tile[][] traps = new Tile[4][2];
+	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
 			traps[i][j] = new Dirt( i, j, .01f, new Vector2f(-.9f+j*.01f, -.5f+i*.01f));
 		}
 	}
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
-	epicShopofEpicness = new Shop(4, 2, new Vector2f(-.9f, -.5f), new Vector2f(.25f, .25f), new Vector2f(4,4), traps);
+	epicShopofEpicness = new Shop(2, 4, new Vector2f(.8f, -.1f), new Vector2f(.25f, .25f), new Vector2f(4,4), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
-	StringLibrary.setSize(new Vector2f(.04f, .08f));
+	//Aspect Ratio should be 1 to 2
+	StringLibrary.setSize(new Vector2f(.02f, .04f));
 	//ABCDEFGHIJKLMNOPQRSTUVWXYZ defghijklmnopqrstuvwxyz
 	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
 	test = StringLibrary.drawString("0123456789abcdefghijklmnopqrstuvwxyz  ,.!?!asdf!j?", new Vector2f(-.98f,-.3f));
@@ -159,7 +160,7 @@ public static Shop epicShopofEpicness;
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		//The screen is -1 to 1 for x and 0 to -1 for y in floats
-		//dynamicGuis.addAll(grid.render());
+		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
@@ -196,8 +197,9 @@ public static Shop epicShopofEpicness;
 	public static void updateMouse() {
 		//This scales mouseX to be in the range of 1 to -1;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
-		//This scales mouseY to be in the range of 0 at the top and -1 at the bottom
-		float mouseY = (1-(float)Mouse.getY()/DisplayManager.HEIGHT)*-1;
+		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
+		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
+		System.out.println(mouseY +" "+grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y+" "+grid.getGridButton().getTL().x+" "+grid.getGridButton().getTL().y);
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));

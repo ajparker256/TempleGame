@@ -42,8 +42,16 @@ public class Shop {
 		this.traps = traps;
 		this.locationOfTrapPlacement = locationOfTrapPlacement;
 		visibilityRange = new int[4];
-		visibilityRange[1] = 4;
-		visibilityRange[3] = 2;
+		if(traps.length<4) {
+			visibilityRange[1] = traps.length;
+		} else {
+			visibilityRange[1] = 4;
+		}
+		if(traps[0].length<3) {
+			visibilityRange[3] = traps[0].length;
+		} else {
+			visibilityRange[3] = 3;
+		}
 		isOn = false;
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
