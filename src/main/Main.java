@@ -117,7 +117,7 @@ public static Shop epicShopofEpicness;
 	
 	//This is the string tester
 	List<GuiTexture> test;
-	StringLibrary.setSize(new Vector2f(.02f, .02f));
+	StringLibrary.setSize(new Vector2f(.04f, .08f));
 	//ABCDEFGHIJKLMNOPQRSTUVWXYZ defghijklmnopqrstuvwxyz
 	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
 	test = StringLibrary.drawString("0123456789abcdefghijklmnopqrstuvwxyz  ,.!?!asdf!j?", new Vector2f(-.98f,-.3f));
@@ -153,7 +153,6 @@ public static Shop epicShopofEpicness;
 		update();
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
-			System.out.println("Rendered");
 		}
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		//enemy update stuff
@@ -199,8 +198,6 @@ public static Shop epicShopofEpicness;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 0 at the top and -1 at the bottom
 		float mouseY = (1-(float)Mouse.getY()/DisplayManager.HEIGHT)*-1;
-		System.out.println(grid.getGridButton().isClicked(mouseX, mouseY) +" "+mouseX+" "+mouseY);
-		System.out.println(grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y);
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));

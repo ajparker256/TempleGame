@@ -18,6 +18,7 @@ public class Dirt extends Tile{
 		this.hp=1000;
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.name = "Dirt!";
 	}
 	@Override
 	public void interact(){

@@ -23,7 +23,7 @@ public class StringLibrary {
 	public static float spacing;
 	
 	public static void init(Loader loader) {
-		size = new Vector2f(.1f, .1f);
+		size = new Vector2f(.1f, .2f);
 		load = loader;
 		nums = new GuiTexture[10];
 		TextureLibrary.space = loader.loadTexture("letters/space");
@@ -112,7 +112,7 @@ public class StringLibrary {
 			if(i!=s.length()-1) {
 				char nextChar = s.charAt(i+1);
 				if(nextChar == 'w' || nextChar == 'm') {
-					spacing = size.x*6/7;
+					spacing = size.x*8/9;
 				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
 					spacing = size.x/4;
 				} else {
@@ -171,7 +171,7 @@ public class StringLibrary {
 			if(i!=s.length()-1) {
 				char nextChar = s.charAt(i+1);
 				if(nextChar == 'w' || nextChar == 'm') {
-					spacing = size.x*6/7;
+					spacing = size.x*8/9;
 				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
 					spacing = size.x/4;
 				} else {
@@ -215,58 +215,58 @@ public class StringLibrary {
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'B') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'C') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'D') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'E') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'F') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'G') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'H') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'I') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'J') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'K') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'L') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'M') 
 			return size.x*11/10;
 		if(c == 'N') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'O') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'P') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'Q') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'R') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'S') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'T') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'U') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'V') 
-			return size.x*6/7;
+			return size.x*8/9;
 		//Possibly make this one have more space than the others to accomodate its obscene breadth
 		if(c == 'W') 
 			return size.x;
 		if(c == 'X') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'Y') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'Z') 
-			return size.x*6/7;
+			return size.x*8/9;
 		
 		//Lower Case Letters (113 is the width of the images)
 		if(c == 'a') 
