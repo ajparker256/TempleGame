@@ -23,7 +23,7 @@ public class StringLibrary {
 	public static float spacing;
 	
 	public static void init(Loader loader) {
-		size = new Vector2f(.1f, .1f);
+		size = new Vector2f(.1f, .2f);
 		load = loader;
 		nums = new GuiTexture[10];
 		TextureLibrary.space = loader.loadTexture("letters/space");
@@ -94,9 +94,15 @@ public class StringLibrary {
 		TextureLibrary.ly = loader.loadTexture("letters/ly");
 		TextureLibrary.lz = loader.loadTexture("letters/lz");
 		
+		//This loads the punctuation
+		TextureLibrary.period = loader.loadTexture("letters/period");
+		TextureLibrary.exclamationPoint = loader.loadTexture("letters/exclamationPoint");
+		TextureLibrary.questionMark = loader.loadTexture("letters/questionMark");
+		TextureLibrary.comma = loader.loadTexture("letters/comma");
 
 	}
 	
+	//This returns a list of instructions to draw letters in the shape of the string.
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		float tempHeight = 0;
@@ -106,7 +112,7 @@ public class StringLibrary {
 			if(i!=s.length()-1) {
 				char nextChar = s.charAt(i+1);
 				if(nextChar == 'w' || nextChar == 'm') {
-					spacing = size.x*6/7;
+					spacing = size.x*8/9;
 				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
 					spacing = size.x/4;
 				} else {
@@ -131,20 +137,29 @@ public class StringLibrary {
 	public static ArrayList<GuiTexture> makeItFit(String s, Vector2f locationOfTopLeftCorner, float width) {
 		Scanner scan = new Scanner(s);
 		ArrayList<GuiTexture> words = new ArrayList<GuiTexture>();
+		//This is used to control line breaks
 		int totalHeight = 0;
+		//This is used to control width
 		float totalLength = 0;
 		while(scan.hasNext()) {
+			//This is the next word plus a space so that it fits well
 			String nextWord = scan.next()+" ";
+			//This is the width of the next word
 			float wLength = getWidth(nextWord);
+			//If the word does not exceed the given width, add it to the line
 			if(totalLength+wLength<width) {
 				totalLength+=wLength;
+				//Otherwise move it to the next line
 			} else {
 				totalHeight++;
 				totalLength = wLength;
 			}
+			//Add the word to the list of strings to draw at the given locations
 			words.addAll(drawString(nextWord, new Vector2f(locationOfTopLeftCorner.x+totalLength-wLength, locationOfTopLeftCorner.y-totalHeight*size.y*2)));
 		}
+		//Restore the memory
 		scan.close();
+		//Return the list of letter images in the proper locations
 		return words;
 	}
 	
@@ -156,7 +171,7 @@ public class StringLibrary {
 			if(i!=s.length()-1) {
 				char nextChar = s.charAt(i+1);
 				if(nextChar == 'w' || nextChar == 'm') {
-					spacing = size.x*6/7;
+					spacing = size.x*8/9;
 				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
 					spacing = size.x/4;
 				} else {
@@ -200,58 +215,58 @@ public class StringLibrary {
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'B') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'C') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'D') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'E') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'F') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'G') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'H') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'I') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'J') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'K') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'L') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'M') 
 			return size.x*11/10;
 		if(c == 'N') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'O') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'P') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'Q') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'R') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'S') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'T') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'U') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'V') 
-			return size.x*6/7;
+			return size.x*8/9;
 		//Possibly make this one have more space than the others to accomodate its obscene breadth
 		if(c == 'W') 
 			return size.x;
 		if(c == 'X') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'Y') 
-			return size.x*6/7;
+			return size.x*8/9;
 		if(c == 'Z') 
-			return size.x*6/7;
+			return size.x*8/9;
 		
 		//Lower Case Letters (113 is the width of the images)
 		if(c == 'a') 
@@ -306,6 +321,16 @@ public class StringLibrary {
 			return size.x*65/113;
 		if(c == 'z') 
 			return size.x*75/113;
+		
+		//Punctuation Width
+		if(c == '.')
+			return size.x*40/113;
+		if(c == '!') 
+			return size.x*40/113;
+		if(c == '?') 
+			return size.x*70/113;
+		if(c == ',') 
+			return size.x*40/113;
 		
 		
 		return 0;
@@ -449,6 +474,15 @@ public class StringLibrary {
 			return TextureLibrary.ly;
 		if(c == 'z') 
 			return TextureLibrary.lz;
+		
+		if(c == '.') 
+			return TextureLibrary.period;
+		if(c == '!')
+			return TextureLibrary.exclamationPoint;
+		if(c == '?') 
+			return TextureLibrary.questionMark;
+		if(c == ',') 
+			return TextureLibrary.comma;
 		
 		//Else return -1 showing error
 		return -1;

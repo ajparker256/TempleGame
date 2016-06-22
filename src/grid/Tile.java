@@ -23,7 +23,7 @@ public class Tile {
 	protected Vector2f position;
 	protected int texture;
 	protected GuiTexture guiTexture;
-	private String name;
+	protected String name;
 	private int price;
 	protected float size;
 	protected Vector2f location;

@@ -85,6 +85,12 @@ public static int lx;
 public static int ly;
 public static int lz;
 
+//Punctuation
+public static int period;
+public static int exclamationPoint;
+public static int questionMark;
+public static int comma;
+
 public static int getTile(int texture) {
 	return tiles.get(texture);
 }

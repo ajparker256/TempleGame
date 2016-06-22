@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 
+import buttons.Button;
 import entities.Group;
 import renderEngine.DisplayManager;
 
@@ -29,6 +30,8 @@ public class Grid {
 	//This is the 2d array that contains all of the locations in the grid represented by tiles
 	private Tile[][] grid;
 	
+	private Button gridClicked;
+	
 	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
 	public Grid(Vector2f location, float size, int rows) {
 		this.location = location;
@@ -36,6 +39,8 @@ public class Grid {
 		goalReached = false;
 		
 		goalReacher = null;
+		
+		gridClicked = new Button(new Vector2f(location.x, location.y+size*rows), new Vector2f(location.x+size*rows, location.y));
 		
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
@@ -56,6 +61,10 @@ public class Grid {
 	
 	public Group getGoalReacher() {
 		return goalReacher;
+	}
+	
+	public Button getGridButton() {
+		return gridClicked;
 	}
 
 	

@@ -12,25 +12,28 @@ import librarys.StringLibrary;
 public class Shop {
 	
 	//This is the tile clicked on to initialize the shop. It is where the traps are placed on the grid
-	Vector2f locationOfTrapPlacement;
+	private Vector2f locationOfTrapPlacement;
 	
 	//This is the bottom left corner of the shop
-	Vector2f location;
+	private Vector2f location;
 	
 	//This is the size of the shop from top left corner to bottom right
-	Vector2f size;
+	private Vector2f size;
 	
 	//Button array to determine which spot is being interacted with.
-	Button[][] buttons;
+	private Button[][] buttons;
 	
 	//Tile array containing the available traps for sale
-	Tile[][] traps;
+	private Tile[][] traps;
 	
 	//0 = Row start, 1 = Row end, 2 = Col start 3 = Col end. This is the range shown on screen at any time. Subject to scrolling
-	int[] visibilityRange;
+	private int[] visibilityRange;
 	
 	//Checks if the shop has been clicked at all
-	Button shopHitbox;
+	private Button shopHitbox;
+	
+	//This determines if the shop is in use or not
+	private boolean isOn;
 	
 	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Vector2f locationOfTrapPlacement, Tile[][] traps) {
 		this.location = location;
@@ -39,8 +42,17 @@ public class Shop {
 		this.traps = traps;
 		this.locationOfTrapPlacement = locationOfTrapPlacement;
 		visibilityRange = new int[4];
-		visibilityRange[1] = 4;
-		visibilityRange[2] = 2;
+		if(traps.length<4) {
+			visibilityRange[1] = traps.length;
+		} else {
+			visibilityRange[1] = 4;
+		}
+		if(traps[0].length<3) {
+			visibilityRange[3] = traps[0].length;
+		} else {
+			visibilityRange[3] = 3;
+		}
+		isOn = false;
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
 				
@@ -61,15 +73,14 @@ public class Shop {
 	public void render(ArrayList<GuiTexture> guis) {
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
-				//TODO Add Tile Naming system instead of toString Below!!!
 				guis.add(traps[j][i].drawTile());
-				StringLibrary.drawString(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)));
+				guis.addAll(StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)), size.x/(traps[0].length)));
 			}
 		}
 	}
 	
 	//Returns true if the mouse is on top of the shop when called.
-	public boolean shopIsClicked(int mouseX, int mouseY) {
+	public boolean shopIsClicked(float mouseX, float mouseY) {
 		return shopHitbox.isClicked(mouseX, mouseY);
 	}
 	
@@ -77,7 +88,7 @@ public class Shop {
 		return locationOfTrapPlacement;
 	}
 	
-	public Tile getShopItem(int mouseX, int mouseY) {
+	public Tile getShopItem(float mouseX, float mouseY) {
 		//Goes through the buttons in the shop until it finds where it is clicked, then returns the item.
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {
@@ -89,5 +100,17 @@ public class Shop {
 		//Error Case
 		return null;
 	}	
+	
+	public void setOn(boolean b) {
+		isOn = b;
+	}
+	
+	public boolean isOn() {
+		return isOn;
+	}
+	
+	public void setGridLoc(Vector2f locationOnGrid) {
+		locationOfTrapPlacement = locationOnGrid;
+	}
 
 }
