@@ -20,6 +20,13 @@ public static int explorerStanding1;
 public static int explorerWalkingL1;
 public static int explorerWalkingR1;
 
+public static int minerStanding;
+public static int minerWalkingL;
+public static int minerWalkingR;
+public static int minerStanding1;
+public static int minerWalkingL1;
+public static int minerWalkingR1;
+
 
 
 //Dart Trap Arrow Animation
@@ -33,4 +40,6 @@ public static int arrow7;
 public static int arrow8;
 public static int arrow9;
 public static int arrow10;
+
+
 }

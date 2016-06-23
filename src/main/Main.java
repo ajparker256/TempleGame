@@ -32,6 +32,7 @@ import buttons.Shop;
 import entities.Camera;
 import entities.Explorer;
 import entities.Group;
+import entities.Miner;
 import entities.Unit;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
@@ -99,13 +100,20 @@ public static Shop epicShopofEpicness;
 	GuiLibrary.explorerStanding1 = loader.loadTexture("BasicExplorerR");
 	GuiLibrary.explorerWalkingL1 = loader.loadTexture("BasicExplorer WalkingR1");
 	GuiLibrary.explorerWalkingR1 = loader.loadTexture("BasicExplorer WalkingR2");
+	
+	GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/Miner");
+	GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/MinerWalking1");
+	GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/MinerWalking2");
+	GuiLibrary.minerStanding1 = loader.loadTexture("Explorers/Miner/MinerR");
+	GuiLibrary.minerWalkingL1 = loader.loadTexture("Explorers/Miner/MinerWalkingR1");
+	GuiLibrary.minerWalkingR1 = loader.loadTexture("Explorers/Miner/MinerWalkingR2");
 	AnimationLibrary.init(loader);
 	
 	Group group1 = new Group();
 	group1.add(new Explorer (group1));
+	group1.add(new Miner (group1));
 	group1.add(new Explorer (group1));
-	group1.add(new Explorer (group1));
-	group1.add(new Explorer (group1));
+	group1.add(new Miner (group1));
 	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
@@ -201,10 +209,7 @@ public static Shop epicShopofEpicness;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
-<<<<<<< HEAD
-		//System.out.println(mouseY +" "+grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y+" "+grid.getGridButton().getTL().x+" "+grid.getGridButton().getTL().y);
-=======
->>>>>>> a0b0f775442eb8975f5476a70e8de71e4ffecb16
+
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));

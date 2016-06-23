@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 import org.lwjgl.util.vector.Vector2f;
 
 import grid.Grid;
@@ -15,11 +17,18 @@ import renderEngine.Loader;
 public class Explorer extends Unit{
 	private int position;
 	private Group group;
-	private Vector2f unitSize;
+	protected Vector2f unitSize;
+	protected ArrayList<Integer> animationx;
+	protected ArrayList<Integer> animationy;
+	protected int idlex;
+	protected int idley;
+	protected int lastDirection;
+	
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		this.lastDirection=2;
 		this.group=group;
 		unitSize=new Vector2f(0.045f,(float) (0.045f*DisplayManager.getAspectratio()));
 		position=group.getPosition();
@@ -27,6 +36,10 @@ public class Explorer extends Unit{
 		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
 		super.animation.setDelay(25);
 		this.velocity = velocity;
+		this.idley=GuiLibrary.explorerStanding;
+		this.idlex=GuiLibrary.explorerStanding1;
+		this.animationx=AnimationLibrary.explorerX;
+		this.animationy=AnimationLibrary.explorerY;
 		
 	}
 	
@@ -88,51 +101,325 @@ public class Explorer extends Unit{
 	return animation.getFrame();
 	}
 
-	public void rotate(int direction) {
-		
-	
-
+	protected void rotate(int direction) {
 		switch(group.getDirection()){
-		case 11:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerY,location,unitSize);
+		case 1:
+			switch(lastDirection){
+			case 1:
+				switch(position){
+				case 1:position=1;
+				break;
+				case 2:position=2;
+				break;
+				case 3:position=3;
+				break;
+				case 4:position=4;
+				break;
+				}
+				
+				
+				break;
+			case 2:
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=1;
+				break;
+				case 3:position=4;
+				break;
+				case 4:position=2;
+				break;
+				}
+			
+			
+				break;
+			case 3:
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=4;
+				break;
+				case 3:position=1;
+				break;
+				case 4:position=2;
+				break;
+				}
+				
+				
+				
+				break;
+			case 4: 
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=4;
+				break;
+				case 3:position=1;
+				break;
+				case 4:position=2;
+				break;
+				}
+				
+
+				
+				break;
+		}
+			
+			
+			
+		super.idle=new GuiTexture(idley,location,unitSize);
+		super.animation=new Animation(animationy,location,unitSize);
 		break;
 			
 			
 
-		case 12:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
+		case 2:
+			switch(lastDirection){
+			case 1:
+				switch(position){
+				case 1:position=2;
+				break;
+				case 2:position=4;
+				break;
+				case 3:position=1;
+				break;
+				case 4:position=3;
+				break;
+				}
+				
+				
+				break;
+			case 2:
+				switch(position){
+				case 1:position=1;
+				break;
+				case 2:position=2;
+				break;
+				case 3:position=3;
+				break;
+				case 4:position=4;
+				break;
+				}
+			
+			
+				break;
+			case 3:
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=1;
+				break;
+				case 3:position=4;
+				break;
+				case 4:position=2;
+				break;
+				}
+				
+				
+				
+				break;
+			case 4: 
+				switch(position){
+				case 1:position=2;
+				break;
+				case 2:position=1;
+				break;
+				case 3:position=4;
+				break;
+				case 4:position=3;
+				break;
+				}
+				
+				
+				
+				break;
+		}
+		super.idle=new GuiTexture(idlex,location,unitSize);
+		super.animation=new Animation(animationx,location,unitSize);
 		break;
 			
-		case 13:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerY,location,unitSize);
+		case 3:
+			switch(lastDirection){
+			case 1:
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=4;
+				break;
+				case 3:position=1;
+				break;
+				case 4:position=2;
+				break;
+				}
+				
+				
+				break;
+			case 2:
+				switch(position){
+				case 1:position=2;
+				break;
+				case 2:position=4;
+				break;
+				case 3:position=1;
+				break;
+				case 4:position=3;
+				break;
+				}
+			
+			
+				break;
+			case 3:
+				switch(position){
+				case 1:position=1;
+				break;
+				case 2:position=2;
+				break;
+				case 3:position=3;
+				break;
+				case 4:position=4;
+				break;
+				}
+				
+				
+				
+				break;
+			case 4: 
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=1;
+				break;
+				case 3:position=4;
+				break;
+				case 4:position=2;
+				break;
+				}
+				
+				
+				
+				break;
+		}
+			super.idle=new GuiTexture(idley,location,unitSize);
+		super.animation=new Animation(animationy,location,unitSize);
 		break;
 			
-		case 14:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
-		break;
-		case 1:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerY,location,unitSize);
-		break;
+		case 4:
+			switch(lastDirection){
+			case 1:
+				switch(position){
+				case 1:position=3;
+				break;
+				case 2:position=1;
+				break;
+				case 3:position=4;
+				break;
+				case 4:position=2;
+				break;
+				}
+				
+				
+				break;
+			case 2:
+				switch(position){
+				case 1:position=2;
+				break;
+				case 2:position=1;
+				break;
+				case 3:position=4;
+				break;
+				case 4:position=3;
+				break;
+				}
 			
 			
-
-		case 2:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
-		break;
-			
-		case 3:super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerY,location,unitSize);
-		break;
-			
-		case 4:super.idle=new GuiTexture(GuiLibrary.explorerStanding1,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
+				break;
+			case 3:
+				switch(position){
+				case 1:position=2;
+				break;
+				case 2:position=4;
+				break;
+				case 3:position=1;
+				break;
+				case 4:position=3;
+				break;
+				}
+				
+				
+				
+				break;
+			case 4: 
+				switch(position){
+				case 1:position=1;
+				break;
+				case 2:position=2;
+				break;
+				case 3:position=3;
+				break;
+				case 4:position=4;
+				break;
+				}
+				
+				
+				
+				break;
+		}
+			super.idle=new GuiTexture(idlex,location,unitSize);
+		super.animation=new Animation(animationx,location,unitSize);
 		break;
 		
 		}
 		super.animation.setDelay(25);
+		System.out.println(lastDirection);
+		lastDirection=direction;
 		
+	}
+	protected void interact(int direction) {
+		
+
+
+		switch(group.getDirection()){
+		case 11:super.idle=new GuiTexture(idley,location,unitSize);
+		super.animation=new Animation(animationy,location,unitSize);
+		break;
+			
+			
+
+		case 12:super.idle=new GuiTexture(idlex,location,unitSize);
+		super.animation=new Animation(animationx,location,unitSize);
+		break;
+			
+		case 13:super.idle=new GuiTexture(idley,location,unitSize);
+		super.animation=new Animation(animationy,location,unitSize);
+		break;
+			
+		case 14:super.idle=new GuiTexture(idlex,location,unitSize);
+		super.animation=new Animation(animationx,location,unitSize);
+		break;
+		case 1:super.idle=new GuiTexture(idley,location,unitSize);
+		super.animation=new Animation(animationy,location,unitSize);
+		break;
+			
+			
+
+		case 2:super.idle=new GuiTexture(idlex,location,unitSize);
+		super.animation=new Animation(animationx,location,unitSize);
+		break;
+			
+		case 3:super.idle=new GuiTexture(idley,location,unitSize);
+		super.animation=new Animation(animationy,location,unitSize);
+		break;
+			
+		case 4:super.idle=new GuiTexture(idlex,location,unitSize);
+		super.animation=new Animation(animationx,location,unitSize);
+		break;
+		
+		}
+		super.animation.setDelay(25);
+
 		
 	}
 	
 	
+
 }

@@ -50,7 +50,7 @@ public class Group {
 	public Point getNextLoc(Grid currentFloor) {
 		
 		
-		return new Point (nextLoc.x,(nextLoc.y+1));
+		return new Point (nextLoc.x+1,(nextLoc.y));
 		/*
 		//If no one has reached the goal
 		int totalOdds = 100;
@@ -92,7 +92,7 @@ public class Group {
 		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			for(Explorer e: group){
-				e.rotate(direction);
+				e.interact(direction);
 			}
 			 grid.getTile(nextLoc.x, nextLoc.y).interact();
 		}else{
@@ -107,7 +107,6 @@ public class Group {
 				if(location.x>destination.x){
 					location.x=destination.x;
 					direction=12;
-					
 				}
 			//If the destination is to the left, go left
 			}else if(location.x>destination.x){
