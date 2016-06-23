@@ -187,7 +187,9 @@ public static Shop epicShopofEpicness;
 	}
 	
 	public static void update() {
-		updateMouse();
+		if(Mouse.isButtonDown(0)) {
+			updateMouse();
+		}
 		//TODO Test traps
 		//TODO Update Explorer AI
 		//TODO Update player input such as placing traps
@@ -203,13 +205,13 @@ public static Shop epicShopofEpicness;
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));
 			epicShopofEpicness.setOn(true);
-		} else {
-			epicShopofEpicness.setOn(false);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
+			System.out.println("Hey, Wakeup!");
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
+				epicShopofEpicness.setOn(false);
 			}
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
