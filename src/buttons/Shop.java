@@ -57,8 +57,8 @@ public class Shop {
 			for(int j = 0; j<numberOfColumns; j++) {
 				
 				//Y position then X position
-				buttons[i][j] = new Button(new Vector2f(location.x+i*location.x/size.x, location.y+j*location.y/size.y), 
-						new Vector2f(location.x*(i+1)*location.x/size.x, location.y*(j+1)*location.y/size.y));
+				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/traps.length, location.y+j*size.y/traps.length), 
+						new Vector2f(location.x*(i+1)*size.x/traps[0].length, location.y*(j+1)*size.y/traps[0].length));
 				
 				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+.5f)*(size.y/traps.length));
 				

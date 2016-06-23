@@ -187,7 +187,9 @@ public static Shop epicShopofEpicness;
 	}
 	
 	public static void update() {
-		updateMouse();
+		if(Mouse.isButtonDown(0)) {
+			updateMouse();
+		}
 		//TODO Test traps
 		//TODO Update Explorer AI
 		//TODO Update player input such as placing traps
@@ -199,18 +201,21 @@ public static Shop epicShopofEpicness;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
+<<<<<<< HEAD
 		//System.out.println(mouseY +" "+grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y+" "+grid.getGridButton().getTL().x+" "+grid.getGridButton().getTL().y);
+=======
+>>>>>>> a0b0f775442eb8975f5476a70e8de71e4ffecb16
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));
 			epicShopofEpicness.setOn(true);
-		} else {
-			epicShopofEpicness.setOn(false);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
+			System.out.println("Hey, Wakeup!");
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
+				epicShopofEpicness.setOn(false);
 			}
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
