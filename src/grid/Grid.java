@@ -40,7 +40,8 @@ public class Grid {
 		
 		goalReacher = null;
 		
-		gridClicked = new Button(new Vector2f(location.x, location.y+size*rows), new Vector2f(location.x+size*rows, location.y));
+		System.out.println(size);
+		gridClicked = new Button(new Vector2f(location.x-size, location.y+3*size*(1.2f+rows)), new Vector2f(location.x-size+2*size*rows, location.y-2*size));
 		
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
