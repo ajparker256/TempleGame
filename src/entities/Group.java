@@ -48,9 +48,17 @@ public class Group {
 	}
 	
 	public Point getNextLoc(Grid currentFloor) {
-		
-		
-		return new Point (nextLoc.x+1,(nextLoc.y));
+		double rand = Math.random();
+		if(rand<.5) {
+			return new Point (nextLoc.x+1,(nextLoc.y));
+		}
+		/*if(rand < .5) {
+			return new Point(nextLoc.x-1, nextLoc.y);
+		}
+		if(rand < .75) {
+			return new Point(nextLoc.x, nextLoc.y-1);
+		}*/
+		return new Point(nextLoc.x, nextLoc.y+1);
 		/*
 		//If no one has reached the goal
 		int totalOdds = 100;
