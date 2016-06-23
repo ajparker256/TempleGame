@@ -199,7 +199,7 @@ public static Shop epicShopofEpicness;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
-		System.out.println(mouseY +" "+grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y+" "+grid.getGridButton().getTL().x+" "+grid.getGridButton().getTL().y);
+		//System.out.println(mouseY +" "+grid.getGridButton().getBR().x+" "+grid.getGridButton().getBR().y+" "+grid.getGridButton().getTL().x+" "+grid.getGridButton().getTL().y);
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
 											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));
