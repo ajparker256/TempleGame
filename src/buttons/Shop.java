@@ -56,8 +56,10 @@ public class Shop {
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
 				
-				buttons[i][j] = new Button(new Vector2f(location.x+j*size.x/numberOfColumns, location.y+(i+1)*size.y/numberOfRows),
-						 new Vector2f(location.x+(j+1)*size.x/numberOfColumns, location.y+i*size.y/numberOfRows));
+				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+(j+1)*size.y/numberOfRows),
+						 new Vector2f(location.x+(i+1)*size.x/numberOfColumns, location.y+j*size.y/numberOfRows));
+				System.out.println(buttons[i][j].getTL().x+" "+buttons[i][j].getTL().y+" "+buttons[i][j].getBR().x+" "+buttons[i][j].getBR().y);
+				
 				
 				//Y position then X position
 				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
