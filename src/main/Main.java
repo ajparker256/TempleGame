@@ -212,8 +212,8 @@ public static Shop epicShopofEpicness;
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
 
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
-			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(mouseX-grid.getLoc().x)/(int)grid.getTileCount().x),
-											(float)((int)(mouseY-grid.getLoc().y)/(int)grid.getTileCount().y)));
+			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(Mouse.getX()-grid.getLoc().x*DisplayManager.WIDTH)/(int)(grid.getTileCount().x*grid.getTile(0, 0).drawTile().getScale().x*DisplayManager.WIDTH)),
+											(float)((int)(Mouse.getY()-(grid.getLoc().y*DisplayManager.HEIGHT))/(int)(grid.getTileCount().y*grid.getTile(0, 0).drawTile().getScale().y*DisplayManager.HEIGHT))));
 			epicShopofEpicness.setOn(true);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
