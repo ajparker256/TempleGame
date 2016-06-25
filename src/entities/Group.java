@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 import main.Main;
+import renderEngine.DisplayManager;
 
 import org.lwjgl.util.vector.Vector2f;
 import java.awt.Point;
@@ -29,7 +30,7 @@ public class Group {
 		nextPos=0;
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
 		location.x=location.x-0.1f;
-		velocity=new Vector2f(0.1f,0.1f);
+		velocity=new Vector2f(0.1f,(float)(0.1f*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
 		

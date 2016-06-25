@@ -57,8 +57,8 @@ public class Shop {
 			for(int j = 0; j<numberOfColumns; j++) {
 				
 				//Y position then X position
-				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/traps.length, location.y+j*size.y/traps.length), 
-						new Vector2f(location.x*(i+1)*size.x/traps[0].length, location.y*(j+1)*size.y/traps[0].length));
+				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
+						new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
 				
 				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+1f)*(size.y/traps.length));
 				
@@ -66,7 +66,7 @@ public class Shop {
 			}
 		}
 		
-		shopHitbox = new Button(location, new Vector2f(location.x+size.x, location.y+size.y));
+		shopHitbox = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+size.x, location.y));
 	}
 	
 	//This renders all traps in the shop at their given locations.
@@ -99,7 +99,7 @@ public class Shop {
 			}
 		}
 		//Error Case
-		return null;
+		return traps[0][0];
 	}	
 	
 	public void setOn(boolean b) {

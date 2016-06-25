@@ -217,8 +217,8 @@ public static Shop epicShopofEpicness;
 			epicShopofEpicness.setOn(true);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
-			System.out.println("Hey, Wakeup!");
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
+			selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
 				epicShopofEpicness.setOn(false);
