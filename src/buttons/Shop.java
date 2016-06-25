@@ -56,9 +56,12 @@ public class Shop {
 		for(int i = 0; i<numberOfRows; i++) {
 			for(int j = 0; j<numberOfColumns; j++) {
 				
+				buttons[i][j] = new Button(new Vector2f(location.x+j*size.x/numberOfColumns, location.y+(i+1)*size.y/numberOfRows),
+						 new Vector2f(location.x+(j+1)*size.x/numberOfColumns, location.y+i*size.y/numberOfRows));
+				
 				//Y position then X position
-				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
-						new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
+				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
+					//	new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
 				
 				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+1f)*(size.y/traps.length));
 				
@@ -80,6 +83,10 @@ public class Shop {
 		}
 	}
 	
+	public Vector2f getGridLoc() {
+		return locationOfTrapPlacement;
+	}
+	
 	//Returns true if the mouse is on top of the shop when called.
 	public boolean shopIsClicked(float mouseX, float mouseY) {
 		return shopHitbox.isClicked(mouseX, mouseY);
@@ -94,12 +101,13 @@ public class Shop {
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {
 				if(buttons[i][j].isClicked(mouseX, mouseY)) {
-					return traps[i][j];
+					//return new Tile((int)traps[i][j].getLocation().x, (int)traps[i][j].getLocation().y, traps[i][j].drawTile().getScale().x, traps[i][j].getLocation());
+					return traps[i][j].copy();
 				}
 			}
 		}
 		//Error Case
-		return traps[0][0];
+		return null;
 	}	
 	
 	public void setOn(boolean b) {

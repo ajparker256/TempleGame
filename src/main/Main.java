@@ -212,16 +212,20 @@ public static Shop epicShopofEpicness;
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
 
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
-			epicShopofEpicness.setGridLoc(new Vector2f((float)((int)(Mouse.getX()-grid.getLoc().x*DisplayManager.WIDTH)/(int)(grid.getTileCount().x*grid.getTile(0, 0).drawTile().getScale().x*DisplayManager.WIDTH)),
-											(float)((int)(Mouse.getY()-(grid.getLoc().y*DisplayManager.HEIGHT))/(int)(grid.getTileCount().y*grid.getTile(0, 0).drawTile().getScale().y*DisplayManager.HEIGHT))));
+			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
+			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
+			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
+			//System.out.println(epicShopofEpicness.getGridLoc().x+" "+epicShopofEpicness.getGridLoc().y+" "+Mouse.getY());
 			epicShopofEpicness.setOn(true);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
+			System.out.println(selectedTrap.getLocation().x+" "+selectedTrap.getLocation().y);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
 				epicShopofEpicness.setOn(false);
+				money -= selectedTrap.getPrice();
 			}
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon

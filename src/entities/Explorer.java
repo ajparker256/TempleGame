@@ -370,7 +370,6 @@ public class Explorer extends Unit{
 		
 		}
 		super.animation.setDelay(25);
-		System.out.println(lastDirection);
 		lastDirection=direction;
 		
 	}

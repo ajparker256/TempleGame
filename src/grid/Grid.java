@@ -32,6 +32,8 @@ public class Grid {
 	
 	private Button gridClicked;
 	
+	private float size;
+	
 	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
 	public Grid(Vector2f location, float size, int rows) {
 		this.location = location;
@@ -41,6 +43,8 @@ public class Grid {
 		goalReacher = null;
 		
 		gridClicked = new Button(new Vector2f(location.x-size, location.y+3*size*(1.2f+rows)), new Vector2f(location.x-size+2*size*rows, location.y-2*size));
+		
+		this.size = size;
 		
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
@@ -65,6 +69,10 @@ public class Grid {
 	
 	public Button getGridButton() {
 		return gridClicked;
+	}
+	
+	public float getSize() {
+		return size;
 	}
 
 	

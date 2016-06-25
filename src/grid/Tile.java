@@ -63,12 +63,25 @@ public class Tile {
 	
 	public void setLocation(Vector2f loc) {
 		location = loc;
-		guiTexture.setPosition(loc);
+		this.position=new Vector2f (location.x+((x-size/2)*size*2),(float) (location.y+((y-size/2)*(size*2*DisplayManager.getAspectratio()))));
+		guiTexture.setPosition(position);
 	}
 
 	public void interact() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Vector2f getPosition()  {
+		return position;
+	}
+	
+	public void setPosition(Vector2f position) {
+		this.position = position;
+	}
+	
+	public Tile copy() {
+		return new Tile(x, y, size, location);
 	}
 
 	public boolean canInteract() {

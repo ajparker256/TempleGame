@@ -28,6 +28,11 @@ public class Dirt extends Tile{
 		}
 	}
 	
+	@Override
+	public Tile copy() {
+		return new Dirt(x, y, size, location);
+	}
+	
 	
 
 }
