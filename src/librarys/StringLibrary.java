@@ -163,6 +163,10 @@ public class StringLibrary {
 		return words;
 	}
 	
+	public static Vector2f getSize() {
+		return size;
+	}
+	
 	//This returns the width of a string, allowing centering of strings regardless of length
 	public static float getWidth(String s) {
 		currentLength = 0;

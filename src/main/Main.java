@@ -117,11 +117,11 @@ public static Shop epicShopofEpicness;
 	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
-			traps[i][j] = new Dirt( i, j, .01f, new Vector2f(-.9f+j*.01f, -.5f+i*.01f));
+			traps[i][j] = new Dirt( i, j, .03f, new Vector2f(-.9f+j*.03f, -.5f+i*.03f));
 		}
 	}
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
-	epicShopofEpicness = new Shop(2, 4, new Vector2f(.8f, -.1f), new Vector2f(.25f, .25f), new Vector2f(4,4), traps);
+	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.4f, .4f), new Vector2f(4,4), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -176,7 +176,8 @@ public static Shop epicShopofEpicness;
 		dynamicGuis.addAll(group1.render());
 		//guiRenderer.render(arrows.getFrame());
 		
-		
+		//TODO FLAW IN MOVING, SINCE IT IS DONE IN FLOATS, THE LARGER X OF SCREEN MAKES HORIZONTAL MOVEMENT FASTER FOR THE SAME
+		//FLOAT VALUE IN THE EXPLORERS VELOCITY!!!
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
