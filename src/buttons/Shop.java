@@ -58,7 +58,6 @@ public class Shop {
 				
 				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+(j+1)*size.y/numberOfRows),
 						 new Vector2f(location.x+(i+1)*size.x/numberOfColumns, location.y+j*size.y/numberOfRows));
-				System.out.println(buttons[i][j].getTL().x+" "+buttons[i][j].getTL().y+" "+buttons[i][j].getBR().x+" "+buttons[i][j].getBR().y);
 				
 				
 				//Y position then X position
@@ -67,6 +66,7 @@ public class Shop {
 				
 				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+1f)*(size.y/traps.length));
 				
+				traps[i][j].setPosition(shopItemPosition);
 				traps[i][j].drawTile().setPosition(shopItemPosition);
 			}
 		}
