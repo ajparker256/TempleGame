@@ -122,7 +122,7 @@ public static Shop epicShopofEpicness;
 		}
 	}
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
-	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.4f, .4f), new Vector2f(4,4), traps);
+	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.4f, .4f), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -222,6 +222,7 @@ public static Shop epicShopofEpicness;
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
+			selectedTrap.drawTile().setScale(grid.getTile(0,0).drawTile().getScale());
 			System.out.println(epicShopofEpicness.getPlacementLoc().x+" "+epicShopofEpicness.getPlacementLoc().y);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);

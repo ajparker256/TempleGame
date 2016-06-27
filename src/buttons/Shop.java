@@ -35,12 +35,12 @@ public class Shop {
 	//This determines if the shop is in use or not
 	private boolean isOn;
 	
-	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Vector2f locationOfTrapPlacement, Tile[][] traps) {
+	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Tile[][] traps) {
 		this.location = location;
 		this.size = size;
 		buttons = new Button[numberOfRows][numberOfColumns];
 		this.traps = traps;
-		this.locationOfTrapPlacement = locationOfTrapPlacement;
+		this.locationOfTrapPlacement = new Vector2f(0,0);
 		visibilityRange = new int[4];
 		if(traps.length<4) {
 			visibilityRange[1] = traps.length;
@@ -64,7 +64,7 @@ public class Shop {
 				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
 					//	new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
 				
-				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/traps[0].length), location.y+(j+1f)*(size.y/traps.length));
+				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/numberOfColumns), location.y+(j+1f)*(size.y/numberOfRows));
 				
 				traps[i][j].setPosition(shopItemPosition);
 				traps[i][j].drawTile().setPosition(shopItemPosition);
@@ -103,12 +103,14 @@ public class Shop {
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {
 				if(buttons[i][j].isClicked(mouseX, mouseY)) {
+					System.out.println("For this trap i = "+i+" and j = " + j);
 					//return new Tile((int)traps[i][j].getLocation().x, (int)traps[i][j].getLocation().y, traps[i][j].drawTile().getScale().x, traps[i][j].getLocation());
 					return traps[i][j].copy();
 				}
 			}
 		}
 		//Error Case
+		System.out.println("Error case in getShopItem");
 		return null;
 	}	
 	
