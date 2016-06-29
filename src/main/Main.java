@@ -122,7 +122,7 @@ public static Shop epicShopofEpicness;
 		}
 	}
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
-	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.4f, .4f), traps);
+	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.2f, .4f), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -138,20 +138,20 @@ public static Shop epicShopofEpicness;
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	
-	/*
-	Animation arrows = new Animation(new Vector2f(-.8f,-.5f));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows2"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows3"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows4"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows5"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows6"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows7"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows8"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"), arrows.getLoc(), new Vector2f(.2f, .2f)));
-	arrows.setDelay(10);
-	*/
+	/*Vector2f quickLoc = new Vector2f(-.8f, .6f);
+	ArrayList<Integer> arrows = new ArrayList<Integer>();
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows2"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows3"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows4"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows5"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows6"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows7"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows8"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"));
+	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"));
+	Animation arrow = new Animation(arrows, quickLoc, new Vector2f(.2f,.2f));*/
+	
 
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {

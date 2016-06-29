@@ -53,18 +53,18 @@ public class Shop {
 			visibilityRange[3] = 3;
 		}
 		isOn = false;
-		for(int i = 0; i<numberOfRows; i++) {
-			for(int j = 0; j<numberOfColumns; j++) {
+		for(int i = visibilityRange[0]; i<visibilityRange[1]; i++) {
+			for(int j = visibilityRange[2]; j<visibilityRange[3]; j++) {
 				
-				buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+(j+1)*size.y/numberOfRows),
-						 new Vector2f(location.x+(i+1)*size.x/numberOfColumns, location.y+j*size.y/numberOfRows));
+				buttons[i][j] = new Button(new Vector2f(location.x+(i-visibilityRange[0])*size.x/visibilityRange[1], location.y+(j+1-visibilityRange[2])*size.y/visibilityRange[3]),
+						 new Vector2f(location.x+(i+1-visibilityRange[0])*size.x/visibilityRange[1], location.y+(j-visibilityRange[2])*size.y/visibilityRange[3]));
 				
 				
 				//Y position then X position
 				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
 					//	new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
 				
-				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/numberOfColumns), location.y+(j+1f)*(size.y/numberOfRows));
+				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/numberOfColumns), location.y+(j+.5f)*(size.y/numberOfRows));
 				
 				traps[i][j].setPosition(shopItemPosition);
 				traps[i][j].drawTile().setPosition(shopItemPosition);
@@ -103,6 +103,7 @@ public class Shop {
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {
 				if(buttons[i][j].isClicked(mouseX, mouseY)) {
+					System.out.println(i+" "+j);
 					return traps[i][j].copy();
 				}
 			}
