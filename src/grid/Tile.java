@@ -41,6 +41,7 @@ public class Tile {
 		//Should be overwritten in every case
 		price = -1;
 	}
+	
 
 	public GuiTexture drawTile(){
 		return guiTexture;
@@ -87,6 +88,9 @@ public class Tile {
 	public boolean canInteract() {
 		
 		return canInteract;
+	}
+	public float getSize(){
+		return size;
 	}
 	
 

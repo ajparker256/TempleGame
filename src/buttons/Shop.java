@@ -103,8 +103,11 @@ public class Shop {
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {
 				if(buttons[i][j].isClicked(mouseX, mouseY)) {
-					System.out.println("For this trap i = "+i+" and j = " + j);
+					//System.out.println("For this trap i = "+i+" and j = " + j);
 					//return new Tile((int)traps[i][j].getLocation().x, (int)traps[i][j].getLocation().y, traps[i][j].drawTile().getScale().x, traps[i][j].getLocation());
+					System.out.println(traps[i][j].getSize());
+					System.out.println(traps[i][j].copy().getSize());
+
 					return traps[i][j].copy();
 				}
 			}

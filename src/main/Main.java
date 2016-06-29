@@ -118,7 +118,7 @@ public static Shop epicShopofEpicness;
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
 			traps[i][j] = new Dirt( i, j, .03f, new Vector2f(-.9f+j*.03f, -.5f+i*.03f));
-			System.out.println(traps[i][j].getLocation());
+			//System.out.println(traps[i][j].getLocation());
 		}
 	}
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
@@ -223,7 +223,7 @@ public static Shop epicShopofEpicness;
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
 			selectedTrap.drawTile().setScale(grid.getTile(0,0).drawTile().getScale());
-			System.out.println(epicShopofEpicness.getPlacementLoc().x+" "+epicShopofEpicness.getPlacementLoc().y);
+			//System.out.println(epicShopofEpicness.getPlacementLoc().x+" "+epicShopofEpicness.getPlacementLoc().y);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
 				epicShopofEpicness.setOn(false);
