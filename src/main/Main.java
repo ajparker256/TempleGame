@@ -223,6 +223,8 @@ public static Shop epicShopofEpicness;
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
 			selectedTrap.drawTile().setScale(grid.getTile(0,0).drawTile().getScale());
+			selectedTrap.setX((int)epicShopofEpicness.getPlacementLoc().x);
+			selectedTrap.setY((int)epicShopofEpicness.getPlacementLoc().y);
 			//System.out.println(epicShopofEpicness.getPlacementLoc().x+" "+epicShopofEpicness.getPlacementLoc().y);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);

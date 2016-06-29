@@ -73,6 +73,14 @@ public class Tile {
 		
 	}
 	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
 	public Vector2f getPosition()  {
 		return position;
 	}
