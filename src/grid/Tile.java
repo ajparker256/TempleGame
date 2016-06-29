@@ -104,6 +104,14 @@ public class Tile {
 	public float getSize(){
 		return size;
 	}
+
+
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 	
 
 

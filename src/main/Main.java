@@ -220,13 +220,16 @@ public static Shop epicShopofEpicness;
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
 			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
-			selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
-			selectedTrap.drawTile().setScale(grid.getTile(0,0).drawTile().getScale());
-			selectedTrap.setX((int)epicShopofEpicness.getPlacementLoc().x);
-			selectedTrap.setY((int)epicShopofEpicness.getPlacementLoc().y);
-			selectedTrap.setSize(grid.getTile(0, 0).drawTile().getScale().x);
+			//selectedTrap.setLocation(grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y).getLocation());
+			//selectedTrap.drawTile().setScale(grid.getTile(0,0).drawTile().getScale());
+			//selectedTrap.setX((int)epicShopofEpicness.getPlacementLoc().x);
+			//selectedTrap.setY((int)epicShopofEpicness.getPlacementLoc().y);
+			//selectedTrap.setSize(grid.getTile(0, 0).drawTile().getScale().x);
 			if(selectedTrap.getPrice()<=money) {
-				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
+				Tile oldTile=grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y);
+				System.out.println(oldTile.getPosition());
+				Tile newTile=new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc());
+				grid.setTile(oldTile.getX(), oldTile.getY(), new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc()));
 				epicShopofEpicness.setOn(false);
 				money -= selectedTrap.getPrice();
 			}
@@ -235,5 +238,7 @@ public static Shop epicShopofEpicness;
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
 	}
 }
+
+
 	
 
