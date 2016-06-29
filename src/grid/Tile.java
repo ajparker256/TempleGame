@@ -72,7 +72,10 @@ public class Tile {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	public void setSize(float size) {
+		this.size = size;
+	}
 	public void setX(int x) {
 		this.x = x;
 	}

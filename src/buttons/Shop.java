@@ -79,8 +79,8 @@ public class Shop {
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				guis.add(traps[j][i].drawTile());
-				guis.addAll(StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(traps[j][i].drawTile().getPosition().x, traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
-				//guis.addAll(StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(location.x+(j+.5f)*(size.x/traps[0].length), location.y+(i+.8f)*(size.y/traps.length)), size.x/(traps[0].length)));
+				guis.addAll(StringLibrary.makeItFit(traps[j][i].getName(), new Vector2f(traps[j][i].drawTile().getPosition().x, 
+						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
 			}
 		}
 	}
@@ -103,11 +103,6 @@ public class Shop {
 		for(int i = 0; i<buttons.length; i++) {
 			for(int j = 0; j<buttons[0].length; j++) {
 				if(buttons[i][j].isClicked(mouseX, mouseY)) {
-					//System.out.println("For this trap i = "+i+" and j = " + j);
-					//return new Tile((int)traps[i][j].getLocation().x, (int)traps[i][j].getLocation().y, traps[i][j].drawTile().getScale().x, traps[i][j].getLocation());
-					System.out.println(traps[i][j].getSize());
-					System.out.println(traps[i][j].copy().getSize());
-
 					return traps[i][j].copy();
 				}
 			}

@@ -216,7 +216,6 @@ public static Shop epicShopofEpicness;
 			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
 			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
-			//System.out.println(epicShopofEpicness.getGridLoc().x+" "+epicShopofEpicness.getGridLoc().y+" "+Mouse.getY());
 			epicShopofEpicness.setOn(true);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
@@ -225,7 +224,7 @@ public static Shop epicShopofEpicness;
 			selectedTrap.drawTile().setScale(grid.getTile(0,0).drawTile().getScale());
 			selectedTrap.setX((int)epicShopofEpicness.getPlacementLoc().x);
 			selectedTrap.setY((int)epicShopofEpicness.getPlacementLoc().y);
-			//System.out.println(epicShopofEpicness.getPlacementLoc().x+" "+epicShopofEpicness.getPlacementLoc().y);
+			selectedTrap.setSize(grid.getTile(0, 0).drawTile().getScale().x);
 			if(selectedTrap.getPrice()<=money) {
 				grid.setTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y, selectedTrap);
 				epicShopofEpicness.setOn(false);
