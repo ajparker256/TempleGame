@@ -64,7 +64,7 @@ public class Shop {
 				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
 					//	new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
 				
-				Vector2f shopItemPosition = new Vector2f(location.x+(i+.5f)*(size.x/numberOfColumns), location.y+(j+.5f)*(size.y/numberOfRows));
+				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(size.x/numberOfColumns), location.y+(j-visibilityRange[2]+.5f)*(size.y/numberOfRows));
 				
 				traps[i][j].setPosition(shopItemPosition);
 				traps[i][j].drawTile().setPosition(shopItemPosition);
