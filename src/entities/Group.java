@@ -50,6 +50,7 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		double rand = Math.random();
+		Tile[] moves = currentFloor.getAdjacent(location);
 		if(rand<.5) {
 			return new Point (nextLoc.x+1,(nextLoc.y));
 		}
