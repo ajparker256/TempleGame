@@ -15,5 +15,7 @@ public class Blank extends Tile {
 		super.passable=true;
 		this.texture=0;
 		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		name = "Blank...";
+		id = 0;
 	}
 }

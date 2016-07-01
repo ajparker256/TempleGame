@@ -29,6 +29,7 @@ public class Tile {
 	protected float size;
 	protected Vector2f location;
 	protected boolean canInteract;
+	protected int id;
 	
 	//creates a tile in location loc, give location in column then row
 	public Tile(int x, int y, float size, Vector2f location){
@@ -39,17 +40,18 @@ public class Tile {
 		this.y=y;
 		this.position=new Vector2f (location.x+((x-size/2)*size*2),(float) (location.y+((y-size/2)*(size*2*DisplayManager.getAspectratio()))));
 		name = "Default_Name";
-		//Should be overwritten in every case
+		//Should be overwritten in every case below this point
 		price = -1;
+		id = -1;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 
 	public GuiTexture drawTile(){
 		return guiTexture;
-	}
-	
-	public String getName() {
-		return name;
 	}
 	
 	public int getPrice() {
@@ -111,6 +113,10 @@ public class Tile {
 	}
 	public int getY() {
 		return y;
+	}
+	
+	public String toString() {
+		return name;
 	}
 	
 

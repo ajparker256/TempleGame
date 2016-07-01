@@ -105,23 +105,23 @@ public class Grid {
 		//0 = Left, 1 = Right, 2 = Down, 3 = Up
 		Tile[] adjacents = new Tile[4];
 		//If not on the left border, get the tile to the left
-		if(locationInGrid.x != 0) {
-			adjacents[0] = getTile((int)location.x-1, (int)location.y);
+		if((int)locationInGrid.x != 0) {
+			adjacents[0] = getTile((int)locationInGrid.x-1, (int)locationInGrid.y);
 		}
 		
 		//If not on the right border, get the tile to the right
-		if(locationInGrid.x != grid[0].length - 1) {
-			adjacents[1] = getTile((int)location.x+1, (int)location.y);
+		if((int)locationInGrid.x != grid[0].length - 1) {
+			adjacents[1] = getTile((int)locationInGrid.x+1, (int)locationInGrid.y);
 		}
 		
 		//If not on the bottom border of the grid, get the downwards tile
-		if(locationInGrid.y != 0) {
-			adjacents[2] = getTile((int)location.x, (int)location.y-1);
+		if((int)locationInGrid.y != 0) {
+			adjacents[2] = getTile((int)locationInGrid.x, (int)locationInGrid.y-1);
 		}
 		
 		//If not on the top border, get the tile upwards of it
-		if(locationInGrid.y != grid.length-1) {
-			adjacents[3] = getTile((int)location.x, (int)location.y+1);
+		if((int)locationInGrid.y != grid.length-1) {
+			adjacents[3] = getTile((int)locationInGrid.x, (int)locationInGrid.y+1);
 		}
 		
 		return adjacents;

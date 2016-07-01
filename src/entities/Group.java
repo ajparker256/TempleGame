@@ -50,9 +50,39 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(location);
-		if(rand<.5) {
-			return new Point (nextLoc.x+1,(nextLoc.y));
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y));
+		int total = 0;
+		int[] individualOdds = new int[4];
+		int i = 0;
+		for(Tile currentTile : moves) {
+			//System.out.println(currentTile+" This is the tile in moves["+i+"]");
+			if(currentTile == null) {
+				i++;
+				continue;
+				//Adds 10 odds if its a blank tile
+			} else if(currentTile.getId() == 0) {
+				individualOdds[i] += 10;
+			} else if(currentTile.getId() == 1) {
+				individualOdds[i] += 50;
+			}
+			total+=individualOdds[i];
+			i++;
+		}
+		i = 0;
+		
+		rand *= total;
+		
+		for(int currentOdds : individualOdds) {
+			if(currentOdds == 0) {
+				i++;
+				continue;
+			}
+			if(rand <= currentOdds) {
+				return new Point(moves[i].getX(), moves[i].getY());
+			} else {
+				i++;
+				rand -= currentOdds;
+			}
 		}
 		/*if(rand < .5) {
 			return new Point(nextLoc.x-1, nextLoc.y);
@@ -60,6 +90,7 @@ public class Group {
 		if(rand < .75) {
 			return new Point(nextLoc.x, nextLoc.y-1);
 		}*/
+		System.out.println("ERROR CASE IN GROUP PATH LOGIC!!!");
 		return new Point(nextLoc.x, nextLoc.y+1);
 		/*
 		//If no one has reached the goal
