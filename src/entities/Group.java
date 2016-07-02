@@ -54,6 +54,8 @@ public class Group {
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
+		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
+		//For each tile type, add the appropriate odds and total them
 		for(Tile currentTile : moves) {
 			//System.out.println(currentTile+" This is the tile in moves["+i+"]");
 			if(currentTile == null) {
@@ -72,6 +74,7 @@ public class Group {
 		
 		rand *= total;
 		
+		//Evaluate which one random fell into
 		for(int currentOdds : individualOdds) {
 			if(currentOdds == 0) {
 				i++;
@@ -84,12 +87,6 @@ public class Group {
 				rand -= currentOdds;
 			}
 		}
-		/*if(rand < .5) {
-			return new Point(nextLoc.x-1, nextLoc.y);
-		}
-		if(rand < .75) {
-			return new Point(nextLoc.x, nextLoc.y-1);
-		}*/
 		System.out.println("ERROR CASE IN GROUP PATH LOGIC!!!");
 		return new Point(nextLoc.x, nextLoc.y+1);
 		/*
