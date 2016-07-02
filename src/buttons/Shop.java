@@ -56,6 +56,14 @@ public class Shop {
 		for(int i = visibilityRange[0]; i<visibilityRange[1]; i++) {
 			for(int j = visibilityRange[2]; j<visibilityRange[3]; j++) {
 				
+				
+				
+				
+				
+				
+				
+				
+				System.out.println(location.x+(i-visibilityRange[0])*size.x/visibilityRange[1]+" "+location.y+(j+1-visibilityRange[2])*size.y/visibilityRange[3]);
 				buttons[i][j] = new Button(new Vector2f(location.x+(i-visibilityRange[0])*size.x/visibilityRange[1], location.y+(j+1-visibilityRange[2])*size.y/visibilityRange[3]),
 						 new Vector2f(location.x+(i+1-visibilityRange[0])*size.x/visibilityRange[1], location.y+(j-visibilityRange[2])*size.y/visibilityRange[3]));
 				
@@ -64,8 +72,7 @@ public class Shop {
 				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
 					//	new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
 				
-				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+1)*(size.x/numberOfColumns), location.y+(j-visibilityRange[2]+.5f)*(size.y/numberOfRows));
-				System.out.println(shopItemPosition);
+				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/numberOfColumns), location.y+(j-visibilityRange[2]+.5f)*(size.y/numberOfRows));
 				traps[i][j].setPosition(shopItemPosition);
 				traps[i][j].drawTile().setPosition(shopItemPosition);
 			}
