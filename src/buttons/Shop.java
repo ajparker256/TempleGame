@@ -89,7 +89,7 @@ public class Shop {
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				guis.add(traps[j][i].drawTile());
-				guis.addAll(StringLibrary.makeItFit(traps[j][i].toString(), new Vector2f(traps[j][i].drawTile().getPosition().x, 
+				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(traps[j][i].drawTile().getPosition().x, 
 						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
 			}
 		}
@@ -113,7 +113,7 @@ public class Shop {
 	}
 	
 	public int getShopItem(float mouseX, float mouseY) {
-		int x = (Mouse.getX()-(int)((location.x+1f)*DisplayManager.WIDTH/2))/(int)(size.y/(visibilityRange[3]-visibilityRange[2])*DisplayManager.WIDTH/2);
+		int x = (Mouse.getX()-(int)((location.x+1f)*DisplayManager.WIDTH/2))/(int)(size.x*2/(visibilityRange[3]-visibilityRange[2])*DisplayManager.WIDTH/2);
 		int y = (Mouse.getY()-(int)((location.y+1f)*DisplayManager.HEIGHT/2))/(int)(size.y/(visibilityRange[1]-visibilityRange[0])*DisplayManager.HEIGHT/2);
 		System.out.println(x+" "+y);
 		return traps[x][y].getId();

@@ -108,7 +108,7 @@ public static Shop epicShopofEpicness;
 	}
 	traps[1][1] = new Blank(1,1, .03f, new Vector2f(-.87f, -.47f));
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
-	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.2f, .4f), traps);
+	epicShopofEpicness = new Shop(2, 4, new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -215,9 +215,8 @@ public static Shop epicShopofEpicness;
 				epicShopofEpicness.setOn(false);
 				money -= selectedTrap.getPrice();
 			} else if(selectedTrap.getPrice()>money) {
-				StringLibrary.makeItFit("Insufficient Funds", new Vector2f(.8f, -.8f), 2);
+				StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f);
 			} else if(oldTile.getId() == selectedTrap.getId()) {
-				System.out.println("It did it");
 				dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
 			}
 		}
