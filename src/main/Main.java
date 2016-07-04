@@ -218,7 +218,7 @@ public static Shop epicShopofEpicness;
 				StringLibrary.makeItFit("Insufficient Funds", new Vector2f(.8f, -.8f), 2);
 			} else if(oldTile.getId() == selectedTrap.getId()) {
 				System.out.println("It did it");
-				dynamicGuis.addAll(StringLibrary.makeItFit("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x));
+				dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
 			}
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon

@@ -163,6 +163,33 @@ public class StringLibrary {
 		return words;
 	}
 	
+	public static ArrayList<GuiTexture>  makeItFitC(String s, Vector2f locationOfTopLeftCorner, float width) {
+		Scanner scan = new Scanner(s);
+		int row = 0;
+		float length = 0;
+		int letterCount = 0;
+		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
+		while(scan.hasNext()) {
+			//This is used to subString the line for drawing it centered
+				String nextWord = scan.next()+" ";
+				float wordWidth = getWidth(nextWord);
+				if(length+wordWidth>width) {
+					string.addAll(drawString(s.substring(0, letterCount), new Vector2f(locationOfTopLeftCorner.x+(width-length)/2, locationOfTopLeftCorner.y-row*size.y*2)));
+					s=s.substring(letterCount);
+					row++;
+					length = wordWidth;
+					letterCount = nextWord.length();
+				} else {
+					length+=wordWidth;
+					letterCount+=nextWord.length();
+				}
+		}
+		string.addAll(drawString(s, new Vector2f(locationOfTopLeftCorner.x+(width-length)/2, locationOfTopLeftCorner.y-row*size.y*2)));
+		
+		scan.close();
+		return string;
+	}
+	
 	public static Vector2f getSize() {
 		return size;
 	}
