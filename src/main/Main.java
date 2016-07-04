@@ -1,5 +1,6 @@
 package main;
 
+import grid.Blank;
 import grid.DartTrap;
 import grid.Dirt;
 import grid.Grid;
@@ -18,6 +19,7 @@ import librarys.GuiLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
 import librarys.TextureLibrary;
+import librarys.TileLibrary;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -84,29 +86,12 @@ public static Shop epicShopofEpicness;
 
 	
 	
-	//shop
 	boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
 	
-	//Test for Animation and moving the Unit. This is independent of a Unit class
-	//TODO Attach the animation to the explorer so that it is done in tandem. 
-	//Currently displaying and movement are taken care of in the while loop below. 
-	
 	//Initializes Explorer frames for later
-	GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
-	GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
-	GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
-	GuiLibrary.explorerStanding1 = loader.loadTexture("BasicExplorerR");
-	GuiLibrary.explorerWalkingL1 = loader.loadTexture("BasicExplorer WalkingR1");
-	GuiLibrary.explorerWalkingR1 = loader.loadTexture("BasicExplorer WalkingR2");
-	
-	GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/Miner");
-	GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/MinerWalking1");
-	GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/MinerWalking2");
-	GuiLibrary.minerStanding1 = loader.loadTexture("Explorers/Miner/MinerR");
-	GuiLibrary.minerWalkingL1 = loader.loadTexture("Explorers/Miner/MinerWalkingR1");
-	GuiLibrary.minerWalkingR1 = loader.loadTexture("Explorers/Miner/MinerWalkingR2");
+	GuiLibrary.init(loader);
 	AnimationLibrary.init(loader);
 	
 	Group group1 = new Group();
@@ -121,6 +106,7 @@ public static Shop epicShopofEpicness;
 			//System.out.println(traps[i][j].getLocation());
 		}
 	}
+	traps[1][1] = new Blank(1,1, .03f, new Vector2f(-.87f, -.47f));
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(2, 4, new Vector2f(.6f, -.1f), new Vector2f(.2f, .4f), traps);
 	
@@ -160,7 +146,7 @@ public static Shop epicShopofEpicness;
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
 		milli = System.currentTimeMillis() - milli;
-		update();
+		update(dynamicGuis);
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
 		}
@@ -196,9 +182,9 @@ public static Shop epicShopofEpicness;
 		
 	}
 	
-	public static void update() {
+	public static void update(ArrayList<GuiTexture> dynamicGuis) {
 		if(Mouse.isButtonDown(0)) {
-			updateMouse();
+			updateMouse(dynamicGuis);
 		}
 		//TODO Test traps
 		//TODO Update Explorer AI
@@ -206,7 +192,7 @@ public static Shop epicShopofEpicness;
 		//TODO Update ArrayLists of explorers, traps, Tiles, etc. if not already done so.
 	}
 	
-	public static void updateMouse() {
+	public static void updateMouse(ArrayList<GuiTexture> dynamicGuis) {
 		//This scales mouseX to be in the range of 1 to -1;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
@@ -219,14 +205,20 @@ public static Shop epicShopofEpicness;
 			epicShopofEpicness.setOn(true);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
-			Tile selectedTrap = epicShopofEpicness.getShopItem(mouseX, mouseY);
-			if(selectedTrap.getPrice()<=money) {
-				Tile oldTile=grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y);
-				System.out.println(oldTile.getPosition());
-				Tile newTile=new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc());
-				grid.setTile(oldTile.getX(), oldTile.getY(), new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc()));
+			Tile oldTile=grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
+			Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), epicShopofEpicness.getShopItem(mouseX, mouseY));
+			if(selectedTrap.getPrice()<=money && oldTile.getId() != selectedTrap.getId()) {
+				//oldTile=grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y);
+				//System.out.println(oldTile.getPosition());
+				//Tile newTile=new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc());
+				grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 				epicShopofEpicness.setOn(false);
 				money -= selectedTrap.getPrice();
+			} else if(selectedTrap.getPrice()>money) {
+				StringLibrary.makeItFit("Insufficient Funds", new Vector2f(.8f, -.8f), 2);
+			} else if(oldTile.getId() == selectedTrap.getId()) {
+				System.out.println("It did it");
+				dynamicGuis.addAll(StringLibrary.makeItFit("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x));
 			}
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon

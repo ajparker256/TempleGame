@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
+import librarys.GuiLibrary;
 import renderEngine.Loader;
 
 public class DartTrap extends Tile{
@@ -43,16 +44,16 @@ public class DartTrap extends Tile{
 		this.guiTexture = new GuiTexture(loader.loadTexture("tiles/Dirt2"), locationRelativeToScreen, new Vector2f(size,size));
 		
 		//arrows = new Animation(position);
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows2"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows3"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows4"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows5"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows6"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows7"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows8"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"), attackPosition, new Vector2f(size, size)));
-		arrows.addFrame(new GuiTexture(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"), attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow1, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow2, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow3, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow4, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow5, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow6, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow7, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow8, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow9, attackPosition, new Vector2f(size, size)));
+		arrows.addFrame(new GuiTexture(GuiLibrary.arrow10, attackPosition, new Vector2f(size, size)));
 		arrows.setDelay(10);
 	}
 	

@@ -1,6 +1,9 @@
 package librarys;
 
+import org.lwjgl.util.vector.Vector2f;
+
 import gui.GuiTexture;
+import renderEngine.Loader;
 
 public class GuiLibrary {
 public static GuiTexture button1;
@@ -41,5 +44,32 @@ public static int arrow8;
 public static int arrow9;
 public static int arrow10;
 
+
+	public static void init(Loader loader) {
+		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
+		GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
+		GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
+		GuiLibrary.explorerStanding1 = loader.loadTexture("BasicExplorerR");
+		GuiLibrary.explorerWalkingL1 = loader.loadTexture("BasicExplorer WalkingR1");
+		GuiLibrary.explorerWalkingR1 = loader.loadTexture("BasicExplorer WalkingR2");
+		
+		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/Miner");
+		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/MinerWalking1");
+		GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/MinerWalking2");
+		GuiLibrary.minerStanding1 = loader.loadTexture("Explorers/Miner/MinerR");
+		GuiLibrary.minerWalkingL1 = loader.loadTexture("Explorers/Miner/MinerWalkingR1");
+		GuiLibrary.minerWalkingR1 = loader.loadTexture("Explorers/Miner/MinerWalkingR2");
+		
+		GuiLibrary.arrow1 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows1");
+		GuiLibrary.arrow2 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows2");
+		GuiLibrary.arrow3 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows3");
+		GuiLibrary.arrow4 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows4");
+		GuiLibrary.arrow5 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows5");
+		GuiLibrary.arrow6 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows6");
+		GuiLibrary.arrow7 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows7");
+		GuiLibrary.arrow8 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows8");
+		GuiLibrary.arrow9 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows9");
+		GuiLibrary.arrow10 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows10");
+	}
 
 }
