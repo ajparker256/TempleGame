@@ -50,7 +50,7 @@ public static ArrayList<Button> buttons;
 public static long milli;
 public static Grid grid;
 public static Shop epicShopofEpicness;
-
+public static boolean wasJustDown = false;
 	public static void main(String[] args) throws FileNotFoundException {
 
 		money=1327;
@@ -183,9 +183,14 @@ public static Shop epicShopofEpicness;
 	}
 	
 	public static void update(ArrayList<GuiTexture> dynamicGuis) {
-		if(Mouse.isButtonDown(0)) {
+		//TODO find a way to make this only on click, currently non-func. Works always when mouse is down regardless of event
+		if(!Mouse.getEventButtonState() && Mouse.isButtonDown(0)) {
 			updateMouse(dynamicGuis);
+			wasJustDown = true;
+		} else {
+			wasJustDown = false;
 		}
+		
 		//TODO Test traps
 		//TODO Update Explorer AI
 		//TODO Update player input such as placing traps
@@ -197,7 +202,9 @@ public static Shop epicShopofEpicness;
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
-
+		if(epicShopofEpicness.isExitClicked(mouseX, mouseY)) {
+			epicShopofEpicness.setOn(false);
+		}
 		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
 			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());

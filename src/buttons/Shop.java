@@ -37,6 +37,8 @@ public class Shop {
 	//This determines if the shop is in use or not
 	private boolean isOn;
 	
+	private Button exitShop;
+	
 	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Tile[][] traps) {
 		this.location = location;
 		this.size = size;
@@ -80,8 +82,18 @@ public class Shop {
 				traps[i][j].drawTile().setPosition(shopItemPosition);
 			}
 		}
-		
-		shopHitbox = new Button(new Vector2f(location.x, location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))), new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0])), location.y));
+		exitShop = new Button(new Vector2f(location.x+size.x*(.5f * (visibilityRange[0]-visibilityRange[1]))-StringLibrary.getWidth('X'), 
+				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2])+StringLibrary.getSize().y)), 
+				new Vector2f(location.x*size.x*(.5f * (visibilityRange[1]-visibilityRange[0])), 
+				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))+StringLibrary.getSize().y));
+		shopHitbox = new Button(new Vector2f(location.x, 
+				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))), 
+				new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0])),
+				location.y));
+	}
+	
+	public boolean isExitClicked(float mouseX, float mouseY) {
+		return exitShop.isClicked(mouseX, mouseY);
 	}
 	
 	//This renders all traps in the shop at their given locations.
@@ -93,6 +105,8 @@ public class Shop {
 						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
 			}
 		}
+		guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth('X'),
+				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))+StringLibrary.getSize().y)));
 	}
 	
 	public Vector2f getGridLoc() {
