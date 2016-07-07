@@ -12,6 +12,8 @@ public class TileLibrary {
 			return new Blank(x, y, size, Main.grid.getLoc());
 		if(id == 1) 
 			return new Dirt(x, y, size, Main.grid.getLoc());
+		if(id == 2)
+			return new CursedIdol(x, y, size);
 		return null;
 	}
 }

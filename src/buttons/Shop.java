@@ -104,13 +104,13 @@ public class Shop {
 	}
 	
 	public boolean isUpArrowClicked(float mouseX, float mouseY) {
-		if(visibilityRange[2] != 0) 	
+		if(visibilityRange[2] != traps[0].length-(visibilityRange[3]-visibilityRange[2])) 	
 			return upArrowHitbox.isClicked(mouseX, mouseY);
 		else return false;
 	}
 	
 	public boolean isDownArrowClicked(float mouseX, float mouseY) {
-		if(visibilityRange[3] != traps[0].length)
+		if(visibilityRange[2] != 0)
 			return downArrowHitbox.isClicked(mouseX, mouseY);
 		else return false;
 	}
@@ -119,7 +119,7 @@ public class Shop {
 		return exitShop.isClicked(mouseX, mouseY);
 	}
 	
-	public void scrollUp() {
+	public void scrollDown() {
 		int rangeY = visibilityRange[3]-visibilityRange[2];
 		if(visibilityRange[2]-rangeY < 0) {
 			visibilityRange[2] = 0;
@@ -131,7 +131,7 @@ public class Shop {
 		updateShopPosition();
 	}
 	
-	public void scrollDown() {
+	public void scrollUp() {
 		int rangeY = visibilityRange[3]-visibilityRange[2];
 		if(visibilityRange[2]+rangeY > traps.length) {
 			visibilityRange[2] = traps[0].length - rangeY;
@@ -146,10 +146,10 @@ public class Shop {
 	
 	//This renders all traps in the shop at their given locations.
 	public void render(ArrayList<GuiTexture> guis) {
-		if(visibilityRange[3] != traps[0].length) {
+		if(visibilityRange[2] != 0) {
 			guis.add(downArrow);
 		}
-		if(visibilityRange[2] != 0) {
+		if(visibilityRange[2] != traps[0].length-(visibilityRange[3]-visibilityRange[2])) {
 			guis.add(upArrow);
 		} 
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {

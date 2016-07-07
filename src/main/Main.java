@@ -1,6 +1,7 @@
 package main;
 
 import grid.Blank;
+import grid.CursedIdol;
 import grid.DartTrap;
 import grid.Dirt;
 import grid.Grid;
@@ -107,6 +108,7 @@ public static boolean wasJustDown = false;
 		}
 	}
 	traps[1][1] = new Blank(1,1, .03f, new Vector2f(-.87f, -.47f));
+	traps[0][1] = new CursedIdol(0,1, .03f);
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(2, 4, new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
 	

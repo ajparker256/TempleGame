@@ -66,6 +66,8 @@ public class Group {
 				individualOdds[i] += 10;
 			} else if(currentTile.getId() == 1) {
 				individualOdds[i] += 50;
+			} else if(currentTile.getId() == 2) {
+				individualOdds[i] += 300;
 			}
 			total+=individualOdds[i];
 			i++;

@@ -49,6 +49,9 @@ public static int frame;
 public static int upArrow;
 public static int downArrow;
 
+public static int idol1;
+public static int idolOnBlank;
+
 
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -79,6 +82,9 @@ public static int downArrow;
 		GuiLibrary.frame = loader.loadTexture("Frame");
 		GuiLibrary.upArrow = loader.loadTexture("UpArrow");
 		GuiLibrary.downArrow = loader.loadTexture("DownArrow");
+		
+		GuiLibrary.idol1 = loader.loadTexture("Idol");
+		GuiLibrary.idolOnBlank = loader.loadTexture("/Tiles/IdolOnBlank");
 	}
 
 }
