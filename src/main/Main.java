@@ -168,7 +168,6 @@ public static boolean wasJustDown = false;
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
-		
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
@@ -226,6 +225,12 @@ public static boolean wasJustDown = false;
 			} else if(oldTile.getId() == selectedTrap.getId()) {
 				dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
 			}
+		}
+		if(epicShopofEpicness.isOn()) {
+			if(epicShopofEpicness.isUpArrowClicked(mouseX, mouseY))
+				epicShopofEpicness.scrollUp();
+			if(epicShopofEpicness.isDownArrowClicked(mouseX, mouseY))
+				epicShopofEpicness.scrollDown();
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
