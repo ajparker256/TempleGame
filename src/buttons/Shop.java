@@ -23,9 +23,6 @@ public class Shop {
 	//This is the size of the shop from top left corner to bottom right
 	private Vector2f size;
 	
-	//Button array to determine which spot is being interacted with.
-	//private Button[][] buttons;
-	
 	//Tile array containing the available traps for sale
 	private Tile[][] traps;
 	
@@ -50,11 +47,7 @@ public class Shop {
 	
 	private Button exitShop;
 	
-	private Button next;
-	
-	private Button prev;
-	
-	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Tile[][] traps) {
+	public Shop(Vector2f location, Vector2f size, Tile[][] traps) {
 		this.location = location;
 		this.size = size;
 		//buttons = new Button[numberOfRows][numberOfColumns];
@@ -76,7 +69,7 @@ public class Shop {
 		isOn = false;
 		for(int i = 0; i<traps.length; i++) {
 			for(int j = 0; j<traps[0].length; j++) {
-				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/numberOfColumns), location.y+(j-visibilityRange[2]+.5f)*(size.y/numberOfRows));
+				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/traps.length), location.y+(j-visibilityRange[2]+.5f)*(size.y/traps[0].length));
 				frames[i][j] = new GuiTexture(GuiLibrary.frame, shopItemPosition, new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 			}
 		}
@@ -87,7 +80,7 @@ public class Shop {
 				new Vector2f(upArrow.getPosition().x+upArrow.getScale().x/2, upArrow.getPosition().y-upArrow.getScale().y/2));
 		
 		
-		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-.025f), new Vector2f(.05f, .05f));
+		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-.1f), new Vector2f(.05f, .05f));
 		
 		downArrowHitbox = new Button(new Vector2f(downArrow.getPosition().x-downArrow.getScale().x/2, downArrow.getPosition().y+downArrow.getScale().y/2),
 				new Vector2f(downArrow.getPosition().x+downArrow.getScale().x/2, downArrow.getPosition().y-downArrow.getScale().y/2));

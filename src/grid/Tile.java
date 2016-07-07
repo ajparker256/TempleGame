@@ -30,6 +30,7 @@ public class Tile {
 	protected Vector2f location;
 	protected boolean canInteract;
 	protected int id;
+	protected boolean occupied;
 	
 	//creates a tile in location loc, give location in column then row
 	public Tile(int x, int y, float size, Vector2f location){
@@ -43,13 +44,21 @@ public class Tile {
 		//Should be overwritten in every case below this point
 		price = -1;
 		id = -1;
+		occupied = false;
 	}
 	
 	public int getId() {
 		return id;
 	}
 	
-
+	public boolean isOccupied() {
+		return occupied;
+	}
+	
+	public void setOccupied(boolean b) {
+		occupied = b;
+	}
+	
 	public GuiTexture drawTile(){
 		return guiTexture;
 	}

@@ -23,9 +23,12 @@ public class CursedIdol extends Tile{
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.idolOnBlank,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Idol!";
+		this.setPrice(100);
 		id = 2;
 	}
 	
+	//TODO make this into its functional self, currently money is added to player but SHOULD be going towards the explorers
+	//ALSO the curse is not implemented, needs some thought there too.
 	@Override
 	public void interact(){
 		value--;

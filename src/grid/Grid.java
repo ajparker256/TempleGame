@@ -101,29 +101,51 @@ public class Grid {
 	}
 	
 	public Tile[] getAdjacent(Vector2f locationInGrid) {
+		int absenceCounter = 0;
 		//A collection of the adjacent tiles, with null if there is no tile there.
 		//0 = Left, 1 = Right, 2 = Down, 3 = Up
 		Tile[] adjacents = new Tile[4];
 		//If not on the left border, get the tile to the left
 		if((int)locationInGrid.x != 0) {
-			adjacents[0] = getTile((int)locationInGrid.x-1, (int)locationInGrid.y);
+			Tile tile = getTile((int)locationInGrid.x-1, (int)locationInGrid.y);
+			if(!tile.isOccupied())
+				adjacents[0] = tile;
+			else{
+				absenceCounter++;
+			}
+		} else {
+			absenceCounter++;
 		}
 		
 		//If not on the right border, get the tile to the right
 		if((int)locationInGrid.x != grid[0].length - 1) {
-			adjacents[1] = getTile((int)locationInGrid.x+1, (int)locationInGrid.y);
-		}
+			Tile tile = getTile((int)locationInGrid.x+1, (int)locationInGrid.y);
+			if(!tile.isOccupied())
+				adjacents[1] = tile;
+			else
+				absenceCounter++;
+		} else absenceCounter++;
 		
 		//If not on the bottom border of the grid, get the downwards tile
 		if((int)locationInGrid.y != 0) {
-			adjacents[2] = getTile((int)locationInGrid.x, (int)locationInGrid.y-1);
-		}
+			Tile tile = getTile((int)locationInGrid.x, (int)locationInGrid.y-1);
+			if(!tile.isOccupied())
+				adjacents[2] = tile;
+			else absenceCounter++;
+		} else absenceCounter++;
 		
 		//If not on the top border, get the tile upwards of it
 		if((int)locationInGrid.y != grid.length-1) {
-			adjacents[3] = getTile((int)locationInGrid.x, (int)locationInGrid.y+1);
-		}
+			Tile tile = getTile((int)locationInGrid.x, (int)locationInGrid.y+1);
+			if(!tile.isOccupied())
+				adjacents[3] = tile;
+			else absenceCounter++;
+		} else absenceCounter++;
 		
+		//If there is no where to go, stay where you are.
+		if(absenceCounter == 4) {
+			adjacents[0] = getTile((int)locationInGrid.x, (int)locationInGrid.y);
+		}
 		return adjacents;
 	}
 	

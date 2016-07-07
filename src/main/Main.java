@@ -100,6 +100,25 @@ public static boolean wasJustDown = false;
 	group1.add(new Miner (group1));
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
+	
+	Group group2 = new Group();
+	group2.add(new Explorer (group2));
+	group2.add(new Miner (group2));
+	group2.add(new Explorer (group2));
+	group2.add(new Miner (group2));
+	
+	Group group3 = new Group();
+	group3.add(new Explorer (group3));
+	group3.add(new Miner (group3));
+	group3.add(new Explorer (group3));
+	group3.add(new Miner (group3));
+	
+	Group group4 = new Group();
+	group4.add(new Explorer (group4));
+	group4.add(new Miner (group4));
+	group4.add(new Explorer (group4));
+	group4.add(new Miner (group4));
+	
 	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
@@ -110,7 +129,7 @@ public static boolean wasJustDown = false;
 	traps[1][1] = new Blank(1,1, .03f, new Vector2f(-.87f, -.47f));
 	traps[0][1] = new CursedIdol(0,1, .03f);
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
-	epicShopofEpicness = new Shop(2, 4, new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
+	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
 	
 	//This is the string tester
 	List<GuiTexture> test;
@@ -162,7 +181,14 @@ public static boolean wasJustDown = false;
 		guiRenderer.render(test);
 		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
 		group1.move((int)milli,grid);
+		group2.move((int)milli, grid);
+		group3.move((int)milli, grid);
+		group4.move((int)milli, grid);
+		
 		dynamicGuis.addAll(group1.render());
+		dynamicGuis.addAll(group2.render());
+		dynamicGuis.addAll(group3.render());
+		dynamicGuis.addAll(group4.render());
 		//guiRenderer.render(arrows.getFrame());
 		
 		//TODO FLAW IN MOVING, SINCE IT IS DONE IN FLOATS, THE LARGER X OF SCREEN MAKES HORIZONTAL MOVEMENT FASTER FOR THE SAME
@@ -225,7 +251,7 @@ public static boolean wasJustDown = false;
 			} else if(selectedTrap.getPrice()>money) {
 				StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f);
 			} else if(oldTile.getId() == selectedTrap.getId()) {
-				dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
+				dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*6), epicShopofEpicness.getSize().x*1.6f));
 			}
 		}
 		if(epicShopofEpicness.isOn()) {
