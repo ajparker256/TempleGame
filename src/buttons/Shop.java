@@ -70,7 +70,8 @@ public class Shop {
 		if(traps[0].length<3) {
 			visibilityRange[3] = traps[0].length;
 		} else {
-			visibilityRange[3] = 3;
+			visibilityRange[3] = traps[0].length;
+			visibilityRange[2] = traps[0].length-3;
 		}
 		isOn = false;
 		for(int i = 0; i<traps.length; i++) {
