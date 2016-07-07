@@ -44,6 +44,11 @@ public static int arrow8;
 public static int arrow9;
 public static int arrow10;
 
+//Images for the shop
+public static int frame;
+public static int upArrow;
+public static int downArrow;
+
 
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -70,6 +75,10 @@ public static int arrow10;
 		GuiLibrary.arrow8 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows8");
 		GuiLibrary.arrow9 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows9");
 		GuiLibrary.arrow10 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows10");
+		
+		GuiLibrary.frame = loader.loadTexture("Frame");
+		GuiLibrary.upArrow = loader.loadTexture("UpArrow");
+		GuiLibrary.downArrow = loader.loadTexture("DownArrow");
 	}
 
 }

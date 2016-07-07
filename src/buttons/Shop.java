@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 import grid.Tile;
 import gui.GuiRenderer;
 import gui.GuiTexture;
+import librarys.GuiLibrary;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
 
@@ -34,16 +35,23 @@ public class Shop {
 	//Checks if the shop has been clicked at all
 	private Button shopHitbox;
 	
+	private GuiTexture[][] frames;
+	
 	//This determines if the shop is in use or not
 	private boolean isOn;
 	
 	private Button exitShop;
+	
+	private Button next;
+	
+	private Button prev;
 	
 	public Shop(int numberOfRows, int numberOfColumns, Vector2f location, Vector2f size, Tile[][] traps) {
 		this.location = location;
 		this.size = size;
 		//buttons = new Button[numberOfRows][numberOfColumns];
 		this.traps = traps;
+		this.frames = new GuiTexture[traps.length][traps[0].length];
 		this.locationOfTrapPlacement = new Vector2f(0,0);
 		visibilityRange = new int[4];
 		if(traps.length<4) {
@@ -59,48 +67,61 @@ public class Shop {
 		isOn = false;
 		for(int i = visibilityRange[0]; i<visibilityRange[1]; i++) {
 			for(int j = visibilityRange[2]; j<visibilityRange[3]; j++) {
-				
-				
-				
-				
-				
-				
-				
-				
-				System.out.println(location.x+(i-visibilityRange[0])*size.x/visibilityRange[1]+" "+location.y+(j+1-visibilityRange[2])*size.y/visibilityRange[3]);
-			//	buttons[i][j] = new Button(new Vector2f(location.x+(i-visibilityRange[0])*size.x/visibilityRange[1], location.y+(j+1-visibilityRange[2])*size.y/visibilityRange[3]),
-			//			 new Vector2f(location.x+(i+1-visibilityRange[0])*size.x/visibilityRange[1], location.y+(j-visibilityRange[2])*size.y/visibilityRange[3]));
-				
-				
-				//Y position then X position
-				//buttons[i][j] = new Button(new Vector2f(location.x+i*size.x/numberOfColumns, location.y+j*size.y/numberOfRows), 
-					//	new Vector2f(location.x*(i+1)*size.x/numberOfColumns, location.y*(j+1)*size.y/numberOfRows));
-				
 				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/numberOfColumns), location.y+(j-visibilityRange[2]+.5f)*(size.y/numberOfRows));
-				traps[i][j].setPosition(shopItemPosition);
-				//traps[i][j].drawTile().setScale(new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
-				traps[i][j].drawTile().setPosition(shopItemPosition);
+				frames[i][j] = new GuiTexture(GuiLibrary.frame, shopItemPosition, new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+				updateShopPosition();
 			}
 		}
-		exitShop = new Button(new Vector2f(location.x+size.x*(.5f * (visibilityRange[0]-visibilityRange[1]))-StringLibrary.getWidth('X'), 
+		//TODO FIX, DOES NOT CURRENTLY WORK
+		
+		exitShop = new Button(new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth('X'), 
 				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2])+StringLibrary.getSize().y)), 
-				new Vector2f(location.x*size.x*(.5f * (visibilityRange[1]-visibilityRange[0])), 
-				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))+StringLibrary.getSize().y));
+				new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0])), 
+				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))));
+		System.out.println(exitShop.getTL()+" "+exitShop.getBR());
 		shopHitbox = new Button(new Vector2f(location.x, 
 				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))), 
 				new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0])),
 				location.y));
+		//next = new Button(new Vector2f(location.x))
 	}
 	
 	public boolean isExitClicked(float mouseX, float mouseY) {
 		return exitShop.isClicked(mouseX, mouseY);
 	}
 	
+	public void scrollUp() {
+		int rangeY = visibilityRange[3]-visibilityRange[2];
+		if(visibilityRange[2]-rangeY < 0) {
+			visibilityRange[2] = 0;
+			visibilityRange[3] = rangeY;
+		} else {
+			visibilityRange[2] -= rangeY;
+			visibilityRange[3] -= rangeY;
+		}
+		updateShopPosition();
+	}
+	
+	public void scrollDown() {
+		int rangeY = visibilityRange[3]-visibilityRange[2];
+		if(visibilityRange[2]+rangeY > traps.length) {
+			visibilityRange[2] = traps.length - rangeY;
+			visibilityRange[3] = traps.length;
+		} else {
+			visibilityRange[2] += rangeY;
+			visibilityRange[3] += rangeY;
+		}
+		updateShopPosition();
+	}
+	
+	
 	//This renders all traps in the shop at their given locations.
 	public void render(ArrayList<GuiTexture> guis) {
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
+				guis.add(frames[j][i]);
 				guis.add(traps[j][i].drawTile());
+				
 				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(traps[j][i].drawTile().getPosition().x, 
 						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
 			}
@@ -111,6 +132,16 @@ public class Shop {
 	
 	public Vector2f getGridLoc() {
 		return locationOfTrapPlacement;
+	}
+	
+	public void updateShopPosition() {
+		for(int i = visibilityRange[0]; i<visibilityRange[1]; i++) {
+			for(int j = visibilityRange[2]; j<visibilityRange[3]; j++) {
+				Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/traps[0].length), location.y+(j-visibilityRange[2]+.5f)*(size.y/traps.length));
+				traps[i][j].setPosition(shopItemPosition);
+				traps[i][j].drawTile().setPosition(shopItemPosition);
+			}
+		}
 	}
 	
 	//Returns true if the mouse is on top of the shop when called.
