@@ -24,6 +24,7 @@ public class Group {
 	private Vector2f velocity;
 	private int nextPos;
 	private int direction=0;
+	private ArrayList<Point> path;
 
 	public Group() {
 		nextLoc=new Point(0,0);
@@ -33,7 +34,7 @@ public class Group {
 		velocity=new Vector2f(0.1f,(float)(0.1f*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
-		
+		path = new ArrayList<Point>();
 	}
 	
 	public int getMaxSize() {
@@ -54,6 +55,10 @@ public class Group {
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
+		path.add(nextLoc);
+		if(path.size()>1) {
+			Main.grid.getTile(path.get(path.size()-2).x, path.get(path.size()-2).y).setOccupied(false);
+		}
 		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
 		//For each tile type, add the appropriate odds and total them
 		for(Tile currentTile : moves) {
@@ -83,7 +88,6 @@ public class Group {
 				continue;
 			}
 			if(rand <= currentOdds) {
-				System.out.println(currentFloor.getTile(moves[i].getX(),  moves[i].getY()).isOccupied());
 				return new Point(moves[i].getX(), moves[i].getY());
 			} else {
 				i++;
@@ -172,7 +176,7 @@ public class Group {
 			for(Explorer e: group){
 				e.rotate(direction);
 			}
-			grid.getTile(nextLoc.x, nextLoc.y).setOccupied(false);
+			//grid.getTile(nextLoc.x, nextLoc.y).setOccupied(false);
 			nextLoc=nextLocTemp;
 		}
 		
