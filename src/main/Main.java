@@ -36,6 +36,7 @@ import entities.Camera;
 import entities.Explorer;
 import entities.Group;
 import entities.Miner;
+import entities.Squad;
 import entities.Unit;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
@@ -119,6 +120,12 @@ public static boolean wasJustDown = false;
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	
+	ArrayList<Group> squad1List=new ArrayList<Group>();
+	squad1List.add(group1);
+	squad1List.add(group2);
+	squad1List.add(group3);
+	squad1List.add(group4);
+	 Squad squad1=new Squad(squad1List);
 	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
@@ -180,10 +187,11 @@ public static boolean wasJustDown = false;
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
-		group1.move((int)milli,grid);
-		group2.move((int)milli, grid);
-		group3.move((int)milli, grid);
-		group4.move((int)milli, grid);
+		squad1.tick((int)milli,grid);
+		//group1.move((int)milli,grid);
+		//group2.move((int)milli, grid);
+	//	group3.move((int)milli, grid);
+		//group4.move((int)milli, grid);
 		
 		dynamicGuis.addAll(group1.render());
 		dynamicGuis.addAll(group2.render());

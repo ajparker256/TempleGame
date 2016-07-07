@@ -25,8 +25,16 @@ public class Group {
 	private int nextPos;
 	private int direction=0;
 	private ArrayList<Point> path;
+	private boolean busy;
+	private boolean wait;
+
+	public boolean getWait() {
+		return wait;
+	}
 
 	public Group() {
+		wait=false;
+		busy=false;
 		nextLoc=new Point(0,0);
 		nextPos=0;
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
@@ -99,11 +107,13 @@ public class Group {
 	}
 	
 	public void move(int milli,Grid grid) {
+		if(!wait){
 		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(true);
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			for(Explorer e: group){
+				busy=true;
 				e.interact(direction);
 			}
 			 grid.getTile(nextLoc.x, nextLoc.y).interact();
@@ -113,6 +123,7 @@ public class Group {
 			//If the destination is to the right, go right
 			if(location.x<destination.x){
 				direction=2;
+				busy=true;
 				tempVelocity.x = velocity.x;
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 				//If you would overshoot, don't
@@ -123,6 +134,7 @@ public class Group {
 			//If the destination is to the left, go left
 			}else if(location.x>destination.x){
 				direction=4;
+				busy=true;
 				tempVelocity = new Vector2f(velocity.x*-1, 0);
 				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 				if(location.x<destination.x){
@@ -133,6 +145,7 @@ public class Group {
 			//If the destination is above you, go up
 			}else if(location.y<destination.y){
 				direction=1;
+				busy=true;
 				tempVelocity.y = velocity.y;
 				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 				if(location.y>destination.y){
@@ -143,6 +156,7 @@ public class Group {
 			//If the destination is below you, go down
 			}else if(location.y>destination.y){
 				direction=3;
+				busy=true;
 				tempVelocity.y = -1*velocity.y;
 				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 				if(location.y<destination.y){
@@ -153,6 +167,8 @@ public class Group {
 			}
 			
 		}else {
+			busy=false;
+			wait=true;
 			Point nextLocTemp=getNextLoc(Main.grid);
 			Vector2f locationNext=grid.getTile(nextLocTemp.x, nextLocTemp.y).getLocation();
 			if(location.x<locationNext.x){
@@ -171,8 +187,6 @@ public class Group {
 			direction=3;
 
 		}
-		
-			
 			for(Explorer e: group){
 				e.rotate(direction);
 			}
@@ -181,7 +195,7 @@ public class Group {
 		}
 		
 		}
-		
+		}
 		
 		
 		}
@@ -214,6 +228,40 @@ public class Group {
 
 	public int getDirection() {
 		return direction;
+	}
+
+	public boolean isBusy() {
+		return this.busy;
+	}
+
+	public void setWait(boolean wait) {
+		this.wait=wait;
+		
+	}
+
+	public void setNextLoc(Point point) {
+
+		Vector2f locationNext=Main.grid.getTile(point.x, point.y).getLocation();
+		if(location.x<locationNext.x){
+			direction=2;
+			
+		}else if(location.x>locationNext.x){
+			direction=4;
+
+			
+		}else if(location.y<locationNext.y){
+			direction=1;
+		
+			
+
+		}else if(location.y>locationNext.y){
+			direction=3;
+
+		}
+			for(Explorer e: group){
+				e.rotate(direction);
+			}
+			this.nextLoc=point;
 	}
 
 
