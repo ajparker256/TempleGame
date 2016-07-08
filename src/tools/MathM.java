@@ -108,12 +108,12 @@ public class MathM {
 				list.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(location.x+size*2,location.y), new Vector2f(size,size)));
 			}
 		
-			if((number%1000)-number%100-number%10==0){
+		System.out.println(number%100);
+			if((number%1000)-number%100==0){
 				list.add(new GuiTexture(TextureLibrary.Num0, new Vector2f(location.x+size,location.y), new Vector2f(size,size)));
 			}else 	if((number%1000)-number%100==100){
 				list.add(new GuiTexture(TextureLibrary.Num1, new Vector2f(location.x+size,location.y), new Vector2f(size,size)));
 			}else 	if((number%1000)-number%100==200){
-			
 				list.add(new GuiTexture(TextureLibrary.Num2, new Vector2f(location.x+size,location.y), new Vector2f(size,size)));
 			}else 	if((number%1000)-number%100==300){
 				list.add(new GuiTexture(TextureLibrary.Num3, new Vector2f(location.x+size,location.y), new Vector2f(size,size)));

@@ -15,6 +15,7 @@ public class Dirt extends Tile{
 	
 	public Dirt(int x, int y, float size) {
 		super(x, y, size, Main.grid.getLoc());
+		System.out.println(size);
 		super.passable=false;
 		super.canInteract=true;
 		this.hp=100;
