@@ -27,12 +27,13 @@ public class Group {
 	private ArrayList<Point> path;
 	private boolean busy;
 	private boolean wait;
+	private int squadId;
 
 	public boolean getWait() {
 		return wait;
 	}
 
-	public Group() {
+	public Group(int id) {
 		wait=false;
 		busy=false;
 		nextLoc=new Point(0,0);
@@ -43,6 +44,7 @@ public class Group {
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
 		path = new ArrayList<Point>();
+		squadId = id;
 	}
 	
 	public int getMaxSize() {
@@ -59,13 +61,13 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y));
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y), squadId);
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
 		path.add(nextLoc);
 		if(path.size()>1) {
-			Main.grid.getTile(path.get(path.size()-2).x, path.get(path.size()-2).y).setOccupied(false);
+			Main.grid.getTile(path.get(path.size()-2).x, path.get(path.size()-2).y).setOccupied(squadId);
 		}
 		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
 		//For each tile type, add the appropriate odds and total them
@@ -108,7 +110,7 @@ public class Group {
 	
 	public void move(int milli,Grid grid) {
 		if(!wait){
-		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(true);
+		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){

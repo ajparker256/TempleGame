@@ -96,25 +96,25 @@ public static boolean wasJustDown = false;
 	GuiLibrary.init(loader);
 	AnimationLibrary.init(loader);
 	
-	Group group1 = new Group();
+	Group group1 = new Group(1);
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
 	
-	Group group2 = new Group();
+	Group group2 = new Group(1);
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	
-	Group group3 = new Group();
+	Group group3 = new Group(1);
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	
-	Group group4 = new Group();
+	Group group4 = new Group(1);
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	group4.add(new Explorer (group4));
@@ -125,7 +125,7 @@ public static boolean wasJustDown = false;
 	squad1List.add(group2);
 	squad1List.add(group3);
 	squad1List.add(group4);
-	 Squad squad1=new Squad(squad1List);
+	 Squad squad1=new Squad(squad1List, 1);
 	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {

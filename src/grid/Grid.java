@@ -95,14 +95,14 @@ public class Grid {
 		for(Tile[]line:grid){
 			for(Tile tile:line){
 				//UNCOMMENT BELOW FOR TRIPPY THINGS XD
-				if(tile.isOccupied())
+				//if(tile.isOccupied())
 				toRender.add(tile.drawTile());
 			}
 		}
 		return toRender;
 	}
 	
-	public Tile[] getAdjacent(Vector2f locationInGrid) {
+	public Tile[] getAdjacent(Vector2f locationInGrid, int id) {
 		int absenceCounter = 0;
 		//A collection of the adjacent tiles, with null if there is no tile there.
 		//0 = Left, 1 = Right, 2 = Down, 3 = Up
@@ -110,7 +110,7 @@ public class Grid {
 		//If not on the left border, get the tile to the left
 		if((int)locationInGrid.x != 0) {
 			Tile tile = getTile((int)locationInGrid.x-1, (int)locationInGrid.y);
-			if(!tile.isOccupied())
+			if(tile.isOccupied()==-1 || tile.isOccupied()==id)
 				adjacents[0] = tile;
 			else{
 				absenceCounter++;
@@ -122,7 +122,7 @@ public class Grid {
 		//If not on the right border, get the tile to the right
 		if((int)locationInGrid.x != grid[0].length - 1) {
 			Tile tile = getTile((int)locationInGrid.x+1, (int)locationInGrid.y);
-			if(!tile.isOccupied())
+			if(tile.isOccupied()==-1 || tile.isOccupied()==id)
 				adjacents[1] = tile;
 			else
 				absenceCounter++;
@@ -131,7 +131,7 @@ public class Grid {
 		//If not on the bottom border of the grid, get the downwards tile
 		if((int)locationInGrid.y != 0) {
 			Tile tile = getTile((int)locationInGrid.x, (int)locationInGrid.y-1);
-			if(!tile.isOccupied())
+			if(tile.isOccupied() == -1 || tile.isOccupied()==id)
 				adjacents[2] = tile;
 			else absenceCounter++;
 		} else absenceCounter++;
@@ -139,7 +139,7 @@ public class Grid {
 		//If not on the top border, get the tile upwards of it
 		if((int)locationInGrid.y != grid.length-1) {
 			Tile tile = getTile((int)locationInGrid.x, (int)locationInGrid.y+1);
-			if(!tile.isOccupied())
+			if(tile.isOccupied() == -1 || tile.isOccupied()==id)
 				adjacents[3] = tile;
 			else absenceCounter++;
 		} else absenceCounter++;

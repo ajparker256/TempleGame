@@ -13,15 +13,17 @@ public class Squad {
 
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
-	public Squad(ArrayList<Group> groups){
+	private int squadId;
+	public Squad(ArrayList<Group> groups, int squadId){
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
 		this.groups=groups;
+		this.squadId = squadId;
 	}
 	public Point getNextLoc(Grid currentFloor) {
 		Point nextLoc= path.get(0);
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y));
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y), squadId);
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
