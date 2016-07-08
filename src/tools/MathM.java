@@ -107,8 +107,6 @@ public class MathM {
 			}else 	if((number%100)-number%10==90){
 				list.add(new GuiTexture(TextureLibrary.Num9, new Vector2f(location.x+size*2,location.y), new Vector2f(size,size)));
 			}
-		
-		System.out.println(number%100);
 			if((number%1000)-number%100==0){
 				list.add(new GuiTexture(TextureLibrary.Num0, new Vector2f(location.x+size,location.y), new Vector2f(size,size)));
 			}else 	if((number%1000)-number%100==100){
