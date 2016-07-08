@@ -64,8 +64,9 @@ public static boolean wasJustDown = false;
 		Loader loader = new Loader();
 		Random random = new Random();
 		new TextureLibrary(loader);
-	
+		StringLibrary.init(loader);
 		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1);
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 2));
 		grid.setIsOn(true);
 		grids.add(grid);
 		
@@ -75,7 +76,7 @@ public static boolean wasJustDown = false;
 		
 	SoundLibrary.music = Sound.loadSound("song");
 
-	StringLibrary.init(loader);
+	
 	
 	
 	
@@ -181,6 +182,9 @@ public static boolean wasJustDown = false;
 			epicShopofEpicness.render(dynamicGuis);
 		}
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
+		for(Grid g: grids) {
+			g.renderFloorSelect();
+		}
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
@@ -269,6 +273,12 @@ public static boolean wasJustDown = false;
 				epicShopofEpicness.scrollUp();
 			if(epicShopofEpicness.isDownArrowClicked(mouseX, mouseY))
 				epicShopofEpicness.scrollDown();
+		}
+		for(Grid g : grids) {
+			if(g.isLevelSelected(mouseX, mouseY)) {
+				Main.grid = g;
+				break;
+			}
 		}
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.

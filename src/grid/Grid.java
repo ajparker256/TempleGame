@@ -1,6 +1,7 @@
 package grid;
 
 import gui.GuiTexture;
+import librarys.StringLibrary;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ import renderEngine.DisplayManager;
 public class Grid {
 	
 	private boolean isOn;
+	
+	private Button levelSelect;
 	
 	
 	public static final Vector2f UNITSIZE = new Vector2f(0.2f,0.2f);
@@ -44,6 +47,11 @@ public class Grid {
 		
 		isOn = false;
 		
+		float f = StringLibrary.size.x;
+		
+		levelSelect = new Button(new Vector2f(location.x+floor*StringLibrary.size.x*2-StringLibrary.getWidth(""+floor), 1),
+					new Vector2f(location.x+floor*StringLibrary.size.x*2, 1-StringLibrary.size.y));
+		
 		goalReached = false;
 		
 		goalReacher = null;
@@ -63,8 +71,16 @@ public class Grid {
 		grid[0][0]=new Blank(0,0,size,location);
 	}
 	
+	public void renderFloorSelect() {
+		StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+floor*StringLibrary.getSize().x*2-StringLibrary.getWidth(""+floor), 1-StringLibrary.getSize().y), 2000);
+	}
+	
 	public int getFloor() {
 		return floor;
+	}
+	
+	public boolean isLevelSelected(float mouseX, float mouseY) {
+		return levelSelect.isClicked(mouseX, mouseY);
 	}
 	
 	public Vector2f getTileCount() {
