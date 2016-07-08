@@ -95,7 +95,7 @@ public class Grid {
 		for(Tile[]line:grid){
 			for(Tile tile:line){
 				//UNCOMMENT BELOW FOR TRIPPY THINGS XD
-				//if(tile.isOccupied())
+				if(tile.isOccupied())
 				toRender.add(tile.drawTile());
 			}
 		}

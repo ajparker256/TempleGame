@@ -150,13 +150,13 @@ public class Explorer extends Unit{
 				break;
 			case 4: 
 				switch(position){
-				case 1:position=3;
+				case 1:position=2;
 				break;
 				case 2:position=4;
 				break;
 				case 3:position=1;
 				break;
-				case 4:position=2;
+				case 4:position=3;
 				break;
 				}
 				
