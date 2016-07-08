@@ -61,7 +61,7 @@ public class Group {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y), squadId);
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*/);
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;

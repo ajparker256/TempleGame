@@ -23,7 +23,7 @@ public class Squad {
 	public Point getNextLoc(Grid currentFloor) {
 		Point nextLoc= path.get(0);
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y), squadId);
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*/);
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
@@ -35,7 +35,7 @@ public class Squad {
 				continue;
 				//Adds 10 odds if its a blank tile
 			} else if(currentTile.getId() == 0) {
-				individualOdds[i] += 10;
+				individualOdds[i] += 10000;
 			} else if(currentTile.getId() == 1) {
 				individualOdds[i] += 50;
 			} else if(currentTile.getId() == 2) {
@@ -61,7 +61,7 @@ public class Squad {
 				rand -= currentOdds;
 			}
 		}
-		System.out.println("ERROR CASE IN GROUP PATH LOGIC!!!");
+		System.out.println("ERROR CASE IN SQUAD PATH LOGIC!!!");
 		return new Point(nextLoc.x, nextLoc.y+1);
 	}
 	public void tick(int milli, Grid grid){
@@ -88,8 +88,11 @@ public class Squad {
 			for(Group group: groups){
 				i++;
 				if(i<path.size()){
-				group.setNextLoc(path.get(i));
-				group.setWait(false);
+					group.setNextLoc(path.get(i));
+					group.setWait(false);
+					//This removes the status of occupied from the tail end of the squad
+					if(i == groups.size() && i+2<path.size()) 
+						Main.grid.getTile(path.get(i+2).x, path.get(i+2).y).setOccupied(-1);
 				}
 			}
 		}
