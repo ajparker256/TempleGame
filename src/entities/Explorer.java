@@ -23,6 +23,7 @@ public class Explorer extends Unit{
 	protected int idlex;
 	protected int idley;
 	protected int lastDirection;
+	protected int floor;
 	
 	
 	public Explorer(Group group) {
@@ -40,6 +41,7 @@ public class Explorer extends Unit{
 		this.idlex=GuiLibrary.explorerStanding1;
 		this.animationx=AnimationLibrary.explorerX;
 		this.animationy=AnimationLibrary.explorerY;
+		floor = Main.grids.get(0).getFloor();
 		
 	}
 	

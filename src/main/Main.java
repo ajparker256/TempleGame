@@ -50,11 +50,12 @@ public static int money;
 public static ArrayList<Explorer> group;
 public static ArrayList<Button> buttons;
 public static long milli;
+public static ArrayList<Grid> grids;
 public static Grid grid;
 public static Shop epicShopofEpicness;
 public static boolean wasJustDown = false;
 	public static void main(String[] args) throws FileNotFoundException {
-
+		grids = new ArrayList<Grid>();
 		money=1327;
 		buttons = new ArrayList<Button>();
 		group = new ArrayList<Explorer>();
@@ -64,8 +65,9 @@ public static boolean wasJustDown = false;
 		Random random = new Random();
 		new TextureLibrary(loader);
 	
-		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10);
-
+		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1);
+		grid.setIsOn(true);
+		grids.add(grid);
 		
 		
 		

@@ -16,6 +16,8 @@ import renderEngine.DisplayManager;
 
 public class Grid {
 	
+	private boolean isOn;
+	
 	
 	public static final Vector2f UNITSIZE = new Vector2f(0.2f,0.2f);
 
@@ -34,9 +36,13 @@ public class Grid {
 	
 	private float size;
 	
+	private int floor;
+	
 	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
-	public Grid(Vector2f location, float size, int rows) {
+	public Grid(Vector2f location, float size, int rows, int floor) {
 		this.location = location;
+		
+		isOn = false;
 		
 		goalReached = false;
 		
@@ -46,6 +52,8 @@ public class Grid {
 		
 		this.size = size;
 		
+		this.floor = floor;
+		
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
 			for(int k=0;k<rows;k++){
@@ -53,6 +61,10 @@ public class Grid {
 			}
 		}
 		grid[0][0]=new Blank(0,0,size,location);
+	}
+	
+	public int getFloor() {
+		return floor;
 	}
 	
 	public Vector2f getTileCount() {
@@ -74,6 +86,14 @@ public class Grid {
 	public float getSize() {
 		return size;
 	}
+	
+	public boolean isOn() {
+		return isOn;
+	}
+	
+	public void setIsOn(boolean b) {
+		isOn = b;
+	}
 
 	
 	//Returns the location
@@ -91,15 +111,20 @@ public class Grid {
 
 	
 	public ArrayList<GuiTexture> render() {
+	
 		ArrayList<GuiTexture> toRender= new ArrayList<GuiTexture>();
-		for(Tile[]line:grid){
-			for(Tile tile:line){
-				//UNCOMMENT BELOW FOR TRIPPY THINGS XD
-				//if(tile.isOccupied())
-				toRender.add(tile.drawTile());
+		if(isOn){
+			for(Tile[]line:grid){
+				for(Tile tile:line){
+					//UNCOMMENT BELOW FOR TRIPPY THINGS XD
+					//if(tile.isOccupied())
+					toRender.add(tile.drawTile());
+				}
 			}
+		
 		}
 		return toRender;
+		
 	}
 	
 	public Tile[] getAdjacent(Vector2f locationInGrid, int id) {
