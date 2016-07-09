@@ -52,6 +52,8 @@ public static int downArrow;
 public static int idol1;
 public static int idolOnBlank;
 
+public static int ladder;
+
 
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -85,6 +87,9 @@ public static int idolOnBlank;
 		
 		GuiLibrary.idol1 = loader.loadTexture("Idol");
 		GuiLibrary.idolOnBlank = loader.loadTexture("/Tiles/IdolOnBlank");
+
+		GuiLibrary.ladder = loader.loadTexture("ladder");
 	}
+	
 
 }

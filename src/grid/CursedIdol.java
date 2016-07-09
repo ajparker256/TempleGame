@@ -2,6 +2,7 @@ package grid;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import entities.Group;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.TextureLibrary;
@@ -30,7 +31,7 @@ public class CursedIdol extends Tile{
 	//TODO make this into its functional self, currently money is added to player but SHOULD be going towards the explorers
 	//ALSO the curse is not implemented, needs some thought there too.
 	@Override
-	public void interact(){
+	public void interact(Group g){
 		value--;
 		if(value%5 == 0)
 			Main.money++;

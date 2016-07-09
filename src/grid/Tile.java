@@ -1,5 +1,6 @@
 package grid;
 
+import entities.Group;
 import entities.Unit;
 import gui.GuiTexture;
 
@@ -80,7 +81,7 @@ public class Tile {
 		guiTexture.setPosition(position);
 	}
 
-	public void interact() {
+	public void interact(Group g) {
 		// TODO Auto-generated method stub
 		
 	}

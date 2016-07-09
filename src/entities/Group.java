@@ -137,7 +137,7 @@ public class Group {
 				busy=true;
 				e.interact(direction);
 			}
-			 grid.getTile(nextLoc.x, nextLoc.y).interact();
+			 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
 		}else{
 		//If you aren't there yet, go somewhere
 		if(!(location.x==destination.x&&location.y==destination.y)){

@@ -6,6 +6,7 @@ import main.Main;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import entities.Group;
 import renderEngine.DisplayManager;
 
 public class Dirt extends Tile{
@@ -37,7 +38,7 @@ public class Dirt extends Tile{
 		id = 1;
 	}
 	@Override
-	public void interact(){
+	public void interact(Group g){
 		hp-=1;
 		if(hp<=0){
 			Main.grid.setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));

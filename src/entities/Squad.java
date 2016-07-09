@@ -43,11 +43,14 @@ public class Squad {
 		int i = 0;
 		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
 		//For each tile type, add the appropriate odds and total them
-		for(Tile currentTile : moves) {
+		
+		for(Tile currentTile : moves) { 
 			if(currentTile == null) {
 				i++;
 				continue;
 				//Adds 10 odds if its a blank tile
+			} else if(currentTile.getId() == -2) {
+				return new Point(currentTile.getX(), currentTile.getY());
 			} else if(currentTile.getId() == 0) {
 				individualOdds[i] += 10;
 			} else if(currentTile.getId() == 1) {

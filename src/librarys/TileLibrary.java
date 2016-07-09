@@ -14,6 +14,9 @@ public class TileLibrary {
 			return new Dirt(x, y, size, Main.grid.getLoc());
 		if(id == 2)
 			return new CursedIdol(x, y, size);
+		if(id == -2)
+			return new Exit(x, y, size);
+		
 		return null;
 	}
 }
