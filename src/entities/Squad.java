@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import grid.Grid;
 import grid.Tile;
+import gui.GuiTexture;
 import main.Main;
 
 public class Squad {
@@ -23,6 +24,14 @@ public class Squad {
 	
 	public ArrayList<Group> getGroups() {
 		return groups;
+	}
+	
+	public ArrayList<GuiTexture> render() {
+		ArrayList<GuiTexture> toBeRendered = new ArrayList<GuiTexture>();
+		for(Group g : groups) {
+			toBeRendered.addAll(g.render());
+		}
+		return toBeRendered;
 	}
 	
 	public Point getNextLoc(Grid currentFloor) {

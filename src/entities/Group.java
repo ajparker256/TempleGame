@@ -28,7 +28,8 @@ public class Group {
 	private boolean busy;
 	private boolean wait;
 	private int squadId;
-
+	private int floor;
+	
 	public boolean getWait() {
 		return wait;
 	}
@@ -45,6 +46,15 @@ public class Group {
 		MAX_SIZE = 4;
 		path = new ArrayList<Point>();
 		squadId = id;
+		floor = Main.grid.getFloor();
+	}
+	
+	public void setFloor(int i) {
+		floor = i;
+	}
+	
+	public int getFloor() {
+		return floor;
 	}
 	
 	public int getMaxSize() {
@@ -227,6 +237,7 @@ public class Group {
 	public ArrayList<GuiTexture> render(){
 		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
 		for(Explorer explorer:group){
+			if(floor == Main.grid.getFloor())
 			toRender.add(explorer.render(location));
 		}
 		return toRender;

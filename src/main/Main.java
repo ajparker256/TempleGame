@@ -206,22 +206,12 @@ public static ArrayList<Squad> squads;
 		dynamicGuis.addAll(grid.render());
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
-		//dynamicGuis.addAll((bob.getWalkingAnimation(loader, 30).getFrame()));
+		
 		squad1.tick((int)milli,grid);
-		//group1.move((int)milli,grid);
-		//group2.move((int)milli, grid);
-	//	group3.move((int)milli, grid);
-		//group4.move((int)milli, grid);
 		
-		
-		dynamicGuis.addAll(group1.render());
-		dynamicGuis.addAll(group2.render());
-		dynamicGuis.addAll(group3.render());
-		dynamicGuis.addAll(group4.render());
-		//guiRenderer.render(arrows.getFrame());
-		
-		//TODO FLAW IN MOVING, SINCE IT IS DONE IN FLOATS, THE LARGER X OF SCREEN MAKES HORIZONTAL MOVEMENT FASTER FOR THE SAME
-		//FLOAT VALUE IN THE EXPLORERS VELOCITY!!!
+		for(Squad squad : squads) {
+			dynamicGuis.addAll(squad.render());
+		}
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
