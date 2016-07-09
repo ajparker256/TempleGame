@@ -54,8 +54,10 @@ public static ArrayList<Grid> grids;
 public static Grid grid;
 public static Shop epicShopofEpicness;
 public static boolean wasJustDown = false;
+public static ArrayList<Squad> squads;
 	public static void main(String[] args) throws FileNotFoundException {
 		grids = new ArrayList<Grid>();
+		squads = new ArrayList<Squad>();
 		money=1327;
 		buttons = new ArrayList<Button>();
 		group = new ArrayList<Explorer>();
@@ -128,7 +130,19 @@ public static boolean wasJustDown = false;
 	squad1List.add(group2);
 	squad1List.add(group3);
 	squad1List.add(group4);
-	 Squad squad1=new Squad(squad1List, 1);
+	Squad squad1=new Squad(squad1List, 1);
+	squads.add(squad1);
+	
+	int x = 0;
+	for(Squad sq : squads) {
+		for(Group gr : sq.getGroups()) {
+			gr.setInitialLocation(new Vector2f(gr.getInitialLocation().x-.1f*x, gr.getInitialLocation().y));
+		}
+		x++;
+	}
+	
+	
+	
 	Tile[][] traps = new Tile[2][4];
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
@@ -198,6 +212,7 @@ public static boolean wasJustDown = false;
 		//group2.move((int)milli, grid);
 	//	group3.move((int)milli, grid);
 		//group4.move((int)milli, grid);
+		
 		
 		dynamicGuis.addAll(group1.render());
 		dynamicGuis.addAll(group2.render());

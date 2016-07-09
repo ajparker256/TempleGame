@@ -51,6 +51,14 @@ public class Group {
 		return MAX_SIZE;
 	}
 	
+	public void setInitialLocation(Vector2f newLoc) {
+		location = newLoc;
+	}
+	
+	public Vector2f getInitialLocation() {
+		return location;
+	}
+	
 	public ArrayList<Explorer> getGroup() {
 		return group;
 	}

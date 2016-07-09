@@ -20,6 +20,11 @@ public class Squad {
 		this.groups=groups;
 		this.squadId = squadId;
 	}
+	
+	public ArrayList<Group> getGroups() {
+		return groups;
+	}
+	
 	public Point getNextLoc(Grid currentFloor) {
 		Point nextLoc= path.get(0);
 		double rand = Math.random();
