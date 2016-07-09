@@ -64,6 +64,14 @@ public class Squad {
 		System.out.println("ERROR CASE IN SQUAD PATH LOGIC!!!");
 		return new Point(nextLoc.x, nextLoc.y+1);
 	}
+	
+	//This is the place where the powers of the groups are gathered
+	public void interaction() {
+		//Total the attack found in the leading group to get group ATK
+		//Get every type of interaction (ie. ladderman, priest, etc.) regardless of position
+		//TODO add more if necessary, this should be the collab zone for info.
+	}
+	
 	public void tick(int milli, Grid grid){
 		boolean go=true;
 		for(Group group:groups){
