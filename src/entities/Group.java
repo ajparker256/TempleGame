@@ -117,6 +117,7 @@ public class Group {
 	}
 	
 	public void move(int milli,Grid grid) {
+		System.out.println(wait);
 		if(!wait){
 		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
