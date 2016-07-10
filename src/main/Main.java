@@ -68,10 +68,11 @@ public static ArrayList<Squad> squads;
 		Random random = new Random();
 		new TextureLibrary(loader);
 		StringLibrary.init(loader);
-		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1);
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 2));
-		grid.setIsOn(true);
+		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 0);
 		grids.add(grid);
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1));
+		grid.setIsOn(true);
+		
 		
 		
 		
@@ -102,25 +103,25 @@ public static ArrayList<Squad> squads;
 	GuiLibrary.init(loader);
 	AnimationLibrary.init(loader);
 	
-	Group group1 = new Group(1);
+	Group group1 = new Group(0);
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
 	
-	Group group2 = new Group(1);
+	Group group2 = new Group(0);
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	
-	Group group3 = new Group(1);
+	Group group3 = new Group(0);
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	
-	Group group4 = new Group(1);
+	Group group4 = new Group(0);
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	group4.add(new Explorer (group4));
@@ -209,7 +210,7 @@ public static ArrayList<Squad> squads;
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		
-		squad1.tick((int)milli,grid);
+		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));
 		
 		for(Squad squad : squads) {
 			dynamicGuis.addAll(squad.render());

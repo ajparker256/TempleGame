@@ -237,7 +237,7 @@ public class Group {
 	public ArrayList<GuiTexture> render(){
 		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
 		for(Explorer explorer:group){
-			if(explorer.floor == Main.grid.getFloor())
+			if(this.floor == Main.grid.getFloor())
 			toRender.add(explorer.render(location));
 		}
 		return toRender;

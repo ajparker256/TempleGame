@@ -110,18 +110,19 @@ public class Squad {
 			path.add(0,tempNextLoc);
 			//}
 			int i=0;
+			//boolean fl = true;
 			for(Group group: groups){
 				i++;
 				if(i<path.size()){
 					group.setNextLoc(path.get(i));
 					group.setWait(false);
 					//This removes the status of occupied from the tail end of the squad
+					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
 					if(i == groups.size() && i+2<path.size()) 
-						//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
-						Main.grid.getTile(path.get(i+2).x, path.get(i+2).y).setOccupied(-1);
-				} else break;
+						Main.grids.get(groups.get(0).getFloor()).getTile(path.get(i+2).x, path.get(i+2).y).setOccupied(-1);
+					} else break;
+				}
 			}
-		}
 		}
 	
 }
