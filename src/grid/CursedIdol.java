@@ -36,7 +36,7 @@ public class CursedIdol extends Tile{
 		if(value%5 == 0)
 			Main.money++;
 		if(value<=0){
-			Main.grid.setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));
+			Main.grids.get(g.getFloor()).setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));
 		}
 		
 	}
