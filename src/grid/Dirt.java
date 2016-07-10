@@ -41,7 +41,7 @@ public class Dirt extends Tile{
 	public void interact(Group g){
 		hp-=1;
 		if(hp<=0){
-			Main.grid.setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));
+			Main.grids.get(g.getFloor()).setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));
 		}
 	}
 	
