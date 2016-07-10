@@ -69,7 +69,7 @@ public static ArrayList<Squad> squads;
 		new TextureLibrary(loader);
 		StringLibrary.init(loader);
 		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 0);
-		grids.add(grid);
+		grids.add(grid);	
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1));
 		grid.setIsOn(true);
 		
@@ -199,19 +199,23 @@ public static ArrayList<Squad> squads;
 			epicShopofEpicness.render(dynamicGuis);
 		}
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
-		for(Grid g: grids) {
-			g.renderFloorSelect();
-		}
+		
 		//enemy update stuff
 		//Renders from TOP TO BOTTOM!
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		//The screen is -1 to 1 for x and 0 to -1 for y in floats
 		dynamicGuis.addAll(grid.render());
+		
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
 		
+		//TODO add for each grid, and inside only do the tihngs that are on the right grid
 		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));
 		
+		
+		for(Grid g: grids) {
+			dynamicGuis.addAll(g.renderFloorSelect());
+		}
 		for(Squad squad : squads) {
 			dynamicGuis.addAll(squad.render());
 		}
@@ -271,7 +275,7 @@ public static ArrayList<Squad> squads;
 				epicShopofEpicness.setOn(false);
 				money -= selectedTrap.getPrice();
 			} else if(selectedTrap.getPrice()>money) {
-				StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f);
+				dynamicGuis.addAll(StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
 			} else if(oldTile.getId() == selectedTrap.getId()) {
 				dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*6), epicShopofEpicness.getSize().x*1.6f));
 			}

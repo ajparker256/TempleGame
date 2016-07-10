@@ -93,7 +93,7 @@ public class Squad {
 		boolean go=true;
 		for(Group group:groups){
 		
-			group.move(milli, grid);
+			group.move(milli, Main.grids.get(group.getFloor()));
 			if(group.isBusy()){
 				go=false;
 				break;
@@ -101,7 +101,7 @@ public class Squad {
 			
 			}
 		if(go){
-			Point tempNextLoc=(getNextLoc(Main.grid));
+			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
 
 			//if(tempNextLoc.equals(path.get(0))){
 				//path.remove(0);

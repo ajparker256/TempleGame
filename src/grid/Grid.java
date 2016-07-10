@@ -72,8 +72,10 @@ public class Grid {
 		grid[0][0]=new Blank(0,0,size,location);
 	}
 	
-	public void renderFloorSelect() {
-		StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+floor*StringLibrary.getSize().x*2-StringLibrary.getWidth(""+floor), 1-StringLibrary.getSize().y), 2000);
+	public ArrayList<GuiTexture> renderFloorSelect() {
+		ArrayList<GuiTexture> iDerped = new ArrayList<GuiTexture>();
+		iDerped.addAll(StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+floor*StringLibrary.getSize().x*2-StringLibrary.getWidth(""+floor), 1-StringLibrary.getSize().y), 2000));
+		return iDerped;
 	}
 	
 	public int getFloor() {
