@@ -129,10 +129,12 @@ public class Squad {
 	public void tick(int milli, Grid grid){
 		boolean go=true;
 		for(Group group:groups){
-			group.move(milli, Main.grids.get(group.getFloor()));
-			if(group.isBusy()){
+			if(group.move(milli, Main.grids.get(group.getFloor()))){
 				go=false;
 				break;
+			}
+			if(group.isBusy()){
+				go=false;
 			}
 			
 			}

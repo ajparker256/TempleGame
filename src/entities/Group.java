@@ -150,12 +150,12 @@ public class Group {
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		if(!(location.x==destination.x&&location.y==destination.y)){
 			moveTo(grid, milli);
-			return true;
+			return false;
 		}
 				
 			busy=false;
 			wait=true;
-		return true;
+		return false;
 		}
 	private void interact(Grid grid){
 		for(Explorer e: group){
@@ -268,9 +268,6 @@ public class Group {
 			
 		}else if(location.y<locationNext.y){
 			direction=1;
-		
-			
-
 		}else if(location.y>locationNext.y){
 			direction=3;
 
