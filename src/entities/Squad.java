@@ -93,6 +93,8 @@ public class Squad {
 				individualOdds[i] += 50;
 			} else if(currentTile.getId() == 2) {
 				individualOdds[i] += 300;
+			} else if(currentTile.getId() == 4) {
+				individualOdds[i] += 600;
 			}
 			individualOdds[i] += treasureFinderOdds[i];
 			total+=individualOdds[i];

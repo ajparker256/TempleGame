@@ -14,6 +14,8 @@ public class TileLibrary {
 			return new Dirt(x, y, size, Main.grid.getLoc());
 		if(id == 2)
 			return new CursedIdol(x, y, size);
+		if(id == 4) 
+			return new TreasureTrap(x, y, size, Main.grids.indexOf(Main.grid));
 		if(id == -2)
 			return new Exit(x, y, size);
 		

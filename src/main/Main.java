@@ -7,6 +7,7 @@ import grid.Dirt;
 import grid.Exit;
 import grid.Grid;
 import grid.Tile;
+import grid.TreasureTrap;
 import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
@@ -153,9 +154,10 @@ public static void main(String[] args) throws FileNotFoundException {
 			//System.out.println(traps[i][j].getLocation());
 		}
 	}
-	traps[1][1] = new Blank(1,1, .03f, new Vector2f(-.87f, -.47f));
-	traps[0][1] = new CursedIdol(0,1, .03f);
-	traps[0][0] = new Exit(0,1, .03f);
+	traps[1][1] = new Blank(-20,-20, .03f, new Vector2f(-.87f, -.47f));
+	traps[0][1] = new CursedIdol(-20,-20, .03f);
+	traps[0][0] = new Exit(-20,-20, .03f);
+	traps[1][3] = new TreasureTrap(-20, -20, .03f, Main.grids.indexOf(Main.grid));
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
 	
@@ -207,7 +209,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		//The screen is -1 to 1 for x and 0 to -1 for y in floats
 		dynamicGuis.addAll(grid.render());
-		
 		
 		guiRenderer.render(guis);
 		guiRenderer.render(test);

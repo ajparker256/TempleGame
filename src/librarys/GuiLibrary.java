@@ -57,6 +57,8 @@ public static int ladderTop;
 
 public static int desertBackdrop;
 
+public static int treasureOpen;
+public static int treasureClosed;
 
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -93,6 +95,9 @@ public static int desertBackdrop;
 
 		GuiLibrary.ladder = loader.loadTexture("ladder");
 		GuiLibrary.ladderTop = loader.loadTexture("ladderTop");
+		
+		GuiLibrary.treasureOpen = loader.loadTexture("treasureOpen");
+		GuiLibrary.treasureClosed = loader.loadTexture("treasureClosed");
 		
 		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 	}
