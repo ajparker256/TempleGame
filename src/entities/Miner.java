@@ -16,6 +16,7 @@ public class Miner extends Explorer{
 		this.idlex=GuiLibrary.minerStanding1;
 		this.animationx=AnimationLibrary.minerX;
 		this.animationy=AnimationLibrary.minerY;
+		this.id = 1;
 	}
 
 }
