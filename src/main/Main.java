@@ -56,7 +56,8 @@ public static Grid grid;
 public static Shop epicShopofEpicness;
 public static boolean wasJustDown = false;
 public static ArrayList<Squad> squads;
-	public static void main(String[] args) throws FileNotFoundException {
+public static GuiTexture background;
+public static void main(String[] args) throws FileNotFoundException {
 		grids = new ArrayList<Grid>();
 		squads = new ArrayList<Squad>();
 		money=1327;
@@ -73,8 +74,8 @@ public static ArrayList<Squad> squads;
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1));
 		grid.setIsOn(true);
 		
-		
-		
+		//TODO figure out why this gave nothing but black screen
+		//background = new GuiTexture(GuiLibrary.desertBackdrop, new Vector2f(-.9f,-1), new Vector2f(1,1));
 		
 		
 		
@@ -193,6 +194,7 @@ public static ArrayList<Squad> squads;
 	}
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
+	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;
 		update(dynamicGuis);
 		if(epicShopofEpicness.isOn()) {
@@ -205,6 +207,7 @@ public static ArrayList<Squad> squads;
 		//RENDERS FROM CENTER OF IMAGE! (90% certain)
 		//The screen is -1 to 1 for x and 0 to -1 for y in floats
 		dynamicGuis.addAll(grid.render());
+		
 		
 		guiRenderer.render(guis);
 		guiRenderer.render(test);
