@@ -16,7 +16,7 @@ public class Group {
 
 	//This is the group of explorers traveling together on a tile
 	private ArrayList<Explorer> group;
-	
+	private ArrayList<Integer> groupIds;
 	//This is the room on a tile for members to exist (generally 2-4 explorers or 1 big thing like a drill)
 	private final int MAX_SIZE;
 	private Point nextLoc;
@@ -39,6 +39,7 @@ public class Group {
 		busy=false;
 		nextLoc=new Point(0,0);
 		nextPos=0;
+		groupIds = new ArrayList<Integer>();
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
 		location.x=location.x-0.1f;
 		velocity=new Vector2f(0.1f,(float)(0.1f*DisplayManager.getAspectratio()));
@@ -75,11 +76,19 @@ public class Group {
 	
 	public void add(Explorer e) {
 		group.add(e);
+		groupIds.add(e.getId());
 	}
 	
-	public Point getNextLoc(Grid currentFloor) {
+	public Point getNextLoc() {
+		return nextLoc;
+	}
+	
+	public ArrayList<Integer> getIds() {
+		return groupIds;
+	}
+	/*public Point getNextLoc(Grid currentFloor) {
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*/);
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*//*);
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
@@ -127,7 +136,7 @@ public class Group {
 		}
 		System.out.println("ERROR CASE IN GROUP PATH LOGIC!!!");
 		return new Point(nextLoc.x, nextLoc.y+1);
-	}
+	}*/
 	
 	public boolean move(int milli,Grid grid) {
 		if(wait){

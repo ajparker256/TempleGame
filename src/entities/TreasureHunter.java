@@ -7,6 +7,8 @@ import librarys.GuiLibrary;
 
 public class TreasureHunter extends Explorer{
 
+	//IMPORTANT!!! SQUADS SHOULD BE LIMITED TO 1 TREASUREHUNTER!!! (ONLY ONE WILL AFFECT PATHFINDING)
+	
 	public TreasureHunter(Group group) {
 		super(group);
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
@@ -16,6 +18,7 @@ public class TreasureHunter extends Explorer{
 		this.idlex=GuiLibrary.explorerStanding1;
 		this.animationx=AnimationLibrary.explorerX;
 		this.animationy=AnimationLibrary.explorerY;
+		this.id = 3;
 	}
 
 }

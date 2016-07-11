@@ -24,11 +24,12 @@ public class Explorer extends Unit{
 	protected int idley;
 	protected int lastDirection;
 	protected int floor;
-	
+	protected int id;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		this.id = -1;
 		this.lastDirection=2;
 		this.group=group;
 		unitSize=new Vector2f(0.045f,(float) (0.045f*DisplayManager.getAspectratio()));
@@ -55,7 +56,9 @@ public class Explorer extends Unit{
 		return true;
 	}
 	
-
+	public int getId() {
+		return id;
+	}
 
 	
 	public GuiTexture render(Vector2f location) {
