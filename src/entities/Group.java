@@ -83,12 +83,15 @@ public class Group {
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
-		path.add(nextLoc);
+		if(nextLoc.x != -1) {
+			path.add(nextLoc);
+		}
 		if(path.size()>1) {
-			Main.grid.getTile(path.get(path.size()-2).x, path.get(path.size()-2).y).setOccupied(squadId);
+			Main.grids.get(this.getFloor()).getTile(path.get(path.size()-2).x, path.get(path.size()-2).y).setOccupied(squadId);
 		}
 		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
 		//For each tile type, add the appropriate odds and total them
+		
 		for(Tile currentTile : moves) {
 			//System.out.println(currentTile+" This is the tile in moves["+i+"]");
 			if(currentTile == null) {

@@ -12,6 +12,7 @@ import main.Main;
 
 public class Squad {
 
+	private int previousFloor;
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
 	private int squadId;
@@ -20,6 +21,7 @@ public class Squad {
 		path.add(new Point(0,0));
 		this.groups=groups;
 		this.squadId = squadId;
+		previousFloor = 0;
 	}
 	
 	public ArrayList<Group> getGroups() {
@@ -118,10 +120,12 @@ public class Squad {
 					group.setWait(false);
 					//This removes the status of occupied from the tail end of the squad
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
+					
 					if(i == groups.size() && i+2<path.size()) 
-						Main.grids.get(groups.get(0).getFloor()).getTile(path.get(i+2).x, path.get(i+2).y).setOccupied(-1);
-					} else break;
+						Main.grids.get(previousFloor).getTile(path.get(i+2).x, path.get(i+2).y).setOccupied(-1);
+				} else break;
 				}
+			previousFloor = groups.get(groups.size()-1).getFloor();
 			}
 		}
 	

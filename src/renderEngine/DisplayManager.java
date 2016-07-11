@@ -13,7 +13,7 @@ import sound.Sound;
 
 //Used to display to window, mostly done by openGL for you
 public class DisplayManager {
-
+//1366, 768 are original Width and Height
 	public static final int WIDTH = 1366;
 	public static final int HEIGHT = 768;
 	private static final int FPSCAP= 120;
