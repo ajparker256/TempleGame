@@ -93,11 +93,11 @@ public static int treasureClosed;
 		GuiLibrary.idol1 = loader.loadTexture("Idol");
 		GuiLibrary.idolOnBlank = loader.loadTexture("/Tiles/IdolOnBlank");
 
-		GuiLibrary.ladder = loader.loadTexture("ladder");
-		GuiLibrary.ladderTop = loader.loadTexture("ladderTop");
+		GuiLibrary.ladder = loader.loadTexture("/Tiles/ladder");
+		GuiLibrary.ladderTop = loader.loadTexture("/Tiles/ladderTop");
 		
-		GuiLibrary.treasureOpen = loader.loadTexture("treasureOpen");
-		GuiLibrary.treasureClosed = loader.loadTexture("treasureClosed");
+		GuiLibrary.treasureOpen = loader.loadTexture("/Tiles/treasureOpen");
+		GuiLibrary.treasureClosed = loader.loadTexture("/Tiles/treasureClosed");
 		
 		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 	}
