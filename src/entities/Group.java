@@ -129,100 +129,83 @@ public class Group {
 		return new Point(nextLoc.x, nextLoc.y+1);
 	}
 	
-	public void move(int milli,Grid grid) {
-		System.out.println(wait);
-		if(!wait){
+	public boolean move(int milli,Grid grid) {
+		if(wait){
+			return false;
+		}
 		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
-		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
-		Vector2f tempVelocity= new Vector2f();
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
-			for(Explorer e: group){
-				busy=true;
-				e.interact(direction);
-			}
-			 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
-		}else{
-		//If you aren't there yet, go somewhere
+			interact(grid);
+			return true;
+		}
+		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		if(!(location.x==destination.x&&location.y==destination.y)){
-			//If the destination is to the right, go right
-			if(location.x<destination.x){
-				direction=2;
-				busy=true;
-				tempVelocity.x = velocity.x;
-				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
-				//If you would overshoot, don't
-				if(location.x>destination.x){
-					location.x=destination.x;
-					direction=12;
-				}
-			//If the destination is to the left, go left
-			}else if(location.x>destination.x){
-				direction=4;
-				busy=true;
-				tempVelocity = new Vector2f(velocity.x*-1, 0);
-				setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
-				if(location.x<destination.x){
-					location.x=destination.x;
-					direction=14;
-					
-				}
-			//If the destination is above you, go up
-			}else if(location.y<destination.y){
-				direction=1;
-				busy=true;
-				tempVelocity.y = velocity.y;
-				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
-				if(location.y>destination.y){
-					location.y=destination.y;
-					direction=11;
-				}
+			moveTo(grid, milli);
+			return true;
+		}
 				
-			//If the destination is below you, go down
-			}else if(location.y>destination.y){
-				direction=3;
-				busy=true;
-				tempVelocity.y = -1*velocity.y;
-				setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
-				if(location.y<destination.y){
-					location.y=destination.y;
-					direction=13;
-					
-				}
-			}
-			
-		}else {
 			busy=false;
 			wait=true;
-			Point nextLocTemp=getNextLoc(Main.grid);
-			Vector2f locationNext=grid.getTile(nextLocTemp.x, nextLocTemp.y).getLocation();
-			if(location.x<locationNext.x){
+		return true;
+		}
+	private void interact(Grid grid){
+		for(Explorer e: group){
+			busy=true;
+			e.interact(direction);
+		}
+		 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
+	}
+	private void moveTo(Grid grid, int milli){
+		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
+		Vector2f tempVelocity= new Vector2f();
+		if(location.x<destination.x){
 			direction=2;
-			
-		}else if(location.x>locationNext.x){
-			direction=4;
-
-			
-		}else if(location.y<locationNext.y){
-			direction=1;
-		
-			
-
-		}else if(location.y>locationNext.y){
-			direction=3;
-
-		}
-			for(Explorer e: group){
-				e.rotate(direction);
+			busy=true;
+			tempVelocity.x = velocity.x;
+			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
+			//If you would overshoot, don't
+			if(location.x>destination.x){
+				location.x=destination.x;
+				direction=12;
 			}
-			//grid.getTile(nextLoc.x, nextLoc.y).setOccupied(false);
-			nextLoc=nextLocTemp;
+		//If the destination is to the left, go left
+		}else if(location.x>destination.x){
+			direction=4;
+			busy=true;
+			tempVelocity = new Vector2f(velocity.x*-1, 0);
+			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
+			if(location.x<destination.x){
+				location.x=destination.x;
+				direction=14;
+				
+			}
+		//If the destination is above you, go up
+		}else if(location.y<destination.y){
+			direction=1;
+			busy=true;
+			tempVelocity.y = velocity.y;
+			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
+			if(location.y>destination.y){
+				location.y=destination.y;
+				direction=11;
+			}
+			
+		//If the destination is below you, go down
+		}else if(location.y>destination.y){
+			direction=3;
+			busy=true;
+			tempVelocity.y = -1*velocity.y;
+			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
+			if(location.y<destination.y){
+				location.y=destination.y;
+				direction=13;
+			}
 		}
+	}
+
 		
-		}
-		}
 		
 		
-		}
 			
 		
 		
