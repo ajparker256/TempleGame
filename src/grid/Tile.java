@@ -32,6 +32,17 @@ public class Tile {
 	protected boolean canInteract;
 	protected int id;
 	protected int occupied;
+	protected int floor;
+	
+	public Tile(float size, Vector2f location) {
+		this.canInteract = false;
+		this.location = location;
+		this.size = size;
+		name = "Default_Name";
+		price = -1;
+		id = -1;
+		occupied = -1;
+	}
 	
 	//creates a tile in location loc, give location in column then row
 	public Tile(int x, int y, float size, Vector2f location){
@@ -46,6 +57,10 @@ public class Tile {
 		price = -1;
 		id = -1;
 		occupied = -1;
+	}
+	
+	public void getIncome() {
+		//STUB
 	}
 	
 	public int getId() {

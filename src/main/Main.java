@@ -12,6 +12,7 @@ import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
+import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +59,12 @@ public static Shop epicShopofEpicness;
 public static boolean wasJustDown = false;
 public static ArrayList<Squad> squads;
 public static GuiTexture background;
+public static int round;
 public static void main(String[] args) throws FileNotFoundException {
 		grids = new ArrayList<Grid>();
 		squads = new ArrayList<Squad>();
 		money=1327;
+		round = 0;
 		buttons = new ArrayList<Button>();
 		group = new ArrayList<Explorer>();
 		Camera camera = new Camera();
@@ -157,7 +160,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	traps[1][1] = new Blank(-20,-20, .03f, new Vector2f(-.87f, -.47f));
 	traps[0][1] = new CursedIdol(-20,-20, .03f);
 	traps[0][0] = new Exit(-20,-20, .03f);
-	traps[1][3] = new TreasureTrap(-20, -20, .03f, Main.grids.indexOf(Main.grid));
+	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
 	
@@ -189,7 +192,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"));
 	Animation arrow = new Animation(arrows, quickLoc, new Vector2f(.2f,.2f));*/
 	
-
+	double timeInRound = 0;
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
 		dynamicGuis.add(test.get(i));
@@ -198,6 +201,19 @@ public static void main(String[] args) throws FileNotFoundException {
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;
+		timeInRound += milli;
+		
+		//10s per round atm
+		if(timeInRound/1000 > 10) {
+			round++;
+			for(Grid g : grids) {
+				for(Point p : g.getTreasureLocs()) {
+					g.getTile(p.x, p.y).getIncome();
+				}
+			}
+			//Recall units or push them all out then stall somehow
+			timeInRound = 0;
+		}
 		update(dynamicGuis);
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
