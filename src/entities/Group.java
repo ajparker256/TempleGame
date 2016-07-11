@@ -213,14 +213,6 @@ public class Group {
 	}
 
 		
-		
-		
-			
-		
-		
-	
-		
-	
 
 	private void setLoc(Vector2f location) {
 		this.location=location;
