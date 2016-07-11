@@ -4,6 +4,7 @@ import gui.GuiTexture;
 import librarys.StringLibrary;
 import main.Main;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
@@ -17,6 +18,10 @@ import renderEngine.DisplayManager;
 //of space. It allows for the organization of turrets and enemy locations for range.
 
 public class Grid {
+	
+	private ArrayList<Point> treasureLocs;
+	
+	private ArrayList<Point> trapLocs;
 	
 	private boolean isOn;
 	
@@ -44,6 +49,11 @@ public class Grid {
 	
 	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
 	public Grid(Vector2f location, float size, int rows, int floor) {
+		
+		treasureLocs = new ArrayList<Point>();
+		
+		trapLocs = new ArrayList<Point>();
+		
 		this.location = location;
 		
 		isOn = false;
@@ -76,6 +86,14 @@ public class Grid {
 		ArrayList<GuiTexture> iDerped = new ArrayList<GuiTexture>();
 		iDerped.addAll(StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+floor*StringLibrary.getSize().x*2-StringLibrary.getWidth(""+floor), 1-StringLibrary.getSize().y), 2000));
 		return iDerped;
+	}
+	
+	public ArrayList<Point> getTreasureLocs() {
+		return treasureLocs;
+	}
+	
+	public ArrayList<Point> getTrapLocs() {
+		return trapLocs;
 	}
 	
 	public int getFloor() {
