@@ -55,6 +55,8 @@ public static int idolOnBlank;
 public static int ladder;
 public static int ladderTop;
 
+public static int desertBackdrop;
+
 
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -91,6 +93,8 @@ public static int ladderTop;
 
 		GuiLibrary.ladder = loader.loadTexture("ladder");
 		GuiLibrary.ladderTop = loader.loadTexture("ladderTop");
+		
+		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 	}
 	
 
