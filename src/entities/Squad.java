@@ -130,6 +130,9 @@ public class Squad {
 		boolean go=true;
 		for(Group group:groups){
 			if(group.move(milli, Main.grids.get(group.getFloor()))){
+				for(Group group2: groups){
+					group2.setIdle();
+				}
 				go=false;
 				break;
 			}

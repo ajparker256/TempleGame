@@ -378,10 +378,13 @@ public class Explorer extends Unit{
 		lastDirection=direction;
 		
 	}
-	protected void interact(int direction) {
+	protected void interact() {
+setIdle();
+
 		
+	}
 
-
+	public void setIdle() {
 		switch(group.getDirection()){
 		case 11:super.idle=new GuiTexture(idley,location,unitSize);
 		super.animation=new Animation(animationy,location,unitSize);

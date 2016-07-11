@@ -160,7 +160,7 @@ public class Group {
 	private void interact(Grid grid){
 		for(Explorer e: group){
 			busy=true;
-			e.interact(direction);
+			e.interact();
 		}
 		 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
 	}
@@ -276,6 +276,11 @@ public class Group {
 				e.rotate(direction);
 			}
 			this.nextLoc=point;
+	}
+	public void setIdle(){
+		for(Explorer explorer: group){
+			explorer.setIdle();
+		}
 	}
 
 
