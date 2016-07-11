@@ -21,5 +21,6 @@ public class Exit extends Tile{
 	
 	public void interact(Group g) {
 		g.setFloor(g.getFloor()+1);
+		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size));
 	}
 }

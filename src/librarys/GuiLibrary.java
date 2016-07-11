@@ -53,6 +53,7 @@ public static int idol1;
 public static int idolOnBlank;
 
 public static int ladder;
+public static int ladderTop;
 
 
 	public static void init(Loader loader) {
@@ -89,6 +90,7 @@ public static int ladder;
 		GuiLibrary.idolOnBlank = loader.loadTexture("/Tiles/IdolOnBlank");
 
 		GuiLibrary.ladder = loader.loadTexture("ladder");
+		GuiLibrary.ladderTop = loader.loadTexture("ladderTop");
 	}
 	
 
