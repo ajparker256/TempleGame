@@ -18,13 +18,13 @@ public class Shop {
 	private Vector2f locationOfTrapPlacement;
 	
 	//This is the bottom left corner of the shop
-	private Vector2f location;
+	protected Vector2f location;
 	
 	//This is the size of the shop from top left corner to bottom right
-	private Vector2f size;
+	protected Vector2f size;
 	
 	//Tile array containing the available traps for sale
-	private Tile[][] traps;
+	protected Tile[][] traps;
 	
 	private GuiTexture downArrow;
 	
@@ -35,7 +35,7 @@ public class Shop {
 	private Button upArrowHitbox;
 	
 	//0 = Row start, 1 = Row end, 2 = Col start 3 = Col end. This is the range shown on screen at any time. Subject to scrolling
-	private int[] visibilityRange;
+	protected int[] visibilityRange;
 	
 	//Checks if the shop has been clicked at all
 	private Button shopHitbox;
@@ -43,7 +43,7 @@ public class Shop {
 	private GuiTexture[][] frames;
 	
 	//This determines if the shop is in use or not
-	private boolean isOn;
+	protected boolean isOn;
 	
 	private Button exitShop;
 	
