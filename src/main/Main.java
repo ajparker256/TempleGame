@@ -197,7 +197,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"));
 	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"));
 	Animation arrow = new Animation(arrows, quickLoc, new Vector2f(.2f,.2f));*/
-	
+	projectiles.add(new Projectile(3, 1, 9, 1));
+	projectiles.add(new Projectile(3, 1, 8, 1));
 	double timeInRound = 0;
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
@@ -237,7 +238,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		
 		//TODO add for each grid, and inside only do the tihngs that are on the right grid
 		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));
-		
+	
 		
 		for(Grid g: grids) {
 			dynamicGuis.addAll(g.renderFloorSelect());
@@ -245,9 +246,15 @@ public static void main(String[] args) throws FileNotFoundException {
 		for(Squad squad : squads) {
 			dynamicGuis.addAll(squad.render());
 		}
-		for(Projectile projectile: projectiles){
+		for(int i=0;i<projectiles.size();i++){
+			Projectile projectile=projectiles.get(i);
+			projectile.tick(milli);
 			dynamicGuis.add(projectile.render());
+			if(projectile.isKill()){
+				projectiles.remove(projectile);
+			}
 		}
+		
 		//dynamicGuis.add(testFlame.render());
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
