@@ -39,6 +39,7 @@ import entities.Camera;
 import entities.Explorer;
 import entities.Group;
 import entities.Miner;
+import entities.Projectile;
 import entities.Squad;
 import entities.Unit;
 import renderEngine.DisplayManager;
@@ -60,6 +61,7 @@ public static boolean wasJustDown = false;
 public static ArrayList<Squad> squads;
 public static GuiTexture background;
 public static int round;
+public static ArrayList<Projectile> projectiles;
 public static void main(String[] args) throws FileNotFoundException {
 		grids = new ArrayList<Grid>();
 		squads = new ArrayList<Squad>();
@@ -93,6 +95,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
+	projectiles= new ArrayList<Projectile>();
 	
 	
 	
@@ -241,7 +244,9 @@ public static void main(String[] args) throws FileNotFoundException {
 		for(Squad squad : squads) {
 			dynamicGuis.addAll(squad.render());
 		}
-		
+		for(Projectile projectile: projectiles){
+			dynamicGuis.add(projectile.render());
+		}
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		guiRenderer.render(dynamicGuis);
