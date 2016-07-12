@@ -25,6 +25,7 @@ public class Explorer extends Unit{
 	protected int lastDirection;
 	protected int floor;
 	protected int id;
+	protected int damage;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
@@ -43,6 +44,7 @@ public class Explorer extends Unit{
 		this.animationx=AnimationLibrary.explorerX;
 		this.animationy=AnimationLibrary.explorerY;
 		floor = Main.grids.get(0).getFloor();
+		damage = 1;
 		
 	}
 	
@@ -58,6 +60,14 @@ public class Explorer extends Unit{
 	
 	public int getId() {
 		return id;
+	}
+	
+	public int getDamage() {
+		return damage;
+	}
+	
+	public void setDamage(int d) {
+		damage = d;
 	}
 
 	

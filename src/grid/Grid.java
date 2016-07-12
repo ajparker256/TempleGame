@@ -79,6 +79,16 @@ public class Grid {
 				grid[k][i]=new Dirt(k,i,size,location);
 			}
 		}
+		for(int i = 0; i<10+floor*5; i++) {
+			int randX = (int)(Math.random() * grid[0].length);
+			int randY = (int)(Math.random() * grid.length);
+			if(floor<7)
+				grid[randY][randX].upgrade(floor+1);
+			else
+				grid[randY][randX].upgrade(7);
+			
+		
+		}
 		//grid[0][0]=new Blank(0,0,size,location);
 	}
 	

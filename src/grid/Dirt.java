@@ -1,22 +1,23 @@
 package grid;
 
 import gui.GuiTexture;
+import librarys.GuiLibrary;
 import librarys.TextureLibrary;
 import main.Main;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import entities.Explorer;
 import entities.Group;
 import renderEngine.DisplayManager;
 
 public class Dirt extends Tile{
 	
-	private int hp;
-	
+	protected int hp;
+	protected int level;
 	
 	public Dirt(int x, int y, float size) {
 		super(x, y, size, Main.grid.getLoc());
-		System.out.println(size);
 		super.passable=false;
 		super.canInteract=true;
 		this.hp=100;
@@ -39,9 +40,41 @@ public class Dirt extends Tile{
 	}
 	@Override
 	public void interact(Group g){
-		hp-=1;
+		int bonusDamage = 0;
+		for(Explorer e : g.getGroup()) {
+			if(e.getId() == 2) {
+				bonusDamage += 5*e.getDamage();
+			} else {
+				bonusDamage += e.getDamage();
+			}
+		}
+		hp-=(bonusDamage);
 		if(hp<=0){
 			Main.grids.get(g.getFloor()).setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));
+		}
+	}
+	
+	public void upgrade(int newLevel) {
+		level = newLevel;
+		if(level == 0)
+			guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		else if(level == 1)
+			guiTexture = new GuiTexture(GuiLibrary.rock1, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		else if(level == 2)
+			guiTexture = new GuiTexture(GuiLibrary.rock2, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		else if(level == 3)
+			guiTexture = new GuiTexture(GuiLibrary.rock3, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		else if(level == 4)
+			guiTexture = new GuiTexture(GuiLibrary.rock4, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		else if(level == 5)
+			guiTexture = new GuiTexture(GuiLibrary.rock5, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		else if(level == 6)
+			guiTexture = new GuiTexture(GuiLibrary.rock6, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		else if(level == 7)
+			guiTexture = new GuiTexture(GuiLibrary.rock7, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
+		hp = 1000*level;
+		if(hp == 0) {
+			hp += 100;
 		}
 	}
 	

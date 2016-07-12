@@ -60,6 +60,14 @@ public static int desertBackdrop;
 public static int treasureOpen;
 public static int treasureClosed;
 
+public static int rock1;
+public static int rock2;
+public static int rock3;
+public static int rock4;
+public static int rock5;
+public static int rock6;
+public static int rock7;
+
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
@@ -98,8 +106,19 @@ public static int treasureClosed;
 		
 		GuiLibrary.treasureOpen = loader.loadTexture("/Tiles/treasureOpen");
 		GuiLibrary.treasureClosed = loader.loadTexture("/Tiles/treasureClosed");
+	
+		GuiLibrary.rock1 = loader.loadTexture("/Tiles/Dirt3");
+		GuiLibrary.rock2 = loader.loadTexture("/Tiles/Dirt4");
+		GuiLibrary.rock3 = loader.loadTexture("/Tiles/Dirt5");
+		GuiLibrary.rock4 = loader.loadTexture("/Tiles/Dirt6");
+		GuiLibrary.rock5 = loader.loadTexture("/Tiles/Dirt7");
+		GuiLibrary.rock6 = loader.loadTexture("/Tiles/Dirt8");
+		GuiLibrary.rock7 = loader.loadTexture("/Tiles/Dirt9");
 		
-		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
+		
+		
+//		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
+	
 	}
 	
 

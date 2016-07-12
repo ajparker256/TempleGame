@@ -59,6 +59,10 @@ public class Tile {
 		occupied = -1;
 	}
 	
+	public void upgrade(int i) {
+		//STUB
+	}
+	
 	public void getIncome() {
 		//STUB
 	}
