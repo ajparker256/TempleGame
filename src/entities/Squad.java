@@ -11,7 +11,7 @@ import gui.GuiTexture;
 import main.Main;
 
 public class Squad {
-
+	private Point backpedalTile;
 	private int previousFloor;
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
@@ -22,6 +22,7 @@ public class Squad {
 		this.groups=groups;
 		this.squadId = squadId;
 		previousFloor = 0;
+		backpedalTile=new Point();
 	}
 	
 	public ArrayList<Group> getGroups() {
@@ -145,13 +146,15 @@ public class Squad {
 			}
 		if(go){
 			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
-
-			//if(tempNextLoc.equals(path.get(0))){
-				//path.remove(0);
-				//path.remove(0);
-			//}else{
 			path.add(0,tempNextLoc);
-			//}
+			if(path.size()>2)
+if(path.get(2).equals(tempNextLoc)){
+	if(backpedalTile!=tempNextLoc){
+	backpedalTile=tempNextLoc;
+	path.remove(0);
+	path.remove(0);
+	}
+}
 			int i=0;
 			//boolean fl = true;
 			for(Group group: groups){
