@@ -37,6 +37,7 @@ import buttons.Button;
 import buttons.Shop;
 import entities.Camera;
 import entities.Explorer;
+import entities.Flame;
 import entities.Group;
 import entities.Miner;
 import entities.Projectile;
@@ -168,7 +169,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
-	
+	//Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()));
 	//This is the string tester
 	List<GuiTexture> test;
 	//Aspect Ratio should be 1 to 2
@@ -247,6 +248,8 @@ public static void main(String[] args) throws FileNotFoundException {
 		for(Projectile projectile: projectiles){
 			dynamicGuis.add(projectile.render());
 		}
+		//dynamicGuis.add(testFlame.render());
+		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		guiRenderer.render(dynamicGuis);

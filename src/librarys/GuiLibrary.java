@@ -68,6 +68,10 @@ public static int rock5;
 public static int rock6;
 public static int rock7;
 
+public static int flame1;
+public static int flame2;
+public static int flame3;
+
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
@@ -114,6 +118,11 @@ public static int rock7;
 		GuiLibrary.rock5 = loader.loadTexture("tiles/Dirt7");
 		GuiLibrary.rock6 = loader.loadTexture("tiles/Dirt8");
 		GuiLibrary.rock7 = loader.loadTexture("tiles/Dirt9");
+		
+		GuiLibrary.flame1 = loader.loadTexture("Flames/Fire1");
+		GuiLibrary.flame2 = loader.loadTexture("Flames/Fire2");
+		GuiLibrary.flame3 = loader.loadTexture("Flames/Fire3");
+				
 		
 		
 		

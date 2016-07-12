@@ -148,13 +148,13 @@ public class Squad {
 			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
 			path.add(0,tempNextLoc);
 			if(path.size()>2)
-if(path.get(2).equals(tempNextLoc)){
-	if(backpedalTile!=tempNextLoc){
-	backpedalTile=tempNextLoc;
-	path.remove(0);
-	path.remove(0);
-	}
-}
+				if(path.get(2).equals(tempNextLoc)){
+					if(backpedalTile!=tempNextLoc){
+						backpedalTile=tempNextLoc;
+						path.remove(0);
+						path.remove(0);
+					}
+				}
 			int i=0;
 			//boolean fl = true;
 			for(Group group: groups){

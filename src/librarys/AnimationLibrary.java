@@ -12,6 +12,7 @@ public class AnimationLibrary {
 	public static ArrayList<Integer> explorerY;
 	public static ArrayList<Integer> minerY;
 	public static ArrayList<Integer> minerX;
+	public static ArrayList<Integer> flame;
 	public static void init(Loader loader){
 		explorerY=new ArrayList<Integer>();
 		explorerY.add(GuiLibrary.explorerStanding);
@@ -33,7 +34,10 @@ public class AnimationLibrary {
 		minerX.add(GuiLibrary.minerWalkingL1);
 		minerX.add(GuiLibrary.minerStanding1);
 		minerX.add(GuiLibrary.minerWalkingR1);
-
+		flame = new ArrayList<Integer>();
+		flame.add(GuiLibrary.flame1);
+		flame.add(GuiLibrary.flame2);
+		flame.add(GuiLibrary.flame3);
 	}
 
 
