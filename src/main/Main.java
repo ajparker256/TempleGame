@@ -73,6 +73,8 @@ public static void main(String[] args) throws FileNotFoundException {
 		Random random = new Random();
 		new TextureLibrary(loader);
 		StringLibrary.init(loader);
+		GuiLibrary.init(loader);
+		
 		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 0);
 		grids.add(grid);	
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1));
@@ -105,7 +107,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	Sound.loopSound(SoundLibrary.music);
 	
 	//Initializes Explorer frames for later
-	GuiLibrary.init(loader);
+	
 	AnimationLibrary.init(loader);
 	
 	Group group1 = new Group(0);

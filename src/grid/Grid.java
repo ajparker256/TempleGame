@@ -77,6 +77,7 @@ public class Grid {
 		for(int i=0;i<rows;i++){
 			for(int k=0;k<rows;k++){
 				grid[k][i]=new Dirt(k,i,size,location);
+				grid[k][i].upgrade(0);
 			}
 		}
 		for(int i = 0; i<10+floor*5; i++) {

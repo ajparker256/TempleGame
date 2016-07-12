@@ -104,16 +104,16 @@ public static int rock7;
 		GuiLibrary.ladder = loader.loadTexture("/Tiles/ladder");
 		GuiLibrary.ladderTop = loader.loadTexture("/Tiles/ladderTop");
 		
-		GuiLibrary.treasureOpen = loader.loadTexture("/Tiles/treasureOpen");
+		GuiLibrary.treasureOpen = loader.loadTexture("tiles/treasureOpen");
 		GuiLibrary.treasureClosed = loader.loadTexture("/Tiles/treasureClosed");
 	
-		GuiLibrary.rock1 = loader.loadTexture("/Tiles/Dirt3");
-		GuiLibrary.rock2 = loader.loadTexture("/Tiles/Dirt4");
-		GuiLibrary.rock3 = loader.loadTexture("/Tiles/Dirt5");
-		GuiLibrary.rock4 = loader.loadTexture("/Tiles/Dirt6");
-		GuiLibrary.rock5 = loader.loadTexture("/Tiles/Dirt7");
-		GuiLibrary.rock6 = loader.loadTexture("/Tiles/Dirt8");
-		GuiLibrary.rock7 = loader.loadTexture("/Tiles/Dirt9");
+		GuiLibrary.rock1 = loader.loadTexture("tiles/Dirt3");
+		GuiLibrary.rock2 = loader.loadTexture("tiles/Dirt4");
+		GuiLibrary.rock3 = loader.loadTexture("tiles/Dirt5");
+		GuiLibrary.rock4 = loader.loadTexture("tiles/Dirt6");
+		GuiLibrary.rock5 = loader.loadTexture("tiles/Dirt7");
+		GuiLibrary.rock6 = loader.loadTexture("tiles/Dirt8");
+		GuiLibrary.rock7 = loader.loadTexture("tiles/Dirt9");
 		
 		
 		
