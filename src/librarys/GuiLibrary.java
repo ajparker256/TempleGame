@@ -71,6 +71,7 @@ public static int rock7;
 public static int flame1;
 public static int flame2;
 public static int flame3;
+public static int flame4;
 
 	public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -122,6 +123,7 @@ public static int flame3;
 		GuiLibrary.flame1 = loader.loadTexture("Flames/Fire1");
 		GuiLibrary.flame2 = loader.loadTexture("Flames/Fire2");
 		GuiLibrary.flame3 = loader.loadTexture("Flames/Fire3");
+		GuiLibrary.flame4 = loader.loadTexture("Flames/Fire4");
 				
 		
 		

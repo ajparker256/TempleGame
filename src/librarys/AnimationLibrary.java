@@ -38,6 +38,7 @@ public class AnimationLibrary {
 		flame.add(GuiLibrary.flame1);
 		flame.add(GuiLibrary.flame2);
 		flame.add(GuiLibrary.flame3);
+		flame.add(GuiLibrary.flame4);
 	}
 
 
