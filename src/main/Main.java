@@ -81,6 +81,12 @@ public static void main(String[] args) throws FileNotFoundException {
 		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 0);
 		grids.add(grid);	
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 2));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 3));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 4));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 5));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 6));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 7));
 		grid.setIsOn(true);
 		
 		//TODO figure out why this gave nothing but black screen
@@ -169,7 +175,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
 	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
-	//Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()));
+	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()));
 	//This is the string tester
 	List<GuiTexture> test;
 	//Aspect Ratio should be 1 to 2
@@ -255,7 +261,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			}
 		}
 		
-		//dynamicGuis.add(testFlame.render());
+		dynamicGuis.add(testFlame.render());
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
