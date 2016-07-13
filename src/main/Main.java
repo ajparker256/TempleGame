@@ -203,8 +203,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"));
 	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"));
 	Animation arrow = new Animation(arrows, quickLoc, new Vector2f(.2f,.2f));*/
-	projectiles.add(new Projectile(3, 1, 9, 1));
-	projectiles.add(new Projectile(3, 1, 8, 1));
+	projectiles.add(new Projectile(3, 1, 9, 0));
+	projectiles.add(new Projectile(3, 1, 8, 0));
 	double timeInRound = 0;
 	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
 	for(int i = 0; i<test.size(); i++) {
@@ -255,10 +255,11 @@ public static void main(String[] args) throws FileNotFoundException {
 		for(int i=0;i<projectiles.size();i++){
 			Projectile projectile=projectiles.get(i);
 			projectile.tick(milli);
-			dynamicGuis.add(projectile.render());
-			if(projectile.isKill()){
+			if(projectile.isKill())
 				projectiles.remove(projectile);
-			}
+			if(projectile.canRender())
+				dynamicGuis.add(projectile.render());
+			
 		}
 		
 		dynamicGuis.add(testFlame.render());

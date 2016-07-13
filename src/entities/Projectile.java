@@ -22,6 +22,7 @@ public class Projectile {
 	private Vector2f size;
 	private Vector2f velocity;
 	private boolean kill;
+	private GuiTexture image;
 
 	public Projectile(int direction, int x, int y, int floor) {
 		kill=false;
@@ -33,9 +34,15 @@ public class Projectile {
 		this.location=new Vector2f(Main.grid.getTile(x,y).getLocation());
 		this.size=new Vector2f(0.1f,0.1f);
 		this.velocity=new Vector2f(0.5f,0.5f);
+		this.image = new GuiTexture(texture, location, size);
 	}
+	
+	public boolean canRender() {
+		return Main.grid.getFloor() == floor;
+	}
+	
 	public GuiTexture render(){
-		return new GuiTexture(texture,location,size);
+			return image;
 	}
 	public boolean tick(long milli){
 	if(kill){
@@ -104,6 +111,7 @@ public class Projectile {
 	}
 	private void setLoc(Vector2f location) {
 		this.location=location;
+		this.image.setPosition(location);
 	}
 	public int getFloor(){
 		return this.floor;
