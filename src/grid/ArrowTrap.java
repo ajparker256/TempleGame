@@ -22,6 +22,7 @@ public class ArrowTrap extends Tile{
 	protected boolean isFiring;
 	private long cooldown;
 	private long maxCd;
+	private int range;
 	
 	public ArrowTrap(int x, int y, float size,int direction) {
 		super(x, y, size, Main.grid.getLoc());
@@ -35,16 +36,54 @@ public class ArrowTrap extends Tile{
 		this.name = "Arrow Trap";
 		this.maxCd=1000;
 		id = 5;
+		range = 5;
 		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		firing.setDelay(25);
 		setTriggers();
 	}
 	@Override
-	public void whenTriggered(){
+	public void whenTriggered(Point p){
 		if(cooldown<=0){
-		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
-		System.out.println("shooting");
-		cooldown=maxCd;
+			boolean fire = false;
+			//Up
+			if(direction == 1) {
+				fire = true;
+				for(int i = y+1; i<p.y; i++) {
+					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
+						fire = false;
+						break;
+					}
+				}
+			} else if(direction == 2) {
+				fire = true;
+				for(int i = x+1; i<p.x; i++) {
+					if(Main.grids.get(floor).getTile(i, y).getId() != 0) {
+						fire = false;
+						break;
+					}
+				}
+			} else if(direction == 3) {
+				fire = true;
+				for(int i = y-1; i>p.y; i--) {
+					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
+						fire = false;
+						break;
+					}
+				}
+			} else if(direction == 4) {
+				fire = true;
+				for(int i = x-1; i>p.y; i--) {
+					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
+						fire = false;
+						break;
+					}
+				}
+			} 
+			if(fire) {
+				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
+				System.out.println("shooting");
+				cooldown=maxCd; 
+			}
 		}
 	}
 	

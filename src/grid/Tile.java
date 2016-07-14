@@ -160,11 +160,11 @@ public class Tile {
 	}
 	public void trigger(int x, int y){
 		for(Point point:trapRefs){
-			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered();
+			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered(point);
 		}
 	}
 
-	protected void whenTriggered() {
+	protected void whenTriggered(Point p) {
 
 	}
 	public void addTrapRef(Point point){
