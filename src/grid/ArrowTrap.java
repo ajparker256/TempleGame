@@ -37,14 +37,12 @@ public class ArrowTrap extends Tile{
 	}
 	@Override
 	public void whenTriggered(){
+		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
 		System.out.println("adsasdasd");
-		isFiring = false;
-		
 	}
 	
 	public void trigger(){
-		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
-		isFiring = true;
+	
 	}
 	
 	@Override
@@ -65,7 +63,7 @@ public class ArrowTrap extends Tile{
 		int i=1;
 		switch(direction){
 		case 1:while(y+i<=9){
-			Main.grids.get(floor).getTile(x, y+1).addTrapRef(new Point(this.x,this.y));
+			Main.grids.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;

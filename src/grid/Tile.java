@@ -152,6 +152,7 @@ public class Tile {
 	}
 	public void trigger(int x, int y){
 		for(Point point:trapRefs){
+			System.out.println("sdsfsd");
 			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered();
 		}
 	}
@@ -160,6 +161,7 @@ public class Tile {
 
 	}
 	public void addTrapRef(Point point){
+		System.out.println(this.x+" "+this.y);
 		trapRefs.add(point);
 	}
 
