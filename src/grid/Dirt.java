@@ -55,7 +55,6 @@ public class Dirt extends Tile{
 	
 	public void upgrade(int newLevel) {
 		level = newLevel;
-		//System.out.println(position);
 		if(level == 0)
 			guiTexture=new GuiTexture(GuiLibrary.dirt0,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio())));	
 		else if(level == 1)

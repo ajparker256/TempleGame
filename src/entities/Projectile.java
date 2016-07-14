@@ -49,7 +49,6 @@ public class Projectile {
 	}
 		move(milli);
 		if(location.equals(Main.grid.getTile(x, y).getLocation())){
-			System.out.println(location);
 			switch(direction){
 			case 1:
 				this.y=y+1;

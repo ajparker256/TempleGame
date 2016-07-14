@@ -191,7 +191,6 @@ public class Shop {
 	public int getShopItem(float mouseX, float mouseY) {
 		int x = (Mouse.getX()-(int)((location.x+1f)*DisplayManager.WIDTH/2))/(int)(size.x*2/(visibilityRange[3]-visibilityRange[2])*DisplayManager.WIDTH/2);
 		int y = (Mouse.getY()-(int)((location.y+1f)*DisplayManager.HEIGHT/2))/(int)(size.y/(visibilityRange[1]-visibilityRange[0])*DisplayManager.HEIGHT/2);
-		System.out.println(x+" "+y);
 		return traps[x+visibilityRange[0]][y+visibilityRange[2]].getId();
 		/*
 		//Goes through the buttons in the shop until it finds where it is clicked, then returns the item.
