@@ -1,5 +1,8 @@
 package grid;
 
+import java.awt.Point;
+import java.util.ArrayList;
+
 import org.lwjgl.util.vector.Vector2f;
 
 import entities.Projectile;
@@ -24,8 +27,37 @@ public class ArrowTrap extends Tile{
 		this.guiTexture=(new GuiTexture(GuiLibrary.desertBackdrop,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Arrow Trap";
 		id = 5;
+		setTriggers();
 	}
-	public void trigger(){
+	@Override
+	public void whenTriggered(){
+		System.out.println("adsasdasd");
 		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
+	}
+	private void setTriggers(){
+		
+		int i=1;
+		switch(direction){
+		case 1:while(y+i<=9){
+			Main.grids.get(floor).getTile(x, y+1).addTrapRef(new Point(this.x,this.y));
+			i++;
+		}
+		break;
+		case 2:while(x+i<=9){
+			Main.grids.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
+			i++;
+		}
+		break;
+		case 3:while(y-i>=0){
+			Main.grids.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
+			i++;
+		}
+		break;
+		case 4:while(x-i>=0){
+			Main.grids.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
+			i++;
+		}
+		break;
+	}
 	}
 }
