@@ -29,6 +29,7 @@ public class Group {
 	private boolean wait;
 	private int squadId;
 	private int floor;
+	private Point realLoc;
 	
 	public boolean getWait() {
 		return wait;
@@ -38,6 +39,7 @@ public class Group {
 		wait=false;
 		busy=false;
 		nextLoc=new Point(0,0);
+		realLoc=nextLoc;
 		nextPos=0;
 		groupIds = new ArrayList<Integer>();
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
@@ -143,12 +145,13 @@ public class Group {
 		if(wait){
 			return false;
 		}
+		Main.grids.get(floor).getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
 		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			interact(grid);
 			return true;
 		}
-		Main.grids.get(floor).getTile(nextLoc.x, nextLoc.y).trigger(nextLoc.x,nextLoc.y);
+		realLoc=nextLoc;
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		if(!(location.x==destination.x&&location.y==destination.y)){
 			moveTo(grid, milli);
