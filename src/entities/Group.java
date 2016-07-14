@@ -139,6 +139,7 @@ public class Group {
 	}*/
 	
 	public boolean move(int milli,Grid grid) {
+		
 		if(wait){
 			return false;
 		}
@@ -147,6 +148,7 @@ public class Group {
 			interact(grid);
 			return true;
 		}
+		Main.grids.get(floor).getTile(nextLoc.x, nextLoc.y).trigger(nextLoc.x,nextLoc.y);
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		if(!(location.x==destination.x&&location.y==destination.y)){
 			moveTo(grid, milli);

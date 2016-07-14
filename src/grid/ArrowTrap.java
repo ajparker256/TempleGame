@@ -38,7 +38,7 @@ public class ArrowTrap extends Tile{
 	@Override
 	public void whenTriggered(){
 		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
-		System.out.println("adsasdasd");
+		System.out.println("shooting");
 	}
 	
 	public void trigger(){
