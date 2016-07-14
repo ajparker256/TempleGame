@@ -31,20 +31,18 @@ public class ArrowTrap extends Tile{
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Arrow Trap";
 		id = 5;
-<<<<<<< HEAD
+		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
+		firing.setDelay(25);
 		setTriggers();
 	}
 	@Override
 	public void whenTriggered(){
 		System.out.println("adsasdasd");
-=======
 		isFiring = false;
-		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
-		firing.setDelay(25);
+		
 	}
 	
 	public void trigger(){
->>>>>>> a412e5f0cc9cc8f012b349ea4f94376cd3fa3336
 		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
 		isFiring = true;
 	}
