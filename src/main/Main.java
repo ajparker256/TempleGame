@@ -190,8 +190,13 @@ public static void main(String[] args) throws FileNotFoundException {
 		
 		//TODO add for each grid, and inside only do the tihngs that are on the right grid
 		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));
-	
-		
+	for(Grid tempgrid:grids){
+		for(int i=0;i<10;i++){
+			for(int j=0;j<10;j++){
+				tempgrid.getTile(i, j).tick(milli);
+			}
+		}
+	}
 		for(Grid g: grids) {
 			dynamicGuis.addAll(g.renderFloorSelect());
 		}

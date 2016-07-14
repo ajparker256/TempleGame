@@ -20,16 +20,20 @@ public class ArrowTrap extends Tile{
 	protected int direction;
 	protected Animation firing;
 	protected boolean isFiring;
+	private long cooldown;
+	private long maxCd;
 	
 	public ArrowTrap(int x, int y, float size,int direction) {
 		super(x, y, size, Main.grid.getLoc());
 		super.passable=false;
 		super.canInteract=true;
+		this.cooldown=0;
 		this.direction=direction;
 		this.hp=100;
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Arrow Trap";
+		this.maxCd=1000;
 		id = 5;
 		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		firing.setDelay(25);
@@ -37,8 +41,11 @@ public class ArrowTrap extends Tile{
 	}
 	@Override
 	public void whenTriggered(){
+		if(cooldown<=0){
 		Main.projectiles.add(new Projectile(direction,x,y,super.floor));
 		System.out.println("shooting");
+		cooldown=maxCd;
+		}
 	}
 	
 	public void trigger(){
@@ -83,5 +90,10 @@ public class ArrowTrap extends Tile{
 		}
 		break;
 	}
+		
+	}
+	@Override
+	public void tick(long milli){
+		cooldown-=milli;
 	}
 }

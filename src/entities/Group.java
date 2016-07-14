@@ -154,7 +154,6 @@ public class Group {
 			moveTo(grid, milli);
 			return false;
 		}
-			Main.grids.get(floor).getTile(nextLoc.x, nextLoc.y).trigger(nextLoc.x,nextLoc.y);
 			busy=false;
 			wait=true;
 		return false;

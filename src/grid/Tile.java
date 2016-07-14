@@ -171,6 +171,10 @@ public class Tile {
 		trapRefs.add(point);
 	}
 
+	public void tick(long milli) {
+		
+	}
+
 
 
 
