@@ -50,7 +50,9 @@ public class TreasureTrap extends Tile{
 			passable = true;
 			canInteract = false;
 			Main.grids.get(g.getFloor()).getTreasureLocs().remove(new Point(x, y));
-			Main.grids.get(g.getFloor()).setTile(x, y, new Blank(x,y,size, Main.grid.getLoc()));
+			Blank blank = new Blank(super.x, super.y, super.size, Main.grid.getLoc());
+			blank.setTrapRefs(trapRefs);
+			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
 		} else {
 			reward --;
 		}
