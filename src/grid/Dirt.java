@@ -49,7 +49,9 @@ public class Dirt extends Tile{
 		}
 		hp-=(bonusDamage);
 		if(hp<=0){
-			Main.grids.get(g.getFloor()).setTile(super.x, super.y, new Blank(super.x, super.y, super.size, Main.grid.getLoc()));
+			Blank blank = new Blank(super.x, super.y, super.size, Main.grid.getLoc());
+			blank.setTrapRefs(trapRefs);
+			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
 		}
 	}
 	

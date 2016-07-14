@@ -62,6 +62,14 @@ public class Tile {
 		occupied = -1;
 	}
 	
+	public ArrayList<Point> getTrapRefs() {
+		return trapRefs;
+	}
+	
+	public void setTrapRefs(ArrayList<Point> newRefs) {
+		trapRefs = newRefs;
+	}
+	
 	public void upgrade(int i) {
 		//STUB
 	}

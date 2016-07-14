@@ -57,7 +57,9 @@ public static GuiTexture background;
 public static int round;
 public static ArrayList<Projectile> projectiles;
 public static double timeInRound;
+public static ArrayList<Grid> gridsReadOnly;
 public static void main(String[] args) throws FileNotFoundException {
+	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
 	squads = new ArrayList<Squad>();
 	money=2000;
@@ -77,6 +79,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, i));
 	}
 	grid = grids.get(0);
+	gridsReadOnly.addAll(grids);
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
@@ -269,6 +272,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				//oldTile=grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y);
 				//System.out.println(oldTile.getPosition());
 				//Tile newTile=new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc());
+				selectedTrap.setTrapRefs(oldTile.getTrapRefs());
 				grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 				epicShopofEpicness.setOn(false);
 				money -= selectedTrap.getPrice();
