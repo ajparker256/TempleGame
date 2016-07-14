@@ -153,6 +153,12 @@ public static int comma;
 
 public static int blank;
 public static int dirt0;
+
+public static int arrowTrap1;
+public static int arrowTrap2;
+public static int arrowTrap3;
+public static int arrowTrap4;
+public static int arrowVolley;
 	
 
 public static void init(Loader loader) {
@@ -284,7 +290,11 @@ GuiLibrary.space = loader.loadTexture("letters/space");
 		GuiLibrary.blank = loader.loadTexture("tiles/Blank");
 		GuiLibrary.dirt0 = loader.loadTexture("tiles/Dirt2");
 		
-				
+		GuiLibrary.arrowTrap1 = loader.loadTexture("CrossBow1");
+		GuiLibrary.arrowTrap2 = loader.loadTexture("CrossBow2");
+		GuiLibrary.arrowTrap3 = loader.loadTexture("CrossBow3");
+		GuiLibrary.arrowTrap4 = loader.loadTexture("CrossBow4");
+		GuiLibrary.arrowVolley = loader.loadTexture("arrows");		
 		
 		
 		

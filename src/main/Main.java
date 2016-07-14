@@ -157,7 +157,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	traps[0][0] = new Exit(-20,-20, .03f);
 	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
-	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()));
+	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()), Main.grid.getFloor());
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	

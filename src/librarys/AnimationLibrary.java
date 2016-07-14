@@ -13,6 +13,7 @@ public class AnimationLibrary {
 	public static ArrayList<Integer> minerY;
 	public static ArrayList<Integer> minerX;
 	public static ArrayList<Integer> flame;
+	public static ArrayList<Integer> crossBowFiring;
 	public static void init(Loader loader){
 		explorerY=new ArrayList<Integer>();
 		explorerY.add(GuiLibrary.explorerStanding);
@@ -39,6 +40,11 @@ public class AnimationLibrary {
 		flame.add(GuiLibrary.flame2);
 		flame.add(GuiLibrary.flame3);
 		flame.add(GuiLibrary.flame4);
+		crossBowFiring = new ArrayList<Integer>();
+		crossBowFiring.add(GuiLibrary.arrowTrap1);
+		crossBowFiring.add(GuiLibrary.arrowTrap2);
+		crossBowFiring.add(GuiLibrary.arrowTrap3);
+		crossBowFiring.add(GuiLibrary.arrowTrap4);
 	}
 
 

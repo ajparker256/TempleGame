@@ -12,16 +12,16 @@ import renderEngine.DisplayManager;
 
 public class Projectile {
 
-	private int floor;
-	private int y;
-	private int x;
-	private int direction;
-	private int texture;
-	private Vector2f location;
-	private Vector2f size;
-	private Vector2f velocity;
-	private boolean kill;
-	private GuiTexture image;
+	protected int floor;
+	protected int y;
+	protected int x;
+	protected int direction;
+	protected int texture;
+	protected Vector2f location;
+	protected Vector2f size;
+	protected Vector2f velocity;
+	protected boolean kill;
+	protected GuiTexture image;
 
 	public Projectile(int direction, int x, int y, int floor) {
 		kill=false;
