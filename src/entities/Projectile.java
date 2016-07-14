@@ -7,7 +7,6 @@ import org.lwjgl.util.vector.Vector2f;
 
 import gui.GuiTexture;
 import librarys.GuiLibrary;
-import librarys.TextureLibrary;
 import main.Main;
 import renderEngine.DisplayManager;
 

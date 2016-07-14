@@ -1,33 +1,28 @@
 package main;
 
+import grid.ArrowTrap;
 import grid.Blank;
 import grid.CursedIdol;
-import grid.DartTrap;
 import grid.Dirt;
 import grid.Exit;
 import grid.Grid;
 import grid.Tile;
 import grid.TreasureTrap;
-import gui.Animation;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
 import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
-import librarys.TextureLibrary;
 import librarys.TileLibrary;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -35,14 +30,12 @@ import org.lwjgl.util.vector.Vector2f;
 
 import buttons.Button;
 import buttons.Shop;
-import entities.Camera;
 import entities.Explorer;
 import entities.Flame;
 import entities.Group;
 import entities.Miner;
 import entities.Projectile;
 import entities.Squad;
-import entities.Unit;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import sound.Sound;
@@ -64,42 +57,28 @@ public static GuiTexture background;
 public static int round;
 public static ArrayList<Projectile> projectiles;
 public static void main(String[] args) throws FileNotFoundException {
-		grids = new ArrayList<Grid>();
-		squads = new ArrayList<Squad>();
-		money=1327;
-		round = 0;
-		buttons = new ArrayList<Button>();
-		group = new ArrayList<Explorer>();
-		Camera camera = new Camera();
-		DisplayManager.createDisplay();
-		Loader loader = new Loader();
-		Random random = new Random();
-		new TextureLibrary(loader);
-		StringLibrary.init(loader);
-		GuiLibrary.init(loader);
-		
-		grid= new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 0);
-		grids.add(grid);	
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 1));
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 2));
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 3));
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 4));
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 5));
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 6));
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, 7));
-		grid.setIsOn(true);
-		
-		//TODO figure out why this gave nothing but black screen
-		//background = new GuiTexture(GuiLibrary.desertBackdrop, new Vector2f(-.9f,-1), new Vector2f(1,1));
-		
-		
-		
-	SoundLibrary.music = Sound.loadSound("song");
+	grids = new ArrayList<Grid>();
+	squads = new ArrayList<Squad>();
+	money=2000;
+	round = 0;
+	buttons = new ArrayList<Button>();
+	group = new ArrayList<Explorer>();
+//	Camera camera = new Camera();
+	DisplayManager.createDisplay();
+	Loader loader = new Loader();
+	StringLibrary.init();
+	//Aspect Ratio should be 1 to 2
+	StringLibrary.setSize(new Vector2f(.02f, .04f));
+	GuiLibrary.init(loader);
 
+	SoundLibrary.init();
 	
+	for(int i = 0; i<8; i++) {
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, i));
+	}
+	grid = grids.get(0);
 	
-	
-	
+		
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	projectiles= new ArrayList<Projectile>();
@@ -112,7 +91,7 @@ public static void main(String[] args) throws FileNotFoundException {
 
 	
 	
-	boolean exit=false;
+	//boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
 	
@@ -120,7 +99,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	AnimationLibrary.init(loader);
 	
-	Group group1 = new Group(0);
+	
+/*	Group group1 = new Group(0);
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
 	group1.add(new Explorer (group1));
@@ -142,13 +122,25 @@ public static void main(String[] args) throws FileNotFoundException {
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	group4.add(new Explorer (group4));
-	group4.add(new Miner (group4));
+	group4.add(new Miner (group4));*/
+	
+	Group group1 = new Group(0);
+	Group group2 = new Group(0);
+	Group group3 = new Group(0);	
+	Group group4 = new Group(0);
+
 	
 	ArrayList<Group> squad1List=new ArrayList<Group>();
 	squad1List.add(group1);
 	squad1List.add(group2);
 	squad1List.add(group3);
 	squad1List.add(group4);
+	for(Group g : squad1List) {
+		g.add(new Explorer (g));
+		g.add(new Miner (g));
+		g.add(new Explorer (g));
+		g.add(new Miner (g));
+	}
 	Squad squad1=new Squad(squad1List, 1);
 	squads.add(squad1);
 	
@@ -169,47 +161,20 @@ public static void main(String[] args) throws FileNotFoundException {
 			//System.out.println(traps[i][j].getLocation());
 		}
 	}
+	traps[1][2] = new ArrowTrap(1,1,.03f, 1);
 	traps[1][1] = new Blank(-20,-20, .03f, new Vector2f(-.87f, -.47f));
 	traps[0][1] = new CursedIdol(-20,-20, .03f);
 	traps[0][0] = new Exit(-20,-20, .03f);
 	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
-	//traps[traps.length-1][traps[0].length-1] = new DartTrap(new Vector2f(-.9f,-.5f), .02f, new Vector2f(-.9f,-.4f), new Vector2f(1,0), loader);
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
 	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()));
-	//This is the string tester
-	List<GuiTexture> test;
-	//Aspect Ratio should be 1 to 2
-	StringLibrary.setSize(new Vector2f(.02f, .04f));
-	//ABCDEFGHIJKLMNOPQRSTUVWXYZ defghijklmnopqrstuvwxyz
-	test = StringLibrary.drawString("0123456789abc", new Vector2f(-.98f,-.7f));
-	test = StringLibrary.drawString("0123456789abcdefghijklmnopqrstuvwxyz  ,.!?!asdf!j?", new Vector2f(-.98f,-.3f));
-	test.addAll(StringLibrary.drawString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", new Vector2f(-.98f,-.6f)));
-	test.addAll(StringLibrary.drawString("asdfweqrlkxjvnmzpoitubnlkwqrw", new Vector2f(-.98f,-.4f)));
-	test.addAll(StringLibrary.drawString("Hello World", new Vector2f(-.98f, -.8f)));
-	test.addAll(StringLibrary.makeItFit("Lets make this set of words fit into a regular sized text box", new Vector2f(0f, -.5f), .5f));
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 	
-	/*Vector2f quickLoc = new Vector2f(-.8f, .6f);
-	ArrayList<Integer> arrows = new ArrayList<Integer>();
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows1"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows2"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows3"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows4"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows5"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows6"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows7"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows8"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows9"));
-	arrows.add(loader.loadTexture("/Trap Animations/Dart Trap/Arrows10"));
-	Animation arrow = new Animation(arrows, quickLoc, new Vector2f(.2f,.2f));*/
 	projectiles.add(new Projectile(3, 1, 9, 0));
 	projectiles.add(new Projectile(3, 1, 8, 0));
 	double timeInRound = 0;
-	//guis.add(new GuiTexture(loader.loadTexture("A"), new Vector2f(0f, 0f), new Vector2f(1f,1f)));
-	for(int i = 0; i<test.size(); i++) {
-		dynamicGuis.add(test.get(i));
-	}
+
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
@@ -240,7 +205,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		dynamicGuis.addAll(grid.render());
 		
 		guiRenderer.render(guis);
-		guiRenderer.render(test);
 		
 		//TODO add for each grid, and inside only do the tihngs that are on the right grid
 		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));

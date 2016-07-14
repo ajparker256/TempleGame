@@ -1,7 +1,7 @@
 package grid;
 
 import gui.GuiTexture;
-import librarys.TextureLibrary;
+import librarys.GuiLibrary;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -13,8 +13,7 @@ public class Blank extends Tile {
 		super(x, y, size, location);
 		super.canInteract=false;
 		super.passable=true;
-		this.texture=0;
-		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.guiTexture=(new GuiTexture(GuiLibrary.blank,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		name = "Blank...";
 		id = 0;
 	}

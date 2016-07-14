@@ -4,7 +4,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import entities.Projectile;
 import gui.GuiTexture;
-import librarys.TextureLibrary;
+import librarys.GuiLibrary;
 import main.Main;
 import renderEngine.DisplayManager;
 
@@ -21,9 +21,9 @@ public class ArrowTrap extends Tile{
 		this.direction=direction;
 		this.hp=100;
 		this.texture=1;
-		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.guiTexture=(new GuiTexture(GuiLibrary.desertBackdrop,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Arrow Trap";
-		id = 1;
+		id = 5;
 	}
 	public void trigger(){
 		Main.projectiles.add(new Projectile(direction,x,y,super.floor));

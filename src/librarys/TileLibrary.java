@@ -16,6 +16,9 @@ public class TileLibrary {
 			return new CursedIdol(x, y, size);
 		if(id == 4) 
 			return new TreasureTrap(x, y, size, Main.grids.indexOf(Main.grid));
+		if(id == 5) {
+			return new ArrowTrap(x, y, size, 1);
+		}
 		if(id == -2)
 			return new Exit(x, y, size);
 		

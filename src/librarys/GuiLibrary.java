@@ -73,7 +73,89 @@ public static int flame2;
 public static int flame3;
 public static int flame4;
 
-	public static void init(Loader loader) {
+//Space
+public static int space;
+	
+//Numbers stored here
+public static int Num0;
+public static int Num1;
+public static int Num2;
+public static int Num3;
+public static int Num4;
+public static int Num5;
+public static int Num6;
+public static int Num7;
+public static int Num8;
+public static int Num9;
+
+//Capital letters stored
+public static int A;
+public static int B;
+public static int C;
+public static int D;
+public static int E;
+public static int F;
+public static int G;
+public static int H;
+public static int I;
+public static int J;
+public static int K;
+public static int L;
+public static int M;
+public static int N;
+public static int O;
+public static int P;
+public static int Q;
+public static int R;
+public static int S;
+public static int T;
+public static int U;
+public static int V;
+public static int W;
+public static int X;
+public static int Y;
+public static int Z;
+
+
+//Lower Case letters
+public static int la;
+public static int lb;
+public static int lc;
+public static int ld;
+public static int le;
+public static int lf;
+public static int lg;
+public static int lh;
+public static int li;
+public static int lj;
+public static int lk;
+public static int ll;
+public static int lm;
+public static int ln;
+public static int lo;
+public static int lp;
+public static int lq;
+public static int lr;
+public static int ls;
+public static int lt;
+public static int lu;
+public static int lv;
+public static int lw;
+public static int lx;
+public static int ly;
+public static int lz;
+
+//Punctuation
+public static int period;
+public static int exclamationPoint;
+public static int questionMark;
+public static int comma;
+
+public static int blank;
+public static int dirt0;
+	
+
+public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
 		GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
@@ -124,11 +206,89 @@ public static int flame4;
 		GuiLibrary.flame2 = loader.loadTexture("Flames/Fire2");
 		GuiLibrary.flame3 = loader.loadTexture("Flames/Fire3");
 		GuiLibrary.flame4 = loader.loadTexture("Flames/Fire4");
+		
+GuiLibrary.space = loader.loadTexture("letters/space");
+		
+		GuiLibrary.Num1= loader.loadTexture("letters/Num1");
+		GuiLibrary.Num2= loader.loadTexture("letters/Num2");
+		GuiLibrary.Num3= loader.loadTexture("letters/Num3");
+		GuiLibrary.Num4= loader.loadTexture("letters/Num4");
+		GuiLibrary.Num5= loader.loadTexture("letters/Num5");
+		GuiLibrary.Num6= loader.loadTexture("letters/Num6");
+		GuiLibrary.Num7= loader.loadTexture("letters/Num7");
+		GuiLibrary.Num8= loader.loadTexture("letters/Num8");
+		GuiLibrary.Num9= loader.loadTexture("letters/Num9");
+		GuiLibrary.Num0= loader.loadTexture("letters/Num0");
+		GuiLibrary.A = loader.loadTexture("letters/A");
+		GuiLibrary.B = loader.loadTexture("letters/B");
+		GuiLibrary.C = loader.loadTexture("letters/C");
+		GuiLibrary.D = loader.loadTexture("letters/D");
+		GuiLibrary.E = loader.loadTexture("letters/E");
+		GuiLibrary.F = loader.loadTexture("letters/F");
+		GuiLibrary.G = loader.loadTexture("letters/G");
+		GuiLibrary.H = loader.loadTexture("letters/H");
+		GuiLibrary.I = loader.loadTexture("letters/I");
+		GuiLibrary.J = loader.loadTexture("letters/J");
+		GuiLibrary.K = loader.loadTexture("letters/K");
+		GuiLibrary.L = loader.loadTexture("letters/L");
+		GuiLibrary.M = loader.loadTexture("letters/M");
+		GuiLibrary.N = loader.loadTexture("letters/N");
+		GuiLibrary.O = loader.loadTexture("letters/O");
+		GuiLibrary.P = loader.loadTexture("letters/P");
+		GuiLibrary.Q = loader.loadTexture("letters/Q");
+		GuiLibrary.R = loader.loadTexture("letters/R");
+		GuiLibrary.S = loader.loadTexture("letters/S");
+		GuiLibrary.T = loader.loadTexture("letters/T");
+		GuiLibrary.U = loader.loadTexture("letters/U");
+		GuiLibrary.V = loader.loadTexture("letters/V");
+		GuiLibrary.W = loader.loadTexture("letters/W");
+		GuiLibrary.X = loader.loadTexture("letters/X");
+		GuiLibrary.Y = loader.loadTexture("letters/Y");
+		GuiLibrary.Z = loader.loadTexture("letters/Z");
+		
+		//Loads lowercase letters
+		//TODO Make special sizes for thin letters so that they can be printed closer together. Also make a getWidth(char c) method.
+		GuiLibrary.la = loader.loadTexture("letters/la");
+		GuiLibrary.lb = loader.loadTexture("letters/lb");
+		GuiLibrary.lc = loader.loadTexture("letters/lc");
+		GuiLibrary.ld = loader.loadTexture("letters/ld");
+		GuiLibrary.le = loader.loadTexture("letters/le");
+		GuiLibrary.lf = loader.loadTexture("letters/lf");
+		GuiLibrary.lg = loader.loadTexture("letters/lg");
+		GuiLibrary.lh = loader.loadTexture("letters/lh");
+		GuiLibrary.li = loader.loadTexture("letters/li");
+		GuiLibrary.lj = loader.loadTexture("letters/lj");
+		GuiLibrary.lk = loader.loadTexture("letters/lk");
+		GuiLibrary.ll = loader.loadTexture("letters/ll");
+		GuiLibrary.lm = loader.loadTexture("letters/lm");
+		GuiLibrary.ln = loader.loadTexture("letters/ln");
+		GuiLibrary.lo = loader.loadTexture("letters/lo");
+		GuiLibrary.lp = loader.loadTexture("letters/lp");
+		GuiLibrary.lq = loader.loadTexture("letters/lq");
+		GuiLibrary.lr = loader.loadTexture("letters/lr");
+		GuiLibrary.ls = loader.loadTexture("letters/ls");
+		GuiLibrary.lt = loader.loadTexture("letters/lt");
+		GuiLibrary.lu = loader.loadTexture("letters/lu");
+		GuiLibrary.lv = loader.loadTexture("letters/lv");
+		GuiLibrary.lw = loader.loadTexture("letters/lw");
+		GuiLibrary.lx = loader.loadTexture("letters/lx");
+		GuiLibrary.ly = loader.loadTexture("letters/ly");
+		GuiLibrary.lz = loader.loadTexture("letters/lz");
+		
+		//This loads the punctuation
+		GuiLibrary.period = loader.loadTexture("letters/period");
+		GuiLibrary.exclamationPoint = loader.loadTexture("letters/exclamationPoint");
+		GuiLibrary.questionMark = loader.loadTexture("letters/questionMark");
+		GuiLibrary.comma = loader.loadTexture("letters/comma");
+
+		GuiLibrary.blank = loader.loadTexture("tiles/Blank");
+		GuiLibrary.dirt0 = loader.loadTexture("tiles/Dirt2");
+		
 				
 		
 		
 		
-//		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
+		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 	
 	}
 	

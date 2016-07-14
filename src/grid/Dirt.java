@@ -2,7 +2,6 @@ package grid;
 
 import gui.GuiTexture;
 import librarys.GuiLibrary;
-import librarys.TextureLibrary;
 import main.Main;
 
 import org.lwjgl.util.vector.Vector2f;
@@ -22,7 +21,7 @@ public class Dirt extends Tile{
 		super.canInteract=true;
 		this.hp=100;
 		this.texture=1;
-		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.guiTexture=(new GuiTexture(GuiLibrary.dirt0,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Dirt!";
 		id = 1;
 	}
@@ -34,7 +33,7 @@ public class Dirt extends Tile{
 		super.canInteract=true;
 		this.hp=100;
 		this.texture=1;
-		this.guiTexture=(new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.guiTexture=(new GuiTexture(GuiLibrary.dirt0,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Dirt!";
 		id = 1;
 	}
@@ -58,7 +57,7 @@ public class Dirt extends Tile{
 		level = newLevel;
 		//System.out.println(position);
 		if(level == 0)
-			guiTexture=new GuiTexture(TextureLibrary.getTile(texture),position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio())));	
+			guiTexture=new GuiTexture(GuiLibrary.dirt0,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio())));	
 		else if(level == 1)
 			guiTexture = new GuiTexture(GuiLibrary.rock1, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		else if(level == 2)

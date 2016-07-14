@@ -22,84 +22,8 @@ public class StringLibrary {
 	
 	public static float spacing;
 	
-	public static void init(Loader loader) {
-		size = new Vector2f(.1f, .2f);
-		load = loader;
-		nums = new GuiTexture[10];
-		TextureLibrary.space = loader.loadTexture("letters/space");
-		
-		TextureLibrary.Num1= loader.loadTexture("letters/Num1");
-		TextureLibrary.Num2= loader.loadTexture("letters/Num2");
-		TextureLibrary.Num3= loader.loadTexture("letters/Num3");
-		TextureLibrary.Num4= loader.loadTexture("letters/Num4");
-		TextureLibrary.Num5= loader.loadTexture("letters/Num5");
-		TextureLibrary.Num6= loader.loadTexture("letters/Num6");
-		TextureLibrary.Num7= loader.loadTexture("letters/Num7");
-		TextureLibrary.Num8= loader.loadTexture("letters/Num8");
-		TextureLibrary.Num9= loader.loadTexture("letters/Num9");
-		TextureLibrary.Num0= loader.loadTexture("letters/Num0");
-		TextureLibrary.A = loader.loadTexture("letters/A");
-		TextureLibrary.B = loader.loadTexture("letters/B");
-		TextureLibrary.C = loader.loadTexture("letters/C");
-		TextureLibrary.D = loader.loadTexture("letters/D");
-		TextureLibrary.E = loader.loadTexture("letters/E");
-		TextureLibrary.F = loader.loadTexture("letters/F");
-		TextureLibrary.G = loader.loadTexture("letters/G");
-		TextureLibrary.H = loader.loadTexture("letters/H");
-		TextureLibrary.I = loader.loadTexture("letters/I");
-		TextureLibrary.J = loader.loadTexture("letters/J");
-		TextureLibrary.K = loader.loadTexture("letters/K");
-		TextureLibrary.L = loader.loadTexture("letters/L");
-		TextureLibrary.M = loader.loadTexture("letters/M");
-		TextureLibrary.N = loader.loadTexture("letters/N");
-		TextureLibrary.O = loader.loadTexture("letters/O");
-		TextureLibrary.P = loader.loadTexture("letters/P");
-		TextureLibrary.Q = loader.loadTexture("letters/Q");
-		TextureLibrary.R = loader.loadTexture("letters/R");
-		TextureLibrary.S = loader.loadTexture("letters/S");
-		TextureLibrary.T = loader.loadTexture("letters/T");
-		TextureLibrary.U = loader.loadTexture("letters/U");
-		TextureLibrary.V = loader.loadTexture("letters/V");
-		TextureLibrary.W = loader.loadTexture("letters/W");
-		TextureLibrary.X = loader.loadTexture("letters/X");
-		TextureLibrary.Y = loader.loadTexture("letters/Y");
-		TextureLibrary.Z = loader.loadTexture("letters/Z");
-		
-		//Loads lowercase letters
-		//TODO Make special sizes for thin letters so that they can be printed closer together. Also make a getWidth(char c) method.
-		TextureLibrary.la = loader.loadTexture("letters/la");
-		TextureLibrary.lb = loader.loadTexture("letters/lb");
-		TextureLibrary.lc = loader.loadTexture("letters/lc");
-		TextureLibrary.ld = loader.loadTexture("letters/ld");
-		TextureLibrary.le = loader.loadTexture("letters/le");
-		TextureLibrary.lf = loader.loadTexture("letters/lf");
-		TextureLibrary.lg = loader.loadTexture("letters/lg");
-		TextureLibrary.lh = loader.loadTexture("letters/lh");
-		TextureLibrary.li = loader.loadTexture("letters/li");
-		TextureLibrary.lj = loader.loadTexture("letters/lj");
-		TextureLibrary.lk = loader.loadTexture("letters/lk");
-		TextureLibrary.ll = loader.loadTexture("letters/ll");
-		TextureLibrary.lm = loader.loadTexture("letters/lm");
-		TextureLibrary.ln = loader.loadTexture("letters/ln");
-		TextureLibrary.lo = loader.loadTexture("letters/lo");
-		TextureLibrary.lp = loader.loadTexture("letters/lp");
-		TextureLibrary.lq = loader.loadTexture("letters/lq");
-		TextureLibrary.lr = loader.loadTexture("letters/lr");
-		TextureLibrary.ls = loader.loadTexture("letters/ls");
-		TextureLibrary.lt = loader.loadTexture("letters/lt");
-		TextureLibrary.lu = loader.loadTexture("letters/lu");
-		TextureLibrary.lv = loader.loadTexture("letters/lv");
-		TextureLibrary.lw = loader.loadTexture("letters/lw");
-		TextureLibrary.lx = loader.loadTexture("letters/lx");
-		TextureLibrary.ly = loader.loadTexture("letters/ly");
-		TextureLibrary.lz = loader.loadTexture("letters/lz");
-		
-		//This loads the punctuation
-		TextureLibrary.period = loader.loadTexture("letters/period");
-		TextureLibrary.exclamationPoint = loader.loadTexture("letters/exclamationPoint");
-		TextureLibrary.questionMark = loader.loadTexture("letters/questionMark");
-		TextureLibrary.comma = loader.loadTexture("letters/comma");
-
+	public static void init() {
+		size = new Vector2f(.2f, .4f);
 	}
 	
 	//This returns a list of instructions to draw letters in the shape of the string.
@@ -371,149 +295,149 @@ public class StringLibrary {
 	public static int getLetter(char c) {
 		//Potential optimization: Order in terms of frequency to reduce lag time in this method.
 		if(c == ' ') {
-			return TextureLibrary.space;
+			return GuiLibrary.space;
 		}
 		//Return number textures
 		if(c == '0') {
-			return TextureLibrary.Num0;
+			return GuiLibrary.Num0;
 			
 		}
 		if(c == '1') 
-			return TextureLibrary.Num1;
+			return GuiLibrary.Num1;
 		if(c == '2') 
-			return TextureLibrary.Num2;
+			return GuiLibrary.Num2;
 		if(c == '3') 
-			return TextureLibrary.Num3;
+			return GuiLibrary.Num3;
 		if(c == '4') 
-			return TextureLibrary.Num4;
+			return GuiLibrary.Num4;
 		if(c == '5') 
-			return TextureLibrary.Num5;
+			return GuiLibrary.Num5;
 		if(c == '6') 
-			return TextureLibrary.Num6;
+			return GuiLibrary.Num6;
 		if(c == '7') 
-			return TextureLibrary.Num7;
+			return GuiLibrary.Num7;
 		if(c == '8') 
-			return TextureLibrary.Num8;
+			return GuiLibrary.Num8;
 		if(c == '9') 
-			return TextureLibrary.Num9;
+			return GuiLibrary.Num9;
 		
 		
 		//Return letter textures for Arial Black (Used font size 96 on 114 by 114 pixel boxes)
 		if(c == 'A') 
-			return TextureLibrary.A;
+			return GuiLibrary.A;
 		if(c == 'B') 
-			return TextureLibrary.B;
+			return GuiLibrary.B;
 		if(c == 'C') 
-			return TextureLibrary.C;
+			return GuiLibrary.C;
 		if(c == 'D') 
-			return TextureLibrary.D;
+			return GuiLibrary.D;
 		if(c == 'E') 
-			return TextureLibrary.E;
+			return GuiLibrary.E;
 		if(c == 'F') 
-			return TextureLibrary.F;
+			return GuiLibrary.F;
 		if(c == 'G') 
-			return TextureLibrary.G;
+			return GuiLibrary.G;
 		if(c == 'H') 
-			return TextureLibrary.H;
+			return GuiLibrary.H;
 		if(c == 'I') 
-			return TextureLibrary.I;
+			return GuiLibrary.I;
 		if(c == 'J') 
-			return TextureLibrary.J;
+			return GuiLibrary.J;
 		if(c == 'K') 
-			return TextureLibrary.K;
+			return GuiLibrary.K;
 		if(c == 'L') 
-			return TextureLibrary.L;
+			return GuiLibrary.L;
 		if(c == 'M') 
-			return TextureLibrary.M;
+			return GuiLibrary.M;
 		if(c == 'N') 
-			return TextureLibrary.N;
+			return GuiLibrary.N;
 		if(c == 'O') 
-			return TextureLibrary.O;
+			return GuiLibrary.O;
 		if(c == 'P') 
-			return TextureLibrary.P;
+			return GuiLibrary.P;
 		if(c == 'Q') 
-			return TextureLibrary.Q;
+			return GuiLibrary.Q;
 		if(c == 'R') 
-			return TextureLibrary.R;
+			return GuiLibrary.R;
 		if(c == 'S') 
-			return TextureLibrary.S;
+			return GuiLibrary.S;
 		if(c == 'T') 
-			return TextureLibrary.T;
+			return GuiLibrary.T;
 		if(c == 'U') 
-			return TextureLibrary.U;
+			return GuiLibrary.U;
 		if(c == 'V') 
-			return TextureLibrary.V;
+			return GuiLibrary.V;
 		if(c == 'W') 
-			return TextureLibrary.W;
+			return GuiLibrary.W;
 		if(c == 'X') 
-			return TextureLibrary.X;
+			return GuiLibrary.X;
 		if(c == 'Y') 
-			return TextureLibrary.Y;
+			return GuiLibrary.Y;
 		if(c == 'Z') 
-			return TextureLibrary.Z;
+			return GuiLibrary.Z;
 		
 		//Lower Case Letters
 		if(c == 'a') 
-			return TextureLibrary.la;
+			return GuiLibrary.la;
 		if(c == 'b') 
-			return TextureLibrary.lb;
+			return GuiLibrary.lb;
 		if(c == 'c') 
-			return TextureLibrary.lc;
+			return GuiLibrary.lc;
 		if(c == 'd') 
-			return TextureLibrary.ld;
+			return GuiLibrary.ld;
 		if(c == 'e') 
-			return TextureLibrary.le;
+			return GuiLibrary.le;
 		if(c == 'f') 
-			return TextureLibrary.lf;
+			return GuiLibrary.lf;
 		if(c == 'g') 
-			return TextureLibrary.lg;
+			return GuiLibrary.lg;
 		if(c == 'h') 
-			return TextureLibrary.lh;
+			return GuiLibrary.lh;
 		if(c == 'i') 
-			return TextureLibrary.li;
+			return GuiLibrary.li;
 		if(c == 'j') 
-			return TextureLibrary.lj;
+			return GuiLibrary.lj;
 		if(c == 'k') 
-			return TextureLibrary.lk;
+			return GuiLibrary.lk;
 		if(c == 'l') 
-			return TextureLibrary.ll;
+			return GuiLibrary.ll;
 		if(c == 'm') 
-			return TextureLibrary.lm;
+			return GuiLibrary.lm;
 		if(c == 'n') 
-			return TextureLibrary.ln;
+			return GuiLibrary.ln;
 		if(c == 'o') 
-			return TextureLibrary.lo;
+			return GuiLibrary.lo;
 		if(c == 'p') 
-			return TextureLibrary.lp;
+			return GuiLibrary.lp;
 		if(c == 'q') 
-			return TextureLibrary.lq;
+			return GuiLibrary.lq;
 		if(c == 'r') 
-			return TextureLibrary.lr;
+			return GuiLibrary.lr;
 		if(c == 's') 
-			return TextureLibrary.ls;
+			return GuiLibrary.ls;
 		if(c == 't') 
-			return TextureLibrary.lt;
+			return GuiLibrary.lt;
 		if(c == 'u') 
-			return TextureLibrary.lu;
+			return GuiLibrary.lu;
 		if(c == 'v') 
-			return TextureLibrary.lv;
+			return GuiLibrary.lv;
 		if(c == 'w') 
-			return TextureLibrary.lw;
+			return GuiLibrary.lw;
 		if(c == 'x') 
-			return TextureLibrary.lx;
+			return GuiLibrary.lx;
 		if(c == 'y') 
-			return TextureLibrary.ly;
+			return GuiLibrary.ly;
 		if(c == 'z') 
-			return TextureLibrary.lz;
+			return GuiLibrary.lz;
 		
 		if(c == '.') 
-			return TextureLibrary.period;
+			return GuiLibrary.period;
 		if(c == '!')
-			return TextureLibrary.exclamationPoint;
+			return GuiLibrary.exclamationPoint;
 		if(c == '?') 
-			return TextureLibrary.questionMark;
+			return GuiLibrary.questionMark;
 		if(c == ',') 
-			return TextureLibrary.comma;
+			return GuiLibrary.comma;
 		
 		//Else return -1 showing error
 		return -1;

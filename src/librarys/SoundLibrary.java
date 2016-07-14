@@ -1,5 +1,7 @@
 package librarys;
 
+import sound.Sound;
+
 public class SoundLibrary {
 	public static int gunSound1;
 	public static int gunSound2;
@@ -14,5 +16,9 @@ public class SoundLibrary {
 	public static int zombieSound;
 	public static int music;
 	public static int reloadSound;
+	
+	public static void init() {
+		music = Sound.loadSound("song");
+	}
 
 }
