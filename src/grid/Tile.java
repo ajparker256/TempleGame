@@ -160,7 +160,6 @@ public class Tile {
 
 	}
 	public void addTrapRef(Point point){
-		System.out.println(this.x+" "+this.y);
 		trapRefs.add(point);
 	}
 
