@@ -55,6 +55,14 @@ public class Dirt extends Tile{
 		}
 	}
 	
+	@Override
+	public Tile copy() {
+		Tile t = new Dirt(x, y, size, location);
+		t.setTrapRefs(trapRefs);
+		t.upgrade(level);
+		return t;
+	}
+	
 	public void upgrade(int newLevel) {
 		level = newLevel;
 		if(level == 0)
@@ -79,10 +87,6 @@ public class Dirt extends Tile{
 		}
 	}
 	
-	@Override
-	public Tile copy() {
-		return new Dirt(x, y, size);
-	}
 	
 	
 

@@ -136,7 +136,9 @@ public class Tile {
 	}
 	
 	public Tile copy() {
-		return new Tile(x, y, size, location);
+		Tile t = new Tile(x, y, size, location);
+		t.setTrapRefs(trapRefs);
+		return t;
 	}
 
 	public boolean canInteract() {
@@ -160,7 +162,7 @@ public class Tile {
 	}
 	public void trigger(int x, int y){
 		for(Point point:trapRefs){
-			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered(point);
+			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered(new Point(this.x, this.y));
 		}
 	}
 

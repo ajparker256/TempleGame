@@ -46,7 +46,7 @@ public class ArrowTrap extends Tile{
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up
-			if(direction == 1) {
+			if(direction == 1 && p.y-y<range) {
 				fire = true;
 				for(int i = y+1; i<p.y; i++) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
@@ -54,7 +54,7 @@ public class ArrowTrap extends Tile{
 						break;
 					}
 				}
-			} else if(direction == 2) {
+			} else if(direction == 2 && p.x-x<range) {
 				fire = true;
 				for(int i = x+1; i<p.x; i++) {
 					if(Main.grids.get(floor).getTile(i, y).getId() != 0) {
@@ -62,7 +62,7 @@ public class ArrowTrap extends Tile{
 						break;
 					}
 				}
-			} else if(direction == 3) {
+			} else if(direction == 3 && y-p.y <range) {
 				fire = true;
 				for(int i = y-1; i>p.y; i--) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
@@ -70,7 +70,7 @@ public class ArrowTrap extends Tile{
 						break;
 					}
 				}
-			} else if(direction == 4) {
+			} else if(direction == 4 && x-p.x<range) {
 				fire = true;
 				for(int i = x-1; i>p.y; i--) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
@@ -82,6 +82,7 @@ public class ArrowTrap extends Tile{
 			if(fire) {
 				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
 				System.out.println("shooting");
+				isFiring = true;
 				cooldown=maxCd; 
 			}
 		}

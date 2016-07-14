@@ -14,6 +14,7 @@ import gui.GuiTexture;
 import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
@@ -77,9 +78,10 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, i));
+		gridsReadOnly.add(grids.get(i).copy());
 	}
 	grid = grids.get(0);
-	gridsReadOnly.addAll(grids);
+	
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
@@ -213,7 +215,6 @@ public static void main(String[] args) throws FileNotFoundException {
 			
 		}
 		
-		//dynamicGuis.add(testFlame.render());
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
@@ -274,11 +275,9 @@ public static void main(String[] args) throws FileNotFoundException {
 			Tile oldTile=grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 			Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), epicShopofEpicness.getShopItem(mouseX, mouseY));
 			if(selectedTrap.getPrice()<=money && oldTile.getId() != selectedTrap.getId()) {
-				//oldTile=grid.getTile((int)epicShopofEpicness.getPlacementLoc().x, (int)epicShopofEpicness.getPlacementLoc().y);
-				//System.out.println(oldTile.getPosition());
-				//Tile newTile=new Dirt(oldTile.getX(), oldTile.getY(), oldTile.getSize(), Main.grid.getLoc());
 				selectedTrap.setTrapRefs(oldTile.getTrapRefs());
 				grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
+				gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 				epicShopofEpicness.setOn(false);
 				money -= selectedTrap.getPrice();
 			} else if(selectedTrap.getPrice()>money) {

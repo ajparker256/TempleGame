@@ -41,6 +41,13 @@ public class TreasureTrap extends Tile{
 	}
 	
 	@Override
+	public Tile copy() {
+		TreasureTrap t = new TreasureTrap(x, y, size, floor);
+		t.setTrapRefs(trapRefs);
+		return t;
+	}
+	
+	@Override
 	public void interact(Group g) {
 		if(guiTexture.getTexture() == GuiLibrary.treasureClosed) {
 			guiTexture = new GuiTexture(GuiLibrary.treasureOpen, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio()))) ;

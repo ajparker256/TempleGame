@@ -107,6 +107,16 @@ public class Grid {
 		return trapLocs;
 	}
 	
+	public Grid copy() {
+		Grid g = new Grid(location, size, grid.length, floor);
+		for(int i=0;i<grid.length;i++){
+			for(int k=0;k<grid[0].length;k++){
+				g.setTile(k, i, grid[k][i].copy());
+			}
+		}
+		return g;
+	}
+	
 	public int getFloor() {
 		return floor;
 	}
