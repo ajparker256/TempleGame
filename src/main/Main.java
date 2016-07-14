@@ -56,6 +56,7 @@ public static ArrayList<Squad> squads;
 public static GuiTexture background;
 public static int round;
 public static ArrayList<Projectile> projectiles;
+public static double timeInRound;
 public static void main(String[] args) throws FileNotFoundException {
 	grids = new ArrayList<Grid>();
 	squads = new ArrayList<Squad>();
@@ -63,7 +64,6 @@ public static void main(String[] args) throws FileNotFoundException {
 	round = 0;
 	buttons = new ArrayList<Button>();
 	group = new ArrayList<Explorer>();
-//	Camera camera = new Camera();
 	DisplayManager.createDisplay();
 	Loader loader = new Loader();
 	StringLibrary.init();
@@ -78,24 +78,14 @@ public static void main(String[] args) throws FileNotFoundException {
 	}
 	grid = grids.get(0);
 	
-		
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	projectiles= new ArrayList<Projectile>();
 	
-	
-	
-	
-	
 	GuiLibrary.background = loader.loadTexture("background");
 
-	
-	
-	//boolean exit=false;
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);
-	
-	//Initializes Explorer frames for later
 	
 	AnimationLibrary.init(loader);
 	
@@ -173,26 +163,14 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	projectiles.add(new Projectile(3, 1, 9, 0));
 	projectiles.add(new Projectile(3, 1, 8, 0));
-	double timeInRound = 0;
 
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;
-		timeInRound += milli;
+		update(dynamicGuis, milli);
 		
-		//10s per round atm
-		if(timeInRound/1000 > 10) {
-			round++;
-			for(Grid g : grids) {
-				for(Point p : g.getTreasureLocs()) {
-					g.getTile(p.x, p.y).getIncome();
-				}
-			}
-			//Recall units or push them all out then stall somehow
-			timeInRound = 0;
-		}
-		update(dynamicGuis);
+		
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
 		}
@@ -243,7 +221,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		
 	}
 	
-	public static void update(ArrayList<GuiTexture> dynamicGuis) {
+	public static void update(ArrayList<GuiTexture> dynamicGuis, double milli) {
 		//TODO find a way to make this only on click, currently non-func. Works always when mouse is down regardless of event
 		if(!Mouse.getEventButtonState() && Mouse.isButtonDown(0)) {
 			updateMouse(dynamicGuis);
@@ -251,7 +229,18 @@ public static void main(String[] args) throws FileNotFoundException {
 		} else {
 			wasJustDown = false;
 		}
-		
+		//10s per round atm
+		timeInRound += milli;
+			if(timeInRound/1000 > 10) {
+				round++;
+				for(Grid g : grids) {
+					for(Point p : g.getTreasureLocs()) {
+						g.getTile(p.x, p.y).getIncome();
+					}
+				}
+				//Recall units or push them all out then stall somehow
+				timeInRound = 0;
+			}
 		//TODO Test traps
 		//TODO Update Explorer AI
 		//TODO Update player input such as placing traps
@@ -295,8 +284,9 @@ public static void main(String[] args) throws FileNotFoundException {
 				epicShopofEpicness.scrollDown();
 		}
 		for(Grid g : grids) {
-			if(g.isLevelSelected(mouseX, mouseY)) {
+			if(g.isLevelSelected(mouseX, mouseY) && Main.grid.getFloor() != g.getFloor()) {
 				Main.grid = g;
+				epicShopofEpicness.setOn(false);
 				break;
 			}
 		}
