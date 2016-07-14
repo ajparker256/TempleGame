@@ -62,7 +62,7 @@ public class Projectile {
 			case 4: this.x=x-1;
 			break;
 			}
-			if(x>9||x<0||y>9||y<0){
+			if(x>9||x<0||y>9||y<0||(!Main.grid.getTile(x, y).isPassable())){
 				this.kill=true;
 			}
 		}
@@ -93,7 +93,6 @@ public class Projectile {
 				}
 				
 			}else if(location.y>destination.y){
-			
 				tempVelocity.y = -1*velocity.y;
 				setLoc(new Vector2f(getLoc().x, getLoc().y+(tempVelocity.y*milli/1000f)));
 				if(location.y<destination.y){

@@ -12,14 +12,12 @@ import renderEngine.DisplayManager;
 
 public class Dirt extends Tile{
 	
-	protected int hp;
 	protected int level;
 	
 	public Dirt(int x, int y, float size) {
 		super(x, y, size, Main.grid.getLoc());
 		super.passable=false;
 		super.canInteract=true;
-		this.hp=100;
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.dirt0,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Dirt!";
@@ -37,23 +35,7 @@ public class Dirt extends Tile{
 		this.name = "Dirt!";
 		id = 1;
 	}
-	@Override
-	public void interact(Group g){
-		int bonusDamage = 0;
-		for(Explorer e : g.getGroup()) {
-			if(e.getId() == 2) {
-				bonusDamage += 5*e.getDamage();
-			} else {
-				bonusDamage += e.getDamage();
-			}
-		}
-		hp-=(bonusDamage);
-		if(hp<=0){
-			Blank blank = new Blank(super.x, super.y, super.size, Main.grid.getLoc());
-			blank.setTrapRefs(trapRefs);
-			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
-		}
-	}
+
 	
 	@Override
 	public Tile copy() {

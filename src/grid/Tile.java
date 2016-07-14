@@ -1,7 +1,7 @@
 package grid;
 
+import entities.Explorer;
 import entities.Group;
-import entities.Unit;
 import gui.GuiTexture;
 
 import java.awt.Point;
@@ -34,11 +34,13 @@ public class Tile {
 	protected int occupied;
 	protected int floor;
 	protected ArrayList<Point> trapRefs;
+	protected int hp;
 	
 	public Tile(float size, Vector2f location) {
 		this.canInteract = false;
 		this.location = location;
 		this.size = size;
+		this.hp=100;
 		trapRefs=new ArrayList<Point>();
 		name = "Default_Name";
 		price = -1;
@@ -48,6 +50,7 @@ public class Tile {
 	
 	//creates a tile in location loc, give location in column then row
 	public Tile(int x, int y, float size, Vector2f location){
+		this.hp=100;
 		this.canInteract=false;
 		this.location=location;
 		trapRefs=new ArrayList<Point>();
@@ -111,11 +114,6 @@ public class Tile {
 		guiTexture.setPosition(position);
 	}
 
-	public void interact(Group g) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void setSize(float size) {
 		this.size = size;
 	}
@@ -175,6 +173,27 @@ public class Tile {
 
 	public void tick(long milli) {
 		
+	}
+	
+	public void interact(Group g){
+		int bonusDamage = 0;
+		for(Explorer e : g.getGroup()) {
+			if(e.getId() == 2) {
+				bonusDamage += 5*e.getDamage();
+			} else {
+				bonusDamage += e.getDamage();
+			}
+		}
+		hp-=(bonusDamage);
+		if(hp<=0){
+			Blank blank = new Blank(this.x, this.y, this.size, Main.grid.getLoc());
+			blank.setTrapRefs(trapRefs);
+			Main.grids.get(g.getFloor()).setTile(this.x, this.y, blank);
+		}
+	}
+
+	public boolean isPassable() {
+		return passable;
 	}
 
 

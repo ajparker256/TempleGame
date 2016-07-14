@@ -15,7 +15,6 @@ import renderEngine.DisplayManager;
 
 public class ArrowTrap extends Tile{
 	
-	protected int hp;
 	protected int level;
 	protected int direction;
 	protected Animation firing;
@@ -30,7 +29,6 @@ public class ArrowTrap extends Tile{
 		super.canInteract=true;
 		this.cooldown=0;
 		this.direction=direction;
-		this.hp=100;
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Arrow Trap";
