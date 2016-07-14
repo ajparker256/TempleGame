@@ -152,7 +152,6 @@ public class Tile {
 	}
 	public void trigger(int x, int y){
 		for(Point point:trapRefs){
-			System.out.println("sdsfsd");
 			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered();
 		}
 	}
