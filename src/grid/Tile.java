@@ -4,6 +4,7 @@ import entities.Group;
 import entities.Unit;
 import gui.GuiTexture;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import main.Main;
@@ -32,11 +33,13 @@ public class Tile {
 	protected int id;
 	protected int occupied;
 	protected int floor;
+	protected ArrayList<Point> trapRefs;
 	
 	public Tile(float size, Vector2f location) {
 		this.canInteract = false;
 		this.location = location;
 		this.size = size;
+		trapRefs=new ArrayList<Point>();
 		name = "Default_Name";
 		price = -1;
 		id = -1;
@@ -47,6 +50,7 @@ public class Tile {
 	public Tile(int x, int y, float size, Vector2f location){
 		this.canInteract=false;
 		this.location=location;
+		trapRefs=new ArrayList<Point>();
 		this.size=size;
 		this.x=x;
 		this.y=y;
@@ -146,7 +150,18 @@ public class Tile {
 	public String toString() {
 		return name;
 	}
-	
+	public void trigger(int x, int y){
+		for(Point point:trapRefs){
+			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered();
+		}
+	}
+
+	protected void whenTriggered() {
+
+	}
+	public void addTrapRef(Point point){
+		trapRefs.add(point);
+	}
 
 
 
