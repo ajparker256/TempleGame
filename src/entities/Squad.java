@@ -46,36 +46,40 @@ public class Squad {
 		int i = 0;
 		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
 		//For each tile type, add the appropriate odds and total them
-		int groupWithTreasureFinder = -1;
+		boolean[] groupsWithTreasureFinder = new boolean[groups.size()];
+		int num = 0;
+		int treasureFloor = -1;
 		for(int j = 0; j<groups.size(); j++) {
 			Group g = groups.get(j);
 			for(int k = 0; k<g.getIds().size(); k++) {
 				if(g.getIds().get(k) == 3) {
-					groupWithTreasureFinder = j;
+					groupsWithTreasureFinder[k] = true;
+					num++;
+					treasureFloor = g.getFloor();
 				}
 			}
 		}
 		int[] treasureFinderOdds = new int[4];
-		if(groupWithTreasureFinder != -1 && groups.get(groupWithTreasureFinder).getFloor() == groups.get(groups.size()-1).getFloor()) {
-			ArrayList<Point> treasureLocs = Main.grids.get(groups.get(groupWithTreasureFinder).getFloor()).getTreasureLocs();
+		if(num>0 && treasureFloor == groups.get(groups.size()-1).getFloor()) {
+			ArrayList<Point> treasureLocs = Main.grids.get(treasureFloor).getTreasureLocs();
 			for(Point loc : treasureLocs) {
 				int xRange = loc.x - groups.get(groups.size()-1).getNextLoc().x;
 				int yRange = loc.y - groups.get(groups.size()-1).getNextLoc().y;
 				int maxOdds = 50;
-				if(Math.abs(xRange) <3 && Math.abs(yRange) <3) {
+				if(Math.abs(xRange) <4 && Math.abs(yRange) <4) {
 					//Left && Right
 					if(xRange > 0) {
 					//Max odds / distance 
-						treasureFinderOdds[0] = maxOdds/Math.abs(xRange);
+						treasureFinderOdds[0] = num*maxOdds/Math.abs(xRange);
 					} else if(xRange < 0) {
-						treasureFinderOdds[1] = maxOdds/Math.abs(xRange);
+						treasureFinderOdds[1] = num*maxOdds/Math.abs(xRange);
 					}
 					
 					//Down then up
 					if(yRange<0) {
-						treasureFinderOdds[2] = maxOdds/Math.abs(yRange);
+						treasureFinderOdds[2] = num*maxOdds/Math.abs(yRange);
 					} else if(yRange>0) {
-						treasureFinderOdds[3] = maxOdds/Math.abs(yRange);
+						treasureFinderOdds[3] = num*maxOdds/Math.abs(yRange);
 					}
 				}
 			}

@@ -37,6 +37,7 @@ import entities.Group;
 import entities.Miner;
 import entities.Projectile;
 import entities.Squad;
+import entities.TreasureHunter;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import sound.Sound;
@@ -133,7 +134,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	for(Group g : squad1List) {
 		g.add(new Explorer (g));
 		g.add(new Miner (g));
-		g.add(new Explorer (g));
+		g.add(new TreasureHunter(g));
 		g.add(new Miner (g));
 	}
 	Squad squad1=new Squad(squad1List, 1);
