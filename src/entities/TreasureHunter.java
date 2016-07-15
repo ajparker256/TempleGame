@@ -15,7 +15,7 @@ public class TreasureHunter extends Explorer{
 		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
 		super.animation.setDelay(25);
 		this.idley=GuiLibrary.explorerStanding;
-		this.idlex=GuiLibraary.explorerStanding1;
+		this.idlex=GuiLibrary.explorerStanding1;
 		this.animationx=AnimationLibrary.explorerX;
 		this.animationy=AnimationLibrary.explorerY;
 		this.id = 3;
