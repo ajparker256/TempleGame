@@ -149,6 +149,7 @@ public class Squad {
 		}
 		groups.removeAll(toRemove);
 		boolean go=true;
+	if(!groups.isEmpty())	{
 		for(Group group:groups){
 			if(group.move(milli, Main.grids.get(group.getFloor()))){
 				for(Group group2: groups){
@@ -190,5 +191,5 @@ public class Squad {
 			previousFloor = groups.get(groups.size()-1).getFloor();
 			}
 		}
-	
+	}
 }

@@ -270,6 +270,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
 		if(epicShopofEpicness.isExitClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setOn(false);
+			rotationDialogueBox.setOn(false);
 		}
 		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn()) {
 			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
@@ -297,7 +298,7 @@ public static void main(String[] args) throws FileNotFoundException {
 					int k = 1;
 					for(int i = 0; i<2; i++) {
 						for(int j = 0; j<2; j++) {
-							rotations[i][j] = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), .1f, selectedTrap.getId());
+							rotations[i][j] = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), .08f, selectedTrap.getId());
 							rotations[i][j].setName(k+"");
 							k++;
 						}
