@@ -271,7 +271,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(epicShopofEpicness.isExitClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setOn(false);
 		}
-		if(grid.getGridButton().isClicked(mouseX, mouseY)) {
+		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn()) {
 			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
 			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
@@ -315,6 +315,8 @@ public static void main(String[] args) throws FileNotFoundException {
 			if(rotationDialogueBox.getSelection() != 0 && rotationDialogueBox.isConfirmed(mouseX, mouseY)) {
 				grid.setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
 				rotationDialogueBox.setSelection(0);
+				rotationDialogueBox.setOn(false);
+				epicShopofEpicness.setOn(false);
 			}
 			if(rotationDialogueBox.isExitClicked(mouseX, mouseY) || rotationDialogueBox.isCanceled(mouseX, mouseY)) {
 				rotationDialogueBox.setOn(false);

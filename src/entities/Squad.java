@@ -51,13 +51,15 @@ public class Squad {
 		int treasureFloor = -1;
 		for(int j = 0; j<groups.size(); j++) {
 			Group g = groups.get(j);
-			for(int k = 0; k<g.getIds().size(); k++) {
-				if(g.getIds().get(k) == 3) {
-					groupsWithTreasureFinder[k] = true;
+			boolean hasTreasureFinder = false;
+			for(int k = 0; k<g.getGroup().size(); k++) {
+				if(g.getGroup().get(k).getId() == 3) {
+					hasTreasureFinder = true;
 					num++;
 					treasureFloor = g.getFloor();
 				}
 			}
+			groupsWithTreasureFinder[j] = hasTreasureFinder;
 		}
 		int[] treasureFinderOdds = new int[4];
 		if(num>0 && treasureFloor == groups.get(groups.size()-1).getFloor()) {

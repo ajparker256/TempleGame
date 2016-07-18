@@ -256,6 +256,7 @@ public class Group {
 
 	public void removeExplorer(Explorer explorer) {
 		group.remove(explorer);
+		groupIds.remove((Integer)explorer.getId());
 	}
 
 
