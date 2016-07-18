@@ -319,7 +319,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setOn(false);
 				epicShopofEpicness.setOn(false);
 			}
-			if(rotationDialogueBox.isExitClicked(mouseX, mouseY) || rotationDialogueBox.isCanceled(mouseX, mouseY)) {
+			if(rotationDialogueBox.isCanceled(mouseX, mouseY)) {
 				rotationDialogueBox.setOn(false);
 			}
 		}

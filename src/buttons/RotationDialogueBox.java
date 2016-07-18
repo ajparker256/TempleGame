@@ -91,8 +91,6 @@ public class RotationDialogueBox extends Shop{
 		}
 		guis.addAll(StringLibrary.makeItFitC(message, new Vector2f(location.x, location.y+size.y+.1f), size.x));
 		
-		guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth("X"),
-				location.y+size.y*(.5f * (visibilityRange[3]-visibilityRange[2]))+StringLibrary.getSize().y)));
 		guis.addAll(StringLibrary.drawString("Confirm", new Vector2f(location.x,
 				location.y+StringLibrary.getSize().y/2)));
 		guis.addAll(StringLibrary.drawString("Cancel", new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth("Cancel"),
