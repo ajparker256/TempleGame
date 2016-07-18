@@ -88,13 +88,13 @@ public class Shop {
 			}
 		}
 		updateShopPosition();
-		upArrow = new GuiTexture(GuiLibrary.upArrow, new Vector2f(location.x+size.x/2, location.y+size.y+.025f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+		upArrow = new GuiTexture(GuiLibrary.upArrow, new Vector2f(location.x+size.x/2, location.y+size.y+.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 		
 		upArrowHitbox = new Button(new Vector2f(upArrow.getPosition().x-upArrow.getScale().x/2, upArrow.getPosition().y+upArrow.getScale().y/2),
 				new Vector2f(upArrow.getPosition().x+upArrow.getScale().x/2, upArrow.getPosition().y-upArrow.getScale().y/2));
 		
 		
-		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-.025f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 		
 		downArrowHitbox = new Button(new Vector2f(downArrow.getPosition().x-downArrow.getScale().x/2, downArrow.getPosition().y+downArrow.getScale().y/2),
 				new Vector2f(downArrow.getPosition().x+downArrow.getScale().x/2, downArrow.getPosition().y-downArrow.getScale().y/2));
@@ -164,9 +164,8 @@ public class Shop {
 				
 			//	guis.add(frames[j][i]);
 				guis.add(traps[j][i].drawTile());
-				
-				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(traps[j][i].drawTile().getPosition().x, 
-						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
+				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(traps[j][i].drawTile().getPosition().x-traps[j][i].drawTile().getScale().x, 
+						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y-textSize.y/2), size.x/traps[0].length));
 			}
 		}
 		StringLibrary.setSize(new Vector2f(.02f, .04f));

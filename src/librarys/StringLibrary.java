@@ -100,13 +100,14 @@ public class StringLibrary {
 				if(length+wordWidth>width) {
 					string.addAll(drawString(s.substring(0, letterCount), new Vector2f(locationOfTopLeftCorner.x+(width-length)/2, locationOfTopLeftCorner.y-row*size.y*2)));
 					s=s.substring(letterCount);
-					row++;
+					if(length != 0)
+						row++;
 					length = wordWidth;
 					letterCount = nextWord.length();
 				} else {
 					length+=wordWidth;
 					letterCount+=nextWord.length();
-				}
+				} 
 		}
 		string.addAll(drawString(s, new Vector2f(locationOfTopLeftCorner.x+(width-length)/2, locationOfTopLeftCorner.y-row*size.y*2)));
 		

@@ -20,7 +20,7 @@ public class TreasureTrap extends Tile{
 		super(size, Main.grid.getLoc());
 		this.floor = floor;
 		this.guiTexture=(new GuiTexture(GuiLibrary.treasureClosed,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "Treasue";
+		this.name = "Treasure";
 		setPrice(200);
 		this.id = 4;
 		reward = 100;
@@ -36,7 +36,7 @@ public class TreasureTrap extends Tile{
 		super.canInteract=true;
 		this.reward=100;
 		this.guiTexture=(new GuiTexture(GuiLibrary.treasureClosed,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "Treasue";
+		this.name = "Treasure";
 		setPrice(200);
 	}
 	
