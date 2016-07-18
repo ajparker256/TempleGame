@@ -32,7 +32,7 @@ public class ArrowTrap extends Tile{
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Arrow Trap";
-		this.maxCd=1000;
+		this.maxCd=100000000;
 		id = 5;
 		range = 5;
 		rotatable = true;
