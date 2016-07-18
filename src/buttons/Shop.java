@@ -49,7 +49,11 @@ public class Shop {
 	
 	private Button exitShop;
 	
-	private Button[][] shopHitboxes;
+	protected Button[][] shopHitboxes;
+	
+	public Shop() {
+		
+	}
 	
 	public Shop(Vector2f location, Vector2f size, Tile[][] traps) {
 		this.location = location;

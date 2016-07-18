@@ -30,6 +30,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
 import buttons.Button;
+import buttons.RotationDialogueBox;
 import buttons.Shop;
 import entities.Explorer;
 import entities.Flame;
@@ -57,6 +58,7 @@ public static boolean wasJustDown = false;
 public static ArrayList<Squad> squads;
 public static GuiTexture background;
 public static int round;
+public static RotationDialogueBox rotationDialogueBox;
 public static ArrayList<Projectile> projectiles;
 public static double timeInRound;
 public static ArrayList<Grid> gridsReadOnly;
@@ -82,7 +84,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		gridsReadOnly.add(grids.get(i).copy());
 	}
 	grid = grids.get(0);
-	
+	rotationDialogueBox = new RotationDialogueBox();
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
@@ -215,6 +217,9 @@ public static void main(String[] args) throws FileNotFoundException {
 				dynamicGuis.add(projectile.render());
 			
 		}
+		if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
+			rotationDialogueBox.render(dynamicGuis);
+		}
 		
 		
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
@@ -277,7 +282,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			int selection = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selection != -1) {
 				Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
-				if(selectedTrap.getPrice()<=money && oldTile.getId() != selectedTrap.getId()) {
+				if(selectedTrap.getPrice()<=money && oldTile.getId() != selectedTrap.getId() && !selectedTrap.isRotatable()) {
 					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
 					grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
@@ -287,7 +292,32 @@ public static void main(String[] args) throws FileNotFoundException {
 					dynamicGuis.addAll(StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
 				} else if(oldTile.getId() == selectedTrap.getId()) {
 					dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*6), epicShopofEpicness.getSize().x*1.6f));
+				} else if(selectedTrap.isRotatable()) {
+					Tile[][] rotations = new Tile[2][2];
+					int k = 1;
+					for(int i = 0; i<2; i++) {
+						for(int j = 0; j<2; j++) {
+							rotations[i][j] = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), .1f, selectedTrap.getId());
+							rotations[i][j].setName(k+"");
+							k++;
+						}
+					}
+					Vector2f size1 = new Vector2f(.8f, .8f);
+					rotationDialogueBox = new RotationDialogueBox(new Vector2f(-size1.x/2, -size1.y/2), size1, rotations, "Which way should it point?");
 				}
+			}
+		}
+		if(rotationDialogueBox.isOn()) {
+			int selected = rotationDialogueBox.getShopItem(mouseX, mouseY);
+			if(selected != 0) {
+				rotationDialogueBox.setSelection(selected);
+			}
+			if(rotationDialogueBox.getSelection() != 0 && rotationDialogueBox.isConfirmed(mouseX, mouseY)) {
+				grid.setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
+				rotationDialogueBox.setSelection(0);
+			}
+			if(rotationDialogueBox.isExitClicked(mouseX, mouseY) || rotationDialogueBox.isCanceled(mouseX, mouseY)) {
+				rotationDialogueBox.setOn(false);
 			}
 		}
 		if(epicShopofEpicness.isOn()) {

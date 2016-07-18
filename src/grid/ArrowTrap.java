@@ -35,6 +35,7 @@ public class ArrowTrap extends Tile{
 		this.maxCd=1000;
 		id = 5;
 		range = 5;
+		rotatable = true;
 		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		firing.setDelay(25);
 		setTriggers();

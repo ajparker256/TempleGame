@@ -35,6 +35,7 @@ public class Tile {
 	protected int floor;
 	protected ArrayList<Point> trapRefs;
 	protected int hp;
+	protected boolean rotatable;
 	
 	public Tile(float size, Vector2f location) {
 		this.canInteract = false;
@@ -75,6 +76,18 @@ public class Tile {
 	
 	public void upgrade(int i) {
 		//STUB
+	}
+	
+	public void setName(String s) {
+		name = s;
+	}
+	
+	public boolean isRotatable() {
+		return rotatable;
+	}
+	
+	public void setRotatable(boolean b) {
+		rotatable = b;
 	}
 	
 	public void getIncome() {

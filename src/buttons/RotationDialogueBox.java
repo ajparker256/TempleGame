@@ -10,7 +10,7 @@ import gui.GuiTexture;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
 
-public class DialogueBox extends Shop{
+public class RotationDialogueBox extends Shop{
 
 	private Button confirm;
 	
@@ -18,11 +18,14 @@ public class DialogueBox extends Shop{
 	
 	private String message;
 	
-	private Shop shop;
+	private int currentSelection;
 	
-	public DialogueBox(Vector2f location, Vector2f size, Tile[][] options, String message, Shop s) {
+	public RotationDialogueBox() {
+		isOn = false;
+	}
+	
+	public RotationDialogueBox(Vector2f location, Vector2f size, Tile[][] options, String message) {
 		super(location, size, options);
-		this.shop = s;
 		this.message = message;
 		confirm = new Button(new Vector2f(location.x,
 				location.y+StringLibrary.getSize().y),
@@ -46,15 +49,24 @@ public class DialogueBox extends Shop{
 			visibilityRange[2] = options[0].length-2;
 		}
 		isOn = true;
-		
+		currentSelection = 0;
 		
 	}
 	
-	public void isCanceled(float mouseX, float mouseY) {
-		if(cancel.isClicked(mouseX,mouseY)) {
-			isOn = false;
-			shop.setOn(false);
-		}
+	public Tile getGivenTile() {
+		return traps[0][0];
+	}
+	
+	public boolean isCanceled(float mouseX, float mouseY) {
+		return cancel.isClicked(mouseX, mouseY);
+	}
+	
+	public void setSelection(int i) {
+		currentSelection = i;
+	}
+	
+	public int getSelection() {
+		return currentSelection;
 	}
 	
 	public boolean isConfirmed(float mouseX, float mouseY) {
@@ -62,14 +74,15 @@ public class DialogueBox extends Shop{
 	}
 	
 	public void render(ArrayList<GuiTexture> guis) {
-		
+		int k = 1;
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				
 				guis.add(traps[j][i].drawTile());
 				
-				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(traps[j][i].drawTile().getPosition().x, 
+				guis.addAll(StringLibrary.makeItFitC(k+"", new Vector2f(traps[j][i].drawTile().getPosition().x, 
 						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
+				k++;
 			}
 		}
 		guis.addAll(StringLibrary.makeItFitC(message, new Vector2f(location.x, location.y+size.y+.1f), size.x));
@@ -80,6 +93,20 @@ public class DialogueBox extends Shop{
 				location.y+StringLibrary.getSize().y)));
 		guis.addAll(StringLibrary.drawString("Cancel", new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth("Cancel"),
 				location.y+StringLibrary.getSize().y)));
+	}
+	
+	@Override
+	public int getShopItem(float mouseX, float mouseY) {
+		int k = 1;
+		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
+			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
+				if(shopHitboxes[j][i].isClicked(mouseX, mouseY)) {
+					return k;
+				}
+				k++;
+			}
+		}
+		return 0;
 	}
 
 	
