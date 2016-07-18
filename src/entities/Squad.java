@@ -134,13 +134,18 @@ public class Squad {
 	}
 	
 	public void tick(int milli, Grid grid){
+		ArrayList<Group> toRemove=new ArrayList<Group>(); 
 		for(Group group:groups){
 			for(int i=0;i<group.getGroup().size();i++){
 				Explorer explorer=group.getGroup().get(i);
 				if(explorer.isKill())
 					group.removeExplorer(explorer);
 			}
+			if(group.getGroup().size()==0){
+				toRemove.add(group);
+			}
 		}
+		groups.removeAll(toRemove);
 		boolean go=true;
 		for(Group group:groups){
 			if(group.move(milli, Main.grids.get(group.getFloor()))){
