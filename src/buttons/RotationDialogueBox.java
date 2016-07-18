@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import grid.Tile;
 import gui.GuiTexture;
+import librarys.GuiLibrary;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
 
@@ -17,6 +18,8 @@ public class RotationDialogueBox extends Shop{
 	private Button cancel;
 	
 	private String message;
+	
+	private GuiTexture background;
 	
 	private int currentSelection;
 	
@@ -50,7 +53,7 @@ public class RotationDialogueBox extends Shop{
 		}
 		isOn = true;
 		currentSelection = 0;
-		
+		background = new GuiTexture(GuiLibrary.dirt0, new Vector2f(location.x+size.x/2, location.y+size.y/2), new Vector2f(size.x/2,size.y/2));
 	}
 	
 	public Tile getGivenTile() {
@@ -75,6 +78,7 @@ public class RotationDialogueBox extends Shop{
 	
 	public void render(ArrayList<GuiTexture> guis) {
 		int k = 1;
+		guis.add(background);
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				
