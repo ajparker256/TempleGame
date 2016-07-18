@@ -29,8 +29,16 @@ public class Group {
 	private boolean wait;
 	private int squadId;
 	private int floor;
-	private Point realLoc;
+	protected Point realLoc;
 	
+	public Point getRealLoc() {
+		return realLoc;
+	}
+
+	public void setRealLoc(Point realLoc) {
+		this.realLoc = realLoc;
+	}
+
 	public boolean getWait() {
 		return wait;
 	}
@@ -88,58 +96,7 @@ public class Group {
 	public ArrayList<Integer> getIds() {
 		return groupIds;
 	}
-	/*public Point getNextLoc(Grid currentFloor) {
-		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*//*);
-		int total = 0;
-		int[] individualOdds = new int[4];
-		int i = 0;
-		if(nextLoc.x != -1) {
-			path.add(nextLoc);
-		}
-		if(path.size()>1) {
-			Main.grids.get(this.getFloor()).getTile(path.get(path.size()-2).x, path.get(path.size()-2).y).setOccupied(squadId);
-		}
-		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
-		//For each tile type, add the appropriate odds and total them
-		
-		for(Tile currentTile : moves) {
-			//System.out.println(currentTile+" This is the tile in moves["+i+"]");
-			if(currentTile == null) {
-				i++;
-				continue;
-				//Adds 10 odds if its a blank tile
-			} else if(currentTile.getId() == 0) {
-				individualOdds[i] += 10;
-			} else if(currentTile.getId() == 1) {
-				individualOdds[i] += 50;
-			} else if(currentTile.getId() == 2) {
-				individualOdds[i] += 300;
-			}
-			total+=individualOdds[i];
-			i++;
-		}
-		i = 0;
-		
-		rand *= total;
-		
-		//Evaluate which one random fell into
-		for(int currentOdds : individualOdds) {
-			if(currentOdds == 0) {
-				i++;
-				continue;
-			}
-			if(rand <= currentOdds) {
-				return new Point(moves[i].getX(), moves[i].getY());
-			} else {
-				i++;
-				rand -= currentOdds;
-			}
-		}
-		System.out.println("ERROR CASE IN GROUP PATH LOGIC!!!");
-		return new Point(nextLoc.x, nextLoc.y+1);
-	}*/
-	
+
 	public boolean move(int milli,Grid grid) {
 		
 		if(wait){
@@ -277,6 +234,28 @@ public class Group {
 		for(Explorer explorer: group){
 			explorer.setIdle();
 		}
+	}
+
+	public void damage(boolean[] toHit,int damage) {
+			for(Explorer explorer:group){
+			if(toHit[0]&&explorer.getPosition()==1){
+				explorer.damage(damage);
+			}
+			if(toHit[1]&&explorer.getPosition()==2){
+				explorer.damage(damage);
+			}
+			if(toHit[2]&&explorer.getPosition()==3){
+				explorer.damage(damage);
+			}
+			if(toHit[3]&&explorer.getPosition()==4){
+				explorer.damage(damage);
+			}
+			}
+		
+	}
+
+	public void removeExplorer(Explorer explorer) {
+		group.remove(explorer);
 	}
 
 

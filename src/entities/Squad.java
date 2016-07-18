@@ -134,6 +134,13 @@ public class Squad {
 	}
 	
 	public void tick(int milli, Grid grid){
+		for(Group group:groups){
+			for(int i=0;i<group.getGroup().size();i++){
+				Explorer explorer=group.getGroup().get(i);
+				if(explorer.isKill())
+					group.removeExplorer(explorer);
+			}
+		}
 		boolean go=true;
 		for(Group group:groups){
 			if(group.move(milli, Main.grids.get(group.getFloor()))){

@@ -20,5 +20,4 @@ public class TreasureHunter extends Explorer{
 		this.animationy=AnimationLibrary.explorerY;
 		this.id = 3;
 	}
-
 }

@@ -433,7 +433,16 @@ setIdle();
 		
 		}
 		super.animation.setDelay(25);
+	}
+	public int getPosition(){
+		return position;
+	}
 
+	public void damage(int damageTaken) {
+		super.hp-=damageTaken;
+		if(hp<=0){
+			super.kill=true;
+		}
 		
 	}
 	

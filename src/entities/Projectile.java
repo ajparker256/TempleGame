@@ -62,6 +62,14 @@ public class Projectile {
 			case 4: this.x=x-1;
 			break;
 			}
+	for(Squad squad:Main.squads){
+		for(Group group: squad.getGroups()){
+			if(group.getRealLoc().equals(new Point(x,y))){
+				group.damage(new boolean[]{true,true,true,true},20);
+				this.kill=true;
+			}
+		}
+	}
 			if(x>9||x<0||y>9||y<0||(!Main.grid.getTile(x, y).isPassable())){
 				this.kill=true;
 			}
@@ -116,5 +124,4 @@ public class Projectile {
 	public boolean isKill() {
 		return kill;
 	}
-
 }

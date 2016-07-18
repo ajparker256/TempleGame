@@ -18,7 +18,7 @@ import gui.GuiTexture;
 public class Unit {
 	
 	//This is the amount of damage a unit can take before dying.
-	private int hp;
+	protected int hp;
 	
 	//This is a unit's location relative to the screen in pixels from the top left corner.
 	protected Vector2f location;
@@ -40,10 +40,13 @@ public class Unit {
 
 	protected Vector2f tempVelocity;
 
+	protected boolean kill;
+
 	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
+		this.kill=false;
 		tempVelocity=new Vector2f(0, 0);
 		this.animation=new Animation(AnimationLibrary.explorerY,location,size);
 		velocity=new Vector2f(0,0);
@@ -90,6 +93,10 @@ public class Unit {
 		
 	}
 	
+	public boolean isKill() {
+		return kill;
+	}
+
 	//This prints the unit at its location, with its design and with its size
 	//Optimization strategy: Return the GuiTexture instead and render only one arrayList so as to avoid
 	//Any excess memory usage.
