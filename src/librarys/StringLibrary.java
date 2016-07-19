@@ -95,22 +95,21 @@ public class StringLibrary {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		while(scan.hasNext()) {
 			//This is used to subString the line for drawing it centered
-				String nextWord = scan.next()+" ";
+				String nextWord = scan.next();
 				float wordWidth = getWidth(nextWord);
 				if(length+wordWidth>width) {
-					string.addAll(drawString(s.substring(0, letterCount), new Vector2f(locationOfTopLeftCorner.x+(width-length)/2, locationOfTopLeftCorner.y-row*size.y*2)));
+					string.addAll(drawString(s.substring(0, letterCount), new Vector2f(locationOfTopLeftCorner.x+(width-length+getWidth(' '))/2, locationOfTopLeftCorner.y-row*size.y*2)));
 					s=s.substring(letterCount);
 					if(length != 0)
 						row++;
-					length = wordWidth;
-					letterCount = nextWord.length();
+					length = wordWidth+getWidth(' ');
+					letterCount = nextWord.length()+1;
 				} else {
-					length+=wordWidth;
-					letterCount+=nextWord.length();
+					length+=wordWidth+getWidth(' ');
+					letterCount+=nextWord.length()+1;
 				} 
 		}
-		string.addAll(drawString(s, new Vector2f(locationOfTopLeftCorner.x+(width-length)/2, locationOfTopLeftCorner.y-row*size.y*2)));
-		
+		string.addAll(drawString(s, new Vector2f(locationOfTopLeftCorner.x+(width-length+getWidth(' '))/2, locationOfTopLeftCorner.y-row*size.y*2)));
 		scan.close();
 		return string;
 	}

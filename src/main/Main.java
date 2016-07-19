@@ -164,7 +164,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	traps[0][1] = new CursedIdol(-20,-20, .03f);
 	traps[0][0] = new Exit(-20,-20, .03f);
 	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
-	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.3f, .4f), traps);
+	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.25f, .5f), traps);
 	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()), Main.grid.getFloor());
 	projectiles.add(testFlame);
 	//Makes the background white
