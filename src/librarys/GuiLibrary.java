@@ -162,6 +162,9 @@ public static int arrowVolley;
 
 public static int backgroundDraft1;
 	
+public static int commonBackground;
+public static int rareBackground;
+public static int legendaryBackground;
 
 public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
@@ -302,6 +305,9 @@ public static void init(Loader loader) {
 		
 		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 	
+		//GuiLibrary.commonBackground = loader.loadTexture("");
+		//GuiLibrary.rareBackground = loader.loadTexture("");
+		//GuiLibrary.legendaryBackground = loader.loadTexture("");
 	}
 	
 

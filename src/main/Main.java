@@ -222,7 +222,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 		
 		if(counter < 250) {
-			dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.4f, 1.2f)));
+			dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
 			counter++;
 		}
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
