@@ -159,6 +159,8 @@ public static int arrowTrap2;
 public static int arrowTrap3;
 public static int arrowTrap4;
 public static int arrowVolley;
+
+public static int backgroundDraft1;
 	
 
 public static void init(Loader loader) {
@@ -213,7 +215,7 @@ public static void init(Loader loader) {
 		GuiLibrary.flame3 = loader.loadTexture("Flames/Fire3");
 		GuiLibrary.flame4 = loader.loadTexture("Flames/Fire4");
 		
-GuiLibrary.space = loader.loadTexture("letters/space");
+		GuiLibrary.space = loader.loadTexture("letters/space");
 		
 		GuiLibrary.Num1= loader.loadTexture("letters/Num1");
 		GuiLibrary.Num2= loader.loadTexture("letters/Num2");
@@ -296,7 +298,7 @@ GuiLibrary.space = loader.loadTexture("letters/space");
 		GuiLibrary.arrowTrap4 = loader.loadTexture("CrossBow4");
 		GuiLibrary.arrowVolley = loader.loadTexture("arrows");		
 		
-		
+		GuiLibrary.backgroundDraft1 = loader.loadTexture("Title Screen/BackgroundDraft1");
 		
 		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 	

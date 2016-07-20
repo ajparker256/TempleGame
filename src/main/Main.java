@@ -93,11 +93,10 @@ public static void main(String[] args) throws FileNotFoundException {
 	GuiLibrary.background = loader.loadTexture("background");
 
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
-	Sound.loopSound(SoundLibrary.music);
-	
+	Sound.loopSound(SoundLibrary.music);	
 	AnimationLibrary.init(loader);
 	
-	
+	guis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(-1f, -1f), new Vector2f(1.8f, 1.8f)));
 /*	Group group1 = new Group(0);
 	group1.add(new Explorer (group1));
 	group1.add(new Miner (group1));
@@ -169,10 +168,11 @@ public static void main(String[] args) throws FileNotFoundException {
 	projectiles.add(testFlame);
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
+
 	
 	projectiles.add(new Projectile(3, 1, 9, 0));
 	projectiles.add(new Projectile(3, 1, 8, 0));
-
+	int counter = 0;
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
@@ -221,7 +221,10 @@ public static void main(String[] args) throws FileNotFoundException {
 			rotationDialogueBox.render(dynamicGuis);
 		}
 		
-		
+		if(counter < 250) {
+			dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.4f, 1.2f)));
+			counter++;
+		}
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		guiRenderer.render(dynamicGuis);
