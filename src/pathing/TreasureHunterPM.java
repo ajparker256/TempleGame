@@ -18,7 +18,12 @@ public class TreasureHunterPM extends PathModifier{
 		int[] treasureFinderOdds = new int[4];
 		ArrayList<Group> groups = squad.getGroups();
 			ArrayList<Point> treasureLocs = Main.grids.get(groups.get(groups.size()-1).getFloor()).getTreasureLocs();
+			int i = 0;
 			for(Point loc : treasureLocs) {
+				if(adjacentTiles[i] == null) {
+					i++;
+					continue;
+				}
 				int xRange = loc.x - groups.get(groups.size()-1).getNextLoc().x;
 				int yRange = loc.y - groups.get(groups.size()-1).getNextLoc().y;
 				int maxOdds = 50;
@@ -38,6 +43,7 @@ public class TreasureHunterPM extends PathModifier{
 						treasureFinderOdds[3] = maxOdds/Math.abs(yRange);
 					}
 				}
+				i++;
 			}
 			return treasureFinderOdds;
 		}
