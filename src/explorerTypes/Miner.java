@@ -13,8 +13,7 @@ public class Miner extends Explorer{
 		super.idle=new GuiTexture(GuiLibrary.minerStanding,location,unitSize);
 		super.animation=new Animation(AnimationLibrary.miner,location,unitSize);
 		super.animation.setDelay(25);
-		this.idley=GuiLibrary.minerStanding;
-		this.idlex=GuiLibrary.minerStanding1;
+
 		this.id = 1;
 	}
 

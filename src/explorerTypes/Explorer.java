@@ -28,10 +28,12 @@ public class Explorer extends Unit{
 	protected int floor;
 	protected int id;
 	protected int damage;
+	protected int delay;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		this.delay=25;
 		this.id = -1;
 		this.lastDirection=2;
 		this.group=group;
@@ -39,10 +41,8 @@ public class Explorer extends Unit{
 		position=group.getPosition();
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
 		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
-		super.animation.setDelay(25);
+		super.animation.setDelay(delay);
 		this.velocity = velocity;
-		this.idley=GuiLibrary.explorerStanding;
-		this.idlex=GuiLibrary.explorerStanding1;
 		floor = Main.grids.get(0).getFloor();
 		damage = 1;
 		
@@ -384,7 +384,7 @@ public class Explorer extends Unit{
 		break;
 		
 		}
-		super.animation.setDelay(25);
+		super.animation.setDelay(delay);
 		lastDirection=direction;
 		
 	}
@@ -431,7 +431,7 @@ setIdle();
 		break;
 		
 		}
-		super.animation.setDelay(25);
+		super.animation.setDelay(delay);
 	}
 	public int getPosition(){
 		return position;
@@ -442,6 +442,12 @@ setIdle();
 		if(hp<=0){
 			super.kill=true;
 		}
+		
+	}
+
+	public void setDelay(int delay) {
+		this.delay=delay;
+		animation.setDelay(delay);
 		
 	}
 	

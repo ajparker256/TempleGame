@@ -13,10 +13,9 @@ public class TreasureHunter extends Explorer{
 	public TreasureHunter(Group group) {
 		super(group);
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
-		super.animation.setDelay(25);
-		this.idley=GuiLibrary.explorerStanding;
-		this.idlex=GuiLibrary.explorerStanding1;
+		super.animation=new Animation(AnimationLibrary.test,location,unitSize);
+		super.setDelay(5);
+
 		this.id = 3;
 	}
 	

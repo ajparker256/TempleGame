@@ -19,16 +19,21 @@ public static int health;
 public static int explorerStanding;
 public static int explorerWalkingL;
 public static int explorerWalkingR;
-public static int explorerStanding1;
-public static int explorerWalkingL1;
-public static int explorerWalkingR1;
+
 
 public static int minerStanding;
 public static int minerWalkingL;
 public static int minerWalkingR;
-public static int minerStanding1;
-public static int minerWalkingL1;
-public static int minerWalkingR1;
+
+public static int test1;
+public static int test2;
+public static int test3;
+public static int test4;
+public static int test5;
+public static int test6;
+public static int test7;
+
+
 
 
 
@@ -175,6 +180,14 @@ public static void init(Loader loader) {
 		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/Miner");
 		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/MinerWalking1");
 		GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/MinerWalking2");
+		
+		GuiLibrary.test1=loader.loadTexture("Explorers/Test/1");
+		GuiLibrary.test2=loader.loadTexture("Explorers/Test/2");
+		GuiLibrary.test3=loader.loadTexture("Explorers/Test/3");
+		GuiLibrary.test4=loader.loadTexture("Explorers/Test/4");
+		GuiLibrary.test5=loader.loadTexture("Explorers/Test/5");
+		GuiLibrary.test6=loader.loadTexture("Explorers/Test/6");
+		GuiLibrary.test7=loader.loadTexture("Explorers/Test/7");
 
 		
 		GuiLibrary.arrow1 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows1");
