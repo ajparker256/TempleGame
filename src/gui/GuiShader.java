@@ -15,6 +15,7 @@ import shaders.ShaderProgram;
 	     
 	    private int location_transformationMatrix;
 	    private int location_colorShift;
+	    private int location_degrees;
 	 
 	    public GuiShader() {
 	        super(VERTEX_FILE, FRAGMENT_FILE);
@@ -30,11 +31,17 @@ import shaders.ShaderProgram;
 	    protected void getAllUniformLocations() {
 	        location_transformationMatrix = super.getUniformLocation("transformationMatrix");
 	        location_colorShift=super.getUniformLocation("colorShift");
+	        location_degrees=super.getUniformLocation("degrees");
 	    }
 	 
 	    protected void bindAttributes() {
 	        super.bindAttribute(0, "position");
 	    }
+
+		public void loadDegrees(double degrees) {
+			super.loadFloat(location_degrees,(float) degrees);
+			
+		}
 	     
 	     
 	 

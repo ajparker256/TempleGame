@@ -9,11 +9,13 @@ public class GuiTexture {
 	private Vector2f position;
 	private Vector2f scale;
 	private Vector3f color;
+	private double rotation;
 	public GuiTexture(int texture, Vector2f position, Vector2f scale) {
 		this.texture = texture;
 		this.position = position;
 		this.scale = scale;
 		this.color=new Vector3f(1.0f,1.0f,1.0f);
+		this.rotation=0;
 	}
 	public int getTexture() {
 		return texture;
@@ -32,6 +34,9 @@ public class GuiTexture {
 	}
 	public Vector3f getColor() {
 		return this.color;
+	}
+	public double getRotation() {
+		return rotation;
 	}
 	
 
