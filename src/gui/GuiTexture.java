@@ -31,7 +31,6 @@ public class GuiTexture {
 		scale = newScale;
 	}
 	public Vector3f getColor() {
-		
 		return this.color;
 	}
 	

@@ -10,6 +10,13 @@ uniform vec4 colorShift;
 
 void main(void){
 	pass_colorShift=colorShift;
-	gl_Position = transformationMatrix*vec4(position, 0.0, 1.0);
+	mat4 RotationMatrix = mat4( cos(1.0), -sin(1.0), 0.0, 0.0,
+                               sin(1.0),  cos(1.0), 0.0, 0.0,
+                               0.0,         0.0, 1.0, 0.0,
+                               0.0,           0.0, 0.0, 1.0 );
+  	
+	
+	gl_Position = RotationMatrix*transformationMatrix*vec4(position, 0.0, 1.0);
+
 	textureCoords = vec2((position.x+1.0)/2.0, 1 - (position.y+1.0)/2.0);
 }

@@ -21,7 +21,7 @@ const float gradient = 1.5;
  
 void main(void){
         vec4 worldPosition = transformationMatrix * vec4(position,1.0);
-         vec4 posFromCam = viewMatrix*worldPosition;
+        vec4 posFromCam = viewMatrix*worldPosition;
         gl_Position = projectionMatrix * posFromCam;
         pass_textureCords = textureCords;
         surfaceNormal = (transformationMatrix * vec4(normal,0.0)).xyz;
