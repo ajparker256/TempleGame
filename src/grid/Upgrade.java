@@ -16,8 +16,8 @@ public class Upgrade {
 	
 	protected String explanation;
 	
-	public Upgrade(String explanation) {
-		numberOfEntries = 10;
+	public Upgrade(String explanation, int rarity) {
+		numberOfEntries = rarity;
 		rarityBorder = new GuiTexture(GuiLibrary.commonBackground, new Vector2f(-2,-2), new Vector2f(.05f,.05f));
 		this.explanation = explanation;
 	}
