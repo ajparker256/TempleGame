@@ -37,6 +37,7 @@ public class GuiRenderer {
 			Matrix4f matrix  = MathM.createTransformationMatrix(thing.getPosition(), thing.getScale());
 			shader.loadTransformation(matrix);
 			shader.loadColorShift(thing.getColor());
+			shader.loadDegrees(Math.toRadians(thing.getRotation()));
 			GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0,quad.getVertexCount());
 		}
 		GL11.glDisable(GL11.GL_BLEND);
