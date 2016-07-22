@@ -16,14 +16,22 @@ public class Squad {
 	private int previousFloor;
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
-	private int squadId;
+	private ArrayList<PathModifier> modifications;
 	public Squad(ArrayList<Group> groups, int squadId){
+		modifications = new ArrayList<PathModifier>();
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
 		this.groups=groups;
-		this.squadId = squadId;
 		previousFloor = 0;
 		backpedalTile=new Point();
+		DefaultPM defaultAI = new DefaultPM(this);
+		for(Group g : groups) {
+			for(Explorer e : g.getGroup()) {
+				if(e.getId() == 3) {
+					TreasureHunterPM treasureGreed = new TreasureHunterPM(this);
+				}
+			}
+		}
 	}
 	
 	public ArrayList<Group> getGroups() {
@@ -47,7 +55,7 @@ public class Squad {
 		int i = 0;
 		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
 		//For each tile type, add the appropriate odds and total them
-		boolean[] groupsWithTreasureFinder = new boolean[groups.size()];
+		/*boolean[] groupsWithTreasureFinder = new boolean[groups.size()];
 		int num = 0;
 		int treasureFloor = -1;
 		for(int j = 0; j<groups.size(); j++) {
@@ -61,33 +69,18 @@ public class Squad {
 				}
 			}
 			groupsWithTreasureFinder[j] = hasTreasureFinder;
-		}
-		int[] treasureFinderOdds = new int[4];
-		if(num>0 && treasureFloor == groups.get(groups.size()-1).getFloor()) {
-			ArrayList<Point> treasureLocs = Main.grids.get(treasureFloor).getTreasureLocs();
-			for(Point loc : treasureLocs) {
-				int xRange = loc.x - groups.get(groups.size()-1).getNextLoc().x;
-				int yRange = loc.y - groups.get(groups.size()-1).getNextLoc().y;
-				int maxOdds = 50;
-				if(Math.abs(xRange) <4 && Math.abs(yRange) <4) {
-					//Left && Right
-					if(xRange > 0) {
-					//Max odds / distance 
-						treasureFinderOdds[0] = num*maxOdds/Math.abs(xRange);
-					} else if(xRange < 0) {
-						treasureFinderOdds[1] = num*maxOdds/Math.abs(xRange);
-					}
-					
-					//Down then up
-					if(yRange<0) {
-						treasureFinderOdds[2] = num*maxOdds/Math.abs(yRange);
-					} else if(yRange>0) {
-						treasureFinderOdds[3] = num*maxOdds/Math.abs(yRange);
-					}
-				}
+		}*/
+		System.out.println(modifications.size());
+		for(int j = 0; j<modifications.size(); j++) {
+			int x = 0;
+			int[] changes = modifications.get(j).modify(moves);
+			for(int k : changes) {
+				total += k;
+				individualOdds[x] += k;
+				x++;
 			}
 		}
-		
+		/*
 		for(Tile currentTile : moves) { 
 			if(currentTile == null) {
 				i++;
@@ -107,9 +100,7 @@ public class Squad {
 			individualOdds[i] += treasureFinderOdds[i];
 			total+=individualOdds[i];
 			i++;
-		}
-		i = 0;
-		
+		}*/
 		rand *= total;
 		
 		//Evaluate which one random fell into
@@ -134,6 +125,10 @@ public class Squad {
 		//Total the attack found in the leading group to get group ATK
 		//Get every type of interaction (ie. ladderman, priest, etc.) regardless of position
 		//TODO add more if necessary, this should be the collab zone for info.
+	}
+	
+	public ArrayList<PathModifier> getPathMods() {
+		return modifications;
 	}
 	
 	public void tick(int milli, Grid grid){

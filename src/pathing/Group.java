@@ -34,6 +34,10 @@ public class Group {
 	private int floor;
 	protected Point realLoc;
 	
+	public int getSquadId() {
+		return squadId;
+	}
+	
 	public Point getRealLoc() {
 		return realLoc;
 	}

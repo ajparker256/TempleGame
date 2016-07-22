@@ -13,6 +13,8 @@ import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
 import main.Main;
 import pathing.Group;
+import pathing.Squad;
+import pathing.TreasureHunterPM;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 
@@ -444,6 +446,8 @@ setIdle();
 		super.hp-=damageTaken;
 		if(hp<=0){
 			super.kill=true;
+			Squad sq = Main.squads.get(group.getSquadId());
+			sq.getPathMods().remove(new TreasureHunterPM(sq));
 		}
 		
 	}
