@@ -10,6 +10,7 @@ public class TreasureHunterPM extends PathModifier{
 
 	public TreasureHunterPM(Squad squad) {
 		super(squad);
+		id = 3;
 	}
 	
 	@Override

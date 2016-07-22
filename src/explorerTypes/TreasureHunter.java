@@ -21,4 +21,13 @@ public class TreasureHunter extends Explorer{
 		this.animationy=AnimationLibrary.explorerY;
 		this.id = 3;
 	}
+	
+	@Override
+	public void damage(int damageTaken) {
+		super.hp-=damageTaken;
+		if(hp<=0){
+			super.kill=true;
+		}
+		
+	}
 }

@@ -131,13 +131,24 @@ public class Squad {
 		return modifications;
 	}
 	
+	public void deathTriggers(Explorer e) {
+		for(int i = 0; i<modifications.size(); i++) {
+			if(modifications.get(i).getId()==e.getId()) {
+				modifications.get(i).cleanUp();
+				break;
+			}
+		}
+	}
+	
 	public void tick(int milli, Grid grid){
 		ArrayList<Group> toRemove=new ArrayList<Group>(); 
 		for(Group group:groups){
 			for(int i=0;i<group.getGroup().size();i++){
 				Explorer explorer=group.getGroup().get(i);
-				if(explorer.isKill())
+				if(explorer.isKill()) {
+					deathTriggers(explorer);
 					group.removeExplorer(explorer);
+				}
 			}
 			if(group.getGroup().size()==0){
 				toRemove.add(group);

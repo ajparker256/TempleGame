@@ -8,6 +8,7 @@ public class DefaultPM extends PathModifier{
 	
 	public DefaultPM(Squad squad) {
 		super(squad);
+		id = 0;
 	}
 	
 	@Override

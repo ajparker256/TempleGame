@@ -446,8 +446,6 @@ setIdle();
 		super.hp-=damageTaken;
 		if(hp<=0){
 			super.kill=true;
-			Squad sq = Main.squads.get(group.getSquadId());
-			sq.getPathMods().remove(new TreasureHunterPM(sq));
 		}
 		
 	}
