@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
 
 import models.RawModel;
 import renderEngine.Loader;
@@ -35,6 +36,7 @@ public class GuiRenderer {
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, thing.getTexture());
 			Matrix4f matrix  = MathM.createTransformationMatrix(thing.getPosition(), thing.getScale());
 			shader.loadTransformation(matrix);
+			shader.loadColorShift(thing.getColor());
 			GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0,quad.getVertexCount());
 		}
 		GL11.glDisable(GL11.GL_BLEND);
