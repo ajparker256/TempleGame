@@ -1,4 +1,4 @@
-package entities;
+package pathing;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,9 @@ import main.Main;
 import renderEngine.DisplayManager;
 
 import org.lwjgl.util.vector.Vector2f;
+
+import explorerTypes.Explorer;
+
 import java.awt.Point;
 
 import grid.Grid;

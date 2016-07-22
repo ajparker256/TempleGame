@@ -6,8 +6,6 @@ import main.Main;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import entities.Explorer;
-import entities.Group;
 import renderEngine.DisplayManager;
 
 public class Dirt extends Tile{

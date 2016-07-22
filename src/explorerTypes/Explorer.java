@@ -1,9 +1,10 @@
-package entities;
+package explorerTypes;
 
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import entities.Unit;
 import grid.Grid;
 import gui.Animation;
 import gui.GuiRenderer;
@@ -11,6 +12,7 @@ import gui.GuiTexture;
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
 import main.Main;
+import pathing.Group;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 
@@ -116,7 +118,7 @@ public class Explorer extends Unit{
 	return animation.getFrame();
 	}
 
-	protected void rotate(int direction) {
+	public void rotate(int direction) {
 		switch(group.getDirection()){
 		case 1:
 			switch(lastDirection){
@@ -388,7 +390,7 @@ public class Explorer extends Unit{
 		lastDirection=direction;
 		
 	}
-	protected void interact() {
+	public void interact() {
 setIdle();
 
 		

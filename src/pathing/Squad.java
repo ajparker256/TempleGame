@@ -1,10 +1,11 @@
-package entities;
+package pathing;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import explorerTypes.Explorer;
 import grid.Grid;
 import grid.Tile;
 import gui.GuiTexture;

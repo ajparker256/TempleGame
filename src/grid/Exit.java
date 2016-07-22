@@ -2,10 +2,10 @@ package grid;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import entities.Group;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import main.Main;
+import pathing.Group;
 import renderEngine.DisplayManager;
 
 public class Exit extends Tile{

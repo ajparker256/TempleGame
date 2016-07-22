@@ -1,13 +1,10 @@
 package main;
 
-import grid.ArrowTrap;
 import grid.Blank;
-import grid.CursedIdol;
 import grid.Dirt;
 import grid.Exit;
 import grid.Grid;
 import grid.Tile;
-import grid.TreasureTrap;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 
@@ -21,6 +18,8 @@ import librarys.GuiLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
 import librarys.TileLibrary;
+import pathing.Group;
+import pathing.Squad;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
@@ -32,17 +31,18 @@ import org.lwjgl.util.vector.Vector2f;
 import buttons.Button;
 import buttons.RotationDialogueBox;
 import buttons.Shop;
-import entities.Explorer;
 import entities.Flame;
-import entities.Group;
-import entities.Miner;
 import entities.Projectile;
-import entities.Squad;
-import entities.TreasureHunter;
+import explorerTypes.Explorer;
+import explorerTypes.Miner;
+import explorerTypes.TreasureHunter;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import sound.Sound;
 import tools.MathM;
+import traps.ArrowTrap;
+import traps.CursedIdol;
+import traps.TreasureTrap;
 //Main game loop
 public class Main {
 	//Amount of ambient light

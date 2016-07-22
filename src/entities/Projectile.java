@@ -8,6 +8,8 @@ import org.lwjgl.util.vector.Vector2f;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import main.Main;
+import pathing.Group;
+import pathing.Squad;
 import renderEngine.DisplayManager;
 
 public class Projectile {

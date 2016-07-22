@@ -1,9 +1,10 @@
-package entities;
+package explorerTypes;
 
 import gui.Animation;
 import gui.GuiTexture;
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
+import pathing.Group;
 
 public class Miner extends Explorer{
 

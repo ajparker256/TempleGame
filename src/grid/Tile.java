@@ -1,16 +1,16 @@
 package grid;
 
-import entities.Explorer;
-import entities.Group;
 import gui.GuiTexture;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
 import main.Main;
+import pathing.Group;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import explorerTypes.Explorer;
 import renderEngine.DisplayManager;
 
 // This is the superclass for all tiles contained in a grid

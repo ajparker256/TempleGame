@@ -3,6 +3,7 @@ package grid;
 import gui.GuiTexture;
 import librarys.StringLibrary;
 import main.Main;
+import pathing.Group;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ import org.lwjgl.util.vector.Vector2f;
 import org.newdawn.slick.Color;
 
 import buttons.Button;
-import entities.Group;
 import renderEngine.DisplayManager;
 
 //This makes a grid for laying out other objects. It is used for in game management

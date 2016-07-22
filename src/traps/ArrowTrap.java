@@ -1,4 +1,4 @@
-package grid;
+package traps;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.vector.Vector2f;
 
 import entities.Projectile;
+import grid.Tile;
 import gui.Animation;
 import gui.GuiTexture;
 import librarys.AnimationLibrary;

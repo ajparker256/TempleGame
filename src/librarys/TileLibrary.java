@@ -2,6 +2,7 @@ package librarys;
 
 import grid.*;
 import main.Main;
+import traps.*;
 
 public class TileLibrary {
 

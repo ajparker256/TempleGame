@@ -1,9 +1,10 @@
-package grid;
+package upgrades;
 
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.StringLibrary;

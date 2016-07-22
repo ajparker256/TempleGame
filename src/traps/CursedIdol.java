@@ -1,11 +1,13 @@
-package grid;
+package traps;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import entities.Group;
+import grid.Blank;
+import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import main.Main;
+import pathing.Group;
 import renderEngine.DisplayManager;
 
 public class CursedIdol extends Tile{
