@@ -138,7 +138,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		g.add(new TreasureHunter(g));
 		g.add(new Miner (g));
 	}
-	Squad squad1=new Squad(squad1List, 1);
+	Squad squad1=new Squad(squad1List, 0);
 	squads.add(squad1);
 	
 	int x = 0;
