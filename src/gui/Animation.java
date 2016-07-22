@@ -106,4 +106,11 @@ public class Animation {
 	public void resetCount() {
 		count = 0;
 	}
+
+	public void setRotation(double rotation) {
+		for(GuiTexture frame:frames){
+			frame.setRotation(rotation);
+		}
+		
+	}
 }

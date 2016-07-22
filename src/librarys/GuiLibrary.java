@@ -167,19 +167,15 @@ public static int rareBackground;
 public static int legendaryBackground;
 
 public static void init(Loader loader) {
-		GuiLibrary.explorerStanding = loader.loadTexture("BasicExplorer");
-		GuiLibrary.explorerWalkingL = loader.loadTexture("BasicExplorer Walking1");
-		GuiLibrary.explorerWalkingR = loader.loadTexture("BasicExplorer Walking2");
-		GuiLibrary.explorerStanding1 = loader.loadTexture("BasicExplorerR");
-		GuiLibrary.explorerWalkingL1 = loader.loadTexture("BasicExplorer WalkingR1");
-		GuiLibrary.explorerWalkingR1 = loader.loadTexture("BasicExplorer WalkingR2");
+		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorer");
+		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorer Walking1");
+		GuiLibrary.explorerWalkingR = loader.loadTexture("Explorers/Basic/BasicExplorer Walking2");
+
 		
 		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/Miner");
 		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/MinerWalking1");
 		GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/MinerWalking2");
-		GuiLibrary.minerStanding1 = loader.loadTexture("Explorers/Miner/MinerR");
-		GuiLibrary.minerWalkingL1 = loader.loadTexture("Explorers/Miner/MinerWalkingR1");
-		GuiLibrary.minerWalkingR1 = loader.loadTexture("Explorers/Miner/MinerWalkingR2");
+
 		
 		GuiLibrary.arrow1 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows1");
 		GuiLibrary.arrow2 = loader.loadTexture("/Trap Animations/Dart Trap/Arrows2");

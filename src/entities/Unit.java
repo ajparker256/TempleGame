@@ -49,7 +49,7 @@ public class Unit {
 	public Unit(Group group) {
 		this.kill=false;
 		tempVelocity=new Vector2f(0, 0);
-		this.animation=new Animation(AnimationLibrary.explorerY,location,size);
+		this.animation=new Animation(AnimationLibrary.explorer,location,size);
 		velocity=new Vector2f(0,0);
 		location = group.getLocation();
 		isAlive = true;

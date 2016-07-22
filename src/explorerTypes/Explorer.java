@@ -22,8 +22,6 @@ public class Explorer extends Unit{
 	private int position;
 	private Group group;
 	protected Vector2f unitSize;
-	protected ArrayList<Integer> animationx;
-	protected ArrayList<Integer> animationy;
 	protected int idlex;
 	protected int idley;
 	protected int lastDirection;
@@ -40,13 +38,11 @@ public class Explorer extends Unit{
 		unitSize=new Vector2f(0.045f,(float) (0.045f*DisplayManager.getAspectratio()));
 		position=group.getPosition();
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorerX,location,unitSize);
+		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
 		super.animation.setDelay(25);
 		this.velocity = velocity;
 		this.idley=GuiLibrary.explorerStanding;
 		this.idlex=GuiLibrary.explorerStanding1;
-		this.animationx=AnimationLibrary.explorerX;
-		this.animationy=AnimationLibrary.explorerY;
 		floor = Main.grids.get(0).getFloor();
 		damage = 1;
 		
@@ -186,8 +182,8 @@ public class Explorer extends Unit{
 			
 			
 			
-		super.idle=new GuiTexture(idley,location,unitSize);
-		super.animation=new Animation(animationy,location,unitSize);
+		super.idle.setRotation(0);
+		super.animation.setRotation(0);
 		break;
 			
 			
@@ -253,8 +249,8 @@ public class Explorer extends Unit{
 				
 				break;
 		}
-		super.idle=new GuiTexture(idlex,location,unitSize);
-		super.animation=new Animation(animationx,location,unitSize);
+			super.idle.setRotation(90);
+			super.animation.setRotation(90);
 		break;
 			
 		case 3:
@@ -318,8 +314,8 @@ public class Explorer extends Unit{
 				
 				break;
 		}
-			super.idle=new GuiTexture(idley,location,unitSize);
-		super.animation=new Animation(animationy,location,unitSize);
+			super.idle.setRotation(180);
+			super.animation.setRotation(180);
 		break;
 			
 		case 4:
@@ -383,8 +379,8 @@ public class Explorer extends Unit{
 				
 				break;
 		}
-			super.idle=new GuiTexture(idlex,location,unitSize);
-		super.animation=new Animation(animationx,location,unitSize);
+			super.idle.setRotation(270);
+			super.animation.setRotation(270);
 		break;
 		
 		}
@@ -400,39 +396,38 @@ setIdle();
 
 	public void setIdle() {
 		switch(group.getDirection()){
-		case 11:super.idle=new GuiTexture(idley,location,unitSize);
-		super.animation=new Animation(animationy,location,unitSize);
+		case 11:	super.idle.setRotation(0);
+		super.animation.setRotation(0);
 		break;
 			
 			
 
-		case 12:super.idle=new GuiTexture(idlex,location,unitSize);
-		super.animation=new Animation(animationx,location,unitSize);
+		case 12:super.idle.setRotation(90);
+		super.animation.setRotation(90);
 		break;
 			
-		case 13:super.idle=new GuiTexture(idley,location,unitSize);
-		super.animation=new Animation(animationy,location,unitSize);
+		case 13:super.idle.setRotation(180);
+		super.animation.setRotation(180);
 		break;
 			
-		case 14:super.idle=new GuiTexture(idlex,location,unitSize);
-		super.animation=new Animation(animationx,location,unitSize);
+		case 14:super.idle.setRotation(270);
+		super.animation.setRotation(270);
 		break;
-		case 1:super.idle=new GuiTexture(idley,location,unitSize);
-		super.animation=new Animation(animationy,location,unitSize);
-		break;
-			
-			
-
-		case 2:super.idle=new GuiTexture(idlex,location,unitSize);
-		super.animation=new Animation(animationx,location,unitSize);
+		case 1:super.idle.setRotation(0);
+		super.animation.setRotation(0);
 		break;
 			
-		case 3:super.idle=new GuiTexture(idley,location,unitSize);
-		super.animation=new Animation(animationy,location,unitSize);
+			
+		case 2:super.idle.setRotation(90);
+		super.animation.setRotation(90);
 		break;
 			
-		case 4:super.idle=new GuiTexture(idlex,location,unitSize);
-		super.animation=new Animation(animationx,location,unitSize);
+		case 3:super.idle.setRotation(180);
+		super.animation.setRotation(180);
+		break;
+			
+		case 4:super.idle.setRotation(270);
+		super.animation.setRotation(270);
 		break;
 		
 		}
