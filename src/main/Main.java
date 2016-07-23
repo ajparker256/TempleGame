@@ -159,7 +159,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			//System.out.println(traps[i][j].getLocation());
 		}
 	}
-	traps[1][2] = new ArrowTrap(1,1,.03f, 1);
+	traps[1][2] = new ArrowTrap(.03f, 1);
 	traps[1][1] = new Blank(-20,-20, .03f, new Vector2f(-.87f, -.47f));
 	traps[0][1] = new CursedIdol(-20,-20, .03f);
 	traps[0][0] = new Exit(-20,-20, .03f);

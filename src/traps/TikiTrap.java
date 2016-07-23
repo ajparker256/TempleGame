@@ -15,24 +15,17 @@ import main.Main;
 import renderEngine.DisplayManager;
 import tools.MathM;
 
-public class ArrowTrap extends Tile{
+public class TikiTrap extends Tile{
 	
 	protected int level;
 	protected int direction;
+	protected Animation firing;
 	protected boolean isFiring;
 	private long cooldown;
 	private long maxCd;
 	private int range;
 	
-	public ArrowTrap(float size, int floor) {
-		super(size, Main.grid.getLoc());
-		this.floor = floor;
-		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "ArrowTrap";
-		setPrice(200);
-		this.id = 5;
-	}
-	public ArrowTrap(int x, int y, float size,int direction) {
+	public TikiTrap(int x, int y, float size,int direction) {
 		super(x, y, size, Main.grid.getLoc());
 		super.passable=false;
 		super.canInteract=true;
@@ -46,8 +39,8 @@ public class ArrowTrap extends Tile{
 		id = 5;
 		range = 5;
 		rotatable = true;
-		super.animation = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
-		super.animation.setDelay(25);
+		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
+		firing.setDelay(25);
 		setTriggers();
 	}
 	@Override
@@ -81,7 +74,7 @@ public class ArrowTrap extends Tile{
 				}
 			} else if(direction == 4 && x-p.x<range) {
 				fire = true;
-				for(int i = x-1; i>p.y; i--) {
+				for(int i = x-1; i>p.x; i--) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
 						fire = false;
 						break;
@@ -101,7 +94,19 @@ public class ArrowTrap extends Tile{
 	
 	}
 	
-
+	@Override
+	public GuiTexture drawTile() {
+		if(isFiring) {
+			GuiTexture temp = firing.getFrameNoLoop();
+			if(temp == null) {
+				return guiTexture;
+			} else {
+				isFiring = false;
+				return temp;
+			}
+		} 
+		return guiTexture;
+	}
 	private void setTriggers(){
 		
 		int i=1;

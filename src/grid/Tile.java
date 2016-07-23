@@ -1,5 +1,6 @@
 package grid;
 
+import gui.Animation;
 import gui.GuiTexture;
 
 import java.awt.Point;
@@ -36,6 +37,7 @@ public class Tile {
 	protected ArrayList<Point> trapRefs;
 	protected int hp;
 	protected boolean rotatable;
+	protected Animation animation;
 	
 	
 	public Tile(float size, Vector2f location) {
@@ -108,7 +110,11 @@ public class Tile {
 	}
 	
 	public GuiTexture drawTile(){
+		if(this.animation!=null){
+			return animation.getFrame();
+		}
 		return guiTexture;
+
 	}
 	
 	public int getPrice() {
