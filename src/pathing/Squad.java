@@ -70,7 +70,6 @@ public class Squad {
 			}
 			groupsWithTreasureFinder[j] = hasTreasureFinder;
 		}*/
-		System.out.println(modifications.size());
 		for(int j = 0; j<modifications.size(); j++) {
 			int x = 0;
 			int[] changes = modifications.get(j).modify(moves);
