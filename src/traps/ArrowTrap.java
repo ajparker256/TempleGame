@@ -26,14 +26,16 @@ public class ArrowTrap extends Tile{
 	
 	public ArrowTrap(float size, int floor) {
 		super(size, Main.grid.getLoc());
-		this.floor = floor;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "ArrowTrap";
-		setPrice(200);
-		this.id = 5;
+		this.guiTexture.setRotation(MathM.toDegrees(direction));
+		this.name = "Arrow Trap";
+		id = 5;
+		rotatable = true;
+		setTriggers();
 	}
 	public ArrowTrap(int x, int y, float size,int direction) {
 		super(x, y, size, Main.grid.getLoc());
+		System.out.println("dsfdsfdsf");
 		super.passable=false;
 		super.canInteract=true;
 		this.cooldown=0;

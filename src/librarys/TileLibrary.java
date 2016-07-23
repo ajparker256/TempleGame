@@ -19,13 +19,13 @@ public class TileLibrary {
 			return new TreasureTrap(x, y, size, Main.grids.indexOf(Main.grid));
 		//Arrow trap rotations (Arrow trap id = 5 + direction - 1)
 		if(id == 5) 
-			return new ArrowTrap( size, 1);
+			return new ArrowTrap(x, y, size, 1);
 		if(id == 6) 
-			return new ArrowTrap( size, 3);
+			return new ArrowTrap(x, y, size, 3);
 		if(id == 7) 
-			return new ArrowTrap( size, 2);
+			return new ArrowTrap(x, y, size, 2);
 		if(id == 8) 
-			return new ArrowTrap( size, 4);
+			return new ArrowTrap(x, y, size, 4);
 		
 		if(id == -2)
 			return new Exit(x, y, size);
