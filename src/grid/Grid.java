@@ -76,11 +76,11 @@ public class Grid {
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
 			for(int k=0;k<rows;k++){
-				grid[k][i]=new Blank(k,i,size,location);
+				grid[k][i]=new Dirt(k,i,size,location);
 				//grid[k][i].upgrade(0);
 			}
 		}
-		/*for(int i = 0; i<10+floor*5; i++) {
+		for(int i = 0; i<10+floor*5; i++) {
 			int randX = (int)(Math.random() * grid[0].length);
 			int randY = (int)(Math.random() * grid.length);
 			if(floor<7)
@@ -89,7 +89,7 @@ public class Grid {
 				grid[randY][randX].upgrade(7);
 			
 		
-		}*/
+		}
 		//grid[0][0]=new Blank(0,0,size,location);
 	}
 	
