@@ -10,6 +10,7 @@ import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
+import tools.MathM;
 
 public class RotationDialogueBox extends Shop{
 
@@ -50,6 +51,13 @@ public class RotationDialogueBox extends Shop{
 		} else {
 			visibilityRange[3] = options[0].length;
 			visibilityRange[2] = options[0].length-2;
+		}
+		int k = 1;
+		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
+			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
+				traps[j][i].drawTile().setRotation(MathM.toDegrees(k));
+				k++;
+			}
 		}
 		isOn = true;
 		currentSelection = 0;

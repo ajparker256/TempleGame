@@ -28,6 +28,8 @@ public class DefaultPM extends PathModifier{
 				individualOdds[i] += 300;
 			} else if(currentTile.getId() == 4) {
 				individualOdds[i] += 600;
+			} else {
+				individualOdds[i] += 200;
 			}
 			i++;
 		}

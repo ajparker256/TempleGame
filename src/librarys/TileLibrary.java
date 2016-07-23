@@ -21,9 +21,9 @@ public class TileLibrary {
 		if(id == 5) 
 			return new ArrowTrap(x, y, size, 1);
 		if(id == 6) 
-			return new ArrowTrap(x, y, size, 2);
-		if(id == 7) 
 			return new ArrowTrap(x, y, size, 3);
+		if(id == 7) 
+			return new ArrowTrap(x, y, size, 2);
 		if(id == 8) 
 			return new ArrowTrap(x, y, size, 4);
 		
