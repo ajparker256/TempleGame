@@ -84,15 +84,14 @@ public class Shop {
 		//		Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/traps.length), location.y+(j-visibilityRange[2]+.5f)*(size.y/traps[0].length));
 		//		frames[i][j] = new GuiTexture(GuiLibrary.frame, shopItemPosition, new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 				Vector2f imageSize = traps[visibilityRange[0]+i][visibilityRange[2]+j].drawTile().getScale();
-				System.out.println("image Size = " + imageSize);
 				//THIS PART WORKS
 				shopHitboxes[j][i] = new Button(new Vector2f(location.x+size.x/rX/2-imageSize.x+i*(size.x/rX),
 						location.y+size.y/rY/2+(imageSize.y+textSize.y)+j*(size.y/rY)),
 						new Vector2f(location.x+size.x/rX/2+imageSize.x+i*(size.x/rX),
 						location.y+size.y/rY/2-(imageSize.y+textSize.y)+j*(size.y/rY)));
-				System.out.println("TL = "+shopHitboxes[j][i].getTL());
-				System.out.println("BR = "+shopHitboxes[j][i].getBR());
-				System.out.println();
+				//System.out.println("TL = "+shopHitboxes[j][i].getTL());
+				//System.out.println("BR = "+shopHitboxes[j][i].getBR());
+				//System.out.println();
 			}
 		}
 		updateShopPosition();
@@ -196,7 +195,6 @@ public class Shop {
 													location.y+size.y/rY/2+textSize.y+(j-visibilityRange[2])*size.y/rY);
 				traps[i][j].setPosition(itemPosition);
 				traps[i][j].drawTile().setPosition(itemPosition);
-				System.out.println("itemPosition = "+itemPosition);
 				//frames[i][j] = new GuiTexture(GuiLibrary.frame, shopItemPosition, new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 			}
 		}
