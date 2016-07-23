@@ -74,7 +74,7 @@ public class ArrowTrap extends Tile{
 				}
 			} else if(direction == 4 && x-p.x<range) {
 				fire = true;
-				for(int i = x-1; i>p.y; i--) {
+				for(int i = x-1; i>p.x; i--) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
 						fire = false;
 						break;

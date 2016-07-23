@@ -104,11 +104,7 @@ public class Squad {
 		
 		//Evaluate which one random fell into
 		for(int currentOdds : individualOdds) {
-			if(currentOdds == 0) {
-				i++;
-				continue;
-			}
-			if(rand <= currentOdds) {
+			if(rand < currentOdds) {
 				return new Point(moves[i].getX(), moves[i].getY());
 			} else {
 				i++;
