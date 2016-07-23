@@ -33,7 +33,6 @@ public class Explorer extends Unit{
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
-
 		this.delay=25;
 		this.id = -1;
 		this.lastDirection=1;
@@ -117,7 +116,6 @@ public class Explorer extends Unit{
 	}
 
 	public void rotate(int direction) {
-		System.out.println("Directionis "+group.getDirection()+" "+lastDirection);
 		switch(group.getDirection()%10){
 		case 1:
 			switch(lastDirection){

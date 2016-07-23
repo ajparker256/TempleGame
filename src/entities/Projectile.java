@@ -37,7 +37,6 @@ public class Projectile {
 		this.size=new Vector2f(0.1f,0.1f);
 		this.velocity=new Vector2f(0.5f,0.5f);
 		this.image = new GuiTexture(texture, location, size);
-		System.out.println("direction is "+direction);
 		this.image.setRotation(MathM.toDegrees(direction));
 
 	}
@@ -71,7 +70,7 @@ public class Projectile {
 	for(Squad squad:Main.squads){
 		for(Group group: squad.getGroups()){
 			if(group.getRealLoc().equals(new Point(x,y))){
-				group.damage(new boolean[]{true,true,true,true},20);
+				group.damage(new boolean[]{true,true,true,true},1);
 				this.kill=true;
 			}
 		}

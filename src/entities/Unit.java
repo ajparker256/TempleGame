@@ -40,13 +40,14 @@ public class Unit {
 	protected GuiTexture idle;
 
 	protected Vector2f tempVelocity;
-
+	
 	protected boolean kill;
 
 	
 	
 	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
+		this.hp=20;
 		this.kill=false;
 		tempVelocity=new Vector2f(0, 0);
 		this.animation=new Animation(AnimationLibrary.explorer,location,size);
@@ -58,6 +59,7 @@ public class Unit {
 	
 	//Move according to the velocity of the unit relative to time passed
 	public void move(int milli,Grid grid) {
+		System.out.println(velocity);
 		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
 		 tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){

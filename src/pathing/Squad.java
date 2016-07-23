@@ -3,6 +3,7 @@ package pathing;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
 
 import explorerTypes.Explorer;
@@ -168,14 +169,20 @@ public class Squad {
 		if(go){
 			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
 			path.add(0,tempNextLoc);
-			if(path.size()>2)
-				if(path.get(2).equals(tempNextLoc)){
-					if(backpedalTile!=tempNextLoc){
-						backpedalTile=tempNextLoc;
+			if(path.size()>2){
+				if(Mouse.isButtonDown(1)){
 						path.remove(0);
 						path.remove(0);
+						for(Group group:groups){
+							group.setFlee(true);
+						}
+				}else{
+					for(Group group:groups){
+						System.out.println("asdasd");
+						group.setFlee(false);
 					}
 				}
+			}
 			int i=0;
 			//boolean fl = true;
 			for(Group group: groups){

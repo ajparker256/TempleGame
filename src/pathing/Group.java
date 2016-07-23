@@ -33,6 +33,9 @@ public class Group {
 	private int squadId;
 	private int floor;
 	protected Point realLoc;
+	protected float speed;
+	private boolean flee;
+	private float speedMod;
 	
 	public int getSquadId() {
 		return squadId;
@@ -51,6 +54,8 @@ public class Group {
 	}
 
 	public Group(int id) {
+		this.flee=false;
+		this.speedMod=1f;
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
 		location.y-=0.1f;
 		wait=false;
@@ -59,8 +64,8 @@ public class Group {
 		realLoc=nextLoc;
 		nextPos=0;
 		groupIds = new ArrayList<Integer>();
-
-		velocity=new Vector2f(0.1f,(float)(0.1f*DisplayManager.getAspectratio()));
+		speed=0.1f;
+		velocity=new Vector2f(speed,(float)(speed*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
 		path = new ArrayList<Point>();
@@ -136,11 +141,19 @@ public class Group {
 	}
 	private void moveTo(Grid grid, int milli){
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
+		
 		Vector2f tempVelocity= new Vector2f();
+		if(flee){
+			speedMod=2f;
+		}else{
+			speedMod=1f;
+		}
+		Vector2f modVelocity=new Vector2f(velocity.x*speedMod,velocity.y*speedMod);
 		if(location.x<destination.x){
 			direction=2;
 			busy=true;
-			tempVelocity.x = velocity.x;
+			tempVelocity.x = modVelocity.x;
+
 			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 			//If you would overshoot, don't
 			if(location.x>destination.x){
@@ -151,7 +164,7 @@ public class Group {
 		}else if(location.x>destination.x){
 			direction=4;
 			busy=true;
-			tempVelocity = new Vector2f(velocity.x*-1, 0);
+			tempVelocity = new Vector2f(modVelocity.x*-1, 0);
 			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 			if(location.x<destination.x){
 				location.x=destination.x;
@@ -162,7 +175,7 @@ public class Group {
 		}else if(location.y<destination.y){
 			direction=1;
 			busy=true;
-			tempVelocity.y = velocity.y;
+			tempVelocity.y = modVelocity.y;
 			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 			if(location.y>destination.y){
 				location.y=destination.y;
@@ -173,7 +186,7 @@ public class Group {
 		}else if(location.y>destination.y){
 			direction=3;
 			busy=true;
-			tempVelocity.y = -1*velocity.y;
+			tempVelocity.y = -1*modVelocity.y;
 			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 			if(location.y<destination.y){
 				location.y=destination.y;
@@ -266,7 +279,15 @@ public class Group {
 		group.remove(explorer);
 		groupIds.remove((Integer)explorer.getId());
 	}
+	public void setSpeed(float speed){
+		this.speed=speed;
+		this.velocity=new Vector2f(speed,(float)(speed*DisplayManager.getAspectratio()));
+	}
 
+	public void setFlee(boolean flee) {
+		this.flee=flee;
+		
+	}
 
 	
 }

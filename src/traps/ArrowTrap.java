@@ -24,18 +24,9 @@ public class ArrowTrap extends Tile{
 	private long maxCd;
 	private int range;
 	
-	public ArrowTrap(float size, int floor) {
-		super(size, Main.grid.getLoc());
-		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.guiTexture.setRotation(MathM.toDegrees(direction));
-		this.name = "Arrow Trap";
-		id = 5;
-		rotatable = true;
-		setTriggers();
-	}
+
 	public ArrowTrap(int x, int y, float size,int direction) {
 		super(x, y, size, Main.grid.getLoc());
-		System.out.println("dsfdsfdsf");
 		super.passable=false;
 		super.canInteract=true;
 		this.cooldown=0;
@@ -44,7 +35,7 @@ public class ArrowTrap extends Tile{
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.guiTexture.setRotation(MathM.toDegrees(direction));
 		this.name = "Arrow Trap";
-		this.maxCd=100000000;
+		this.maxCd=1000;
 		id = 5;
 		range = 5;
 		rotatable = true;
@@ -54,6 +45,7 @@ public class ArrowTrap extends Tile{
 	}
 	@Override
 	public void whenTriggered(Point p){
+		System.out.println("sdsf");
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up
@@ -92,7 +84,6 @@ public class ArrowTrap extends Tile{
 			} 
 			if(fire) {
 				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
-				System.out.println("shooting");
 				isFiring = true;
 				cooldown=maxCd; 
 			}
@@ -105,7 +96,6 @@ public class ArrowTrap extends Tile{
 	
 
 	private void setTriggers(){
-		
 		int i=1;
 		switch(direction){
 		case 1:while(y+i<=9){
