@@ -171,6 +171,8 @@ public static int commonBackground;
 public static int rareBackground;
 public static int legendaryBackground;
 
+public static int tikiTrap;
+
 public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorer");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorer Walking1");
@@ -313,6 +315,8 @@ public static void init(Loader loader) {
 		GuiLibrary.backgroundDraft1 = loader.loadTexture("Title Screen/BackgroundDraft1");
 		
 		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
+		
+		GuiLibrary.tikiTrap = loader.loadTexture("tiles/Tiki");
 	
 		//GuiLibrary.commonBackground = loader.loadTexture("");
 		//GuiLibrary.rareBackground = loader.loadTexture("");

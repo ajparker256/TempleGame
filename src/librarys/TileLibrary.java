@@ -26,6 +26,8 @@ public class TileLibrary {
 			return new ArrowTrap(x, y, size, 2);
 		if(id == 8) 
 			return new ArrowTrap(x, y, size, 4);
+		if(id == 9) 
+			return new TikiTrap(x, y, size);
 		
 		if(id == -2)
 			return new Exit(x, y, size);

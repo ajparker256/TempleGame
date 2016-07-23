@@ -25,14 +25,14 @@ public class TikiTrap extends Tile{
 	private long maxCd;
 	private int range;
 	
-	public TikiTrap(int x, int y, float size,int direction) {
+	public TikiTrap(int x, int y, float size) {
 		super(x, y, size, Main.grid.getLoc());
 		super.passable=false;
 		super.canInteract=true;
 		this.cooldown=0;
-		this.direction=direction;
-		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "TikiTrap";
+		this.direction = 1;
+		this.guiTexture=(new GuiTexture(GuiLibrary.tikiTrap,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.name = "Tiki Trap";
 		this.maxCd=100000000;
 		id = 9;
 		range = 1;

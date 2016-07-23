@@ -42,6 +42,7 @@ import sound.Sound;
 import tools.MathM;
 import traps.ArrowTrap;
 import traps.CursedIdol;
+import traps.TikiTrap;
 import traps.TreasureTrap;
 //Main game loop
 public class Main {
@@ -159,6 +160,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			//System.out.println(traps[i][j].getLocation());
 		}
 	}
+	traps[0][2] = new TikiTrap(0,0, .03f);
 	traps[1][2] = new ArrowTrap(0,0,.03f, 1);
 	traps[1][1] = new Blank(-20,-20, .03f, new Vector2f(-.87f, -.47f));
 	traps[0][1] = new CursedIdol(-20,-20, .03f);
