@@ -90,7 +90,7 @@ public class Animation {
 			run();
 			return currentFrame;
 		}
-		else return null;
+		else return frames.get(0);
 	}
 	
 	public void run() {

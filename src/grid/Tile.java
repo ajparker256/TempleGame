@@ -38,6 +38,7 @@ public class Tile {
 	protected int hp;
 	protected boolean rotatable;
 	protected Animation animation;
+	protected boolean hasAnimation;
 	
 	
 	public Tile(float size, Vector2f location) {
@@ -45,6 +46,7 @@ public class Tile {
 		this.location = location;
 		this.size = size;
 		this.hp=100;
+		hasAnimation=false;
 		trapRefs=new ArrayList<Point>();
 		name = "Default_Name";
 		price = -1;
@@ -110,8 +112,8 @@ public class Tile {
 	}
 	
 	public GuiTexture drawTile(){
-		if(this.animation!=null){
-			return animation.getFrame();
+		if(hasAnimation){
+			return animation.getFrameNoLoop();
 		}
 		return guiTexture;
 

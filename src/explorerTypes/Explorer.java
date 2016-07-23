@@ -385,7 +385,7 @@ public class Explorer extends Unit{
 		
 		}
 		super.animation.setDelay(delay);
-		lastDirection=direction%10;
+	
 		
 	}
 	public void interact() {
