@@ -317,7 +317,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			if(selected != 0) {
 				rotationDialogueBox.setSelection(selected);
 			}
-			if(rotationDialogueBox.getSelection() != 0 && rotationDialogueBox.isConfirmed(mouseX, mouseY)) {
+			if(rotationDialogueBox.getSelection() != 0 /*&& rotationDialogueBox.isConfirmed(mouseX, mouseY)*/) {
 				grid.setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
 				rotationDialogueBox.setSelection(0);
 				rotationDialogueBox.setOn(false);
