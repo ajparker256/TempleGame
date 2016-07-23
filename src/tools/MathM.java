@@ -153,6 +153,15 @@ public class MathM {
 		
 		return list;
 	}
+	public static double toDegrees(int direction){
+		switch(direction){
+		case 1:return 0;
+		case 2:return 90;
+		case 3:return 180;
+		case 4:return 270;
+		}
+		return 0;
+	}
 
 	
 	

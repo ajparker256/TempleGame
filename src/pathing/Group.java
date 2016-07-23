@@ -26,7 +26,7 @@ public class Group {
 	private Vector2f location;
 	private Vector2f velocity;
 	private int nextPos;
-	private int direction=0;
+	private int direction;
 	private ArrayList<Point> path;
 	private boolean busy;
 	private boolean wait;
@@ -51,6 +51,7 @@ public class Group {
 	}
 
 	public Group(int id) {
+		direction=11;
 		wait=false;
 		busy=false;
 		nextLoc=new Point(0,0);
@@ -58,7 +59,7 @@ public class Group {
 		nextPos=0;
 		groupIds = new ArrayList<Integer>();
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
-		location.x=location.x-0.1f;
+		location.y=location.y-0.1f;
 		velocity=new Vector2f(0.1f,(float)(0.1f*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;

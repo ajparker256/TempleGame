@@ -133,10 +133,11 @@ public static void main(String[] args) throws FileNotFoundException {
 	squad1List.add(group3);
 	squad1List.add(group4);
 	for(Group g : squad1List) {
+		g.add(new Miner (g));
+		g.add(new Miner (g));
 		g.add(new Explorer (g));
-		g.add(new Miner (g));
 		g.add(new TreasureHunter(g));
-		g.add(new Miner (g));
+
 	}
 	Squad squad1=new Squad(squad1List, 0);
 	squads.add(squad1);
@@ -222,7 +223,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 		
 		if(counter < 250) {
-			dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
+			//dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
 			counter++;
 		}
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.

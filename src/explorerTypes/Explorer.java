@@ -33,16 +33,17 @@ public class Explorer extends Unit{
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		animation.setRotation(90);
+
 		this.delay=25;
 		this.id = -1;
-		this.lastDirection=2;
+		this.lastDirection=1;
 		this.group=group;
 		unitSize=new Vector2f(0.045f,(float) (0.045f*DisplayManager.getAspectratio()));
 		position=group.getPosition();
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
 		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
 		super.animation.setDelay(delay);
-		this.velocity = velocity;
 		floor = Main.grids.get(0).getFloor();
 		damage = 1;
 		
@@ -117,6 +118,7 @@ public class Explorer extends Unit{
 	}
 
 	public void rotate(int direction) {
+		System.out.println("rotating");
 		switch(group.getDirection()){
 		case 1:
 			switch(lastDirection){

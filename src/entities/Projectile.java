@@ -11,6 +11,7 @@ import main.Main;
 import pathing.Group;
 import pathing.Squad;
 import renderEngine.DisplayManager;
+import tools.MathM;
 
 public class Projectile {
 
@@ -31,11 +32,14 @@ public class Projectile {
 		this.x=x;
 		this.y=y;
 		this.floor=floor;
-		this.texture=GuiLibrary.rock1;
+		this.texture=GuiLibrary.arrow5;
 		this.location=new Vector2f(Main.grid.getTile(x,y).getLocation());
 		this.size=new Vector2f(0.1f,0.1f);
 		this.velocity=new Vector2f(0.5f,0.5f);
 		this.image = new GuiTexture(texture, location, size);
+		System.out.println("direction is "+direction);
+		this.image.setRotation(MathM.toDegrees(direction));
+
 	}
 	
 	public boolean canRender() {

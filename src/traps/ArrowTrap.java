@@ -13,6 +13,7 @@ import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
 import main.Main;
 import renderEngine.DisplayManager;
+import tools.MathM;
 
 public class ArrowTrap extends Tile{
 	
@@ -32,6 +33,7 @@ public class ArrowTrap extends Tile{
 		this.direction=direction;
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
+		this.guiTexture.setRotation(MathM.toDegrees(direction));
 		this.name = "Arrow Trap";
 		this.maxCd=100000000;
 		id = 5;
