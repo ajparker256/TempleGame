@@ -27,7 +27,7 @@ public class DisplayManager {
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH,HEIGHT));
 			Display.create(new PixelFormat(), attribs);
-			Display.setTitle("Insert name here");
+			Display.setTitle("Temple Game of Legend");
 			AL.create();
 		} catch (LWJGLException e) {
 			// TODO Auto-generated catch block
