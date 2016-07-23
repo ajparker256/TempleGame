@@ -13,7 +13,22 @@ public class ShopItem {
 	protected boolean rotatable;
 	
 	public ShopItem() {
-
+	}
+	
+	public GuiTexture drawTile() {
+		return guiTexture;
+	}
+	
+	public int getCost() {
+		return cost;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public String toString() {
+		return name;
 	}
 
 }

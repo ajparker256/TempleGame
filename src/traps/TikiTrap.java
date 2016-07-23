@@ -36,7 +36,7 @@ public class TikiTrap extends Tile{
 		this.guiTexture.setRotation(MathM.toDegrees(direction));
 		this.name = "Arrow Trap";
 		this.maxCd=100000000;
-		id = 5;
+		id = 6;
 		range = 5;
 		rotatable = true;
 		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
