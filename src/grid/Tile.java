@@ -37,6 +37,7 @@ public class Tile {
 	protected int hp;
 	protected boolean rotatable;
 	
+	
 	public Tile(float size, Vector2f location) {
 		this.canInteract = false;
 		this.location = location;
