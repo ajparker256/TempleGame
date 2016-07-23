@@ -13,8 +13,8 @@ public class TreasureHunter extends Explorer{
 	public TreasureHunter(Group group) {
 		super(group);
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.test,location,unitSize);
-		super.setDelay(5);
+		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
+		super.setDelay(25);
 
 		this.id = 3;
 	}

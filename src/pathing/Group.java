@@ -222,15 +222,15 @@ public class Group {
 
 		Vector2f locationNext=Main.grid.getTile(point.x, point.y).getLocation();
 		if(location.x<locationNext.x){
-			direction=2;
+			direction=12;
 			
 		}else if(location.x>locationNext.x){
-			direction=4;
+			direction=14;
 			
 		}else if(location.y<locationNext.y){
-			direction=1;
+			direction=11;
 		}else if(location.y>locationNext.y){
-			direction=3;
+			direction=13;
 
 		}
 			for(Explorer e: group){

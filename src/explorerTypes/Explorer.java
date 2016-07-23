@@ -40,8 +40,8 @@ public class Explorer extends Unit{
 		this.group=group;
 		unitSize=new Vector2f(0.045f,(float) (0.045f*DisplayManager.getAspectratio()));
 		position=group.getPosition();
-		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
+		super.idle=new GuiTexture(GuiLibrary.test1,location,unitSize);
+		super.animation=new Animation(AnimationLibrary.test,location,unitSize);
 		super.animation.setDelay(delay);
 		floor = Main.grids.get(0).getFloor();
 		damage = 1;
@@ -117,7 +117,8 @@ public class Explorer extends Unit{
 	}
 
 	public void rotate(int direction) {
-		switch(group.getDirection()){
+		System.out.println("Directionis "+group.getDirection()+" "+lastDirection);
+		switch(group.getDirection()%10){
 		case 1:
 			switch(lastDirection){
 			case 1:
@@ -385,7 +386,7 @@ public class Explorer extends Unit{
 		
 		}
 		super.animation.setDelay(delay);
-	
+		lastDirection=direction%10;
 		
 	}
 	public void interact() {

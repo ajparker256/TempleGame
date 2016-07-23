@@ -129,9 +129,9 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	ArrayList<Group> squad1List=new ArrayList<Group>();
 	squad1List.add(group1);
-	squad1List.add(group2);
-	squad1List.add(group3);
-	squad1List.add(group4);
+	//squad1List.add(group2);
+	//squad1List.add(group3);
+	//squad1List.add(group4);
 	for(Group g : squad1List) {
 		g.add(new Miner (g));
 		g.add(new Miner (g));
