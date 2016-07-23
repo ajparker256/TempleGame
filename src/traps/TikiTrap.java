@@ -31,16 +31,12 @@ public class TikiTrap extends Tile{
 		super.canInteract=true;
 		this.cooldown=0;
 		this.direction=direction;
-		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.guiTexture.setRotation(MathM.toDegrees(direction));
-		this.name = "Arrow Trap";
+		this.name = "TikiTrap";
 		this.maxCd=100000000;
-		id = 6;
-		range = 5;
-		rotatable = true;
-		firing = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
-		firing.setDelay(25);
+		id = 9;
+		range = 1;
+		rotatable = false;
 		setTriggers();
 	}
 	@Override
@@ -83,7 +79,6 @@ public class TikiTrap extends Tile{
 			} 
 			if(fire) {
 				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
-				System.out.println("shooting");
 				isFiring = true;
 				cooldown=maxCd; 
 			}
