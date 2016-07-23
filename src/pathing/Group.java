@@ -51,21 +51,22 @@ public class Group {
 	}
 
 	public Group(int id) {
-		direction=11;
+		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
+		location.y-=0.1f;
 		wait=false;
 		busy=false;
 		nextLoc=new Point(0,0);
 		realLoc=nextLoc;
 		nextPos=0;
 		groupIds = new ArrayList<Integer>();
-		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
-		location.y=location.y-0.1f;
+
 		velocity=new Vector2f(0.1f,(float)(0.1f*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
 		path = new ArrayList<Point>();
 		squadId = id;
 		floor = Main.grid.getFloor();
+		setNextLoc(nextLoc);
 	}
 	
 	public void setFloor(int i) {
@@ -225,7 +226,6 @@ public class Group {
 			
 		}else if(location.x>locationNext.x){
 			direction=4;
-
 			
 		}else if(location.y<locationNext.y){
 			direction=1;

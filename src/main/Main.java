@@ -171,8 +171,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 
 	
-	projectiles.add(new Projectile(3, 1, 9, 0));
-	projectiles.add(new Projectile(3, 1, 8, 0));
+	//projectiles.add(new Projectile(3, 1, 9, 0));
+	//projectiles.add(new Projectile(3, 1, 8, 0));
 	int counter = 0;
 	milli = System.currentTimeMillis();
 	while(!Display.isCloseRequested()){
