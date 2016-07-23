@@ -230,6 +230,10 @@ public class Group {
 		this.wait=wait;
 		
 	}
+	
+	public boolean getFlee() {
+		return flee;
+	}
 
 	public void setNextLoc(Point point) {
 
