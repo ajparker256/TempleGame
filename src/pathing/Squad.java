@@ -186,8 +186,8 @@ public class Squad {
 					//This removes the status of occupied from the tail end of the squad
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
 					
-					if(i == groups.size() && i+2<path.size()) 
-						Main.grids.get(previousFloor).getTile(path.get(i+2).x, path.get(i+2).y).setOccupied(-1);
+					if(groups.size()+2<path.size()) 
+						Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
 				} else break;
 				}
 			previousFloor = groups.get(groups.size()-1).getFloor();
