@@ -8,7 +8,7 @@ import librarys.GuiLibrary;
 public class TikiSI extends ShopItem{
 
 	public TikiSI(Vector2f location, Vector2f size) {
-		guiTexture = new GuiTexture(GuiLibrary.dirt0, location, size);
+		guiTexture = new GuiTexture(GuiLibrary.tikiTrap, location, size);
 		id = 9;
 		rotatable = true;
 		cost = 300;

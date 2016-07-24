@@ -1,6 +1,7 @@
 package buttons;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
@@ -26,7 +27,7 @@ public class Shop {
 	protected Vector2f size;
 	
 	//Tile array containing the available traps for sale
-	protected Tile[][] traps;
+	protected ShopItem[][] traps;
 	
 	private GuiTexture downArrow;
 	
@@ -51,20 +52,17 @@ public class Shop {
 	
 	private Button exitShop;
 	
-	protected ShopItem[][] items;
-	
 	protected Button[][] shopHitboxes;
 	
 	public Shop() {
 		
 	}
 	
-	public Shop(Vector2f location, Vector2f size, Tile[][] traps) {
-		items = new ShopItem[ShopItemLibrary.getItems().size()/2][2];
+	public Shop(Vector2f location, Vector2f size, ShopItem[][] items) {
+		traps = items;
 		this.location = location;
 		this.size = size;
 		//buttons = new Button[numberOfRows][numberOfColumns];
-		this.traps = traps;
 		//this.frames = new GuiTexture[traps.length][traps[0].length];
 		this.locationOfTrapPlacement = new Vector2f(0,0);
 		visibilityRange = new int[4];

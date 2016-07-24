@@ -8,7 +8,7 @@ import librarys.GuiLibrary;
 public class ExitSI extends ShopItem{
 	
 	public ExitSI(Vector2f location, Vector2f size) {
-		guiTexture = new GuiTexture(GuiLibrary.arrowTrap1, location, size);
+		guiTexture = new GuiTexture(GuiLibrary.ladder, location, size);
 		id = -2;
 		rotatable = false;
 		cost = 0;

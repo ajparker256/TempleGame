@@ -8,8 +8,10 @@ import org.lwjgl.util.vector.Vector2f;
 import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
+import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
+import shopItems.ShopItem;
 import tools.MathM;
 
 public class RotationDialogueBox extends Shop{
@@ -20,6 +22,8 @@ public class RotationDialogueBox extends Shop{
 	
 	private String message;
 	
+	private ShopItem[][] traps;
+	
 	private GuiTexture background;
 	
 	private int currentSelection;
@@ -28,8 +32,9 @@ public class RotationDialogueBox extends Shop{
 		isOn = false;
 	}
 	
-	public RotationDialogueBox(Vector2f location, Vector2f size, Tile[][] options, String message) {
-		super(location, size, options);
+	public RotationDialogueBox(Vector2f location, Vector2f size, ShopItem[][] items, String message) {
+		super(location, size, items);
+		int test = items.length;
 		this.message = message;
 		confirm = new Button(new Vector2f(location.x,
 				location.y+StringLibrary.getSize().y),
@@ -41,16 +46,17 @@ public class RotationDialogueBox extends Shop{
 					location.y));
 		visibilityRange[1] = 2;
 		visibilityRange[3] = 2;
-		if(options.length<2) {
-			visibilityRange[1] = options.length;
+		
+		if(traps.length<2) {
+			visibilityRange[1] = traps.length;
 		} else {
 			visibilityRange[1] = 2;
 		}
-		if(options[0].length<2) {
-			visibilityRange[3] = options[0].length;
+		if(traps[0].length<2) {
+			visibilityRange[3] = traps[0].length;
 		} else {
-			visibilityRange[3] = options[0].length;
-			visibilityRange[2] = options[0].length-2;
+			visibilityRange[3] = traps[0].length;
+			visibilityRange[2] = traps[0].length-2;
 		}
 		int k = 1;
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
@@ -64,7 +70,7 @@ public class RotationDialogueBox extends Shop{
 		background = new GuiTexture(GuiLibrary.dirt0, new Vector2f(location.x+size.x/2, location.y+size.y/2), new Vector2f(size.x/2,size.y/2));
 	}
 	
-	public Tile getGivenTile() {
+	public ShopItem getGivenTile() {
 		return traps[0][0];
 	}
 	

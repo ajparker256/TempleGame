@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
+import librarys.ShopItemLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
 import librarys.TileLibrary;
@@ -38,6 +39,7 @@ import explorerTypes.Miner;
 import explorerTypes.TreasureHunter;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
+import shopItems.ShopItem;
 import sound.Sound;
 import tools.MathM;
 import traps.ArrowTrap;
@@ -153,19 +155,16 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	
 	
-	Tile[][] traps = new Tile[2][4];
+	ShopItemLibrary.init();
+	ShopItem[][] traps = new ShopItem[2][ShopItemLibrary.getItems().size()/2];
+	ArrayList<ShopItem> items = ShopItemLibrary.getItems();
+	int k = 0;
 	for(int i = 0; i<traps.length; i++) {
 		for(int j = 0; j<traps[0].length; j++) {
-			traps[i][j] = new Dirt( i, j, .03f, new Vector2f(-.9f+j*.03f, -.5f+i*.03f));
-			//System.out.println(traps[i][j].getLocation());
+			traps[i][j] = items.get(k);
+			k++;
 		}
 	}
-	traps[0][2] = new TikiTrap(0,0, .03f);
-	traps[1][2] = new ArrowTrap(0,0,.03f, 1);
-	traps[1][1] = new Blank(-20,-20, .03f, new Vector2f(-.87f, -.47f));
-	traps[0][1] = new CursedIdol(-20,-20, .03f);
-	traps[0][0] = new Exit(-20,-20, .03f);
-	traps[1][3] = new TreasureTrap(.03f, Main.grids.indexOf(Main.grid));
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.25f, .5f), traps);
 	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()), Main.grid.getFloor());
 	projectiles.add(testFlame);
@@ -301,17 +300,15 @@ public static void main(String[] args) throws FileNotFoundException {
 				} else if(oldTile.getId() == selectedTrap.getId()) {
 					dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*6), epicShopofEpicness.getSize().x*1.6f));
 				} else if(selectedTrap.isRotatable()) {
-					Tile[][] rotations = new Tile[2][2];
-					int k = 1;
+					Vector2f size1 = new Vector2f(.8f, .8f);
+					ShopItem[][] rotations = new ShopItem[2][2];
 					for(int i = 0; i<2; i++) {
 						for(int j = 0; j<2; j++) {
-							rotations[i][j] = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), .08f, selectedTrap.getId());
-							rotations[i][j].setName(k+"");
-							k++;
+							rotations[i][j] = ShopItemLibrary.getItem(selectedTrap.getId());
 						}
 					}
-					Vector2f size1 = new Vector2f(.8f, .8f);
-					rotationDialogueBox = new RotationDialogueBox(new Vector2f(-size1.x/2, -size1.y/2), size1, rotations, "Which way should it point?");
+					System.out.println(rotations);
+					rotationDialogueBox = new RotationDialogueBox(new Vector2f(-size1.x/2, -size1.y/2), size1, rotations,  "Which way should it point?");
 				}
 			}
 		}

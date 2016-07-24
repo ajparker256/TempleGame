@@ -1,5 +1,7 @@
 package shopItems;
 
+import org.lwjgl.util.vector.Vector2f;
+
 import gui.GuiTexture;
 
 public class ShopItem implements Comparable<ShopItem>{
@@ -28,6 +30,10 @@ public class ShopItem implements Comparable<ShopItem>{
 	
 	public int getId() {
 		return id;
+	}
+	
+	public void setPosition(Vector2f position) {
+		this.guiTexture.setPosition(position);
 	}
 	
 	public String toString() {
