@@ -9,8 +9,10 @@ import grid.Tile;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
+import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
+import shopItems.ShopItem;
 
 public class Shop {
 	
@@ -49,6 +51,8 @@ public class Shop {
 	
 	private Button exitShop;
 	
+	protected ShopItem[][] items;
+	
 	protected Button[][] shopHitboxes;
 	
 	public Shop() {
@@ -56,6 +60,7 @@ public class Shop {
 	}
 	
 	public Shop(Vector2f location, Vector2f size, Tile[][] traps) {
+		items = new ShopItem[ShopItemLibrary.getItems().size()/2][2];
 		this.location = location;
 		this.size = size;
 		//buttons = new Button[numberOfRows][numberOfColumns];
