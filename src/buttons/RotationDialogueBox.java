@@ -34,7 +34,7 @@ public class RotationDialogueBox extends Shop{
 	
 	public RotationDialogueBox(Vector2f location, Vector2f size, ShopItem[][] items, String message) {
 		super(location, size, items);
-		int test = items.length;
+		this.traps = super.traps;
 		this.message = message;
 		confirm = new Button(new Vector2f(location.x,
 				location.y+StringLibrary.getSize().y),

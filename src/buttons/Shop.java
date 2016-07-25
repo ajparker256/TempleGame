@@ -29,6 +29,10 @@ public class Shop {
 	//Tile array containing the available traps for sale
 	protected ShopItem[][] traps;
 	
+	protected double lastTimeClosed;
+	
+	protected double lastTimeClicked;
+	
 	private GuiTexture downArrow;
 	
 	private Button downArrowHitbox;
@@ -59,7 +63,7 @@ public class Shop {
 	}
 	
 	public Shop(Vector2f location, Vector2f size, ShopItem[][] items) {
-		traps = items;
+		this.traps = items;
 		this.location = location;
 		this.size = size;
 		//buttons = new Button[numberOfRows][numberOfColumns];
@@ -129,6 +133,14 @@ public class Shop {
 		if(visibilityRange[2] != 0)
 			return downArrowHitbox.isClicked(mouseX, mouseY);
 		else return false;
+	}
+	
+	public void setLastTimeClicked(double currentTime) {
+		lastTimeClicked = currentTime;
+	}
+	
+	public double getLastTimeClicked() {
+		return lastTimeClicked;
 	}
 	
 	public boolean isExitClicked(float mouseX, float mouseY) {
@@ -214,6 +226,14 @@ public class Shop {
 	
 	public Vector2f getSize() {
 		return size;
+	}
+	
+	public void setLastTimeClosed(double currentTime) {
+		lastTimeClosed = currentTime;
+	}
+	
+	public double getLastTimeClosed() {
+		return lastTimeClosed;
 	}
 	
 	public int getShopItem(float mouseX, float mouseY) {

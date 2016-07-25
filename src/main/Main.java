@@ -274,15 +274,18 @@ public static void main(String[] args) throws FileNotFoundException {
 		float mouseX = (float)Mouse.getX()*2/DisplayManager.WIDTH - 1;
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
+		double currentTime = System.currentTimeMillis();
 		if(epicShopofEpicness.isExitClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setOn(false);
 			rotationDialogueBox.setOn(false);
 		}
-		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn()) {
+		//If the grid is clicked (Selecting tile) and There isn't something over the grid, and the shop hasn't been closed recently, and it isn't currently open
+		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < currentTime && epicShopofEpicness.getLastTimeClicked()+500<currentTime) {
 			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
 			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
 			epicShopofEpicness.setOn(true);
+			epicShopofEpicness.setLastTimeClicked(currentTime);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
 			Tile oldTile=grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
@@ -294,6 +297,7 @@ public static void main(String[] args) throws FileNotFoundException {
 					grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					epicShopofEpicness.setOn(false);
+					epicShopofEpicness.setLastTimeClosed(currentTime);
 					money -= selectedTrap.getPrice();
 				} else if(selectedTrap.getPrice()>money) {
 					dynamicGuis.addAll(StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
@@ -307,7 +311,6 @@ public static void main(String[] args) throws FileNotFoundException {
 							rotations[i][j] = ShopItemLibrary.getItem(selectedTrap.getId());
 						}
 					}
-					System.out.println(rotations);
 					rotationDialogueBox = new RotationDialogueBox(new Vector2f(-size1.x/2, -size1.y/2), size1, rotations,  "Which way should it point?");
 				}
 			}
@@ -322,6 +325,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setSelection(0);
 				rotationDialogueBox.setOn(false);
 				epicShopofEpicness.setOn(false);
+				epicShopofEpicness.setLastTimeClosed(currentTime);
 			}
 			if(rotationDialogueBox.isCanceled(mouseX, mouseY)) {
 				rotationDialogueBox.setOn(false);
