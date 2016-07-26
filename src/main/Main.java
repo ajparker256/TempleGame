@@ -309,6 +309,7 @@ public static void main(String[] args) throws FileNotFoundException {
 					for(int i = 0; i<2; i++) {
 						for(int j = 0; j<2; j++) {
 							rotations[i][j] = ShopItemLibrary.getItem(selectedTrap.getId());
+							rotations[i][j].drawTile().setScale(new Vector2f(.06f, .06f*(float)DisplayManager.getAspectratio()));
 						}
 					}
 					rotationDialogueBox = new RotationDialogueBox(new Vector2f(-size1.x/2, -size1.y/2), size1, rotations,  "Which way should it point?");

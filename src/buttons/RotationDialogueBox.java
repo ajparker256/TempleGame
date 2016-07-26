@@ -22,8 +22,6 @@ public class RotationDialogueBox extends Shop{
 	
 	private String message;
 	
-	private ShopItem[][] traps;
-	
 	private GuiTexture background;
 	
 	private int currentSelection;
@@ -34,7 +32,6 @@ public class RotationDialogueBox extends Shop{
 	
 	public RotationDialogueBox(Vector2f location, Vector2f size, ShopItem[][] items, String message) {
 		super(location, size, items);
-		this.traps = super.traps;
 		this.message = message;
 		confirm = new Button(new Vector2f(location.x,
 				location.y+StringLibrary.getSize().y),
