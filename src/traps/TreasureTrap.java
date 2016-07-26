@@ -12,21 +12,27 @@ import main.Main;
 import pathing.Group;
 import renderEngine.DisplayManager;
 
-public class TreasureTrap extends Tile{
+public class TreasureTrap extends Trap{
 	
 	private int reward;
 	
 	private int round;
 	
-	public TreasureTrap(float size, int floor) {
-		super(size, Main.grid.getLoc());
-		this.floor = floor;
-		this.guiTexture=(new GuiTexture(GuiLibrary.treasureClosed,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "Treasure";
-		setPrice(200);
-		this.id = 4;
-		reward = 100;
-	}
+	//Inherited traits that can be set/modified.
+/*	protected int damage;
+	protected int range;
+	protected int defense;
+	protected int maxHp;
+	protected double critChance;
+	protected int armorPen;
+	protected double pierceChance;
+	protected int bleed;
+	protected int gatlingRampPerShot;
+	protected int gatlingCap;
+	protected int warmUpTime;
+	protected double accuracy;
+	protected double cooldown;
+	protected double maxCd;*/
 	
 	public TreasureTrap(int x, int y, float size, int floor) {
 		super(x, y, size, Main.grid.getLoc());

@@ -15,14 +15,27 @@ import main.Main;
 import renderEngine.DisplayManager;
 import tools.MathM;
 
-public class ArrowTrap extends Tile{
+public class ArrowTrap extends Trap{
 	
-	protected int level;
+	//protected int level; level is handled by the size of the upgrade arraylist
 	protected int direction;
 	protected boolean isFiring;
-	private long cooldown;
-	private long maxCd;
-	private int range;
+	
+	//Inherited traits that can be set/modified.
+/*	protected int damage;
+	protected int range;
+	protected int defense;
+	protected int maxHp;
+	protected double critChance;
+	protected int armorPen;
+	protected double pierceChance;
+	protected int bleed;
+	protected int gatlingRampPerShot;
+	protected int gatlingCap;
+	protected int warmUpTime;
+	protected double accuracy;
+	protected double cooldown;
+	protected double maxCd;*/
 	
 
 	public ArrowTrap(int x, int y, float size,int direction) {
@@ -45,7 +58,6 @@ public class ArrowTrap extends Tile{
 	}
 	@Override
 	public void whenTriggered(Point p){
-		System.out.println("sdsf");
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up

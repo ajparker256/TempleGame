@@ -10,11 +10,26 @@ import main.Main;
 import pathing.Group;
 import renderEngine.DisplayManager;
 
-public class CursedIdol extends Tile{
+public class CursedIdol extends Trap{
 
 	//This is the upgrading power given when picked up by the explorers
 	private int value;
 	
+	//Inherited traits that can be set/modified.
+/*	protected int damage;
+	protected int range;
+	protected int defense;
+	protected int maxHp;
+	protected double critChance;
+	protected int armorPen;
+	protected double pierceChance;
+	protected int bleed;
+	protected int gatlingRampPerShot;
+	protected int gatlingCap;
+	protected int warmUpTime;
+	protected double accuracy;
+	protected double cooldown;
+	protected double maxCd;*/
 	
 	
 	public CursedIdol(int x, int y, float size) {

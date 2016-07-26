@@ -9,7 +9,7 @@ import gui.GuiTexture;
 import librarys.GuiLibrary;
 import renderEngine.Loader;
 
-public class DartTrap extends Tile{
+public class DartTrap extends Trap{
 	
 	//This is the damage of the darts
 	private int damage;

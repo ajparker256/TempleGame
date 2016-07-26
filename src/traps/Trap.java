@@ -1,5 +1,7 @@
 package traps;
 
+import java.awt.Point;
+
 import org.lwjgl.util.vector.Vector2f;
 
 import grid.Tile;
@@ -18,8 +20,14 @@ public class Trap extends Tile{
 	protected int gatlingCap;
 	protected int warmUpTime;
 	protected double accuracy;
+	protected double cooldown;
+	protected double maxCd;
 	
-	public Trap(float size, Vector2f location) {
-		super(size, location);
+	public Trap(int x, int y, float size, Vector2f location) {
+		super(x, y, size, location);
+	}
+	
+	public void whenTriggered(Point p) {
+		//Stub
 	}
 }

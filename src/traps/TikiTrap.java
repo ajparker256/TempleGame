@@ -15,15 +15,29 @@ import main.Main;
 import renderEngine.DisplayManager;
 import tools.MathM;
 
-public class TikiTrap extends Tile{
+public class TikiTrap extends Trap{
 	
-	protected int level;
+	//protected int level; level is controlled by arraylist.size() of centralized upgrades arraylist
 	protected int direction;
 	protected Animation firing;
 	protected boolean isFiring;
-	private long cooldown;
-	private long maxCd;
-	private int range;
+	
+	
+	//Inherited traits that can be set/modified.
+/*	protected int damage;
+	protected int range;
+	protected int defense;
+	protected int maxHp;
+	protected double critChance;
+	protected int armorPen;
+	protected double pierceChance;
+	protected int bleed;
+	protected int gatlingRampPerShot;
+	protected int gatlingCap;
+	protected int warmUpTime;
+	protected double accuracy;
+	protected double cooldown;
+	protected double maxCd;*/
 	
 	public TikiTrap(int x, int y, float size) {
 		super(x, y, size, Main.grid.getLoc());
@@ -39,6 +53,7 @@ public class TikiTrap extends Tile{
 		rotatable = false;
 		setTriggers();
 	}
+	
 	@Override
 	public void whenTriggered(Point p){
 		if(cooldown<=0){
@@ -102,6 +117,7 @@ public class TikiTrap extends Tile{
 		} 
 		return guiTexture;
 	}
+	
 	private void setTriggers(){
 		
 		int i=1;
