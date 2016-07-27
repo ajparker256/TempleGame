@@ -66,6 +66,9 @@ public class ArrowTrap extends Trap{
 	}
 	@Override
 	public void whenTriggered(Point p){
+		for(Upgrade u : onTrigger) {
+			u.upgrade(this);
+		}
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up
@@ -103,6 +106,9 @@ public class ArrowTrap extends Trap{
 				}
 			} 
 			if(fire) {
+				for(Upgrade u : onFire) {
+					u.upgrade(this);
+				}
 				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
 				isFiring = true;
 				cooldown=maxCd; 

@@ -66,6 +66,9 @@ public class TreasureTrap extends Trap{
 	
 	@Override
 	public void interact(Group g) {
+		for(Upgrade u : onInteract) {
+			u.upgrade(this);
+		}
 		if(guiTexture.getTexture() == GuiLibrary.treasureClosed) {
 			guiTexture = new GuiTexture(GuiLibrary.treasureOpen, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio()))) ;
 		}
