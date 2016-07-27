@@ -17,6 +17,9 @@ public class Upgrade {
 	
 	protected String explanation;
 	
+	//0=One Time 1 = On Hit 2 = On Fire 3 = On Interact 4 = On Trigger 5 = On Death
+	protected int triggerLoc;
+	
 	public Upgrade(String explanation, int rarity) {
 		numberOfEntries = rarity;
 		rarityBorder = new GuiTexture(GuiLibrary.commonBackground, new Vector2f(-2,-2), new Vector2f(.05f,.05f));
@@ -25,6 +28,10 @@ public class Upgrade {
 	
 	public GuiTexture getTexture() {
 		return rarityBorder;
+	}
+	
+	public int getTriggerLoc() {
+		return triggerLoc;
 	}
 	
 	public int getNumOfEntries() {

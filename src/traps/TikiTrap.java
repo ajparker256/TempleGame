@@ -14,6 +14,7 @@ import librarys.GuiLibrary;
 import main.Main;
 import renderEngine.DisplayManager;
 import tools.MathM;
+import upgrades.Upgrade;
 
 public class TikiTrap extends Trap{
 	
@@ -37,7 +38,14 @@ public class TikiTrap extends Trap{
 	protected int warmUpTime;
 	protected double accuracy;
 	protected double cooldown;
-	protected double maxCd;*/
+	protected double maxCd;
+	
+	protected int level;	
+	protected ArrayList<Upgrade> onHit;
+	protected ArrayList<Upgrade> onFire;
+	protected ArrayList<Upgrade> onDeath;
+	protected ArrayList<Upgrade> onInteract;
+	protected ArrayList<Upgrade> onTrigger;*/
 	
 	public TikiTrap(int x, int y, float size) {
 		super(x, y, size, Main.grid.getLoc());
@@ -56,6 +64,9 @@ public class TikiTrap extends Trap{
 	
 	@Override
 	public void whenTriggered(Point p){
+		for(Upgrade u : onTrigger) {
+			u.upgrade(this);
+		}
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up
@@ -95,6 +106,9 @@ public class TikiTrap extends Trap{
 			if(fire) {
 				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
 				isFiring = true;
+				for(Upgrade u : onFire) {
+					u.upgrade(this);
+				}
 				cooldown=maxCd; 
 			}
 		}

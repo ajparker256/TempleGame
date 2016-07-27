@@ -14,6 +14,7 @@ import librarys.GuiLibrary;
 import main.Main;
 import renderEngine.DisplayManager;
 import tools.MathM;
+import upgrades.Upgrade;
 
 public class ArrowTrap extends Trap{
 	
@@ -35,7 +36,14 @@ public class ArrowTrap extends Trap{
 	protected int warmUpTime;
 	protected double accuracy;
 	protected double cooldown;
-	protected double maxCd;*/
+	protected double maxCd;
+	
+	protected int level;	
+	protected ArrayList<Upgrade> onHit;
+	protected ArrayList<Upgrade> onFire;
+	protected ArrayList<Upgrade> onDeath;
+	protected ArrayList<Upgrade> onInteract;
+	protected ArrayList<Upgrade> onTrigger;*/
 	
 
 	public ArrowTrap(int x, int y, float size,int direction) {

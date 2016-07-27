@@ -1,6 +1,7 @@
 package traps;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -11,6 +12,7 @@ import librarys.GuiLibrary;
 import main.Main;
 import pathing.Group;
 import renderEngine.DisplayManager;
+import upgrades.Upgrade;
 
 public class TreasureTrap extends Trap{
 	
@@ -32,7 +34,14 @@ public class TreasureTrap extends Trap{
 	protected int warmUpTime;
 	protected double accuracy;
 	protected double cooldown;
-	protected double maxCd;*/
+	protected double maxCd;
+	
+	protected int level;	
+	protected ArrayList<Upgrade> onHit;
+	protected ArrayList<Upgrade> onFire;
+	protected ArrayList<Upgrade> onDeath;
+	protected ArrayList<Upgrade> onInteract;
+	protected ArrayList<Upgrade> onTrigger;*/
 	
 	public TreasureTrap(int x, int y, float size, int floor) {
 		super(x, y, size, Main.grid.getLoc());
