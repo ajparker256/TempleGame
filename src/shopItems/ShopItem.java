@@ -20,6 +20,10 @@ public class ShopItem implements Comparable<ShopItem>{
 		return 0;
 	}
 	
+	public boolean isRotatable() {
+		return rotatable;
+	}
+	
 	public GuiTexture drawTile() {
 		return guiTexture;
 	}

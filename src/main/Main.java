@@ -291,24 +291,25 @@ public static void main(String[] args) throws FileNotFoundException {
 			Tile oldTile=grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 			int selection = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selection != -1) {
-				Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
-				if(selectedTrap.getPrice()<=money && oldTile.getId() != selectedTrap.getId() && !selectedTrap.isRotatable()) {
+				ShopItem selectedItem = ShopItemLibrary.getItem(selection);
+				if(selectedItem.getCost()<=money && oldTile.getId() != selectedItem.getId() && !selectedItem.isRotatable()) {
+					Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
 					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
 					grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					epicShopofEpicness.setOn(false);
 					epicShopofEpicness.setLastTimeClosed(currentTime);
-					money -= selectedTrap.getPrice();
-				} else if(selectedTrap.getPrice()>money) {
+					money -= selectedItem.getCost();
+				} else if(selectedItem.getCost()>money) {
 					dynamicGuis.addAll(StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
-				} else if(oldTile.getId() == selectedTrap.getId()) {
+				} else if(oldTile.getId() == selectedItem.getId()) {
 					dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*6), epicShopofEpicness.getSize().x*1.6f));
-				} else if(selectedTrap.isRotatable()) {
+				} else if(selectedItem.isRotatable()) {
 					Vector2f size1 = new Vector2f(.8f, .8f);
 					ShopItem[][] rotations = new ShopItem[2][2];
 					for(int i = 0; i<2; i++) {
 						for(int j = 0; j<2; j++) {
-							rotations[i][j] = ShopItemLibrary.getItem(selectedTrap.getId());
+							rotations[i][j] = ShopItemLibrary.getItem(selectedItem.getId());
 							rotations[i][j].drawTile().setScale(new Vector2f(.06f, .06f*(float)DisplayManager.getAspectratio()));
 						}
 					}
@@ -316,7 +317,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 			}
 		}
-		if(rotationDialogueBox.isOn()) {
+		if(rotationDialogueBox.isOn() && rotationDialogueBox.shopIsClicked(mouseX, mouseY)) {
 			int selected = rotationDialogueBox.getShopItem(mouseX, mouseY);
 			if(selected != 0) {
 				rotationDialogueBox.setSelection(selected);

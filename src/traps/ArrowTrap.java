@@ -52,6 +52,7 @@ public class ArrowTrap extends Trap{
 		super.canInteract=true;
 		this.cooldown=0;
 		this.direction=direction;
+		System.out.println(direction);
 		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.guiTexture.setRotation(MathM.toDegrees(direction));
