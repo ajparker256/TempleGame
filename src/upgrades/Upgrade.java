@@ -58,7 +58,7 @@ public class Upgrade {
 		return numberOfEntries+" entries. "+explanation;
 	}
 	
-	public ArrayList<GuiTexture> render() {
+	public ArrayList<GuiTexture> render(Vector2f locationOfImage) {
 		//Renders the rarity's background and displays its message on top
 		ArrayList<GuiTexture> toBeRendered = new ArrayList<GuiTexture>();
 		toBeRendered.add(rarityBorder);
