@@ -23,7 +23,7 @@ public class UpgradeLibrary {
 	
 	public static ArrayList<Upgrade> tikiTrapUpgrades;
 	
-	public static ArrayList<Upgrade> treasureUpgrades;
+	public static ArrayList<Upgrade> treasureTrapUpgrades;
 	
 	public static void init() {
 		//Initializes example upgrades for reference in the arraylists
@@ -43,8 +43,16 @@ public class UpgradeLibrary {
 		arrowTrapUpgrades.add(defenseRef);
 		
 		tikiTrapUpgrades = new ArrayList<Upgrade>();
-		//All added to tiki
+		tikiTrapUpgrades.add(hpRef);
+		tikiTrapUpgrades.add(damageRef);
+		tikiTrapUpgrades.add(critRef);
+		tikiTrapUpgrades.add(attackSpeedRef);
+		tikiTrapUpgrades.add(defenseRef);
+		//tikiTrapUpgrades.add(rangeRef);
 		
+		treasureTrapUpgrades = new ArrayList<Upgrade>();
+		treasureTrapUpgrades.add(hpRef);
+		treasureTrapUpgrades.add(defenseRef);
 	}
 	
 	public static Upgrade getUpgradeOfType(int upgradeId) {
@@ -68,9 +76,12 @@ public class UpgradeLibrary {
 	public static Upgrade getUpgrade(int trapId) {
 		ArrayList<Upgrade> pool = new ArrayList<Upgrade>();
 		//Identification of pool
-		
+		if(trapId == 4)
+			pool = treasureTrapUpgrades;
 		if(trapId == 5) 
 			pool = arrowTrapUpgrades;
+		if(trapId == 9)
+			pool = tikiTrapUpgrades;
 		
 		//Randomization calculation
 		int total = 0;
@@ -81,7 +92,7 @@ public class UpgradeLibrary {
 		for(Upgrade u: pool) {
 			num -= u.getNumOfEntries();
 			if(num<=0) {
-				return u;
+				return getUpgradeOfType(u.getId());
 			}
 		}
 		//Error Case
