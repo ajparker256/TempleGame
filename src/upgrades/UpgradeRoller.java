@@ -61,6 +61,7 @@ public class UpgradeRoller {
 			for(int i = 0; i<givenOptions.length; i++) {
 				givenOptions[i] = UpgradeLibrary.getUpgrade(trap.getId());
 				optionsTextures.addAll(givenOptions[i].render());
+				//TODO change the location and size to appropriate sizes
 			}
 		}
 		
