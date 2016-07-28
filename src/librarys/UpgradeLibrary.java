@@ -25,6 +25,8 @@ public class UpgradeLibrary {
 	
 	public static ArrayList<Upgrade> treasureTrapUpgrades;
 	
+	public static ArrayList<Upgrade> cursedIdolUpgrades;
+	
 	public static void init() {
 		//Initializes example upgrades for reference in the arraylists
 		attackSpeedRef = new AttackSpeedUpgrade();
@@ -53,6 +55,10 @@ public class UpgradeLibrary {
 		treasureTrapUpgrades = new ArrayList<Upgrade>();
 		treasureTrapUpgrades.add(hpRef);
 		treasureTrapUpgrades.add(defenseRef);
+		
+		cursedIdolUpgrades = new ArrayList<Upgrade>();
+		cursedIdolUpgrades.add(hpRef);
+		cursedIdolUpgrades.add(defenseRef);
 	}
 	
 	public static Upgrade getUpgradeOfType(int upgradeId) {
@@ -76,6 +82,8 @@ public class UpgradeLibrary {
 	public static Upgrade getUpgrade(int trapId) {
 		ArrayList<Upgrade> pool = new ArrayList<Upgrade>();
 		//Identification of pool
+		if(trapId == 2)
+			pool = cursedIdolUpgrades;
 		if(trapId == 4)
 			pool = treasureTrapUpgrades;
 		if(trapId == 5) 
