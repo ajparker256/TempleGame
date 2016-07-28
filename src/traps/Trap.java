@@ -19,12 +19,12 @@ public class Trap extends Tile{
 	protected int bleed;
 	protected int gatlingRampPerShot;
 	protected int gatlingCap;
-	protected int warmUpTime;
+	protected double warmUpTime;
 	protected double accuracy;
 	protected double cooldown;
 	protected double maxCd;
-	
 	protected int level;	
+	
 	protected ArrayList<Upgrade> onHit;
 	protected ArrayList<Upgrade> onFire;
 	protected ArrayList<Upgrade> onDeath;
@@ -39,6 +39,121 @@ public class Trap extends Tile{
 		onInteract = new ArrayList<Upgrade>();
 		onTrigger = new ArrayList<Upgrade>();
 	}
+	
+	//Wall of gets/sets
+	public int getLevel() {
+		return level;
+	}
+	
+	public void setLevel(int i) {
+		damage = i;
+	}
+	
+	public double getMaxCd() {
+		return maxCd;
+	}
+	
+	public void setMaxCd(double i) {
+		maxCd = i;
+	}
+	
+	public double getCooldown() {
+		return cooldown;
+	}
+	
+	public void setCooldown(double i) {
+		cooldown = i;
+	}
+	
+	public double getAccuracy() {
+		return accuracy;
+	}
+	
+	public void setAccuracy(double i) {
+		accuracy = i;
+	}
+	
+	public int getBleedDamage() {
+		return bleed;
+	}
+	
+	public void setBleedDamage(int i) {
+		bleed = i;
+	}
+	
+	public int getGatlingRampPerShot() {
+		return gatlingRampPerShot;
+	}
+	
+	public double getWarmUpTime() {
+		return warmUpTime;
+	}
+	
+	public void setWarmUpTime(double i) {
+		warmUpTime = i;
+	}
+	
+	public void setGatlingRampPerShot(int i) {
+		gatlingRampPerShot = i;
+	}
+	
+	public double getPierceChance() {
+		return pierceChance;
+	}
+	
+	public void setPierceChance(double i) {
+		pierceChance = i;
+	}
+	
+	public int getDamage() {
+		return damage;
+	}
+	
+	public void setDamage(int i) {
+		damage = i;
+	}
+	
+	public int getRange() {
+		return range;
+	}
+	
+	public int getDefense() {
+		return defense;
+	}
+	
+	public void setDefense(int i) {
+		defense = i;
+	}
+	
+	public void setRange(int i) {
+		range = i;
+	}
+	
+	public int getMaxHp() {
+		return maxHp;
+	}
+	
+	public void setMaxHp(int i) {
+		maxHp = i;
+	}
+	
+	public double getCritChance() {
+		return critChance;
+	}
+	
+	public void setCritChance(double i) {
+		critChance = i;
+	}
+	
+	public int getArmorPen() {
+		return armorPen;
+	}
+	
+	public void setArmorPen(int i) {
+		armorPen = i;
+	}
+	
+	
 	
 	public void whenTriggered(Point p) {
 		for(Upgrade u : onTrigger) {

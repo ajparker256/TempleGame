@@ -1,17 +1,19 @@
 package commonUpgrades;
 
-import grid.Tile;
+import traps.Trap;
 import upgrades.Upgrade;
 
 public class AttackSpeedUpgrade extends Upgrade{
 	
-	public AttackSpeedUpgrade(String explanation, int rarity) {
-		super(explanation, rarity);
+private static double attackSpeedIncrease = .2;
+	
+	public AttackSpeedUpgrade() {
+		super("This increases the attack speed of the trap by "+(int)(attackSpeedIncrease*100)+"%.", 10);
 	}
 	
 	@Override
-	public void upgrade(Tile upgradedTrap) {
-		//upgradedTrap.setAttackSpd(upgradedTrap.getAttackspd()*1.2); //Multiplies current by some constant
+	public void upgrade(Trap trapBeingUpgraded) {
+		trapBeingUpgraded.setMaxCd(trapBeingUpgraded.getMaxCd()/(1+attackSpeedIncrease));
 	}
 
 }

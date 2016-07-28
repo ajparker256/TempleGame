@@ -1,16 +1,19 @@
 package commonUpgrades;
 
-import grid.Tile;
+import traps.Trap;
 import upgrades.Upgrade;
 
 public class DamageUpgrade extends Upgrade{
 
-	public DamageUpgrade(String explanation, int rarity) {
-		super(explanation, rarity);
+private static double damageIncrease = .2;
+	
+	public DamageUpgrade() {
+		super("This increases the damage of the trap by "+(int)(100*damageIncrease)+"%.", 10);
 	}
 	
-	public void upgrade(Tile tile) {
-		
+	@Override
+	public void upgrade(Trap trapBeingUpgraded) {
+		trapBeingUpgraded.setDamage((int)(trapBeingUpgraded.getDamage()*(1+damageIncrease)));
 	}
 	
 }

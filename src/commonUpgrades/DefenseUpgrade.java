@@ -1,15 +1,18 @@
 package commonUpgrades;
 
-import grid.Tile;
+import traps.Trap;
 import upgrades.Upgrade;
 
 public class DefenseUpgrade extends Upgrade {
 
-	public DefenseUpgrade(String explanation, int rarity) {
-		super(explanation, rarity);
+private static int defenseIncrease = 1;
+	
+	public DefenseUpgrade() {
+		super("This increases the defense of the trap by "+defenseIncrease+".", 10);
 	}
 	
-	public void upgrade(Tile tile) {
-		//tile.setDefense(tile.getDefense*1.2);
+	@Override
+	public void upgrade(Trap trapBeingUpgraded) {
+		trapBeingUpgraded.setDefense(trapBeingUpgraded.getDefense()+defenseIncrease);
 	}
 }
