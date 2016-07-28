@@ -19,7 +19,7 @@ import gui.GuiTexture;
 public class Unit {
 	
 	//This is the amount of damage a unit can take before dying.
-	protected int hp;
+	protected double hp;
 	
 	//This is a unit's location relative to the screen in pixels from the top left corner.
 	protected Vector2f location;
@@ -123,7 +123,7 @@ public class Unit {
 	}
 	
 	//Returns current health
-	public int getHp() {
+	public double getHp() {
 		return hp;
 	}
 	

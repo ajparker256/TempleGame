@@ -179,7 +179,6 @@ public class Squad {
 						}
 				}else{
 					for(Group group:groups){
-						System.out.println("asdasd");
 						group.setFlee(false);
 					}
 				}

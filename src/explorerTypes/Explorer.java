@@ -436,8 +436,8 @@ setIdle();
 		return position;
 	}
 
-	public void damage(int damageTaken) {
-		super.hp-=damageTaken;
+	public void damage(double d) {
+		super.hp-=d;
 		if(hp<=0){
 			super.kill=true;
 		}

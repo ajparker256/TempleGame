@@ -261,19 +261,19 @@ public class Group {
 		}
 	}
 
-	public void damage(boolean[] toHit,int damage) {
+	public void damage(boolean[] toHit,double d) {
 			for(Explorer explorer:group){
 			if(toHit[0]&&explorer.getPosition()==1){
-				explorer.damage(damage);
+				explorer.damage(d);
 			}
 			if(toHit[1]&&explorer.getPosition()==2){
-				explorer.damage(damage);
+				explorer.damage(d);
 			}
 			if(toHit[2]&&explorer.getPosition()==3){
-				explorer.damage(damage);
+				explorer.damage(d);
 			}
 			if(toHit[3]&&explorer.getPosition()==4){
-				explorer.damage(damage);
+				explorer.damage(d);
 			}
 			}
 		

@@ -55,7 +55,7 @@ public class TikiTrap extends Trap{
 		this.direction = 1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.tikiTrap,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Tiki Trap";
-		this.maxCd=100000000;
+		this.maxCd=100;
 		id = 9;
 		range = 1;
 		rotatable = false;
@@ -68,43 +68,20 @@ public class TikiTrap extends Trap{
 			u.upgrade(this);
 		}
 		if(cooldown<=0){
-			boolean fire = false;
+			boolean fire = true;
 			//Up
-			if(direction == 1 && p.y-y<range) {
-				fire = true;
-				for(int i = y+1; i<p.y; i++) {
-					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
-						fire = false;
-						break;
-					}
-				}
-			} else if(direction == 2 && p.x-x<range) {
-				fire = true;
-				for(int i = x+1; i<p.x; i++) {
-					if(Main.grids.get(floor).getTile(i, y).getId() != 0) {
-						fire = false;
-						break;
-					}
-				}
-			} else if(direction == 3 && y-p.y <range) {
-				fire = true;
-				for(int i = y-1; i>p.y; i--) {
-					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
-						fire = false;
-						break;
-					}
-				}
-			} else if(direction == 4 && x-p.x<range) {
-				fire = true;
-				for(int i = x-1; i>p.x; i--) {
-					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
-						fire = false;
-						break;
-					}
-				}
-			} 
+		
 			if(fire) {
-				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
+
+				if(x-1>=0)
+				Main.projectiles.add(new Fire(1,x-1,y,super.floor));
+				if(x+1<=9)
+				Main.projectiles.add(new Fire(1,x+1,y,super.floor));
+				if(y-1>=0)
+				Main.projectiles.add(new Fire(1,x,y-1,super.floor));
+				if(y+1<=9)
+				Main.projectiles.add(new Fire(1,x,y+1,super.floor));
+				
 				isFiring = true;
 				for(Upgrade u : onFire) {
 					u.upgrade(this);
@@ -120,43 +97,39 @@ public class TikiTrap extends Trap{
 	
 	@Override
 	public GuiTexture drawTile() {
-		if(isFiring) {
-			GuiTexture temp = firing.getFrameNoLoop();
-			if(temp == null) {
-				return guiTexture;
-			} else {
-				isFiring = false;
-				return temp;
-			}
-		} 
+
 		return guiTexture;
 	}
 	
 	private void setTriggers(){
 		
-		int i=1;
-		switch(direction){
-		case 1:while(y+i<=9){
+
+		for(int j=1;j<=4;j++){
+			int i=1;
+		switch(j){
+		case 1:while(y+i<=9&&i<=range){
 			Main.grids.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
-		case 2:while(x+i<=9){
+		case 2:while(x+i<=9&&i<=range){
 			Main.grids.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
-		case 3:while(y-i>=0){
+		case 3:while(y-i>=0&&i<=range){
 			Main.grids.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
-		case 4:while(x-i>=0){
+		case 4:while(x-i>=0&&i<=range){
 			Main.grids.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 	}
+		}
+
 		
 	}
 	@Override

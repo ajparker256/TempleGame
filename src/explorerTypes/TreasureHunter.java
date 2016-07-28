@@ -20,7 +20,7 @@ public class TreasureHunter extends Explorer{
 	}
 	
 	@Override
-	public void damage(int damageTaken) {
+	public void damage(double damageTaken) {
 		super.hp-=damageTaken;
 		if(hp<=0){
 			super.kill=true;
