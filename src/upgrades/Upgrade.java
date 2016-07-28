@@ -8,6 +8,7 @@ import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.StringLibrary;
+import traps.Trap;
 
 public class Upgrade {
 	
@@ -58,7 +59,7 @@ public class Upgrade {
 		return toBeRendered;
 	}
 	
-	public void upgrade(Tile upgradingTrap) {
+	public void upgrade(Trap upgradingTrap) {
 		//Stub
 	}
 }
