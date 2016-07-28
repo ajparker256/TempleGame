@@ -9,6 +9,7 @@ private static double critChanceAdded = .08;
 	
 	public CritUpgrade() {
 		super("This increases the chance of critical hit on each hit by "+(int)(critChanceAdded*100)+"%.", 10);
+		id = 2;
 	}
 	
 	@Override

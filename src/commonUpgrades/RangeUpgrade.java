@@ -9,6 +9,7 @@ public class RangeUpgrade extends Upgrade{
 	
 	public RangeUpgrade() {
 		super("This increases the range of the trap by "+rangeIncrease+".", 10);
+		id = 6;
 	}
 	
 	@Override

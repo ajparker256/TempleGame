@@ -9,6 +9,7 @@ private static int defenseIncrease = 1;
 	
 	public DefenseUpgrade() {
 		super("This increases the defense of the trap by "+defenseIncrease+".", 10);
+		id = 4;
 	}
 	
 	@Override

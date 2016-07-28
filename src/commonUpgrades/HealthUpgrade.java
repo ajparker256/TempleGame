@@ -9,6 +9,7 @@ public class HealthUpgrade extends Upgrade{
 	
 	public HealthUpgrade() {
 		super("This increases the health of the trap by "+(int)(multiplier*100)+"%.", 10);
+		id = 5;
 	}
 	
 	@Override

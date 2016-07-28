@@ -9,6 +9,7 @@ private static double attackSpeedIncrease = .2;
 	
 	public AttackSpeedUpgrade() {
 		super("This increases the attack speed of the trap by "+(int)(attackSpeedIncrease*100)+"%.", 10);
+		id = 1;
 	}
 	
 	@Override
