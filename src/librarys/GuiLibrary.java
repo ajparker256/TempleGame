@@ -318,9 +318,9 @@ public static void init(Loader loader) {
 		
 		GuiLibrary.tikiTrap = loader.loadTexture("tiles/Tiki");
 	
-		//GuiLibrary.commonBackground = loader.loadTexture("");
-		//GuiLibrary.rareBackground = loader.loadTexture("");
-		//GuiLibrary.legendaryBackground = loader.loadTexture("");
+		GuiLibrary.commonBackground = loader.loadTexture("commonBackground");
+		GuiLibrary.rareBackground = loader.loadTexture("rareBackground");
+		GuiLibrary.legendaryBackground = loader.loadTexture("legendaryBackground");
 	}
 	
 

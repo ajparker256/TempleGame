@@ -56,6 +56,8 @@ public class Shop {
 	
 	private Button exitShop;
 	
+	private Button upgrade;
+	
 	protected Button[][] shopHitboxes;
 	
 	public Shop() {
@@ -101,6 +103,8 @@ public class Shop {
 				//System.out.println();
 			}
 		}
+		upgrade = new Button(new Vector2f(location.x+size.x/2-StringLibrary.getWidth("UPGRADE!")/2, location.y), 
+								new Vector2f(location.x+size.x/2+StringLibrary.getWidth("UPGRADE!")/2, location.y-StringLibrary.getSize().y));
 		updateShopPosition();
 		upArrow = new GuiTexture(GuiLibrary.upArrow, new Vector2f(location.x+size.x/2, location.y+size.y+.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 		
@@ -108,7 +112,7 @@ public class Shop {
 				new Vector2f(upArrow.getPosition().x+upArrow.getScale().x/2, upArrow.getPosition().y-upArrow.getScale().y/2));
 		
 		
-		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-StringLibrary.getSize().y-.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 		
 		downArrowHitbox = new Button(new Vector2f(downArrow.getPosition().x-downArrow.getScale().x/2, downArrow.getPosition().y+downArrow.getScale().y/2),
 				new Vector2f(downArrow.getPosition().x+downArrow.getScale().x/2, downArrow.getPosition().y-downArrow.getScale().y/2));
@@ -121,6 +125,10 @@ public class Shop {
 											location.y+size.y), 
 								new Vector2f(location.x+size.x,
 											location.y));
+	}
+	
+	public boolean isUpgradeClicked(float mouseX, float mouseY) {
+			return upgrade.isClicked(mouseX,mouseY);
 	}
 	
 	public boolean isUpArrowClicked(float mouseX, float mouseY) {
