@@ -8,6 +8,7 @@ import buttons.Button;
 import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
+import librarys.StringLibrary;
 import librarys.UpgradeLibrary;
 import traps.Trap;
 
@@ -31,8 +32,13 @@ public class UpgradeRoller {
 		
 		boolean isOn;
 		
+		public UpgradeRoller() {
+			isOn = false;
+		}
+		
 		public UpgradeRoller(Vector2f loc, Vector2f size, Trap trapBeingUpgraded) {
-			background = new GuiTexture(GuiLibrary.commonBackground, loc, size);
+			System.out.println("Initialized");
+			//background = new GuiTexture(GuiLibrary.commonBackground, new Vector2f(loc.x+size.x/2, loc.y+size.y/2), size);
 			options = new Button[3];
 			givenOptions = new Upgrade[3];
 			optionsTextures = new ArrayList<GuiTexture>();
@@ -40,28 +46,42 @@ public class UpgradeRoller {
 			this.size = size;
 			trap = trapBeingUpgraded;
 			for(int i = 0; i<options.length; i++) {
-				options[i] = new Button(new Vector2f(location.x+size.x/options.length/2-size.x/4+i*(size.x/options.length),
-						location.y+size.y/6*5),
-						new Vector2f(location.x+size.x/options.length/2+size.x/4+i*(size.x/options.length),
-						location.y+size.y/6));
+				//location.x+i*(size.x/options.length*2), location.y+size.y/2
+				options[i] = new Button(new Vector2f(location.x+i*(4*size.x/options.length),
+						location.y+size.y),
+						new Vector2f(location.x+(1+i)*(4*size.x/options.length),
+						location.y));
 			}
 			roll();
-			isOn = false;
+			isOn = true;
 		}
 		
-		public ArrayList<GuiTexture> render() {
-			ArrayList<GuiTexture> toBeRendered = new ArrayList<GuiTexture>();
-			toBeRendered.add(background);
-			toBeRendered.addAll(optionsTextures);
-			return toBeRendered;
+		public Trap getTrap() {
+			return trap;
+		}
+		
+		public boolean isOn() {
+			return isOn;
+		}
+		
+		public void setOn(boolean b) {
+			isOn = b;
+		}
+		
+		public void render(ArrayList<GuiTexture> dynamicGuis) {
+			//dynamicGuis.add(background);
+			dynamicGuis.addAll(optionsTextures);
 		}
 		
 		public void roll() {
 			optionsTextures.clear();
+			StringLibrary.setSize(new Vector2f(.015f, .03f));
 			for(int i = 0; i<givenOptions.length; i++) {
 				givenOptions[i] = UpgradeLibrary.getUpgrade(trap.getId());
-				optionsTextures.addAll(givenOptions[i].render(new Vector2f(location.x+size.x/options.length/2+i*(size.x/options.length), location.y+size.y/2)));
+				givenOptions[i].getTexture().setScale(new Vector2f(size.x/options.length, size.y));
+				optionsTextures.addAll(givenOptions[i].render(new Vector2f(location.x+i*(size.x/options.length*2), location.y+size.y/2)));
 			}
+			StringLibrary.setSize(new Vector2f(.02f, .04f));
 		}
 		
 		public boolean itemIsClicked(float mouseX, float mouseY) {

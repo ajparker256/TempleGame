@@ -200,6 +200,7 @@ public class Shop {
 			}
 		}
 		StringLibrary.setSize(new Vector2f(.02f, .04f));
+		guis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
 		guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x-StringLibrary.getWidth('X'),
 				location.y+size.y)));
 	}

@@ -19,6 +19,7 @@ import librarys.ShopItemLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
 import librarys.TileLibrary;
+import librarys.UpgradeLibrary;
 import pathing.Group;
 import pathing.Squad;
 
@@ -42,10 +43,8 @@ import renderEngine.Loader;
 import shopItems.ShopItem;
 import sound.Sound;
 import tools.MathM;
-import traps.ArrowTrap;
-import traps.CursedIdol;
-import traps.TikiTrap;
-import traps.TreasureTrap;
+import traps.Trap;
+import upgrades.UpgradeRoller;
 //Main game loop
 public class Main {
 	//Amount of ambient light
@@ -65,6 +64,7 @@ public static RotationDialogueBox rotationDialogueBox;
 public static ArrayList<Projectile> projectiles;
 public static double timeInRound;
 public static ArrayList<Grid> gridsReadOnly;
+public static UpgradeRoller upgradeRoller;
 public static void main(String[] args) throws FileNotFoundException {
 	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
@@ -79,7 +79,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	//Aspect Ratio should be 1 to 2
 	StringLibrary.setSize(new Vector2f(.02f, .04f));
 	GuiLibrary.init(loader);
-
+	UpgradeLibrary.init();
 	SoundLibrary.init();
 	
 	for(int i = 0; i<8; i++) {
@@ -92,12 +92,13 @@ public static void main(String[] args) throws FileNotFoundException {
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	projectiles= new ArrayList<Projectile>();
-	
 	GuiLibrary.background = loader.loadTexture("background");
 
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);	
 	AnimationLibrary.init(loader);
+	
+	upgradeRoller = new UpgradeRoller();
 	
 	guis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(-1f, -1f), new Vector2f(1.8f, 1.8f)));
 /*	Group group1 = new Group(0);
@@ -182,9 +183,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		update(dynamicGuis, milli);
 		
 		
-		if(epicShopofEpicness.isOn()) {
-			epicShopofEpicness.render(dynamicGuis);
-		}
+		
 		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 		
 		//enemy update stuff
@@ -223,7 +222,12 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
 			rotationDialogueBox.render(dynamicGuis);
 		}
-		
+		if(epicShopofEpicness.isOn()) {
+			epicShopofEpicness.render(dynamicGuis);
+		}
+		if(upgradeRoller.isOn()) {
+			upgradeRoller.render(dynamicGuis);
+		}
 		if(counter < 250) {
 			//dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
 			counter++;
@@ -278,9 +282,10 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(epicShopofEpicness.isExitClicked(mouseX, mouseY)) {
 			epicShopofEpicness.setOn(false);
 			rotationDialogueBox.setOn(false);
+			upgradeRoller.setOn(false);
 		}
 		//If the grid is clicked (Selecting tile) and There isn't something over the grid, and the shop hasn't been closed recently, and it isn't currently open
-		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < currentTime && epicShopofEpicness.getLastTimeClicked()+500<currentTime) {
+		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < currentTime && epicShopofEpicness.getLastTimeClicked()+500<currentTime && !upgradeRoller.isOn()) {
 			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
 			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
@@ -317,6 +322,23 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 			}
 		}
+		//UpgradeRoller Logic
+		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
+			if(Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
+				Trap trap = (Trap) Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
+				upgradeRoller = new UpgradeRoller(new Vector2f(-.4f, -.8f), new Vector2f(.8f, .4f), trap);
+			}
+		}
+		if(upgradeRoller.isOn()) {
+			if(upgradeRoller.itemIsClicked(mouseX, mouseY)) {
+				upgradeRoller.getTrap().upgrade(upgradeRoller.getClickedUpgrade(mouseX, mouseY));
+				upgradeRoller.setOn(false);
+				epicShopofEpicness.setOn(false);
+				epicShopofEpicness.setLastTimeClosed(currentTime);
+				System.out.println("UPGRADE COMPLETE"+upgradeRoller.getClickedUpgrade(mouseX, mouseY).toString());
+			}
+		}
+		//RotationDialogueBox Logic
 		if(rotationDialogueBox.isOn() && rotationDialogueBox.shopIsClicked(mouseX, mouseY)) {
 			int selected = rotationDialogueBox.getShopItem(mouseX, mouseY);
 			if(selected != 0) {
@@ -333,12 +355,14 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setOn(false);
 			}
 		}
+		//Shop Scrolling Logic
 		if(epicShopofEpicness.isOn()) {
 			if(epicShopofEpicness.isUpArrowClicked(mouseX, mouseY))
 				epicShopofEpicness.scrollUp();
 			if(epicShopofEpicness.isDownArrowClicked(mouseX, mouseY))
 				epicShopofEpicness.scrollDown();
 		}
+		//Floor Select / Purchasing Floors Logic (TODO)
 		for(Grid g : grids) {
 			if(g.isLevelSelected(mouseX, mouseY) && Main.grid.getFloor() != g.getFloor()) {
 				Main.grid = g;

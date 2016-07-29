@@ -61,6 +61,7 @@ public class Upgrade {
 	public ArrayList<GuiTexture> render(Vector2f locationOfImage) {
 		//Renders the rarity's background and displays its message on top
 		ArrayList<GuiTexture> toBeRendered = new ArrayList<GuiTexture>();
+		rarityBorder.setPosition(locationOfImage);
 		toBeRendered.add(rarityBorder);
 		toBeRendered.addAll(StringLibrary.makeItFitC(explanation, new Vector2f(rarityBorder.getPosition().x-rarityBorder.getScale().x/2, rarityBorder.getPosition().y+rarityBorder.getScale().y/2), rarityBorder.getScale().x));
 		return toBeRendered;
