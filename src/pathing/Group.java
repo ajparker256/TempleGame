@@ -112,16 +112,15 @@ public class Group {
 	}
 
 	public boolean move(int milli,Grid grid) {
-		
-		if(wait){
-			return false;
-		}
-		Main.grids.get(floor).getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
-		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			interact(grid);
 			return true;
 		}
+		for(Explorer explorer:group){
+			explorer.moveTo(nextLoc,milli);
+		}
+		Main.grids.get(floor).getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
+		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		realLoc=nextLoc;
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		if(!(location.x==destination.x&&location.y==destination.y)){
@@ -141,7 +140,6 @@ public class Group {
 	}
 	private void moveTo(Grid grid, int milli){
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
-		
 		Vector2f tempVelocity= new Vector2f();
 		if(flee){
 			speedMod=2f;
@@ -157,6 +155,7 @@ public class Group {
 			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 			//If you would overshoot, don't
 			if(location.x>destination.x){
+				busy=false;
 				location.x=destination.x;
 				direction=12;
 			}
@@ -167,6 +166,7 @@ public class Group {
 			tempVelocity = new Vector2f(modVelocity.x*-1, 0);
 			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
 			if(location.x<destination.x){
+				busy=false;
 				location.x=destination.x;
 				direction=14;
 				
@@ -178,6 +178,7 @@ public class Group {
 			tempVelocity.y = modVelocity.y;
 			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 			if(location.y>destination.y){
+				busy=false;
 				location.y=destination.y;
 				direction=11;
 			}
@@ -189,6 +190,7 @@ public class Group {
 			tempVelocity.y = -1*modVelocity.y;
 			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
 			if(location.y<destination.y){
+				busy=false;
 				location.y=destination.y;
 				direction=13;
 			}
@@ -208,7 +210,7 @@ public class Group {
 		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
 		for(Explorer explorer:group){
 			if(this.floor == Main.grid.getFloor())
-			toRender.add(explorer.render(location));
+			toRender.add(explorer.render());
 		}
 		return toRender;
 	}
@@ -223,7 +225,15 @@ public class Group {
 	}
 
 	public boolean isBusy() {
-		return this.busy;
+		if(this.busy){
+			return true;
+		}
+		for(Explorer explorer:group){
+			if(explorer.isBusy()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setWait(boolean wait) {
@@ -237,22 +247,6 @@ public class Group {
 
 	public void setNextLoc(Point point) {
 
-		Vector2f locationNext=Main.grid.getTile(point.x, point.y).getLocation();
-		if(location.x<locationNext.x){
-			direction=12;
-			
-		}else if(location.x>locationNext.x){
-			direction=14;
-			
-		}else if(location.y<locationNext.y){
-			direction=11;
-		}else if(location.y>locationNext.y){
-			direction=13;
-
-		}
-			for(Explorer e: group){
-				e.rotate(direction);
-			}
 			this.nextLoc=point;
 	}
 	public void setIdle(){
@@ -290,6 +284,28 @@ public class Group {
 
 	public void setFlee(boolean flee) {
 		this.flee=flee;
+		
+	}
+
+	public void rotate(Point point) {
+		System.out.println(point);
+		this.busy=false;
+		Vector2f locationNext=Main.grid.getTile(point.x, point.y).getLocation();
+		if(location.x<locationNext.x){
+			direction=12;
+		}else if(location.x>locationNext.x){
+			direction=14;
+			
+		}else if(location.y<locationNext.y){
+			direction=11;
+		}else if(location.y>locationNext.y){
+			direction=13;
+		}
+		int i=0;
+			for(Explorer e: group){
+				e.rotate(direction);
+				i++;
+			}
 		
 	}
 

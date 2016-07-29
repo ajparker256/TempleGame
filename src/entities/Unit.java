@@ -6,6 +6,7 @@ import java.util.List;
 import librarys.AnimationLibrary;
 import main.Main;
 import pathing.Group;
+import renderEngine.DisplayManager;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -51,7 +52,7 @@ public class Unit {
 		this.kill=false;
 		tempVelocity=new Vector2f(0, 0);
 		this.animation=new Animation(AnimationLibrary.explorer,location,size);
-		velocity=new Vector2f(0,0);
+		velocity=new Vector2f(0.1f,(float) (0.1f*DisplayManager.getAspectratio()));
 		location = group.getLocation();
 		isAlive = true;
 		this.size = Main.grid.UNITSIZE;	

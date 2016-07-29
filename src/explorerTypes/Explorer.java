@@ -1,5 +1,6 @@
 package explorerTypes;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
@@ -29,10 +30,16 @@ public class Explorer extends Unit{
 	protected int id;
 	protected int damage;
 	protected int delay;
+	private Point nextLoc;
+	private float speedMod;
+	private int direction;
+	private boolean busy;
+	private boolean flee;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		this.nextLoc=new Point(0,0);
 		this.delay=25;
 		this.id = -1;
 		this.lastDirection=1;
@@ -44,6 +51,16 @@ public class Explorer extends Unit{
 		super.animation.setDelay(delay);
 		floor = Main.grids.get(0).getFloor();
 		damage = 1;
+		switch(position){
+		case 1:location=new Vector2f(location.x-0.025f+0.01f,location.y+0.04f);
+		break;
+		case 2:location=new Vector2f(location.x+0.025f+0.01f,location.y+0.04f);
+		break;
+		case 3:location=new Vector2f(location.x-0.025f+0.01f,location.y-0.04f);
+		break;
+		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.04f);
+		break;
+		}
 		
 	}
 	
@@ -70,18 +87,8 @@ public class Explorer extends Unit{
 	}
 
 	
-	public GuiTexture render(Vector2f location) {
-		
-		switch(position){
-		case 1:location=new Vector2f(location.x-0.025f+0.01f,location.y+0.04f);
-		break;
-		case 2:location=new Vector2f(location.x+0.025f+0.01f,location.y+0.04f);
-		break;
-		case 3:location=new Vector2f(location.x-0.025f+0.01f,location.y-0.04f);
-		break;
-		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.04f);
-		break;
-		}
+	public GuiTexture render() {
+
 	
 		
 	switch(group.getDirection()){
@@ -448,6 +455,84 @@ setIdle();
 		this.delay=delay;
 		animation.setDelay(delay);
 		
+	}
+
+
+	public void moveTo(Point nextLoc, int milli){
+
+		Vector2f destination=Main.grid.getTile(nextLoc.x, nextLoc.y).getLocation();
+
+		Vector2f tempVelocity= new Vector2f();
+		switch(position){
+		case 1:destination=new Vector2f(destination.x-0.025f+0.01f,destination.y+0.04f);
+		break;
+		case 2:destination=new Vector2f(destination.x+0.025f+0.01f,destination.y+0.04f);
+		break;
+		case 3:destination=new Vector2f(destination.x-0.025f+0.01f,destination.y-0.04f);
+		break;
+		case 4:destination=new Vector2f(destination.x+0.025f+0.01f,destination.y-0.04f);
+		break;
+		}
+
+		if(flee){
+			speedMod=2f;
+		}else{
+			speedMod=1f;
+		}
+		Vector2f modVelocity=new Vector2f(velocity.x*speedMod,velocity.y*speedMod);
+		if(location.x<destination.x){
+			direction=2;
+			busy=true;
+			tempVelocity.x = modVelocity.x;
+			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
+			//If you would overshoot, don't
+			if(location.x>destination.x){
+				busy=false;
+				location.x=destination.x;
+				direction=12;
+			}
+		//If the destination is to the left, go left
+		}else if(location.x>destination.x){
+			direction=4;
+			busy=true;
+			tempVelocity = new Vector2f(modVelocity.x*-1, 0);
+			setLoc(new Vector2f(location.x+tempVelocity.x*milli/1000f, location.y));
+			if(location.x<destination.x){
+				busy=false;
+				location.x=destination.x;
+				direction=14;
+				
+			}
+		//If the destination is above you, go up
+		}else if(location.y<destination.y){
+			direction=1;
+			busy=true;
+			tempVelocity.y = modVelocity.y;
+			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
+			if(location.y>destination.y){
+				busy=false;
+				location.y=destination.y;
+				direction=11;
+			}
+			
+		//If the destination is below you, go down
+		}else if(location.y>destination.y){
+			direction=3;
+			busy=true;
+			tempVelocity.y = -1*modVelocity.y;
+			setLoc(new Vector2f(location.x, location.y+(tempVelocity.y*milli/1000f)));
+			if(location.y<destination.y){
+				busy=false;
+				location.y=destination.y;
+				direction=13;
+			}
+		}
+
+
+	}
+
+	public boolean isBusy() {
+		return busy;
 	}
 	
 	
