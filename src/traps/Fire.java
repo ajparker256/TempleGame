@@ -15,8 +15,8 @@ import gui.GuiTexture;
 public class Fire extends Projectile {
 
 	private int life;
-	public Fire(int direction, int x, int y, int floor) {
-		super(direction, x, y, floor);
+	public Fire(int direction, int x, int y, int floor, double damage) {
+		super(direction, x, y, floor, damage);
 		super.texture=GuiLibrary.flame1;
 		super.image = new GuiTexture(texture, location, size);
 		life=1000;

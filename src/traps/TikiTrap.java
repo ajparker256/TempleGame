@@ -60,6 +60,21 @@ public class TikiTrap extends Trap{
 		range = 1;
 		rotatable = false;
 		setTriggers();
+		
+		damage = 1;
+		range = 1;
+		defense = 10;
+		maxHp = 200;
+		critChance = 0;
+		armorPen = 10;
+		pierceChance = 0;
+		bleed = 0;
+		gatlingRampPerShot = 0;
+		gatlingCap = 0;
+		warmUpTime = 0;
+		accuracy = .9;
+		cooldown = 0;
+		maxCd = 100;
 	}
 	
 	@Override
@@ -74,13 +89,13 @@ public class TikiTrap extends Trap{
 			if(fire) {
 
 				if(x-1>=0)
-				Main.projectiles.add(new Fire(1,x-1,y,super.floor));
+				Main.projectiles.add(new Fire(1,x-1,y,super.floor, damage));
 				if(x+1<=9)
-				Main.projectiles.add(new Fire(1,x+1,y,super.floor));
+				Main.projectiles.add(new Fire(1,x+1,y,super.floor, damage));
 				if(y-1>=0)
-				Main.projectiles.add(new Fire(1,x,y-1,super.floor));
+				Main.projectiles.add(new Fire(1,x,y-1,super.floor, damage));
 				if(y+1<=9)
-				Main.projectiles.add(new Fire(1,x,y+1,super.floor));
+				Main.projectiles.add(new Fire(1,x,y+1,super.floor, damage));
 				
 				isFiring = true;
 				for(Upgrade u : onFire) {

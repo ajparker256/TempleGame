@@ -35,7 +35,7 @@ public class Tile {
 	protected int occupied;
 	protected int floor;
 	protected ArrayList<Point> trapRefs;
-	protected int hp;
+	protected double hp;
 	protected boolean rotatable;
 	protected Animation animation;
 	protected boolean hasAnimation;

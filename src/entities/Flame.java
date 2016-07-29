@@ -10,8 +10,8 @@ public class Flame extends Projectile{
 	
 	private Animation flames;
 	
-	public Flame(int x, int y, Vector2f size, int floor) {
-		super(x, y, 1, floor);
+	public Flame(int x, int y, Vector2f size, int floor, int damage) {
+		super(x, y, 1, floor, damage);
 		velocity = new Vector2f(0,0);
 		flames = new Animation(AnimationLibrary.flame, new Vector2f(0,0), size);
 		flames.setDelay(20);

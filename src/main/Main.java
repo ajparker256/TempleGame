@@ -167,8 +167,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 	}
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.25f, .5f), traps);
-	Flame testFlame = new Flame(1, 1, new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio()), Main.grid.getFloor());
-	projectiles.add(testFlame);
 	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 
@@ -326,7 +324,14 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
 			if(Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
 				Trap trap = (Trap) Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
-				upgradeRoller = new UpgradeRoller(new Vector2f(-.4f, -.8f), new Vector2f(.8f, .4f), trap);
+				int levelCost = trap.getLevel()*100+50;
+				if(money-levelCost>-0) {
+					upgradeRoller = new UpgradeRoller(new Vector2f(-.4f, -.8f), new Vector2f(.8f, .4f), trap);
+					money-=levelCost;
+				}
+				else {
+					dynamicGuis.addAll(StringLibrary.makeItFitC("Insufficient Funds",new Vector2f(epicShopofEpicness.getLoc().x, epicShopofEpicness.getLoc().y-.2f), epicShopofEpicness.getSize().x));
+				}
 			}
 		}
 		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < currentTime) {
@@ -335,7 +340,6 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller.setOn(false);
 				epicShopofEpicness.setOn(false);
 				epicShopofEpicness.setLastTimeClosed(currentTime);
-				System.out.println("UPGRADE COMPLETE"+upgradeRoller.getClickedUpgrade(mouseX, mouseY).toString());
 			}
 		}
 		//RotationDialogueBox Logic

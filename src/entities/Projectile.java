@@ -25,12 +25,14 @@ public class Projectile {
 	protected Vector2f velocity;
 	protected boolean kill;
 	protected GuiTexture image;
+	protected double damage;
 
-	public Projectile(int direction, int x, int y, int floor) {
+	public Projectile(int direction, int x, int y, int floor, double damage) {
 		kill=false;
 		this.direction=direction;
 		this.x=x;
 		this.y=y;
+		this.damage = damage;
 		this.floor=floor;
 		this.texture=GuiLibrary.arrow5;
 		this.location=new Vector2f(Main.grid.getTile(x,y).getLocation());
@@ -70,7 +72,7 @@ public class Projectile {
 	for(Squad squad:Main.squads){
 		for(Group group: squad.getGroups()){
 			if(group.getRealLoc().equals(new Point(x,y))){
-				group.damage(new boolean[]{true,true,true,true},1);
+				group.damage(new boolean[]{true,true,true,true}, damage);
 				this.kill=true;
 			}
 		}

@@ -50,20 +50,33 @@ public class ArrowTrap extends Trap{
 		super(x, y, size, Main.grid.getLoc());
 		super.passable=false;
 		super.canInteract=true;
-		this.cooldown=0;
 		this.direction=direction;
 		System.out.println(direction);
-		this.texture=1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.guiTexture.setRotation(MathM.toDegrees(direction));
 		this.name = "Arrow Trap";
 		this.maxCd=1000;
 		id = 5;
-		range = 5;
 		rotatable = true;
 		super.animation = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		super.animation.setDelay(25);
 		setTriggers();
+		
+		damage = 5;
+		range = 4;
+		defense = 0;
+		maxHp = 100;
+		hp = 100;
+		critChance = 0;
+		armorPen = 0;
+		bleed = 0;
+		gatlingRampPerShot = 0;
+		pierceChance = 0;
+		gatlingCap = 0;
+		warmUpTime = 0;
+		accuracy = .9;
+		cooldown = 0;
+		maxCd = 1;
 	}
 	@Override
 	public void whenTriggered(Point p){
@@ -110,7 +123,7 @@ public class ArrowTrap extends Trap{
 				for(Upgrade u : onFire) {
 					u.upgrade(this);
 				}
-				Main.projectiles.add(new Projectile(direction,x,y,super.floor));
+				Main.projectiles.add(new Projectile(direction,x,y,super.floor, damage));
 				isFiring = true;
 				cooldown=maxCd; 
 			}

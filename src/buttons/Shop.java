@@ -12,6 +12,7 @@ import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
+import main.Main;
 import renderEngine.DisplayManager;
 import shopItems.ShopItem;
 
@@ -200,6 +201,7 @@ public class Shop {
 			}
 		}
 		StringLibrary.setSize(new Vector2f(.02f, .04f));
+		if(Main.grid.getTile((int)getGridLoc().x, (int)getGridLoc().y).getId() > 1)
 		guis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
 		guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x-StringLibrary.getWidth('X'),
 				location.y+size.y)));

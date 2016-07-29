@@ -4,15 +4,18 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
+
+import explorerTypes.Explorer;
 import upgrades.*;
 import grid.Tile;
+import pathing.Group;
 
 public class Trap extends Tile{
 	
-	protected int damage;
+	protected double damage;
 	protected int range;
 	protected int defense;
-	protected int maxHp;
+	protected double maxHp;
 	protected double critChance;
 	protected int armorPen;
 	protected double pierceChance;
@@ -38,6 +41,8 @@ public class Trap extends Tile{
 		onDeath = new ArrayList<Upgrade>();
 		onInteract = new ArrayList<Upgrade>();
 		onTrigger = new ArrayList<Upgrade>();
+		maxHp = 100;
+		hp = maxHp;
 	}
 	
 	//Wall of gets/sets
@@ -105,7 +110,7 @@ public class Trap extends Tile{
 		pierceChance = i;
 	}
 	
-	public int getDamage() {
+	public double getDamage() {
 		return damage;
 	}
 	
@@ -129,7 +134,7 @@ public class Trap extends Tile{
 		range = i;
 	}
 	
-	public int getMaxHp() {
+	public double getMaxHp() {
 		return maxHp;
 	}
 	
@@ -161,6 +166,12 @@ public class Trap extends Tile{
 		}
 	}
 	
+	@Override
+	public void interact(Group g) {
+		for(Explorer e : g.getGroup()) {
+			hp -= (e.getDamage()+100)/(100+defense);
+		}
+	}
 	
 	public void upgrade(Upgrade powerUp) {
 		int triggerLoc = powerUp.getTriggerLoc();
@@ -178,5 +189,7 @@ public class Trap extends Tile{
 			onTrigger.add(powerUp);
 		if(triggerLoc == 5) 
 			onDeath.add(powerUp);
+		level++;
+		System.out.println(damage);
 	}
 }

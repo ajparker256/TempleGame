@@ -39,7 +39,6 @@ public class UpgradeRoller {
 		}
 		
 		public UpgradeRoller(Vector2f loc, Vector2f size, Trap trapBeingUpgraded) {
-			System.out.println("Initialized");
 			//background = new GuiTexture(GuiLibrary.commonBackground, new Vector2f(loc.x+size.x/2, loc.y+size.y/2), size);
 			options = new Button[3];
 			givenOptions = new Upgrade[3];
@@ -106,7 +105,6 @@ public class UpgradeRoller {
 			int i = 0;
 			for(Button b : options) {
 				if(b.isClicked(mouseX, mouseY)) {
-					System.out.println(i);
 					return givenOptions[i];
 				}
 				i++;
