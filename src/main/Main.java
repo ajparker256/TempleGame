@@ -329,7 +329,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller = new UpgradeRoller(new Vector2f(-.4f, -.8f), new Vector2f(.8f, .4f), trap);
 			}
 		}
-		if(upgradeRoller.isOn()) {
+		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < currentTime) {
 			if(upgradeRoller.itemIsClicked(mouseX, mouseY)) {
 				upgradeRoller.getTrap().upgrade(upgradeRoller.getClickedUpgrade(mouseX, mouseY));
 				upgradeRoller.setOn(false);

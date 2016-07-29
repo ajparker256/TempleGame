@@ -32,6 +32,8 @@ public class UpgradeRoller {
 		
 		boolean isOn;
 		
+		double sinceOpened;
+		
 		public UpgradeRoller() {
 			isOn = false;
 		}
@@ -47,13 +49,19 @@ public class UpgradeRoller {
 			trap = trapBeingUpgraded;
 			for(int i = 0; i<options.length; i++) {
 				//location.x+i*(size.x/options.length*2), location.y+size.y/2
-				options[i] = new Button(new Vector2f(location.x+i*(4*size.x/options.length),
+				options[i] = new Button(new Vector2f(location.x-size.x/options.length+(i)*(2*size.x/options.length),
 						location.y+size.y),
-						new Vector2f(location.x+(1+i)*(4*size.x/options.length),
+						new Vector2f(location.x-size.x/options.length+(i+1)*(2*size.x/options.length),
 						location.y));
 			}
 			roll();
 			isOn = true;
+			sinceOpened
+			= System.currentTimeMillis();
+		}
+		
+		public double getTimeOpened() {
+			return sinceOpened;
 		}
 		
 		public Trap getTrap() {
@@ -78,7 +86,7 @@ public class UpgradeRoller {
 			StringLibrary.setSize(new Vector2f(.015f, .03f));
 			for(int i = 0; i<givenOptions.length; i++) {
 				givenOptions[i] = UpgradeLibrary.getUpgrade(trap.getId());
-				givenOptions[i].getTexture().setScale(new Vector2f(size.x/options.length, size.y));
+				givenOptions[i].getTexture().setScale(new Vector2f(size.x/options.length, size.y/2));
 				optionsTextures.addAll(givenOptions[i].render(new Vector2f(location.x+i*(size.x/options.length*2), location.y+size.y/2)));
 			}
 			StringLibrary.setSize(new Vector2f(.02f, .04f));
@@ -98,6 +106,7 @@ public class UpgradeRoller {
 			int i = 0;
 			for(Button b : options) {
 				if(b.isClicked(mouseX, mouseY)) {
+					System.out.println(i);
 					return givenOptions[i];
 				}
 				i++;
