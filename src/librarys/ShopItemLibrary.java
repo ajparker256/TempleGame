@@ -29,6 +29,8 @@ public class ShopItemLibrary {
 	public static ShopItem getItem(int id) {
 		if(id == -2) 
 			return new ExitSI(new Vector2f(-2,-2), size);
+		if(id == 0) 
+			return new BlankSI(new Vector2f(-2,-2), size);
 		if(id == 2)
 			return new CursedIdolSI(new Vector2f(-2,-2), size);
 		if(id == 4)
