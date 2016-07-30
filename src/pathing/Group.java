@@ -287,20 +287,20 @@ public class Group {
 		
 	}
 
-	public void rotate(Point point) {
-		System.out.println(point);
+	public void rotate(Point locationNext) {
 		this.busy=false;
-		Vector2f locationNext=Main.grid.getTile(point.x, point.y).getLocation();
-		if(location.x<locationNext.x){
+
+		if(realLoc.x<locationNext.x){
 			direction=12;
-		}else if(location.x>locationNext.x){
+		}else if(realLoc.x>locationNext.x){
 			direction=14;
 			
-		}else if(location.y<locationNext.y){
+		}else if(realLoc.y<locationNext.y){
 			direction=11;
-		}else if(location.y>locationNext.y){
+		}else if(realLoc.y>locationNext.y){
 			direction=13;
 		}
+		System.out.println(locationNext+" "+realLoc);
 		int i=0;
 			for(Explorer e: group){
 				e.rotate(direction);

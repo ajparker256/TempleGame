@@ -20,7 +20,7 @@ public class Squad {
 	private ArrayList<PathModifier> modifications;
 	private boolean rotating;
 	public Squad(ArrayList<Group> groups, int squadId){
-		rotating=false;
+		rotating=true;
 		modifications = new ArrayList<PathModifier>();
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
