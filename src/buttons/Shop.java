@@ -61,6 +61,8 @@ public class Shop {
 	
 	protected Button[][] shopHitboxes;
 	
+	protected GuiTexture selectionOutline;
+	
 	public Shop() {
 		
 	}
@@ -189,6 +191,7 @@ public class Shop {
 		if(visibilityRange[2] != traps[0].length-(visibilityRange[3]-visibilityRange[2])) {
 			guis.add(upArrow);
 		} 
+		guis.add(selectionOutline);
 		StringLibrary.setSize(textSize);
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
@@ -285,6 +288,7 @@ public class Shop {
 	
 	public void setGridLoc(Vector2f locationOnGrid) {
 		locationOfTrapPlacement = locationOnGrid;
+		selectionOutline = new GuiTexture(GuiLibrary.selectionOutline, Main.grid.getTile((int)locationOfTrapPlacement.x, (int)locationOfTrapPlacement.y).getLocation(), new Vector2f(Main.grid.getTile((int)locationOfTrapPlacement.x,(int)locationOfTrapPlacement.y).getSize(), Main.grid.getTile((int)locationOfTrapPlacement.x,(int)locationOfTrapPlacement.y).getSize()*(float)DisplayManager.getAspectratio()));
 	}
 
 }

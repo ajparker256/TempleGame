@@ -217,11 +217,11 @@ public static void main(String[] args) throws FileNotFoundException {
 				dynamicGuis.add(projectile.render());
 			
 		}
-		if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
-			rotationDialogueBox.render(dynamicGuis);
-		}
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
+		}
+		if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
+			rotationDialogueBox.render(dynamicGuis);
 		}
 		if(upgradeRoller.isOn()) {
 			upgradeRoller.render(dynamicGuis);
@@ -301,6 +301,8 @@ public static void main(String[] args) throws FileNotFoundException {
 					grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					epicShopofEpicness.setOn(false);
+					rotationDialogueBox.setOn(false);
+					upgradeRoller.setOn(false);
 					epicShopofEpicness.setLastTimeClosed(currentTime);
 					money -= selectedItem.getCost();
 				} else if(selectedItem.getCost()>money) {
@@ -326,7 +328,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				Trap trap = (Trap) Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 				int levelCost = trap.getLevel()*100+50;
 				if(money-levelCost>-0) {
-					upgradeRoller = new UpgradeRoller(new Vector2f(-.4f, -.8f), new Vector2f(.8f, .4f), trap);
+					upgradeRoller = new UpgradeRoller(new Vector2f(-.5f, -.8f), new Vector2f(.8f, .4f), trap);
 					money-=levelCost;
 				}
 				else {

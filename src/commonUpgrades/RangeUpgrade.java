@@ -8,7 +8,7 @@ public class RangeUpgrade extends Upgrade{
 	private static int rangeIncrease = 1;
 	
 	public RangeUpgrade() {
-		super("This increases the range of the trap by "+rangeIncrease+".", 10);
+		super("Increase the range of this trap by "+rangeIncrease+".", 10);
 		id = 6;
 	}
 	

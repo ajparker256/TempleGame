@@ -8,7 +8,7 @@ public class DamageUpgrade extends Upgrade{
 private static double damageIncrease = .2;
 	
 	public DamageUpgrade() {
-		super("This increases the damage of the trap by "+(int)(100*damageIncrease)+"%.", 10);
+		super("Increase the damage of this trap by "+(int)(100*damageIncrease)+"%.", 10);
 		id = 3;
 	}
 	

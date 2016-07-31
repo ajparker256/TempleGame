@@ -170,6 +170,7 @@ public static int backgroundDraft1;
 public static int commonBackground;
 public static int rareBackground;
 public static int legendaryBackground;
+public static int selectionOutline;
 
 public static int tikiTrap;
 
@@ -321,6 +322,7 @@ public static void init(Loader loader) {
 		GuiLibrary.commonBackground = loader.loadTexture("commonBackground");
 		GuiLibrary.rareBackground = loader.loadTexture("rareBackground");
 		GuiLibrary.legendaryBackground = loader.loadTexture("legendaryBackground");
+		GuiLibrary.selectionOutline = loader.loadTexture("selectionOutline");
 	}
 	
 
