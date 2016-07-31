@@ -7,6 +7,7 @@ import upgrades.Upgrade;
 
 public class UpgradeLibrary {
 	
+	//Upgrades
 	public static AttackSpeedUpgrade attackSpeedRef;
 	
 	public static HealthUpgrade hpRef;
@@ -19,6 +20,7 @@ public class UpgradeLibrary {
 	
 	public static DefenseUpgrade defenseRef;
 	
+	//Trap Upgrade Pools
 	public static ArrayList<Upgrade> arrowTrapUpgrades;
 	
 	public static ArrayList<Upgrade> tikiTrapUpgrades;
@@ -75,7 +77,7 @@ public class UpgradeLibrary {
 		if(upgradeId == damageRef.getId()) {
 			return new DamageUpgrade();
 		}
-		
+		System.out.println("Error in Upgrade getUpgradeOfType Method");
 		return null;
 	}
 	

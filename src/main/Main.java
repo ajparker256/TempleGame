@@ -328,7 +328,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				Trap trap = (Trap) Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 				int levelCost = trap.getLevel()*100+50;
 				if(money-levelCost>-0) {
-					upgradeRoller = new UpgradeRoller(new Vector2f(-.5f, -.8f), new Vector2f(.8f, .4f), trap);
+					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
 					money-=levelCost;
 				}
 				else {
