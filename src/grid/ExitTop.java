@@ -9,8 +9,8 @@ import renderEngine.DisplayManager;
 
 public class ExitTop extends Tile{
 
-	public ExitTop(int x, int y, float size) {
-		super(x,y,size, Main.grid.getLoc());
+	public ExitTop(int x, int y, float size, int floor) {
+		super(x,y,size, Main.grids.get(floor).getLoc(), floor);
 		this.guiTexture=(new GuiTexture(GuiLibrary.ladderTop,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));
 		passable = false;
 		canInteract = false;

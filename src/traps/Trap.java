@@ -34,8 +34,8 @@ public class Trap extends Tile{
 	protected ArrayList<Upgrade> onInteract;
 	protected ArrayList<Upgrade> onTrigger;
 	
-	public Trap(int x, int y, float size, Vector2f location) {
-		super(x, y, size, location);
+	public Trap(int x, int y, float size, Vector2f location, int floor) {
+		super(x, y, size, location, floor);
 		onHit = new ArrayList<Upgrade>();
 		onFire = new ArrayList<Upgrade>();
 		onDeath = new ArrayList<Upgrade>();

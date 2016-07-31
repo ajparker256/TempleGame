@@ -114,6 +114,69 @@ public class StringLibrary {
 		return string;
 	}
 	
+	public static ArrayList<GuiTexture> makeItFitCInBoxWithScroll(String s, Vector2f locationOfTopLeftCorner, float width, float height, float scrollDisp) {
+		Scanner scan = new Scanner(s);
+		int maxLines = (int)Math.floor(height/size.y);
+		int row = 0;
+		if(scrollDisp>0) {
+			row -= (int)Math.ceil(scrollDisp/size.y);
+		} else if(scrollDisp<0) {
+			maxLines += (int)Math.floor(scrollDisp/size.y);
+		}
+		float length = 0;
+		int letterCount = 0;
+		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
+		while(scan.hasNext()) {
+			//This is used to subString the line for drawing it centered
+				String nextWord = scan.next();
+				float wordWidth = getWidth(nextWord);
+				if(length+wordWidth>width) {
+					if(row >= 0 && row<=maxLines) {
+						string.addAll(drawString(s.substring(0, letterCount), new Vector2f(locationOfTopLeftCorner.x+(width-length+getWidth(' '))/2, locationOfTopLeftCorner.y-row*size.y*2)));
+					} if(length != 0)
+						row++;
+					s=s.substring(letterCount);
+					length = wordWidth+getWidth(' ');
+					letterCount = nextWord.length()+1;
+				} else {
+					length+=wordWidth+getWidth(' ');
+					letterCount+=nextWord.length()+1;
+				} 
+		}
+		if(row>0 && row<=maxLines) {
+			string.addAll(drawString(s, new Vector2f(locationOfTopLeftCorner.x+(width-length+getWidth(' '))/2, locationOfTopLeftCorner.y-row*size.y*2)));
+		}
+		scan.close();
+		return string;
+	}
+	
+	public static String[] getLines(String s, float width) {
+		String[] lines = new String[(int)Math.ceil(getWidth(s)/width)];
+		Scanner scan = new Scanner(s);
+		int row = 0;
+		float length = 0;
+		int letterCount = 0;
+		while(scan.hasNext()) {
+			//This is used to subString the line for drawing it centered
+				String nextWord = scan.next();
+				float wordWidth = getWidth(nextWord);
+				if(length+wordWidth>width) {
+					lines[row] = s.substring(0, letterCount);
+					s=s.substring(letterCount);
+					if(length != 0)
+						row++;
+					length = wordWidth+getWidth(' ');
+					letterCount = nextWord.length()+1;
+				} else {
+					length+=wordWidth+getWidth(' ');
+					letterCount+=nextWord.length()+1;
+				} 
+		}
+		lines[lines.length-1] = s;
+		scan.close();
+		return lines;
+	}
+	
 	public static Vector2f getSize() {
 		return size;
 	}

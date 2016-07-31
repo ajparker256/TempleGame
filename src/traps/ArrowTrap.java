@@ -46,8 +46,8 @@ public class ArrowTrap extends Trap{
 	protected ArrayList<Upgrade> onTrigger;*/
 	
 
-	public ArrowTrap(int x, int y, float size,int direction) {
-		super(x, y, size, Main.grid.getLoc());
+	public ArrowTrap(int x, int y, float size,int direction, int floor) {
+		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.direction=direction;

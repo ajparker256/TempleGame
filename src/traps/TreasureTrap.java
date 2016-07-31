@@ -44,7 +44,7 @@ public class TreasureTrap extends Trap{
 	protected ArrayList<Upgrade> onTrigger;*/
 	
 	public TreasureTrap(int x, int y, float size, int floor) {
-		super(x, y, size, Main.grid.getLoc());
+		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		id = 4;
 		round = Main.round;
 		this.floor = floor;
@@ -77,7 +77,7 @@ public class TreasureTrap extends Trap{
 			passable = true;
 			canInteract = false;
 			Main.grids.get(g.getFloor()).getTreasureLocs().remove(new Point(x, y));
-			Blank blank = new Blank(super.x, super.y, super.size, Main.grid.getLoc());
+			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);
 			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
 		} else {

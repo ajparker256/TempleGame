@@ -12,8 +12,8 @@ public class Dirt extends Tile{
 	
 	protected int level;
 	
-	public Dirt(int x, int y, float size) {
-		super(x, y, size, Main.grid.getLoc());
+	public Dirt(int x, int y, float size, int floor) {
+		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.texture=1;
@@ -23,8 +23,8 @@ public class Dirt extends Tile{
 	}
 	
 	
-	public Dirt(int x, int y, float size, Vector2f location) {
-		super(x, y, size, location);
+	public Dirt(int x, int y, float size, Vector2f location, int floor) {
+		super(x, y, size, location, floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.hp=3000;
@@ -37,7 +37,7 @@ public class Dirt extends Tile{
 	
 	@Override
 	public Tile copy() {
-		Tile t = new Dirt(x, y, size, location);
+		Tile t = new Dirt(x, y, size, location, floor);
 		t.setTrapRefs(trapRefs);
 		t.upgrade(level);
 		return t;

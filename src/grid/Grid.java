@@ -53,8 +53,13 @@ public class Grid {
 		treasureLocs = new ArrayList<Point>();
 		
 		trapLocs = new ArrayList<Point>();
+	
+		//D.x + Size.x/2 - A.x*floor/2, D.y+size.y/2-A.x*AspectRatio*floor/2
+		//Where D = bottomleftcorner of screen and A = size of a single tile (in total)
+		//D + size/2 cancels since size/2 = 1 and d = -1
+		this.location = new Vector2f(-size*(rows), -size*(float)DisplayManager.getAspectratio()*(rows-1f));
 		
-		this.location = location;
+	//	this.location = location;
 		
 		isOn = false;
 		
@@ -76,7 +81,7 @@ public class Grid {
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
 			for(int k=0;k<rows;k++){
-				grid[k][i]=new Dirt(k,i,size,location);
+				grid[k][i]=new Dirt(k,i,size,location, floor);
 				//grid[k][i].upgrade(0);
 			}
 		}
@@ -158,15 +163,14 @@ public class Grid {
 	public Vector2f getLoc() {
 		return location;
 	}
+	
 	public Tile getTile(int x,int y){
 		return grid[x][y];
 	}
+	
 	public void setTile(int x, int y,Tile tile){
 		grid[x][y]=tile;
 	}
-	
-	
-
 	
 	public ArrayList<GuiTexture> render() {
 	

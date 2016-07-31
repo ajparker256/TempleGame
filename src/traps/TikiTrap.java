@@ -47,8 +47,8 @@ public class TikiTrap extends Trap{
 	protected ArrayList<Upgrade> onInteract;
 	protected ArrayList<Upgrade> onTrigger;*/
 	
-	public TikiTrap(int x, int y, float size) {
-		super(x, y, size, Main.grid.getLoc());
+	public TikiTrap(int x, int y, float size, int floor) {
+		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.cooldown=0;

@@ -83,7 +83,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	SoundLibrary.init();
 	
 	for(int i = 0; i<8; i++) {
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,10, i));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5, i));
 		gridsReadOnly.add(grids.get(i).copy());
 	}
 	grid = grids.get(0);
@@ -195,10 +195,10 @@ public static void main(String[] args) throws FileNotFoundException {
 		//TODO add for each grid, and inside only do the tihngs that are on the right grid
 		//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
 		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));
-	for(Grid tempgrid:grids){
-		for(int i=0;i<10;i++){
-			for(int j=0;j<10;j++){
-				tempgrid.getTile(i, j).tick(milli);
+	for(Grid tempGrid:grids){
+		for(int i=0;i<(int)tempGrid.getTileCount().x;i++){
+			for(int j=0;j<(int)tempGrid.getTileCount().y;j++){
+				tempGrid.getTile(i, j).tick(milli);
 			}
 		}
 	}

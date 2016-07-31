@@ -10,8 +10,8 @@ import renderEngine.DisplayManager;
 
 public class Exit extends Tile{
 	
-	public Exit(int x, int y, float size) {
-		super(x, y, size, Main.grid.getLoc());
+	public Exit(int x, int y, float size, int floor) {
+		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		this.guiTexture=(new GuiTexture(GuiLibrary.ladder,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));
 		passable = true;
 		canInteract = true;
@@ -21,6 +21,6 @@ public class Exit extends Tile{
 	
 	public void interact(Group g) {
 		g.setFloor(g.getFloor()+1);
-		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size));
+		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size, floor+1));
 	}
 }

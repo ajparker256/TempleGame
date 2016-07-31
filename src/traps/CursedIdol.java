@@ -42,8 +42,8 @@ public class CursedIdol extends Trap{
 	protected ArrayList<Upgrade> onTrigger;*/
 	
 	
-	public CursedIdol(int x, int y, float size) {
-		super(x, y, size, Main.grid.getLoc());
+	public CursedIdol(int x, int y, float size, int floor) {
+		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.value = 100;
@@ -62,7 +62,7 @@ public class CursedIdol extends Trap{
 		if(value%5 == 0)
 			Main.money++;
 		if(value<=0){
-			Blank blank = new Blank(super.x, super.y, super.size, Main.grid.getLoc());
+			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);
 			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);		
 		}
