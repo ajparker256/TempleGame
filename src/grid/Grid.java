@@ -48,7 +48,7 @@ public class Grid {
 	private int floor;
 	
 	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
-	public Grid(Vector2f location, float size, int rows, int floor) {
+	public Grid(Vector2f loc, float size, int rows, int floor) {
 		
 		treasureLocs = new ArrayList<Point>();
 		
