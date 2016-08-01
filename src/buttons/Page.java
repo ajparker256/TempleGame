@@ -48,7 +48,7 @@ public class Page {
 			imageSize = new Vector2f(size.x/3, size.x/3*(float)DisplayManager.getAspectratio());
 		else 
 			imageSize = new Vector2f(size.y/(float)DisplayManager.getAspectratio()/3, size.y/3);
-		this.image = new GuiTexture(imageId, new Vector2f(location.x+size.x/2, location.y+size.y-3/2*titleTextSize.y-imageSize.y/2), imageSize);
+		this.image = new GuiTexture(imageId, new Vector2f(location.x+size.x/2, location.y+size.y-4*titleTextSize.y-imageSize.y/2), imageSize);
 		scrollDisp = 0;
 		isOn = false;
 	}

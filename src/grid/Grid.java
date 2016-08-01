@@ -176,6 +176,10 @@ public class Grid {
 		return grid[x][y];
 	}
 	
+	public int getWidth() {
+		return grid.length;
+	}
+	
 	public void setTile(int x, int y,Tile tile){
 		grid[x][y]=tile;
 	}

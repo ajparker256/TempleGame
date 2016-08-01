@@ -219,7 +219,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				dynamicGuis.add(projectile.render());
 			
 		}
-		credits.render(dynamicGuis);
+//		credits.render(dynamicGuis);
 		story.render(dynamicGuis);
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
