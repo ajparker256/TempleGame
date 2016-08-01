@@ -83,7 +83,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	SoundLibrary.init();
 	
 	for(int i = 0; i<8; i++) {
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5, i));
+		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5+i, i));
 		gridsReadOnly.add(grids.get(i).copy());
 	}
 	grid = grids.get(0);

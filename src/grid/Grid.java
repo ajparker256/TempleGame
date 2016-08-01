@@ -65,14 +65,14 @@ public class Grid {
 		
 		float f = StringLibrary.size.x;
 		
-		levelSelect = new Button(new Vector2f(location.x+floor*StringLibrary.size.x*2-StringLibrary.getWidth(""+floor), 1),
-					new Vector2f(location.x+floor*StringLibrary.size.x*2, 1-StringLibrary.size.y));
+		levelSelect = new Button(new Vector2f(location.x+floor*StringLibrary.getWidth(floor+"")*2-StringLibrary.getWidth(""+floor), 1),
+					new Vector2f(location.x+floor*StringLibrary.getWidth(floor+"")*2, .9f-StringLibrary.size.y));
 		
 		goalReached = false;
 		
 		goalReacher = null;
 		
-		gridClicked = new Button(new Vector2f(location.x-size, location.y+3*size*(1.2f+rows)), new Vector2f(location.x-size+2*size*rows-.005f, location.y-2*size));
+		gridClicked = new Button(new Vector2f(location.x-size, location.y+rows*size*2*(float)DisplayManager.getAspectratio()-2*size), new Vector2f(location.x-size+2*size*rows-.005f, location.y-2*size));
 		
 		this.size = size;
 		
@@ -100,7 +100,11 @@ public class Grid {
 	
 	public ArrayList<GuiTexture> renderFloorSelect() {
 		ArrayList<GuiTexture> iDerped = new ArrayList<GuiTexture>();
-		iDerped.addAll(StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+floor*StringLibrary.getSize().x*2-StringLibrary.getWidth(""+floor), 1-StringLibrary.getSize().y), 2000));
+		float totalLength = 0;
+		for(int i = floor-1; i>=0; i--) {
+			totalLength+=StringLibrary.getWidth(i+" ");
+		}
+		iDerped.addAll(StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+totalLength, .9f), 2000));
 		return iDerped;
 	}
 	
