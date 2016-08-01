@@ -30,9 +30,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 
-import buttons.Button;
-import buttons.RotationDialogueBox;
-import buttons.Shop;
+import buttons.*;
 import entities.Flame;
 import entities.Projectile;
 import explorerTypes.Explorer;
@@ -153,8 +151,12 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 		x++;
 	}
+	Vector2f leftSideMenuLoc = new Vector2f(-.8f, -.6f);
+	Vector2f leftSideMenuSize = new Vector2f(.4f, 1.2f);
 	
-	
+
+	Page credits = new Page(leftSideMenuLoc, leftSideMenuSize, "Credits", "These are the credits, this was done by AJ Parker and Jackson Mills, with art collaboration from Hunter Ferrell.");
+	Page story = new Page(leftSideMenuLoc, leftSideMenuSize, "Story", "There once was a king by the name of VERYLONGNAME, he lived in a verylongkingdom with many verylongwords", GuiLibrary.rareBackground);
 	
 	ShopItemLibrary.init();
 	ShopItem[][] traps = new ShopItem[2][ShopItemLibrary.getItems().size()/2];
@@ -217,6 +219,8 @@ public static void main(String[] args) throws FileNotFoundException {
 				dynamicGuis.add(projectile.render());
 			
 		}
+		credits.render(dynamicGuis);
+		story.render(dynamicGuis);
 		if(epicShopofEpicness.isOn()) {
 			epicShopofEpicness.render(dynamicGuis);
 		}

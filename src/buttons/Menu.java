@@ -20,7 +20,9 @@ public class Menu {
 	
 	protected Vector2f textSize = new Vector2f(.02f, .04f); //Text size used for the menu options, varies with specifics
 	
-	boolean isVertical;
+	protected boolean isVertical;
+	
+	protected boolean isOn;
 	
 	public Menu(Vector2f loc, Vector2f size, String[] menuLabels) {
 		location = loc;
@@ -28,6 +30,7 @@ public class Menu {
 		this.menuLabels = menuLabels;
 		isVertical = true;
 		setHitboxes();
+		isOn = false;
 	}
 	
 	public void setHitboxes() {
@@ -47,6 +50,14 @@ public class Menu {
 										new Vector2f(location.x+i*size.x/menuLabels.length+size.x/menuLabels.length+StringLibrary.getWidth(menuLabels[i])/2,
 													 location.y+size.y/menuLabels.length/2-StringLibrary.getSize().y/2));
 			}
+	}
+	
+	public void setOn(boolean b) {
+		isOn = b;
+	}
+	
+	public boolean isOn() {
+		return isOn;
 	}
 	
 	public boolean isMenuOptionClicked(float mouseX, float mouseY) {

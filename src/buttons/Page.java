@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import gui.GuiTexture;
 import librarys.StringLibrary;
+import renderEngine.DisplayManager;
 
 public class Page {
 	
@@ -27,12 +28,15 @@ public class Page {
 	
 	protected GuiTexture image; //If null, ignore it, otherwise its to show what is being talked about
 	
+	protected boolean isOn;
+	
 	public Page (Vector2f loc, Vector2f size, String title, String desc) {
 		location = loc;
 		this.size = size;
 		description = desc;
 		this.title = title;
 		scrollDisp = 0;
+		isOn = false;
 	}
 	
 	public Page (Vector2f loc, Vector2f size, String title, String desc, int imageId) {
@@ -40,9 +44,21 @@ public class Page {
 		this.size = size;
 		description = desc;
 		this.title = title;
-		imageSize = new Vector2f(size.x/3, size.y/3);
+		if(size.x*(float)DisplayManager.getAspectratio()<size.y)
+			imageSize = new Vector2f(size.x/3, size.x/3*(float)DisplayManager.getAspectratio());
+		else 
+			imageSize = new Vector2f(size.y/(float)DisplayManager.getAspectratio()/3, size.y/3);
 		this.image = new GuiTexture(imageId, new Vector2f(location.x+size.x/2, location.y+size.y-3/2*titleTextSize.y-imageSize.y/2), imageSize);
 		scrollDisp = 0;
+		isOn = false;
+	}
+	
+	public boolean isOn() {
+		return isOn;
+	}
+	
+	public void setOn(boolean b) {
+		isOn = b;
 	}
 	
 	//TODO MAKE THE IMAGE SCROLL AND RENDER CORRECTLY!!!!!!!!!! Currently stops rendering if any part exceeds bounds, but should only

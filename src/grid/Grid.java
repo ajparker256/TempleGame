@@ -63,10 +63,13 @@ public class Grid {
 		
 		isOn = false;
 		
-		float f = StringLibrary.size.x;
-		
-		levelSelect = new Button(new Vector2f(location.x+floor*StringLibrary.getWidth(floor+"")*2-StringLibrary.getWidth(""+floor), 1),
-					new Vector2f(location.x+floor*StringLibrary.getWidth(floor+"")*2, .9f-StringLibrary.size.y));
+		float totalLength = 0;
+		StringLibrary.setSize(new Vector2f(.02f,.04f));
+		for(int i = floor-1; i>=0; i--) {
+			totalLength+=StringLibrary.getWidth(i+" ");
+		}
+		levelSelect = new Button(new Vector2f(location.x+totalLength*2, .9f),
+					new Vector2f(location.x+totalLength*2+StringLibrary.getWidth(floor+" "), .9f-StringLibrary.size.y));
 		
 		goalReached = false;
 		
@@ -101,10 +104,11 @@ public class Grid {
 	public ArrayList<GuiTexture> renderFloorSelect() {
 		ArrayList<GuiTexture> iDerped = new ArrayList<GuiTexture>();
 		float totalLength = 0;
+		StringLibrary.setSize(new Vector2f(.02f,.04f));
 		for(int i = floor-1; i>=0; i--) {
 			totalLength+=StringLibrary.getWidth(i+" ");
 		}
-		iDerped.addAll(StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+totalLength, .9f), 2000));
+		iDerped.addAll(StringLibrary.makeItFit(floor+" ", new Vector2f(location.x+totalLength*2, .9f), 2000));
 		return iDerped;
 	}
 	
