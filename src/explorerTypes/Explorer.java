@@ -396,8 +396,6 @@ public class Explorer extends Unit{
 	}
 	public void interact() {
 setIdle();
-
-		
 	}
 
 	public void setIdle() {

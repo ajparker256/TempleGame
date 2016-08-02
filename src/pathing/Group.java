@@ -76,63 +76,38 @@ public class Group {
 		setNextLoc(nextLoc);
 	}
 	
-	public void setFloor(int i) {
-		floor = i;
-	}
-	
-	public int getFloor() {
-		return floor;
-	}
-	
-	public int getMaxSize() {
-		return MAX_SIZE;
-	}
-	
-	public void setInitialLocation(Vector2f newLoc) {
-		location = newLoc;
-	}
-	
-	public Vector2f getInitialLocation() {
-		return location;
-	}
-	
-	public ArrayList<Explorer> getGroup() {
-		return group;
-	}
-	
-	public void add(Explorer e) {
-		group.add(e);
-		groupIds.add(e.getId());
-	}
-	
-	public Point getNextLoc() {
-		return nextLoc;
-	}
-	
-	public ArrayList<Integer> getIds() {
-		return groupIds;
-	}
+
 
 	public boolean move(int milli,Grid grid) {
+		//Interacts if possible
 		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			interact(grid);
 			return true;
 		}
+		//moves explorers within group
 		for(Explorer explorer:group){
 			explorer.moveTo(nextLoc,milli);
 		}
+		//triggers the tile that the group is on
 		Main.grids.get(floor).getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
+		//sets the tile the group is on to occupied
 		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
+		//real loc is what is used for hitboxes for getting hit
 		realLoc=nextLoc;
+		//destination is set so the group can start moving towards it
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
+		//Does movement if not at destination
 		if(!(location.x==destination.x&&location.y==destination.y)){
 			moveTo(grid, milli);
 			return false;
 		}
+		//if done with everything resets busy to false so squad can move on
 			busy=false;
 			wait=true;
 		return false;
 		}
+	
+	//Interacts with the tile with both the explorers and the group
 	private void interact(Grid grid){
 		for(Explorer e: group){
 			busy=true;
@@ -140,6 +115,7 @@ public class Group {
 		}
 		 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
 	}
+	//Basic movement based on destination and current location
 	private void moveTo(Grid grid, int milli){
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
@@ -198,16 +174,7 @@ public class Group {
 			}
 		}
 	}
-
-		
-
-	private void setLoc(Vector2f location) {
-		this.location=location;
-		
-	}
-	public Vector2f getLocation(){
-		return location;
-	}
+		//calls render on all the explorers
 	public ArrayList<GuiTexture> render(){
 		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
 		for(Explorer explorer:group){
@@ -217,11 +184,60 @@ public class Group {
 		return toRender;
 	}
 
+
+
+
+//to hit is an array that gives what members of the squad to hit, d is damage
+	public void damage(boolean[] toHit,double d) {
+			for(Explorer explorer:group){
+			if(toHit[0]&&explorer.getPosition()==1){
+				explorer.damage(d);
+			}
+			if(toHit[1]&&explorer.getPosition()==2){
+				explorer.damage(d);
+			}
+			if(toHit[2]&&explorer.getPosition()==3){
+				explorer.damage(d);
+			}
+			if(toHit[3]&&explorer.getPosition()==4){
+				explorer.damage(d);
+			}
+			}
+		
+	}
+
+//changes direction variables based on current location and next location
+	public void rotate(Point locationNext) {
+		this.busy=false;
+		
+		if(realLoc.x<locationNext.x){
+			direction=12;
+		}else if(realLoc.x>locationNext.x){
+			direction=14;
+			
+		}else if(realLoc.y<locationNext.y){
+			direction=11;
+		}else if(realLoc.y>locationNext.y){
+			direction=13;
+		}
+		int i=0;
+			for(Explorer e: group){
+				e.rotate(direction);
+				i++;
+			}
+		
+	}
+	private void setLoc(Vector2f location) {
+		this.location=location;
+		
+	}
+	public Vector2f getLocation(){
+		return location;
+	}
 	public int getPosition() {
 		nextPos++;
 		return nextPos;
 	}
-
 	public int getDirection() {
 		return direction;
 	}
@@ -256,28 +272,45 @@ public class Group {
 			explorer.setIdle();
 		}
 	}
-
-	public void damage(boolean[] toHit,double d) {
-			for(Explorer explorer:group){
-			if(toHit[0]&&explorer.getPosition()==1){
-				explorer.damage(d);
-			}
-			if(toHit[1]&&explorer.getPosition()==2){
-				explorer.damage(d);
-			}
-			if(toHit[2]&&explorer.getPosition()==3){
-				explorer.damage(d);
-			}
-			if(toHit[3]&&explorer.getPosition()==4){
-				explorer.damage(d);
-			}
-			}
-		
-	}
-
 	public void removeExplorer(Explorer explorer) {
 		group.remove(explorer);
 		groupIds.remove((Integer)explorer.getId());
+	}
+	public void setFloor(int i) {
+		floor = i;
+	}
+	
+	public int getFloor() {
+		return floor;
+	}
+	
+	public int getMaxSize() {
+		return MAX_SIZE;
+	}
+	
+	public void setInitialLocation(Vector2f newLoc) {
+		location = newLoc;
+	}
+	
+	public Vector2f getInitialLocation() {
+		return location;
+	}
+	
+	public ArrayList<Explorer> getGroup() {
+		return group;
+	}
+	
+	public void add(Explorer e) {
+		group.add(e);
+		groupIds.add(e.getId());
+	}
+	
+	public Point getNextLoc() {
+		return nextLoc;
+	}
+	
+	public ArrayList<Integer> getIds() {
+		return groupIds;
 	}
 	public void setSpeed(float speed){
 		this.speed=speed;
@@ -289,26 +322,6 @@ public class Group {
 		
 	}
 
-	public void rotate(Point locationNext) {
-		this.busy=false;
-		
-		if(realLoc.x<locationNext.x){
-			direction=12;
-		}else if(realLoc.x>locationNext.x){
-			direction=14;
-			
-		}else if(realLoc.y<locationNext.y){
-			direction=11;
-		}else if(realLoc.y>locationNext.y){
-			direction=13;
-		}
-		int i=0;
-			for(Explorer e: group){
-				e.rotate(direction);
-				i++;
-			}
-		
-	}
 
 	
 }
