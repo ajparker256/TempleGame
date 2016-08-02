@@ -187,14 +187,12 @@ public class Squad {
 					}
 				}
 			}
-			}
+			
 			int i=0;
-			//boolean fl = true;
-			if(rotating){
 				for(Group group:groups){
 				rotating=true;
 				if(i<path.size()){
-				group.rotate(path.get(i));
+				group.rotate(path.get(i+1));
 				}
 				i++;
 				rotating=false;
@@ -202,6 +200,7 @@ public class Squad {
 				
 			}else{
 			rotating=true;
+			int i=0;
 			for(Group group: groups){
 				i++;
 				if(i<path.size()){

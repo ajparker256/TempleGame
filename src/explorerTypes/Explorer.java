@@ -459,9 +459,7 @@ setIdle();
 
 
 	public void moveTo(Point nextLoc, int milli){
-
 		Vector2f destination=Main.grid.getTile(nextLoc.x, nextLoc.y).getLocation();
-
 		Vector2f tempVelocity= new Vector2f();
 		switch(position){
 		case 1:destination=new Vector2f(destination.x-0.025f+0.01f,destination.y+0.04f);

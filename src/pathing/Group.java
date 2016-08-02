@@ -36,6 +36,7 @@ public class Group {
 	protected float speed;
 	private boolean flee;
 	private float speedMod;
+	private Point actualLoc;
 	
 	public int getSquadId() {
 		return squadId;
@@ -56,6 +57,7 @@ public class Group {
 	public Group(int id) {
 		this.flee=false;
 		this.speedMod=1f;
+		this.actualLoc=new Point(0,0);
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
 		location.y-=0.1f;
 		wait=false;
@@ -289,7 +291,7 @@ public class Group {
 
 	public void rotate(Point locationNext) {
 		this.busy=false;
-
+		
 		if(realLoc.x<locationNext.x){
 			direction=12;
 		}else if(realLoc.x>locationNext.x){
@@ -300,7 +302,6 @@ public class Group {
 		}else if(realLoc.y>locationNext.y){
 			direction=13;
 		}
-		System.out.println(locationNext+" "+realLoc);
 		int i=0;
 			for(Explorer e: group){
 				e.rotate(direction);
