@@ -174,10 +174,10 @@ public class Squad {
 		if(go){
 			if(rotating){
 			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
-			if(!firstTime) {
+			//if(!firstTime) {
 				path.add(0,tempNextLoc);
-			}
-			firstTime = false;
+			//}
+			//firstTime = false;
 			//Flee code
 			if(path.size()>groups.size()+2){
 				if(Mouse.isButtonDown(1)){
