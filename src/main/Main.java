@@ -129,19 +129,19 @@ public static void main(String[] args) throws FileNotFoundException {
 	Group group4 = new Group(2);
 
 	
-	ArrayList<Group> squad1List=new ArrayList<Group>();
-	squad1List.add(group1);
+//	ArrayList<Group> squad1List=new ArrayList<Group>();
+//	squad1List.add(group1);
 	ArrayList<Group> squad2List = new ArrayList<Group>();
 	squad2List.add(group2);
 	squad2List.add(group3);
-	ArrayList<Group> squad3List = new ArrayList<Group>();
-	squad3List.add(group4);
-	for(Group g : squad1List) {
+//	ArrayList<Group> squad3List = new ArrayList<Group>();
+//	squad3List.add(group4);
+	/*for(Group g : squad1List) {
 		g.add(new Miner (g));
 		g.add(new Miner (g));
 		g.add(new Explorer (g));
 		g.add(new TreasureHunter(g));
-		}
+		}*/
 	for(Group g : squad2List) {
 		g.add(new Miner (g));
 		g.add(new TreasureHunter (g));
@@ -149,19 +149,19 @@ public static void main(String[] args) throws FileNotFoundException {
 		g.add(new TreasureHunter(g));
 
 	}
-	for(Group g : squad3List) {
+/*	for(Group g : squad3List) {
 		g.add(new Miner (g));
 		g.add(new Miner (g));
 		g.add(new Miner (g));
 		g.add(new TreasureHunter(g));
 
 	}
-	Squad squad1=new Squad(squad1List, 0);
+	Squad squad1=new Squad(squad1List, 0);*/
 	Squad squad2= new Squad(squad2List, 1);
-	Squad squad3= new Squad(squad3List, 2);
-	squads.add(squad1);
+	//Squad squad3= new Squad(squad3List, 2);
+	//squads.add(squad1);
 	squads.add(squad2);
-	squads.add(squad3);
+	//squads.add(squad3);
 	
 	int x = 0;
 	for(Squad sq : squads) {
