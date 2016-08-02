@@ -91,7 +91,8 @@ public class Group {
 		//triggers the tile that the group is on
 		Main.grids.get(floor).getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
 		//sets the tile the group is on to occupied
-		grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
+		if(grid.getTile(nextLoc.x, nextLoc.y).getOccupied()>-2)
+			grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		//real loc is what is used for hitboxes for getting hit
 		realLoc=nextLoc;
 		//destination is set so the group can start moving towards it

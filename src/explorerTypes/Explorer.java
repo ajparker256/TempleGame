@@ -74,6 +74,14 @@ public class Explorer extends Unit{
 		return true;
 	}
 	
+	public void setFloor(int i) {
+		floor = i;
+	}
+	
+	public int getFloor() {
+		return floor;
+	}
+	
 	public int getId() {
 		return id;
 	}

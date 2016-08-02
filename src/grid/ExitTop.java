@@ -11,8 +11,9 @@ public class ExitTop extends Tile{
 
 	public ExitTop(int x, int y, float size, int floor) {
 		super(x,y,size, Main.grids.get(floor).getLoc(), floor);
+		setOccupied(-3);
 		this.guiTexture=(new GuiTexture(GuiLibrary.ladderTop,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));
-		passable = false;
+		passable = true;
 		canInteract = false;
 		id = -3;
 	}

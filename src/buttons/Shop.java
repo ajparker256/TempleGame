@@ -120,8 +120,8 @@ public class Shop {
 		downArrowHitbox = new Button(new Vector2f(downArrow.getPosition().x-downArrow.getScale().x/2, downArrow.getPosition().y+downArrow.getScale().y/2),
 				new Vector2f(downArrow.getPosition().x+downArrow.getScale().x/2, downArrow.getPosition().y-downArrow.getScale().y/2));
 		
-		exitShop = new Button(new Vector2f(location.x+size.x-StringLibrary.getWidth('X'), 
-				location.y+size.y), 
+		exitShop = new Button(new Vector2f(location.x+size.x-StringLibrary.getWidth('X')*2, 
+				location.y+size.y+StringLibrary.getSize().y), 
 				new Vector2f(location.x+size.x, 
 				location.y+size.y-StringLibrary.getSize().y));
 		shopHitbox = new Button(new Vector2f(location.x, 

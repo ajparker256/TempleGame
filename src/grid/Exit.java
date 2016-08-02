@@ -2,6 +2,7 @@ package grid;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import explorerTypes.Explorer;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import main.Main;
@@ -21,6 +22,9 @@ public class Exit extends Tile{
 	
 	public void interact(Group g) {
 		g.setFloor(g.getFloor()+1);
+		for(Explorer e : g.getGroup()) {
+			e.setFloor(e.getFloor()+1);
+		}
 		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size, floor+1));
 	}
 }

@@ -130,6 +130,10 @@ public class Tile {
 		this.x = x;
 	}
 	
+	public int getOccupied() {
+		return occupied;
+	}
+	
 	public void setY(int y) {
 		this.y = y;
 	}

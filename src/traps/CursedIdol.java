@@ -10,6 +10,7 @@ import gui.GuiTexture;
 import librarys.GuiLibrary;
 import main.Main;
 import pathing.Group;
+import pathing.TrapAffinityPM;
 import renderEngine.DisplayManager;
 import upgrades.Upgrade;
 
@@ -58,12 +59,12 @@ public class CursedIdol extends Trap{
 	//ALSO the curse is not implemented, needs some thought there too.
 	@Override
 	public void interact(Group g){
-		value--;
 		if(value%5 == 0)
 			Main.money++;
 		if(value<=0){
 			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);
+			Main.squads.get(g.getSquadId()).getPathMods().add(new TrapAffinityPM(Main.squads.get(g.getSquadId())));
 			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);		
 		}
 	}

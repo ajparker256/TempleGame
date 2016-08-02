@@ -211,9 +211,9 @@ public class Grid {
 			Tile tile = getTile((int)locationInGrid.x-1, (int)locationInGrid.y);
 			if(tile.id == -2) {
 				adjacents[0] = tile;
-			} else if(tile.isOccupied()==-1  /*|| tile.isOccupied()==id*/)
+			} else if(tile.isOccupied()==-1  /*|| tile.isOccupied()==id*/) {
 				adjacents[0] = tile;
-			else{
+			} else{
 				absenceCounter++;
 			}
 		} else {
@@ -225,9 +225,9 @@ public class Grid {
 			Tile tile = getTile((int)locationInGrid.x+1, (int)locationInGrid.y);
 			if(tile.id == -2) {
 				adjacents[1] = tile;
-			} else if(tile.isOccupied()==-1 /*|| tile.isOccupied()==id*/)
+			} else if(tile.isOccupied()==-1 /*|| tile.isOccupied()==id*/) {
 				adjacents[1] = tile;
-			else
+			} else
 				absenceCounter++;
 		} else absenceCounter++;
 		
@@ -236,9 +236,9 @@ public class Grid {
 			Tile tile = getTile((int)locationInGrid.x, (int)locationInGrid.y-1);
 			if(tile.id == -2) {
 				adjacents[2] = tile;
-			} else if(tile.isOccupied() == -1  /*|| tile.isOccupied()==id*/)
+			} else if(tile.isOccupied() == -1  /*|| tile.isOccupied()==id*/) {
 				adjacents[2] = tile;
-			else absenceCounter++;
+			}else absenceCounter++;
 		} else absenceCounter++;
 		
 		//If not on the top border, get the tile upwards of it
@@ -246,9 +246,9 @@ public class Grid {
 			Tile tile = getTile((int)locationInGrid.x, (int)locationInGrid.y+1);
 			if(tile.id == -2) {
 				adjacents[3] = tile;
-			} else if(tile.isOccupied() == -1  /*|| tile.isOccupied()==id*/)
+			} else if(tile.isOccupied() == -1  /*|| tile.isOccupied()==id*/) {
 				adjacents[3] = tile;
-			else absenceCounter++;
+			} else absenceCounter++;
 		} else absenceCounter++;
 		
 		//If there is no where to go, stay where you are.
