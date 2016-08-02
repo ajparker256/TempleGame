@@ -19,8 +19,10 @@ public class Squad {
 	private ArrayList<Group> groups;
 	private ArrayList<PathModifier> modifications;
 	private boolean rotating;
+	private boolean firstTime;
 	public Squad(ArrayList<Group> groups, int squadId){
 		rotating=true;
+		firstTime = true;
 		modifications = new ArrayList<PathModifier>();
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
@@ -168,11 +170,14 @@ public class Squad {
 			}
 			
 			}
+		Point toBeRemoved = new Point(-1,-1);
 		if(go){
 			if(rotating){
-			Point toBeRemoved = new Point(-1,-1);
 			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
-			path.add(0,tempNextLoc);
+			if(!firstTime) {
+				path.add(0,tempNextLoc);
+			}
+			firstTime = false;
 			//Flee code
 			if(path.size()>groups.size()+2){
 				if(Mouse.isButtonDown(1)){
@@ -192,7 +197,7 @@ public class Squad {
 				for(Group group:groups){
 				rotating=true;
 				if(i<path.size()){
-				group.rotate(path.get(i+1));
+				group.rotate(path.get(i));
 				}
 				i++;
 				rotating=false;
@@ -209,11 +214,11 @@ public class Squad {
 					//This removes the status of occupied from the tail end of the squad
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
 					
-					//if(groups.size()+2<path.size() && !group.getFlee()) {
-					//	Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
-					//} else if(group.getFlee() && toBeRemoved.x != -1) {
-					//Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1);;
-				//} 
+					if(groups.size()+2<path.size() && !group.getFlee()) {
+						Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
+					} else if(group.getFlee() && toBeRemoved.x != -1) {
+					Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1);;
+				} 
 				}else break;
 				}
 			}

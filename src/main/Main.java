@@ -131,7 +131,12 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	ArrayList<Group> squad1List=new ArrayList<Group>();
 	squad1List.add(group1);
-	//squad1List.add(group2);
+	ArrayList<Group> squad2List = new ArrayList<Group>();
+	squad2List.add(group2);
+	squad2List.add(group3);
+	ArrayList<Group> squad3List = new ArrayList<Group>();
+	squad3List.add(group4);
+			//squad1List.add(group2);
 	//squad1List.add(group3);
 	//squad1List.add(group4);
 	for(Group g : squad1List) {
@@ -139,10 +144,27 @@ public static void main(String[] args) throws FileNotFoundException {
 		g.add(new Miner (g));
 		g.add(new Explorer (g));
 		g.add(new TreasureHunter(g));
+		}
+	for(Group g : squad2List) {
+		g.add(new Miner (g));
+		g.add(new TreasureHunter (g));
+		g.add(new TreasureHunter (g));
+		g.add(new TreasureHunter(g));
+
+	}
+	for(Group g : squad3List) {
+		g.add(new Miner (g));
+		g.add(new Miner (g));
+		g.add(new Miner (g));
+		g.add(new TreasureHunter(g));
 
 	}
 	Squad squad1=new Squad(squad1List, 0);
+	Squad squad2= new Squad(squad2List, 1);
+	Squad squad3= new Squad(squad3List, 2);
 	squads.add(squad1);
+	squads.add(squad2);
+	squads.add(squad3);
 	
 	int x = 0;
 	for(Squad sq : squads) {
@@ -196,7 +218,10 @@ public static void main(String[] args) throws FileNotFoundException {
 		
 		//TODO add for each grid, and inside only do the tihngs that are on the right grid
 		//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
-		squad1.tick((int)milli,grids.get(squad1.getGroups().get(squad1.getGroups().size()-1).getFloor()));
+		for(Squad s : squads) {
+			s.tick((int)milli,grids.get(s.getGroups().get(s.getGroups().size()-1).getFloor()));
+		}
+			
 	for(Grid tempGrid:grids){
 		for(int i=0;i<(int)tempGrid.getTileCount().x;i++){
 			for(int j=0;j<(int)tempGrid.getTileCount().y;j++){

@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import gui.GuiTexture;
 
 import librarys.StringLibrary;
+import renderEngine.DisplayManager;
 
 public class Menu {
 
@@ -28,7 +29,7 @@ public class Menu {
 		location = loc;
 		this.size = size;
 		this.menuLabels = menuLabels;
-		isVertical = true;
+		isVertical = size.y>size.x*DisplayManager.getAspectratio();
 		setHitboxes();
 		isOn = false;
 	}
