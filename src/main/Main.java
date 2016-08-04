@@ -63,6 +63,7 @@ public static ArrayList<Projectile> projectiles;
 public static double timeInRound;
 public static ArrayList<Grid> gridsReadOnly;
 public static UpgradeRoller upgradeRoller;
+public static int state;
 public static void main(String[] args) throws FileNotFoundException {
 	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
@@ -194,70 +195,79 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	//projectiles.add(new Projectile(3, 1, 9, 0));
 	//projectiles.add(new Projectile(3, 1, 8, 0));
-	int counter = 0;
+	double counter = 0;
 	milli = System.currentTimeMillis();
+	state = 0; //Title Screen State
+	//state = 1; //Gameplay state
+	//state = 2; //Pause
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;
-		update(dynamicGuis, milli);
-		
-		
-		
-		dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
-		
-		//enemy update stuff
-		//Renders from TOP TO BOTTOM!
-		//RENDERS FROM CENTER OF IMAGE! (90% certain)
-		//The screen is -1 to 1 for x and 0 to -1 for y in floats
-		dynamicGuis.addAll(grid.render());
-		
-		guiRenderer.render(guis);
-		
-		//TODO add for each grid, and inside only do the tihngs that are on the right grid
-		//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
-		for(Squad s : squads) {
-			s.tick((int)milli,grids.get(s.getGroups().get(s.getGroups().size()-1).getFloor()));
-		}
-			
-	for(Grid tempGrid:grids){
-		for(int i=0;i<(int)tempGrid.getTileCount().x;i++){
-			for(int j=0;j<(int)tempGrid.getTileCount().y;j++){
-				tempGrid.getTile(i, j).tick(milli);
+		if(state == 0) {
+			if(counter < 1000) {
+				dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
+				counter += milli;
+			} else  {
+				state = 1;
 			}
 		}
-	}
-		for(Grid g: grids) {
-			dynamicGuis.addAll(g.renderFloorSelect());
-		}
-		for(Squad squad : squads) {
-			dynamicGuis.addAll(squad.render());
-		}
-		for(int i=0;i<projectiles.size();i++){
-			Projectile projectile=projectiles.get(i);
-			projectile.tick(milli);
-			if(projectile.isKill())
-				projectiles.remove(projectile);
-			if(projectile.canRender())
-				dynamicGuis.add(projectile.render());
+		if(state == 1) {
+			//TODO add for each grid, and inside only do the tihngs that are on the right grid
+			//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
+			for(Squad s : squads) {
+				s.tick((int)milli,grids.get(s.getGroups().get(s.getGroups().size()-1).getFloor()));
+			}
+			
+			for(Grid tempGrid:grids){
+				for(int i=0;i<(int)tempGrid.getTileCount().x;i++){
+					for(int j=0;j<(int)tempGrid.getTileCount().y;j++){
+						tempGrid.getTile(i, j).tick(milli);
+					}
+				}
+			}
+			
+			for(int i=0;i<projectiles.size();i++){
+				Projectile projectile=projectiles.get(i);
+				projectile.tick(milli);
+				if(projectile.isKill())
+					projectiles.remove(projectile);
+				
+			
+			}
+			//		credits.render(dynamicGuis);
 			
 		}
-//		credits.render(dynamicGuis);
-		story.render(dynamicGuis);
-		if(epicShopofEpicness.isOn()) {
-			epicShopofEpicness.render(dynamicGuis);
-		}
-		if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
-			rotationDialogueBox.render(dynamicGuis);
-		}
-		if(upgradeRoller.isOn()) {
-			upgradeRoller.render(dynamicGuis);
-		}
-		if(counter < 250) {
-			//dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
-			counter++;
+		if(state == 1 || state == 2) {
+			update(dynamicGuis, milli);
+			dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
+			//Renders from TOP TO BOTTOM!
+			//RENDERS FROM CENTER OF IMAGE! (90% certain)
+			//The screen is -1 to 1 for x and 0 to -1 for y in floats
+			dynamicGuis.addAll(grid.render());
+			for(Grid g: grids) {
+				dynamicGuis.addAll(g.renderFloorSelect());
+			}
+			for(Squad squad : squads) {
+				dynamicGuis.addAll(squad.render());
+			}
+			for(Projectile projectile : projectiles){
+				if(projectile.canRender())
+					dynamicGuis.add(projectile.render());
+			}
+			story.render(dynamicGuis);
+			if(epicShopofEpicness.isOn()) {
+				epicShopofEpicness.render(dynamicGuis);
+			}
+			if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
+				rotationDialogueBox.render(dynamicGuis);
+			}
+			if(upgradeRoller.isOn()) {
+				upgradeRoller.render(dynamicGuis);
+			}
 		}
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
+		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);
 		DisplayManager.updateDisplay();
 		dynamicGuis.clear();
@@ -273,11 +283,14 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	public static void update(ArrayList<GuiTexture> dynamicGuis, double milli) {
 		//TODO find a way to make this only on click, currently non-func. Works always when mouse is down regardless of event
-		if(!Mouse.getEventButtonState() && Mouse.isButtonDown(0)) {
+		if(!Mouse.getEventButtonState() && Mouse.isButtonDown(0) && state == 1) {
 			updateMouse(dynamicGuis);
 			wasJustDown = true;
+		} else if(Mouse.isButtonDown(2)) {
+			state = 2;
 		} else {
 			wasJustDown = false;
+			state = 1;
 		}
 		//10s per round atm
 		timeInRound += milli;
@@ -350,7 +363,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 		//UpgradeRoller Logic
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
-			if(Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
+			if(Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
 				Trap trap = (Trap) Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 				int levelCost = trap.getLevel()*100+50;
 				if(money-levelCost>-0) {
@@ -377,7 +390,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setSelection(selected);
 			}
 			if(rotationDialogueBox.getSelection() != 0 /*&& rotationDialogueBox.isConfirmed(mouseX, mouseY)*/) {
-				grid.setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
+				Main.gridsReadOnly.get(grid.getFloor()).setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
 				rotationDialogueBox.setSelection(0);
 				rotationDialogueBox.setOn(false);
 				epicShopofEpicness.setOn(false);
@@ -405,8 +418,5 @@ public static void main(String[] args) throws FileNotFoundException {
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
 	}
-}
-
-
 	
-
+}
