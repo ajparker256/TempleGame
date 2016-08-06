@@ -13,7 +13,6 @@ import gui.GuiTexture;
 import main.Main;
 
 public class Squad {
-	private Point backpedalTile;
 	private int previousFloor;
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
@@ -29,11 +28,12 @@ public class Squad {
 		path.add(new Point(0,0));
 		this.groups=groups;
 		previousFloor = 0;
-		backpedalTile=new Point();
+		@SuppressWarnings("unused")
 		DefaultPM defaultAI = new DefaultPM(this);
 		for(Group g : groups) {
 			for(Explorer e : g.getGroup()) {
 				if(e.getId() == 3) {
+					@SuppressWarnings("unused")
 					TreasureHunterPM treasureGreed = new TreasureHunterPM(this);
 				}
 			}
@@ -186,7 +186,6 @@ public class Squad {
 					if(Mouse.isButtonDown(1)){
 						path.remove(0);
 						toBeRemoved = path.remove(0);
-						System.out.println(toBeRemoved.x);
 						for(Group group:groups){
 							group.setFlee(true);
 						}
@@ -201,13 +200,10 @@ public class Squad {
 				for(Group group: groups){
 					//This removes the status of occupied from the tail end of the squad
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
-					System.out.println("Flee = " + group.getFlee());
-					System.out.println("toBeRemoved.x = " + toBeRemoved.x);
 					if(groups.size()+2<path.size() && !group.getFlee() && Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
 						Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
 					} else if(group.getFlee() && toBeRemoved.x != -1) {
 						Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
-						System.out.println("In it");
 						toBeRemoved = new Point();
 					}else break;
 				}

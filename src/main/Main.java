@@ -64,12 +64,15 @@ public static double timeInRound;
 public static ArrayList<Grid> gridsReadOnly;
 public static UpgradeRoller upgradeRoller;
 public static int state;
+public static boolean isEditPhase;
+public static Button startWave;
 public static void main(String[] args) throws FileNotFoundException {
 	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
 	squads = new ArrayList<Squad>();
 	money=2000;
 	round = 0;
+	isEditPhase = true;
 	buttons = new ArrayList<Button>();
 	group = new ArrayList<Explorer>();
 	DisplayManager.createDisplay();
@@ -96,6 +99,9 @@ public static void main(String[] args) throws FileNotFoundException {
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);	
 	AnimationLibrary.init(loader);
+	
+	
+	
 	
 	upgradeRoller = new UpgradeRoller();
 	
@@ -211,7 +217,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				state = 1;
 			}
 		}
-		if(state == 1) {
+		if(state == 1 && !isEditPhase) {
 			//TODO add for each grid, and inside only do the tihngs that are on the right grid
 			//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
 			for(Squad s : squads) {
@@ -240,10 +246,17 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(state == 1 || state == 2) {
 			update(dynamicGuis, milli);
 			dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
+			//General Knowledge about rendering
 			//Renders from TOP TO BOTTOM!
 			//RENDERS FROM CENTER OF IMAGE! (90% certain)
 			//The screen is -1 to 1 for x and 0 to -1 for y in floats
-			dynamicGuis.addAll(grid.render());
+			
+			//Determines which of the grids to render
+			if(isEditPhase)
+				dynamicGuis.addAll(Main.gridsReadOnly.get(grid.getFloor()).render());
+			else
+				dynamicGuis.addAll(grid.render());
+			
 			for(Grid g: grids) {
 				dynamicGuis.addAll(g.renderFloorSelect());
 			}
@@ -337,6 +350,8 @@ public static void main(String[] args) throws FileNotFoundException {
 				if(selectedItem.getCost()<=money && oldTile.getId() != selectedItem.getId() && !selectedItem.isRotatable()) {
 					Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
 					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
+					
+					//REMOVE WHEN READ ONLY IMPLEMENTED FULLY
 					grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					epicShopofEpicness.setOn(false);
@@ -364,7 +379,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		//UpgradeRoller Logic
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
 			if(Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
-				Trap trap = (Trap) Main.grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
+				Trap trap = (Trap) Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 				int levelCost = trap.getLevel()*100+50;
 				if(money-levelCost>-0) {
 					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
@@ -415,6 +430,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				break;
 			}
 		}
+		
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
 	}

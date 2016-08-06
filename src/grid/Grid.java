@@ -88,7 +88,7 @@ public class Grid {
 				//grid[k][i].upgrade(0);
 			}
 		}
-		for(int i = 0; i<10+floor*5; i++) {
+		/*for(int i = 0; i<10+floor*5; i++) {
 			int randX = (int)(Math.random() * grid[0].length);
 			int randY = (int)(Math.random() * grid.length);
 			if(floor<7)
@@ -97,7 +97,7 @@ public class Grid {
 				grid[randY][randX].upgrade(7);
 			
 		
-		}
+		}*/
 		//grid[0][0]=new Blank(0,0,size,location);
 	}
 	
@@ -190,8 +190,8 @@ public class Grid {
 		if(floor == Main.grid.getFloor()){
 			for(Tile[]line:grid){
 				for(Tile tile:line){
-					//UNCOMMENT BELOW FOR TRIPPY THINGS XD
-					if(tile.isOccupied() != -1)
+					//UNCOMMENT BELOW FOR TRIPPY THINGS XD (Used for testing occupied tiles)
+					//if(tile.isOccupied() != -1)
 					toRender.add(tile.drawTile());
 				}
 			}

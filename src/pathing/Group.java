@@ -12,7 +12,6 @@ import explorerTypes.Explorer;
 import java.awt.Point;
 
 import grid.Grid;
-import grid.Tile;
 import gui.GuiTexture;
 
 public class Group {
@@ -27,7 +26,6 @@ public class Group {
 	private Vector2f velocity;
 	private int nextPos;
 	private int direction;
-	private ArrayList<Point> path;
 	private boolean busy;
 	private boolean wait;
 	private int squadId;
@@ -36,7 +34,6 @@ public class Group {
 	protected float speed;
 	private boolean flee;
 	private float speedMod;
-	private Point actualLoc;
 	
 	public int getSquadId() {
 		return squadId;
@@ -57,7 +54,6 @@ public class Group {
 	public Group(int id) {
 		this.flee=false;
 		this.speedMod=1f;
-		this.actualLoc=new Point(0,0);
 		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
 		location.y-=0.1f;
 		wait=false;
@@ -70,7 +66,6 @@ public class Group {
 		velocity=new Vector2f(speed,(float)(speed*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
-		path = new ArrayList<Point>();
 		squadId = id;
 		floor = Main.grid.getFloor();
 		setNextLoc(nextLoc);
@@ -221,10 +216,8 @@ public class Group {
 		}else if(realLoc.y>locationNext.y){
 			direction=13;
 		}
-		int i=0;
 			for(Explorer e: group){
 				e.rotate(direction);
-				i++;
 			}
 		
 	}

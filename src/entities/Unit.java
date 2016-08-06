@@ -22,7 +22,7 @@ public class Unit {
 	//This is the amount of damage a unit can take before dying.
 	protected double hp;
 	
-	//This is a unit's location relative to the screen in pixels from the top left corner.
+	//This is a unit's location relative to the screen in floats
 	protected Vector2f location;
 	
 	//This is a unit's speed in x and y on the screen.
@@ -51,6 +51,7 @@ public class Unit {
 		this.hp=20;
 		this.kill=false;
 		tempVelocity=new Vector2f(0, 0);
+		location = new Vector2f(-2,-2);
 		this.animation=new Animation(AnimationLibrary.explorer,location,size);
 		velocity=new Vector2f(0.1f,(float) (0.1f*DisplayManager.getAspectratio()));
 		location = group.getLocation();

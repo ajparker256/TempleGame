@@ -1,23 +1,18 @@
 package explorerTypes;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
 import entities.Unit;
 import grid.Grid;
 import gui.Animation;
-import gui.GuiRenderer;
 import gui.GuiTexture;
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
 import main.Main;
 import pathing.Group;
-import pathing.Squad;
-import pathing.TreasureHunterPM;
 import renderEngine.DisplayManager;
-import renderEngine.Loader;
 
 public class Explorer extends Unit{
 	private int position;
@@ -30,17 +25,14 @@ public class Explorer extends Unit{
 	protected int id;
 	protected int damage;
 	protected int delay;
-	private Point nextLoc;
+	protected int direction;
 	private float speedMod;
-	private int direction;
 	private boolean busy;
 	private boolean flee;
-	private boolean isPaused;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
-		this.nextLoc=new Point(0,0);
 		this.delay=25;
 		this.id = -1;
 		this.lastDirection=1;
