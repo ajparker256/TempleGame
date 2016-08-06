@@ -20,6 +20,7 @@ public class Squad {
 	private ArrayList<PathModifier> modifications;
 	private boolean rotating;
 	private boolean firstTime;
+	private Point toBeRemoved;
 	public Squad(ArrayList<Group> groups, int squadId){
 		rotating=true;
 		firstTime = true;
@@ -37,6 +38,7 @@ public class Squad {
 				}
 			}
 		}
+		toBeRemoved = new Point(-1,-1);
 	}
 	
 	public ArrayList<Group> getGroups() {
@@ -132,6 +134,7 @@ public class Squad {
 	}
 	
 	public void deathTriggers(Explorer e) {
+		//Removes any path modifiers that were added by the dead explorers
 		for(int i = 0; i<modifications.size(); i++) {
 			if(modifications.get(i).getId()==e.getId()) {
 				modifications.get(i).cleanUp();
@@ -170,61 +173,70 @@ public class Squad {
 			}
 			
 			}
-		Point toBeRemoved = new Point(-1,-1);
+		
 		if(go){
 			if(rotating){
-			Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
-			if(!firstTime) {
-				path.add(0,tempNextLoc);
-			}
-			firstTime = false;
-			//Flee code
-			if(path.size()>groups.size()+2){
-				if(Mouse.isButtonDown(1)){
+				Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
+				if(!firstTime) {
+					path.add(0,tempNextLoc);
+				}
+				firstTime = false;
+				//Flee code
+				if(path.size()>groups.size()+2){
+					if(Mouse.isButtonDown(1)){
 						path.remove(0);
 						toBeRemoved = path.remove(0);
+						System.out.println(toBeRemoved.x);
 						for(Group group:groups){
 							group.setFlee(true);
 						}
-				}else{
-					for(Group group:groups){
-						group.setFlee(false);
+					}else{
+						toBeRemoved = new Point(-1,-1);
+						for(Group group:groups){
+							group.setFlee(false);
+						}
 					}
 				}
-			}
-			
-			int i=0;
-				for(Group group:groups){
-				rotating=true;
-				if(i<path.size()){
-				if(i+1<path.size()){
-				group.rotate(path.get(i+1));
-				}else 
-					group.rotate(path.get(i));
-				}
-				i++;
-				rotating=false;
-				}
 				
-			}else{
-			rotating=true;
-			int i=0;
-			for(Group group: groups){
-				i++;
-				if(i<path.size()){
-					group.setNextLoc(path.get(i));
-					group.setWait(false);
+				for(Group group: groups){
 					//This removes the status of occupied from the tail end of the squad
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
-					
+					System.out.println("Flee = " + group.getFlee());
+					System.out.println("toBeRemoved.x = " + toBeRemoved.x);
 					if(groups.size()+2<path.size() && !group.getFlee() && Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
 						Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
 					} else if(group.getFlee() && toBeRemoved.x != -1) {
-					Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1);;
-				} 
-				}else break;
+						Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
+						System.out.println("In it");
+						toBeRemoved = new Point();
+					}else break;
 				}
-			}
+			
+				int i=0;
+				for(Group group:groups){
+					rotating=true;
+					if(i<path.size()){
+						if(i+1<path.size()){
+							group.rotate(path.get(i+1));
+						}else 
+							group.rotate(path.get(i));
+						}
+					i++;
+					rotating=false;
+				}
+				
+				}else{
+					rotating=true;
+					int i=0;
+					for(Group group: groups){
+						i++;
+						if(i<path.size()){
+							group.setNextLoc(path.get(i));
+							group.setWait(false);
+						}
+					}
+					
+				}
 			previousFloor = groups.get(groups.size()-1).getFloor();
 			}
 		}

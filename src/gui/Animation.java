@@ -8,8 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 //Implied default of %1 == 0 but can be raised.
 public class Animation {
 	
-	//If true, the animation will loop, otherwise it stops until this is changed to true
-	private boolean loop;
+	private boolean freezeFrame;
 	
 	//This keeps track of the current animation image
 	private int count;
@@ -30,7 +29,15 @@ public class Animation {
 		for(Integer i:list){
 			frames.add(new GuiTexture(i,location,size));
 		}
-		loop = true;
+		freezeFrame = false;
+	}
+	
+	public boolean getIfFrozen() {
+		return freezeFrame;
+	}
+	
+	public void setIfFrozen(boolean b) {
+		freezeFrame = b;
 	}
 	
 	private void update() {
@@ -98,7 +105,7 @@ public class Animation {
 		//This moves to the next frame or loops
 		if(count>frames.size()*frameDelay-2) {
 			count = 0;
-		} else {
+		} else if(!freezeFrame){
 			count++;
 		}
 	}

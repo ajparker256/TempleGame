@@ -35,6 +35,7 @@ public class Explorer extends Unit{
 	private int direction;
 	private boolean busy;
 	private boolean flee;
+	private boolean isPaused;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
@@ -97,8 +98,8 @@ public class Explorer extends Unit{
 	
 	public GuiTexture render() {
 
-	
-		
+	super.animation.setIfFrozen(Main.state == 2); //If the game is paused, freeze the animation for walking
+
 	switch(group.getDirection()){
 	case 11:
 		idle.setPosition(location);
