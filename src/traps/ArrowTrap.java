@@ -134,6 +134,16 @@ public class ArrowTrap extends Trap{
 	
 	}
 	
+	@Override
+	public Tile copy() {
+		Tile copiedArrowTrap = new ArrowTrap(x, y, size, direction, floor);
+		copiedArrowTrap.setTrapRefs(trapRefs);
+		for(Upgrade u: allUpgrades) {
+			copiedArrowTrap.upgrade(u.getId());
+		}
+		return copiedArrowTrap;
+	}
+	
 
 	private void setTriggers(){
 		int i=1;
@@ -162,7 +172,7 @@ public class ArrowTrap extends Trap{
 		
 	}
 	@Override
-	public void tick(long milli){
+	public void tick(double milli){
 		cooldown-=milli;
 	}
 }

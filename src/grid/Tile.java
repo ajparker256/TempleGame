@@ -184,7 +184,7 @@ public class Tile {
 		trapRefs.add(point);
 	}
 
-	public void tick(long milli) {
+	public void tick(double milli) {
 		
 	}
 	

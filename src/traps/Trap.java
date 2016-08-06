@@ -7,7 +7,10 @@ import org.lwjgl.util.vector.Vector2f;
 
 import explorerTypes.Explorer;
 import upgrades.*;
+import grid.Blank;
 import grid.Tile;
+import librarys.TileLibrary;
+import main.Main;
 import pathing.Group;
 
 public class Trap extends Tile{
@@ -28,6 +31,7 @@ public class Trap extends Tile{
 	protected double maxCd;
 	protected int level;	
 	
+	protected ArrayList<Upgrade> allUpgrades;
 	protected ArrayList<Upgrade> onHit;
 	protected ArrayList<Upgrade> onFire;
 	protected ArrayList<Upgrade> onDeath;
@@ -36,6 +40,7 @@ public class Trap extends Tile{
 	
 	public Trap(int x, int y, float size, Vector2f location, int floor) {
 		super(x, y, size, location, floor);
+		allUpgrades = new ArrayList<Upgrade>();
 		onHit = new ArrayList<Upgrade>();
 		onFire = new ArrayList<Upgrade>();
 		onDeath = new ArrayList<Upgrade>();
@@ -169,13 +174,23 @@ public class Trap extends Tile{
 	@Override
 	public void interact(Group g) {
 		for(Explorer e : g.getGroup()) {
-			hp -= (e.getDamage()+100)/(100+defense);
+			hp -= e.getDamage()*100/(double)(100+defense);
+		}
+		if(hp <= 0) {
+			for(Upgrade u : onDeath) {
+				u.upgrade(this);
+			}
+			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(g.getFloor()).getLoc(), floor);
+			blank.setTrapRefs(trapRefs);
+			Main.grids.get(g.getFloor()).setTile(this.x, this.y, blank);
+			System.out.println("This killed the unit");
 		}
 	}
 	
 	public void upgrade(Upgrade powerUp) {
 		int triggerLoc = powerUp.getTriggerLoc();
-		
+		//This is for copying from read only to non-readonly
+		allUpgrades.add(powerUp);
 		//0=One Time 1 = On Hit 2 = On Fire 3 = On Interact 4 = On Trigger 5 = On Death
 		if(triggerLoc == 0)
 			powerUp.upgrade(this);

@@ -65,7 +65,10 @@ public class CursedIdol extends Trap{
 			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);
 			Main.squads.get(g.getSquadId()).getPathMods().add(new TrapAffinityPM(Main.squads.get(g.getSquadId())));
-			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);		
+			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
+			for(Upgrade u : onDeath) {
+				u.upgrade(this);
+			}
 		}
 	}
 }

@@ -19,7 +19,6 @@ import upgrades.Upgrade;
 public class TikiTrap extends Trap{
 	
 	//protected int level; level is controlled by arraylist.size() of centralized upgrades arraylist
-	protected int direction;
 	protected Animation firing;
 	protected boolean isFiring;
 	
@@ -51,8 +50,6 @@ public class TikiTrap extends Trap{
 		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
 		super.passable=false;
 		super.canInteract=true;
-		this.cooldown=0;
-		this.direction = 1;
 		this.guiTexture=(new GuiTexture(GuiLibrary.tikiTrap,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Tiki Trap";
 		this.maxCd=100;
@@ -90,11 +87,11 @@ public class TikiTrap extends Trap{
 
 				if(x-1>=0)
 				Main.projectiles.add(new Fire(1,x-1,y,super.floor, damage));
-				if(x+1<=9)
+				if(x+1<=Main.grids.get(floor).getWidth()-1)
 				Main.projectiles.add(new Fire(1,x+1,y,super.floor, damage));
 				if(y-1>=0)
 				Main.projectiles.add(new Fire(1,x,y-1,super.floor, damage));
-				if(y+1<=9)
+				if(y+1<=Main.grids.get(floor).getWidth()-1)
 				Main.projectiles.add(new Fire(1,x,y+1,super.floor, damage));
 				
 				isFiring = true;
@@ -106,13 +103,8 @@ public class TikiTrap extends Trap{
 		}
 	}
 	
-	public void trigger(){
-	
-	}
-	
 	@Override
 	public GuiTexture drawTile() {
-
 		return guiTexture;
 	}
 	
@@ -123,32 +115,41 @@ public class TikiTrap extends Trap{
 			int i=1;
 		switch(j){
 		case 1:while(y+i<=Main.grids.get(floor).getWidth()-1&&i<=range){
-			Main.grids.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 		case 2:while(x+i<=Main.grids.get(floor).getWidth()-1&&i<=range){
-			Main.grids.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 		case 3:while(y-i>=0&&i<=range){
-			Main.grids.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 		case 4:while(x-i>=0&&i<=range){
-			Main.grids.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
-	}
 		}
-
-		
+		}	
 	}
+	
 	@Override
-	public void tick(long milli){
+	public Tile copy() {
+		Tile copiedTiki = new TikiTrap(x, y, size, floor);
+		copiedTiki.setTrapRefs(trapRefs);
+		for(Upgrade u: allUpgrades) {
+			copiedTiki.upgrade(u.getId());
+		}
+		return copiedTiki;
+	}
+	
+	@Override
+	public void tick(double milli){
 		cooldown-=milli;
 	}
 }
