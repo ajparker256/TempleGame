@@ -217,7 +217,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				state = 1;
 			}
 		}
-		if(state == 1 && !isEditPhase) {
+		if(state == 1 /*&& !isEditPhase*/) {
 			//TODO add for each grid, and inside only do the tihngs that are on the right grid
 			//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
 			for(Squad s : squads) {
@@ -252,9 +252,9 @@ public static void main(String[] args) throws FileNotFoundException {
 			//The screen is -1 to 1 for x and 0 to -1 for y in floats
 			
 			//Determines which of the grids to render
-			if(isEditPhase)
-				dynamicGuis.addAll(Main.gridsReadOnly.get(grid.getFloor()).render());
-			else
+			//if(isEditPhase)
+			//	dynamicGuis.addAll(Main.gridsReadOnly.get(grid.getFloor()).render());
+			//else
 				dynamicGuis.addAll(grid.render());
 			
 			for(Grid g: grids) {
