@@ -59,8 +59,10 @@ public class CursedIdol extends Trap{
 	//ALSO the curse is not implemented, needs some thought there too.
 	@Override
 	public void interact(Group g){
-		if(value%5 == 0)
+		if(value%5 == 0) {
 			Main.money++;
+		}
+		value--;
 		if(value<=0){
 			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);

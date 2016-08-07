@@ -131,8 +131,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	group4.add(new Miner (group4));*/
 	
 	Group group1 = new Group(0);
-	Group group2 = new Group(1);
-	Group group3 = new Group(1);	
+	Group group2 = new Group(0);
+	Group group3 = new Group(0);	
 	Group group4 = new Group(2);
 
 	
@@ -164,7 +164,7 @@ public static void main(String[] args) throws FileNotFoundException {
 
 	}
 	Squad squad1=new Squad(squad1List, 0);*/
-	Squad squad2= new Squad(squad2List, 1);
+	Squad squad2= new Squad(squad2List, 0);
 	//Squad squad3= new Squad(squad3List, 2);
 	//squads.add(squad1);
 	squads.add(squad2);
@@ -376,7 +376,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 			}
 		}
-		//UpgradeRoller Logic
+		//UpgradeRoller Initiation Logic
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
 			if(Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
 				Trap trap = (Trap) Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
@@ -390,6 +390,8 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 			}
 		}
+		
+		//Choose Upgrade
 		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < currentTime) {
 			if(upgradeRoller.itemIsClicked(mouseX, mouseY)) {
 				upgradeRoller.getTrap().upgrade(upgradeRoller.getClickedUpgrade(mouseX, mouseY));
@@ -405,7 +407,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setSelection(selected);
 			}
 			if(rotationDialogueBox.getSelection() != 0 /*&& rotationDialogueBox.isConfirmed(mouseX, mouseY)*/) {
-				Main.gridsReadOnly.get(grid.getFloor()).setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
+				gridsReadOnly.get(grid.getFloor()).setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
 				rotationDialogueBox.setSelection(0);
 				rotationDialogueBox.setOn(false);
 				epicShopofEpicness.setOn(false);
