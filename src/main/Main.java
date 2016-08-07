@@ -389,8 +389,9 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(startWave.isClicked(mouseX, mouseY)) {
 			isEditPhase = false;
 			for(Grid g : gridsReadOnly) {
-				for(Grid grid : grids) {
-					grid = g.copy();
+				for(int i = 0; i<grids.size(); i++) {
+					 grids.remove(i);
+					 grids.add(i, g.copy());
 				}
 			}
 		}
