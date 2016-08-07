@@ -214,6 +214,15 @@ public class Shop {
 		return locationOfTrapPlacement;
 	}
 	
+	public void scrollLogic(float mouseX, float mouseY) {
+		if(isOn()) {
+			if(isUpArrowClicked(mouseX, mouseY))
+				scrollUp();
+			if(isDownArrowClicked(mouseX, mouseY))
+				scrollDown();
+		}
+	}
+	
 	public void updateShopPosition() {
 		int rX = visibilityRange[1]-visibilityRange[0];
 		int rY = visibilityRange[3]-visibilityRange[2];

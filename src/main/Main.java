@@ -101,7 +101,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	AnimationLibrary.init(loader);
 	
 	
-	
+	startWave = new Button(new Vector2f(.08f, -.09f), new Vector2f(1, -1));
 	
 	upgradeRoller = new UpgradeRoller();
 	
@@ -217,7 +217,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				state = 1;
 			}
 		}
-		if(state == 1 /*&& !isEditPhase*/) {
+		if(state == 1 && !isEditPhase) {
 			//TODO add for each grid, and inside only do the tihngs that are on the right grid
 			//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
 			for(Squad s : squads) {
@@ -252,9 +252,9 @@ public static void main(String[] args) throws FileNotFoundException {
 			//The screen is -1 to 1 for x and 0 to -1 for y in floats
 			
 			//Determines which of the grids to render
-			//if(isEditPhase)
-			//	dynamicGuis.addAll(Main.gridsReadOnly.get(grid.getFloor()).render());
-			//else
+			if(isEditPhase)
+				dynamicGuis.addAll(Main.gridsReadOnly.get(grid.getFloor()).render());
+			else
 				dynamicGuis.addAll(grid.render());
 			
 			for(Grid g: grids) {
@@ -277,6 +277,8 @@ public static void main(String[] args) throws FileNotFoundException {
 			if(upgradeRoller.isOn()) {
 				upgradeRoller.render(dynamicGuis);
 			}
+			
+			
 		}
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
@@ -291,6 +293,10 @@ public static void main(String[] args) throws FileNotFoundException {
 	guiRenderer.cleanUp();
 	loader.cleanUp();
 	DisplayManager.closeDisplay();
+		
+	}
+
+	public static void titleScreenLogic(double milli) {
 		
 	}
 	
@@ -376,7 +382,28 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 			}
 		}
-		//UpgradeRoller Initiation Logic
+		upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
+		upgradeSelection(mouseX, mouseY);
+		
+		rotationDialogueBoxLogic(mouseX, mouseY);
+		if(startWave.isClicked(mouseX, mouseY)) {
+			isEditPhase = false;
+			for(Grid g : gridsReadOnly) {
+				for(Grid grid : grids) {
+					grid = g.copy();
+				}
+			}
+		}
+		epicShopofEpicness.scrollLogic(mouseX, mouseY);
+
+		//Floor Select / Purchasing Floors Logic (TODO)
+		
+		
+		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
+		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
+	}
+	
+	public static void upgradeRollerInitiationLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
 			if(Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
 				Trap trap = (Trap) Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
@@ -390,17 +417,20 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 			}
 		}
-		
-		//Choose Upgrade
-		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < currentTime) {
+	}
+	
+	public static void upgradeSelection(float mouseX, float mouseY) {
+		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < System.currentTimeMillis()) {
 			if(upgradeRoller.itemIsClicked(mouseX, mouseY)) {
 				upgradeRoller.getTrap().upgrade(upgradeRoller.getClickedUpgrade(mouseX, mouseY));
 				upgradeRoller.setOn(false);
 				epicShopofEpicness.setOn(false);
-				epicShopofEpicness.setLastTimeClosed(currentTime);
+				epicShopofEpicness.setLastTimeClosed(System.currentTimeMillis());
 			}
 		}
-		//RotationDialogueBox Logic
+	}
+	
+	public static void rotationDialogueBoxLogic(float mouseX, float mouseY) {
 		if(rotationDialogueBox.isOn() && rotationDialogueBox.shopIsClicked(mouseX, mouseY)) {
 			int selected = rotationDialogueBox.getShopItem(mouseX, mouseY);
 			if(selected != 0) {
@@ -411,20 +441,15 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setSelection(0);
 				rotationDialogueBox.setOn(false);
 				epicShopofEpicness.setOn(false);
-				epicShopofEpicness.setLastTimeClosed(currentTime);
+				epicShopofEpicness.setLastTimeClosed(System.currentTimeMillis());
 			}
 			if(rotationDialogueBox.isCanceled(mouseX, mouseY)) {
 				rotationDialogueBox.setOn(false);
 			}
 		}
-		//Shop Scrolling Logic
-		if(epicShopofEpicness.isOn()) {
-			if(epicShopofEpicness.isUpArrowClicked(mouseX, mouseY))
-				epicShopofEpicness.scrollUp();
-			if(epicShopofEpicness.isDownArrowClicked(mouseX, mouseY))
-				epicShopofEpicness.scrollDown();
-		}
-		//Floor Select / Purchasing Floors Logic (TODO)
+	}
+	
+	public static void floorSelect(float mouseX, float mouseY) {
 		for(Grid g : grids) {
 			if(g.isLevelSelected(mouseX, mouseY) && Main.grid.getFloor() != g.getFloor()) {
 				Main.grid = g;
@@ -432,9 +457,6 @@ public static void main(String[] args) throws FileNotFoundException {
 				break;
 			}
 		}
-		
-		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
-		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
 	}
 	
 }
