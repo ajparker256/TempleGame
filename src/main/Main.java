@@ -101,7 +101,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	AnimationLibrary.init(loader);
 	
 	
-	startWave = new Button(new Vector2f(.08f, -.09f), new Vector2f(1, -1));
+	startWave = new Button(new Vector2f(.8f, -.09f), new Vector2f(1, -1));
 	
 	upgradeRoller = new UpgradeRoller();
 	
