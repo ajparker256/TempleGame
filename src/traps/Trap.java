@@ -23,8 +23,6 @@ public class Trap extends Tile{
 	protected int armorPen;
 	protected double pierceChance;
 	protected int bleed;
-	protected int gatlingRampPerShot;
-	protected int gatlingCap;
 	protected double warmUpTime;
 	protected double accuracy;
 	protected double cooldown;
@@ -91,10 +89,6 @@ public class Trap extends Tile{
 		bleed = i;
 	}
 	
-	public int getGatlingRampPerShot() {
-		return gatlingRampPerShot;
-	}
-	
 	public double getWarmUpTime() {
 		return warmUpTime;
 	}
@@ -103,9 +97,18 @@ public class Trap extends Tile{
 		warmUpTime = i;
 	}
 	
-	public void setGatlingRampPerShot(int i) {
-		gatlingRampPerShot = i;
+	public double getRealDamage() {
+		//If it misses, it does no damage
+		if(accuracy < Math.random()) 
+			return 0;
+		//If it crits, it deals double damage
+		else if(critChance > Math.random()) 
+			return 2*damage;
+		//Otherwise do normal damage
+		else 
+			return damage;
 	}
+	
 	
 	public double getPierceChance() {
 		return pierceChance;

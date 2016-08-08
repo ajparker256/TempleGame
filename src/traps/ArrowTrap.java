@@ -70,9 +70,7 @@ public class ArrowTrap extends Trap{
 		critChance = 0;
 		armorPen = 0;
 		bleed = 0;
-		gatlingRampPerShot = 0;
 		pierceChance = 0;
-		gatlingCap = 0;
 		warmUpTime = 0;
 		accuracy = .9;
 		cooldown = 0;
@@ -123,7 +121,8 @@ public class ArrowTrap extends Trap{
 				for(Upgrade u : onFire) {
 					u.upgrade(this);
 				}
-				Main.projectiles.add(new Projectile(direction,x,y,super.floor, damage));
+				double tempDamage = getRealDamage();
+				Main.projectiles.add(new Projectile(direction,x,y,super.floor, tempDamage));
 				isFiring = true;
 				cooldown=maxCd; 
 			}

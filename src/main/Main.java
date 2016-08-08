@@ -367,7 +367,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	}
 	
 	private static void shopExitLogic(float mouseX, float mouseY) {
-		if(epicShopofEpicness.isExitClicked(mouseX, mouseY)) {
+		if(epicShopofEpicness.isExitClicked(mouseX, mouseY) || !isEditPhase) {
 			epicShopofEpicness.setOn(false);
 			rotationDialogueBox.setOn(false);
 			upgradeRoller.setOn(false);

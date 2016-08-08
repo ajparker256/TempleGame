@@ -66,8 +66,6 @@ public class TikiTrap extends Trap{
 		armorPen = 10;
 		pierceChance = 0;
 		bleed = 0;
-		gatlingRampPerShot = 0;
-		gatlingCap = 0;
 		warmUpTime = 0;
 		accuracy = .9;
 		cooldown = 0;
@@ -82,17 +80,18 @@ public class TikiTrap extends Trap{
 		if(cooldown<=0){
 			boolean fire = true;
 			//Up
+			double tempDamage = getRealDamage();
 		
 			if(fire) {
 
 				if(x-1>=0)
-				Main.projectiles.add(new Fire(1,x-1,y,super.floor, damage));
+				Main.projectiles.add(new Fire(1,x-1,y,super.floor, tempDamage));
 				if(x+1<=Main.grids.get(floor).getWidth()-1)
-				Main.projectiles.add(new Fire(1,x+1,y,super.floor, damage));
+				Main.projectiles.add(new Fire(1,x+1,y,super.floor, tempDamage));
 				if(y-1>=0)
-				Main.projectiles.add(new Fire(1,x,y-1,super.floor, damage));
+				Main.projectiles.add(new Fire(1,x,y-1,super.floor, tempDamage));
 				if(y+1<=Main.grids.get(floor).getWidth()-1)
-				Main.projectiles.add(new Fire(1,x,y+1,super.floor, damage));
+				Main.projectiles.add(new Fire(1,x,y+1,super.floor, tempDamage));
 				
 				isFiring = true;
 				for(Upgrade u : onFire) {
