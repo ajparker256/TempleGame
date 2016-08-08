@@ -393,7 +393,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			for(Grid g : gridsReadOnly) {
 					grids.remove(i);
 					grids.add(i, g.copy());
-					System.out.println(grids);
+					//System.out.println(grids);
 					i++;
 			}
 		}

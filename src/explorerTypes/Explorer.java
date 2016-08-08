@@ -462,6 +462,7 @@ public class Explorer extends Unit{
 
 
 	public void moveTo(Point nextLoc, int milli){
+		System.out.println("moving");
 		Vector2f destination=Main.grids.get(floor).getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		switch(position){
@@ -527,6 +528,8 @@ public class Explorer extends Unit{
 				location.y=destination.y;
 				direction=13;
 			}
+		}else {
+			busy=false;
 		}
 
 
