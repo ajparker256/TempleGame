@@ -11,7 +11,9 @@ import pathing.Group;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import explorerTypes.Exploder;
 import explorerTypes.Explorer;
+import explorerTypes.Miner;
 import renderEngine.DisplayManager;
 
 // This is the superclass for all tiles contained in a grid
@@ -191,22 +193,42 @@ public class Tile {
 	public void interact(Group g){
 		int bonusDamage = 0;
 		for(Explorer e : g.getGroup()) {
-			if(e.getId() == 2) {
+
 				bonusDamage += 5*e.getDamage();
-			} else {
+
 				bonusDamage += e.getDamage();
+			if(e instanceof Exploder){
+				Exploder exploder = (Exploder)e;
+				explodeDamage(exploder.getExplosive());
 			}
 		}
-		hp-=(bonusDamage);
-		if(hp<=0){
-			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(g.getFloor()).getLoc(), floor);
-			blank.setTrapRefs(trapRefs);
-			Main.grids.get(g.getFloor()).setTile(this.x, this.y, blank);
-		}
+		damage(bonusDamage);
 	}
 
 	public boolean isPassable() {
 		return passable;
+	}
+	public void damage(int damage){
+		hp-=damage;
+		if(hp<=0){
+			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(floor).getLoc(), floor);
+			blank.setTrapRefs(trapRefs);
+			Main.grids.get(floor).setTile(this.x, this.y, blank);
+		}
+	}
+	public void explodeDamage(int damage){
+		if(y-1>=0){
+		Main.grids.get(floor).getTile(x,y-1).damage(damage);
+		}
+		if(y+1<=Main.grids.get(floor).getWidth()-1){
+		Main.grids.get(floor).getTile(x,y+1).damage(damage);
+		}
+		if(x-1>=0){
+		Main.grids.get(floor).getTile(x-1,y).damage(damage);
+		}
+		if(x+1<=Main.grids.get(floor).getWidth()-1){
+		Main.grids.get(floor).getTile(x+1,y).damage(damage);
+		}
 	}
 
 

@@ -34,6 +34,7 @@ import buttons.*;
 import entities.Flame;
 import entities.Projectile;
 import explorerTypes.Athlete;
+import explorerTypes.Exploder;
 import explorerTypes.Explorer;
 import explorerTypes.Miner;
 import explorerTypes.TreasureHunter;
@@ -152,7 +153,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	for(Group g : squad2List) {
 		g.add(new Miner (g));
 		g.add(new Athlete (g));
-		g.add(new TreasureHunter (g));
+		g.add(new Exploder (g));
 		g.add(new TreasureHunter(g));
 
 	}
