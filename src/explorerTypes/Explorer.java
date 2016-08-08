@@ -547,6 +547,13 @@ public class Explorer extends Unit{
 		this.speedBonus+=speedBonus;
 		
 	}
+
+	public void tick(int milli) {
+		
+		
+	}
+		
+	
 	
 	
 

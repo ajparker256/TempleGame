@@ -155,6 +155,11 @@ public class Squad {
 	}
 	
 	public void tick(int milli, Grid grid){
+		for(Group group:groups){
+			for (Explorer explorer: group.getGroup()){
+				explorer.tick(milli);
+			}
+		}
 		ArrayList<Group> toRemove=new ArrayList<Group>(); 
 		for(Group group:groups){
 			for(int i=0;i<group.getGroup().size();i++){
