@@ -56,7 +56,7 @@ public class Unit {
 		velocity=new Vector2f(0.1f,(float) (0.1f*DisplayManager.getAspectratio()));
 		location = group.getLocation();
 		isAlive = true;
-		this.size = Main.grid.UNITSIZE;	
+		this.size = Main.grids.get(Main.gridToBeRendered).UNITSIZE;	
 	}
 	
 	//Move according to the velocity of the unit relative to time passed

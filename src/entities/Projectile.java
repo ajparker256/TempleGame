@@ -35,7 +35,7 @@ public class Projectile {
 		this.damage = damage;
 		this.floor=floor;
 		this.texture=GuiLibrary.arrow5;
-		this.location=new Vector2f(Main.grid.getTile(x,y).getLocation());
+		this.location=new Vector2f(Main.grids.get(Main.gridToBeRendered).getTile(x,y).getLocation());
 		this.size=new Vector2f(0.1f,0.1f);
 		this.velocity=new Vector2f(0.5f,0.5f);
 		this.image = new GuiTexture(texture, location, size);
@@ -44,7 +44,7 @@ public class Projectile {
 	}
 	
 	public boolean canRender() {
-		return Main.grid.getFloor() == floor;
+		return Main.gridToBeRendered == floor;
 	}
 	
 	public GuiTexture render(){
@@ -55,7 +55,7 @@ public class Projectile {
 		return false;
 	}
 		move(milli);
-		if(location.equals(Main.grid.getTile(x, y).getLocation())){
+		if(location.equals(Main.grids.get(Main.gridToBeRendered).getTile(x, y).getLocation())){
 			switch(direction){
 			case 1:
 				this.y=y+1;
@@ -77,14 +77,14 @@ public class Projectile {
 			}
 		}
 	}
-			if(x>9||x<0||y>9||y<0||(!Main.grid.getTile(x, y).isPassable())){
+			if(x>9||x<0||y>9||y<0||(!Main.grids.get(Main.gridToBeRendered).getTile(x, y).isPassable())){
 				this.kill=true;
 			}
 		}
 		return true;
 	}
 	public void move(long milli){
-		Vector2f destination=Main.grid.getTile(x, y).getLocation();
+		Vector2f destination=Main.grids.get(Main.gridToBeRendered).getTile(x, y).getLocation();
 		 Vector2f tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){
 			if(location.x<destination.x){

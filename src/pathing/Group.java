@@ -54,7 +54,7 @@ public class Group {
 	public Group(int id) {
 		this.flee=false;
 		this.speedMod=1f;
-		location=new Vector2f(Main.grid.getTile(0,0).getLocation().x,Main.grid.getTile(0,0).getLocation().y);
+		location=new Vector2f(Main.grids.get(Main.gridToBeRendered).getTile(0,0).getLocation().x,Main.grids.get(Main.gridToBeRendered).getTile(0,0).getLocation().y);
 		location.y-=0.1f;
 		wait=false;
 		busy=false;
@@ -67,7 +67,7 @@ public class Group {
 		group = new ArrayList<Explorer>();
 		MAX_SIZE = 4;
 		squadId = id;
-		floor = Main.grid.getFloor();
+		floor = Main.gridToBeRendered;
 		setNextLoc(nextLoc);
 	}
 	
@@ -174,7 +174,7 @@ public class Group {
 	public ArrayList<GuiTexture> render(){
 		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
 		for(Explorer explorer:group){
-			if(this.floor == Main.grid.getFloor())
+			if(this.floor == Main.gridToBeRendered)
 			toRender.add(explorer.render());
 		}
 		return toRender;

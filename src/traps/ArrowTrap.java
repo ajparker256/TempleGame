@@ -145,7 +145,7 @@ public class ArrowTrap extends Trap{
 	}
 	
 
-	private void setTriggers(){
+ 	private void setTriggers(){
 		int i=1;
 		switch(direction){
 		case 1:while(y+i<=9&&i<range){

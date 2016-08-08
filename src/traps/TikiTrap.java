@@ -114,12 +114,12 @@ public class TikiTrap extends Trap{
 		for(int j=1;j<=4;j++){
 			int i=1;
 		switch(j){
-		case 1:while(y+i<=Main.grids.get(floor).getWidth()-1&&i<=range){
+		case 1:while(y+i<Main.grids.get(floor).getWidth()-1&&i<=range){
 			Main.gridsReadOnly.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
-		case 2:while(x+i<=Main.grids.get(floor).getWidth()-1&&i<=range){
+		case 2:while(x+i<Main.grids.get(floor).getWidth()-1&&i<=range){
 			Main.gridsReadOnly.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}

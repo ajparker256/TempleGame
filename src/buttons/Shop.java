@@ -204,7 +204,7 @@ public class Shop {
 			}
 		}
 		StringLibrary.setSize(new Vector2f(.02f, .04f));
-		if(Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)getGridLoc().x, (int)getGridLoc().y).getId() > 1)
+		if(Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)getGridLoc().x, (int)getGridLoc().y).getId() > 1)
 		guis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
 		guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x-StringLibrary.getWidth('X'),
 				location.y+size.y)));
@@ -297,7 +297,9 @@ public class Shop {
 	
 	public void setGridLoc(Vector2f locationOnGrid) {
 		locationOfTrapPlacement = locationOnGrid;
-		selectionOutline = new GuiTexture(GuiLibrary.selectionOutline, Main.grid.getTile((int)locationOfTrapPlacement.x, (int)locationOfTrapPlacement.y).getLocation(), new Vector2f(Main.grid.getTile((int)locationOfTrapPlacement.x,(int)locationOfTrapPlacement.y).getSize(), Main.grid.getTile((int)locationOfTrapPlacement.x,(int)locationOfTrapPlacement.y).getSize()*(float)DisplayManager.getAspectratio()));
+		selectionOutline = new GuiTexture(GuiLibrary.selectionOutline, Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)locationOfTrapPlacement.x, 
+				(int)locationOfTrapPlacement.y).getLocation(), new Vector2f(Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)locationOfTrapPlacement.x,
+						(int)locationOfTrapPlacement.y).getSize(), Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)locationOfTrapPlacement.x,(int)locationOfTrapPlacement.y).getSize()*(float)DisplayManager.getAspectratio()));
 	}
 
 }

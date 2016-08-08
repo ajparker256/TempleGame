@@ -52,7 +52,7 @@ public static ArrayList<Explorer> group;
 public static ArrayList<Button> buttons;
 public static long milli;
 public static ArrayList<Grid> grids;
-public static Grid grid;
+public static int gridToBeRendered;
 public static Shop epicShopofEpicness;
 public static boolean wasJustDown = false;
 public static ArrayList<Squad> squads;
@@ -88,7 +88,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5+i, i));
 		gridsReadOnly.add(grids.get(i).copy());
 	}
-	grid = grids.get(0);
 	rotationDialogueBox = new RotationDialogueBox();
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
@@ -253,9 +252,9 @@ public static void main(String[] args) throws FileNotFoundException {
 			
 			//Determines which of the grids to render
 			if(isEditPhase)
-				dynamicGuis.addAll(Main.gridsReadOnly.get(grid.getFloor()).render());
+				dynamicGuis.addAll(Main.gridsReadOnly.get(gridToBeRendered).render());
 			else
-				dynamicGuis.addAll(grid.render());
+				dynamicGuis.addAll(grids.get(gridToBeRendered).render());
 			
 			for(Grid g: grids) {
 				dynamicGuis.addAll(g.renderFloorSelect());
@@ -341,15 +340,15 @@ public static void main(String[] args) throws FileNotFoundException {
 			upgradeRoller.setOn(false);
 		}
 		//If the grid is clicked (Selecting tile) and There isn't something over the grid, and the shop hasn't been closed recently, and it isn't currently open
-		if(grid.getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < currentTime && epicShopofEpicness.getLastTimeClicked()+500<currentTime && !upgradeRoller.isOn()) {
-			int x = (Mouse.getX()-(int)((grid.getLoc().x-grid.getSize()+1f)*DisplayManager.WIDTH/2))/(int)(grid.getSize()*DisplayManager.WIDTH);
-			int y = (Mouse.getY()-(int)((grid.getLoc().y-grid.getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(grid.getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
+		if(gridsReadOnly.get(gridToBeRendered).getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < currentTime && epicShopofEpicness.getLastTimeClicked()+500<currentTime && !upgradeRoller.isOn()) {
+			int x = (Mouse.getX()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().x-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.WIDTH/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.WIDTH);
+			int y = (Mouse.getY()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().y-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
 			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
 			epicShopofEpicness.setOn(true);
 			epicShopofEpicness.setLastTimeClicked(currentTime);
 		}
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
-			Tile oldTile=grid.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
+			Tile oldTile=gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 			int selection = epicShopofEpicness.getShopItem(mouseX, mouseY);
 			if(selection != -1) {
 				ShopItem selectedItem = ShopItemLibrary.getItem(selection);
@@ -358,8 +357,8 @@ public static void main(String[] args) throws FileNotFoundException {
 					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
 					
 					//REMOVE WHEN READ ONLY IMPLEMENTED FULLY
-					grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
-					gridsReadOnly.get(grid.getFloor()).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
+					//grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
+					gridsReadOnly.get(gridToBeRendered).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					epicShopofEpicness.setOn(false);
 					rotationDialogueBox.setOn(false);
 					upgradeRoller.setOn(false);
@@ -386,19 +385,21 @@ public static void main(String[] args) throws FileNotFoundException {
 		upgradeSelection(mouseX, mouseY);
 		
 		rotationDialogueBoxLogic(mouseX, mouseY);
+		//TODO this. Right here, goto.
 		if(startWave.isClicked(mouseX, mouseY)) {
 			isEditPhase = false;
+			int i = 0; 
 			for(Grid g : gridsReadOnly) {
-				for(int i = 0; i<grids.size(); i++) {
-					 grids.remove(i);
-					 grids.add(i, g.copy());
-				}
+					grids.remove(i);
+					grids.add(i, g.copy());
+					System.out.println(grids);
+					i++;
 			}
 		}
 		epicShopofEpicness.scrollLogic(mouseX, mouseY);
 
 		//Floor Select / Purchasing Floors Logic (TODO)
-		
+		floorSelect(mouseX, mouseY);
 		
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
@@ -406,8 +407,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	public static void upgradeRollerInitiationLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
 		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
-			if(Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
-				Trap trap = (Trap) Main.gridsReadOnly.get(Main.grid.getFloor()).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
+			if(Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
+				Trap trap = (Trap) Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
 				int levelCost = trap.getLevel()*100+50;
 				if(money-levelCost>-0) {
 					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
@@ -438,7 +439,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				rotationDialogueBox.setSelection(selected);
 			}
 			if(rotationDialogueBox.getSelection() != 0 /*&& rotationDialogueBox.isConfirmed(mouseX, mouseY)*/) {
-				gridsReadOnly.get(grid.getFloor()).setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
+				gridsReadOnly.get(gridToBeRendered).setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
 				rotationDialogueBox.setSelection(0);
 				rotationDialogueBox.setOn(false);
 				epicShopofEpicness.setOn(false);
@@ -452,8 +453,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	public static void floorSelect(float mouseX, float mouseY) {
 		for(Grid g : grids) {
-			if(g.isLevelSelected(mouseX, mouseY) && Main.grid.getFloor() != g.getFloor()) {
-				Main.grid = g;
+			if(g.isLevelSelected(mouseX, mouseY) && gridToBeRendered != g.getFloor()) {
+				gridToBeRendered = g.getFloor();
 				epicShopofEpicness.setOn(false);
 				break;
 			}
