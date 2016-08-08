@@ -73,4 +73,14 @@ public class CursedIdol extends Trap{
 			}
 		}
 	}
+	
+	@Override
+	public Tile copy() {
+		CursedIdol newCursedIdol = new CursedIdol(x, y, size, floor);
+		newCursedIdol.setTrapRefs(trapRefs);
+		for(Upgrade u : allUpgrades) {
+			newCursedIdol.upgrade(u.getId());
+		}
+		return newCursedIdol;
+	}
 }

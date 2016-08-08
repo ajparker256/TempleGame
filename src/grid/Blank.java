@@ -17,4 +17,11 @@ public class Blank extends Tile {
 		name = "Blank...";
 		id = 0;
 	}
+	
+	@Override
+	public Tile copy() {
+		Blank newTile = new Blank(x, y, size, location, floor);
+		newTile.setTrapRefs(trapRefs);
+		return newTile;
+	}
 }
