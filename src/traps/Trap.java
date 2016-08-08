@@ -163,8 +163,6 @@ public class Trap extends Tile{
 		armorPen = i;
 	}
 	
-	
-	
 	public void whenTriggered(Point p) {
 		for(Upgrade u : onTrigger) {
 			u.upgrade(this);
@@ -183,7 +181,6 @@ public class Trap extends Tile{
 			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(g.getFloor()).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);
 			Main.grids.get(g.getFloor()).setTile(this.x, this.y, blank);
-			System.out.println("This killed the unit");
 		}
 	}
 	

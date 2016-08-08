@@ -27,4 +27,11 @@ public class Exit extends Tile{
 		}
 		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size, floor+1));
 	}
+	
+	@Override
+	public Tile copy() {
+		Tile newExit = new Exit(x, y, size, floor);
+		newExit.setTrapRefs(trapRefs);
+		return newExit;
+	}
 }
