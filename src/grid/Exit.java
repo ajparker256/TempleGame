@@ -29,6 +29,11 @@ public class Exit extends Tile{
 	}
 	
 	@Override
+	public void damage(double damage) {
+		
+	}
+	
+	@Override
 	public Tile copy() {
 		Tile newExit = new Exit(x, y, size, floor);
 		newExit.setTrapRefs(trapRefs);

@@ -208,7 +208,7 @@ public class Tile {
 	public boolean isPassable() {
 		return passable;
 	}
-	public void damage(int damage){
+	public void damage(double damage){
 		hp-=damage;
 		if(hp<=0){
 			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(floor).getLoc(), floor);
