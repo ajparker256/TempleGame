@@ -21,6 +21,17 @@ public class Squad {
 	private boolean firstTime;
 	private Point toBeRemoved;
 	public Squad(ArrayList<Group> groups, int squadId){
+		float speedBonus=0;
+		for(Group group:groups){
+			for(Explorer explorer:group.getGroup()){
+				speedBonus+=explorer.getSpeedProvided();
+			}
+		}
+		for(Group group:groups){
+			for(Explorer explorer:group.getGroup()){
+				explorer.addSpeedBonus(speedBonus);
+			}
+		}
 		rotating=true;
 		firstTime = true;
 		modifications = new ArrayList<PathModifier>();

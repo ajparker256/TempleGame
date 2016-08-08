@@ -29,10 +29,14 @@ public class Explorer extends Unit{
 	private float speedMod;
 	private boolean busy;
 	private boolean flee;
+	private float speedBonus;
+	protected float providedSpeedBonus;
 	
 	public Explorer(Group group) {
 		//Hit points, location in Pixels, Velocity in Pixels, Size relative to screen, id to recognize later, an identity code
 		super(group);
+		this.providedSpeedBonus=0;
+		this.speedBonus=0;
 		this.delay=25;
 		this.id = -1;
 		this.lastDirection=1;
@@ -471,10 +475,10 @@ public class Explorer extends Unit{
 		break;
 		}
 
+		speedMod=1f;
+		speedMod+=speedBonus;
 		if(flee){
-			speedMod=2f;
-		}else{
-			speedMod=1f;
+			speedMod*=2f;
 		}
 		Vector2f modVelocity=new Vector2f(velocity.x*speedMod,velocity.y*speedMod);
 		if(location.x<destination.x){
@@ -530,6 +534,15 @@ public class Explorer extends Unit{
 
 	public boolean isBusy() {
 		return busy;
+	}
+
+	public float getSpeedProvided() {
+		return providedSpeedBonus;
+	}
+
+	public void addSpeedBonus(float speedBonus) {
+		this.speedBonus+=speedBonus;
+		
 	}
 	
 	

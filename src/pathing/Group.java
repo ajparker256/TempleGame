@@ -34,6 +34,7 @@ public class Group {
 	protected float speed;
 	private boolean flee;
 	private float speedMod;
+	private float speedBonus;
 	
 	public int getSquadId() {
 		return squadId;
@@ -52,6 +53,7 @@ public class Group {
 	}
 
 	public Group(int id) {
+		this.speedBonus=0;
 		this.flee=false;
 		this.speedMod=1f;
 		location=new Vector2f(Main.grids.get(Main.gridToBeRendered).getTile(0,0).getLocation().x,Main.grids.get(Main.gridToBeRendered).getTile(0,0).getLocation().y);
@@ -115,10 +117,10 @@ public class Group {
 	private void moveTo(Grid grid, int milli){
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
+		speedMod=1f;
+		speedMod+=speedBonus;
 		if(flee){
-			speedMod=2f;
-		}else{
-			speedMod=1f;
+			speedMod*=2f;
 		}
 		Vector2f modVelocity=new Vector2f(velocity.x*speedMod,velocity.y*speedMod);
 		if(location.x<destination.x){
