@@ -17,5 +17,9 @@ public class ExitTop extends Tile{
 		canInteract = false;
 		id = -3;
 	}
+	@Override
+	public void damage(double damage) {
+		//Invulnerable
+	}
 	
 }

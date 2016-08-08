@@ -359,8 +359,8 @@ public static void main(String[] args) throws FileNotFoundException {
 			isEditPhase = !isEditPhase;
 			int i = 0; 
 			for(Grid g : gridsReadOnly) {
-					grids.remove(i);
 					grids.add(i, g.copy());
+					grids.remove(i+1);
 					i++;
 			}
 		}
