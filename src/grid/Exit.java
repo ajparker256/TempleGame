@@ -25,6 +25,7 @@ public class Exit extends Tile{
 		for(Explorer e : g.getGroup()) {
 			e.setFloor(e.getFloor()+1);
 		}
+		Main.squads.get(g.getSquadId()).getPathMods().remove(4); //Cursed idol path modifier
 		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size, floor+1));
 	}
 	

@@ -26,16 +26,16 @@ public class TrapAffinityPM extends PathModifier{
 						//Left && Right
 						if(xRange > 0 && adjacentTiles[0] != null) {
 							//Max odds / distance 
-							trapModifier[0] = maxOdds/Math.abs(xRange);
+							trapModifier[0] = maxOdds/Math.abs(xRange)*numberOfThisType;
 						} else if(xRange < 0 && adjacentTiles[1] != null) {
-							trapModifier[1] = maxOdds/Math.abs(xRange);
+							trapModifier[1] = maxOdds/Math.abs(xRange)*numberOfThisType;
 						}
 					
 						//Down then up
 						if(yRange<0 && adjacentTiles[2] != null) {
-							trapModifier[2] = maxOdds/Math.abs(yRange);
+							trapModifier[2] = maxOdds/Math.abs(yRange)*numberOfThisType;
 						} else if(yRange>0 && adjacentTiles[3] != null) {
-							trapModifier[3] = maxOdds/Math.abs(yRange);
+							trapModifier[3] = maxOdds/Math.abs(yRange)*numberOfThisType;
 						}
 					}
 				}

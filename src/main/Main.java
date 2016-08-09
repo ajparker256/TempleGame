@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
@@ -207,6 +208,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	state = 0; //Title Screen State
 	//state = 1; //Gameplay state
 	//state = 2; //Pause
+	
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;

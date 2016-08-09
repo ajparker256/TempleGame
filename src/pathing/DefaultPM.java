@@ -19,15 +19,15 @@ public class DefaultPM extends PathModifier{
 				continue;
 				//Adds 10 odds if its a blank tile
 			} else if(currentTile.getId() == 0) {
-				individualOdds[i] += 10;
+				individualOdds[i] += 10*numberOfThisType;
 			} else if(currentTile.getId() == 1) {
-				individualOdds[i] += 50;
+				individualOdds[i] += 50*numberOfThisType;
 			} else if(currentTile.getId() == 2) {
-				individualOdds[i] += 300;
+				individualOdds[i] += 300*numberOfThisType;
 			} else if(currentTile.getId() == 4) {
-				individualOdds[i] += 600;
+				individualOdds[i] += 600*numberOfThisType;
 			} else {
-				individualOdds[i] += 200;
+				individualOdds[i] += 200*numberOfThisType;
 			}
 			i++;
 		}

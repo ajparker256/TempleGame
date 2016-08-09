@@ -147,7 +147,7 @@ public class Squad {
 		//TODO add more if necessary, this should be the collab zone for info.
 	}
 	
-	public HashMap getPathMods() {
+	public HashMap<Integer, PathModifier> getPathMods() {
 		return modifications;
 	}
 	

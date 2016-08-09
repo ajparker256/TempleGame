@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.StringLibrary;
@@ -22,6 +21,7 @@ public class Upgrade {
 	protected int triggerLoc;
 	
 	protected int id;
+	
 	
 	public Upgrade(String explanation, int rarity) {
 		numberOfEntries = rarity;
