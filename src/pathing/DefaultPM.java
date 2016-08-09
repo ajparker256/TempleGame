@@ -1,12 +1,11 @@
 package pathing;
 
-import java.awt.Point;
-
 import grid.Tile;
 
 public class DefaultPM extends PathModifier{
 	
-	public DefaultPM() {
+	public DefaultPM(Squad s) {
+		super(s);
 		id = 0;
 	}
 	

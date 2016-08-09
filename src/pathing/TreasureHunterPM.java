@@ -8,14 +8,15 @@ import main.Main;
 
 public class TreasureHunterPM extends PathModifier{
 
-	public TreasureHunterPM() {
+	public TreasureHunterPM(Squad s) { 
+		super(s);
 		id = 3;
 	}
 	
 	@Override
 	public int[] modify(Tile[] adjacentTiles) {
 		int[] treasureFinderOdds = new int[4];
-		ArrayList<Group> groups = squad.getGroups();
+		ArrayList<Group> groups	 = squad.getGroups();
 			ArrayList<Point> treasureLocs = Main.grids.get(groups.get(groups.size()-1).getFloor()).getTreasureLocs();
 				for(Point loc : treasureLocs) {
 					

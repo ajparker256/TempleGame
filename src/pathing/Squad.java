@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
@@ -44,13 +42,12 @@ public class Squad {
 		path.add(new Point(0,0));
 		this.groups=groups;
 		previousFloor = 0;
-		@SuppressWarnings("unused")
-		DefaultPM defaultAI = new DefaultPM();
+		DefaultPM defaultAI = new DefaultPM(this);
 		modifications.put(defaultAI.getId(), defaultAI);
 		for(Group g : groups) {
 			for(Explorer e : g.getGroup()) {
 				if(e.getId() == 3) {
-					TreasureHunterPM treasureGreed = new TreasureHunterPM();
+					TreasureHunterPM treasureGreed = new TreasureHunterPM(this);
 					modifications.put(treasureGreed.getId(), treasureGreed);
 				}
 			}
@@ -96,11 +93,11 @@ public class Squad {
 		}*/
 		
 		//TO FUTURE ME, WORKING ON MOVING THE PATHING SYSTEM OVER TO HASHMAP TODO
-		ArrayList<PathModifier> allMods = (ArrayList<PathModifier>) modifications.values();
+		Collection<PathModifier> allMods = modifications.values();
+		Iterator<PathModifier> iterator = allMods.iterator();
 		for(int j = 0; j<modifications.size(); j++) {
 			int x = 0;
-			PathModifier modifier = allMods.get(j);
-			int[] changes = modifier.modify(moves);
+			int[] changes = iterator.next().modify(moves);
 			for(int k : changes) {
 				total += k;
 				individualOdds[x] += k;
