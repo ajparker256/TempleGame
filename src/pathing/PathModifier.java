@@ -8,10 +8,8 @@ public class PathModifier {
 		
 		protected int id;
 	
-		PathModifier(Squad squad) {
+		PathModifier() {
 			id = -1;
-			squad.getPathMods().add(this);
-			this.squad = squad;
 		}
 		
 		public int getId() {

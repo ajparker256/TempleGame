@@ -6,8 +6,7 @@ import grid.Tile;
 
 public class DefaultPM extends PathModifier{
 	
-	public DefaultPM(Squad squad) {
-		super(squad);
+	public DefaultPM() {
 		id = 0;
 	}
 	

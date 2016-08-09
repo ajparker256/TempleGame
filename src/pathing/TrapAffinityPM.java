@@ -8,8 +8,8 @@ import main.Main;
 
 public class TrapAffinityPM extends PathModifier{
 	
-	public TrapAffinityPM(Squad s) {
-		super(s);
+	public TrapAffinityPM() {
+		super();
 		id = 4;
 	}
 	

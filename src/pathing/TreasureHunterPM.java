@@ -8,8 +8,7 @@ import main.Main;
 
 public class TreasureHunterPM extends PathModifier{
 
-	public TreasureHunterPM(Squad squad) {
-		super(squad);
+	public TreasureHunterPM() {
 		id = 3;
 	}
 	

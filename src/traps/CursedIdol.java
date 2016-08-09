@@ -66,7 +66,8 @@ public class CursedIdol extends Trap{
 		if(value<=0){
 			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
 			blank.setTrapRefs(trapRefs);
-			Main.squads.get(g.getSquadId()).getPathMods().add(new TrapAffinityPM(Main.squads.get(g.getSquadId())));
+			TrapAffinityPM attractedToDanger = new TrapAffinityPM();
+			Main.squads.get(g.getSquadId()).getPathMods().put(attractedToDanger.getId(), attractedToDanger);
 			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
 			for(Upgrade u : onDeath) {
 				u.upgrade(this);

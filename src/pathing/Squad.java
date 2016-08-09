@@ -2,6 +2,11 @@ package pathing;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
@@ -16,7 +21,7 @@ public class Squad {
 	private int previousFloor;
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
-	private ArrayList<PathModifier> modifications;
+	private HashMap<Integer, PathModifier> modifications;
 	private boolean rotating;
 	private boolean firstTime;
 	private Point toBeRemoved;
@@ -34,18 +39,19 @@ public class Squad {
 		}
 		rotating=true;
 		firstTime = true;
-		modifications = new ArrayList<PathModifier>();
+		modifications = new HashMap<Integer, PathModifier>(10, .8f);
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
 		this.groups=groups;
 		previousFloor = 0;
 		@SuppressWarnings("unused")
-		DefaultPM defaultAI = new DefaultPM(this);
+		DefaultPM defaultAI = new DefaultPM();
+		modifications.put(defaultAI.getId(), defaultAI);
 		for(Group g : groups) {
 			for(Explorer e : g.getGroup()) {
 				if(e.getId() == 3) {
-					@SuppressWarnings("unused")
-					TreasureHunterPM treasureGreed = new TreasureHunterPM(this);
+					TreasureHunterPM treasureGreed = new TreasureHunterPM();
+					modifications.put(treasureGreed.getId(), treasureGreed);
 				}
 			}
 		}
@@ -88,9 +94,13 @@ public class Squad {
 			}
 			groupsWithTreasureFinder[j] = hasTreasureFinder;
 		}*/
+		
+		//TO FUTURE ME, WORKING ON MOVING THE PATHING SYSTEM OVER TO HASHMAP TODO
+		ArrayList<PathModifier> allMods = (ArrayList<PathModifier>) modifications.values();
 		for(int j = 0; j<modifications.size(); j++) {
 			int x = 0;
-			int[] changes = modifications.get(j).modify(moves);
+			PathModifier modifier = allMods.get(j);
+			int[] changes = modifier.modify(moves);
 			for(int k : changes) {
 				total += k;
 				individualOdds[x] += k;
@@ -140,12 +150,13 @@ public class Squad {
 		//TODO add more if necessary, this should be the collab zone for info.
 	}
 	
-	public ArrayList<PathModifier> getPathMods() {
+	public HashMap getPathMods() {
 		return modifications;
 	}
 	
 	public void deathTriggers(Explorer e) {
 		//Removes any path modifiers that were added by the dead explorers
+		modifications.values();
 		for(int i = 0; i<modifications.size(); i++) {
 			if(modifications.get(i).getId()==e.getId()) {
 				modifications.get(i).cleanUp();
