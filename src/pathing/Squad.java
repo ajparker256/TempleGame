@@ -43,12 +43,12 @@ public class Squad {
 		this.groups=groups;
 		previousFloor = 0;
 		DefaultPM defaultAI = new DefaultPM(this);
-		modifications.put(defaultAI.getId(), defaultAI);
+		defaultAI.addModifier(modifications);
 		for(Group g : groups) {
 			for(Explorer e : g.getGroup()) {
 				if(e.getId() == 3) {
 					TreasureHunterPM treasureGreed = new TreasureHunterPM(this);
-					modifications.put(treasureGreed.getId(), treasureGreed);
+					treasureGreed.addModifier(modifications);;
 				}
 			}
 		}
@@ -153,12 +153,9 @@ public class Squad {
 	
 	public void deathTriggers(Explorer e) {
 		//Removes any path modifiers that were added by the dead explorers
-		modifications.values();
-		for(int i = 0; i<modifications.size(); i++) {
-			if(modifications.get(i).getId()==e.getId()) {
-				modifications.get(i).cleanUp();
-				break;
-			}
+		PathModifier toBeRemoved = modifications.get(e.getId());
+		if(toBeRemoved != null) {
+			toBeRemoved.cleanUp();
 		}
 	}
 	
