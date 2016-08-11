@@ -207,4 +207,5 @@ public class Trap extends Tile{
 		level++;
 		System.out.println(damage);
 	}
+
 }

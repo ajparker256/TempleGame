@@ -14,7 +14,7 @@ import pathing.Group;
 import renderEngine.DisplayManager;
 import upgrades.Upgrade;
 
-public class TreasureTrap extends Trap{
+public class TreasureTrap extends Trap implements TrapInterface{
 	
 	private int reward;
 	
@@ -93,5 +93,11 @@ public class TreasureTrap extends Trap{
 		guiTexture = new GuiTexture(GuiLibrary.treasureClosed, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
 		reward = 100;
 		Main.grids.get(floor).setTile(x, y, this);
+	}
+
+	@Override
+	public void setTriggers() {
+		// TODO Auto-generated method stub
+		
 	}
 }

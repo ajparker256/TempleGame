@@ -16,7 +16,7 @@ import renderEngine.DisplayManager;
 import tools.MathM;
 import upgrades.Upgrade;
 
-public class ArrowTrap extends Trap{
+public class ArrowTrap extends Trap implements TrapInterface{
 	
 	//protected int level; level is handled by the size of the upgrade arraylist
 	protected int direction;
@@ -31,8 +31,6 @@ public class ArrowTrap extends Trap{
 	protected int armorPen;
 	protected double pierceChance;
 	protected int bleed;
-	protected int gatlingRampPerShot;
-	protected int gatlingCap;
 	protected int warmUpTime;
 	protected double accuracy;
 	protected double cooldown;
@@ -144,7 +142,7 @@ public class ArrowTrap extends Trap{
 	}
 	
 
- 	private void setTriggers(){
+ 	public void setTriggers(){
 		int i=1;
 		switch(direction){
 		case 1:while(y+i<=9&&i<range){

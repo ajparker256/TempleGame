@@ -25,9 +25,12 @@ public class Menu {
 	
 	protected boolean isOn;
 	
-	public Menu(Vector2f loc, Vector2f size, String[] menuLabels) {
+	protected String title;
+	
+	public Menu(Vector2f loc, Vector2f size, String[] menuLabels, String title) {
 		location = loc;
 		this.size = size;
+		this.title = title;
 		this.menuLabels = menuLabels;
 		isVertical = size.y>size.x*DisplayManager.getAspectratio();
 		setHitboxes();
@@ -71,10 +74,11 @@ public class Menu {
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(textSize);
+		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y), size.y));
 		if(isVertical)
 		for(int i = 0; i<menuLabels.length; i++) {
 			dynamicGuis.addAll(StringLibrary.makeItFitC(menuLabels[i], new Vector2f(location.x+size.x/menuLabels.length/2-StringLibrary.getWidth(menuLabels[i])/2,
-					 location.y+i*size.y/menuLabels.length+size.y/menuLabels.length/2+StringLibrary.getSize().y/2), size.x));
+					 location.y-StringLibrary.getSize().y+i*size.y/menuLabels.length+size.y/menuLabels.length/2+StringLibrary.getSize().y/2), size.x));
 		}
 		else
 		for(int i = 0; i<menuLabels.length; i++) {

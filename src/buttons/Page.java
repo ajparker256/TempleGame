@@ -57,6 +57,14 @@ public class Page {
 		return isOn;
 	}
 	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String newTitle) {
+		title = newTitle;
+	}
+	
 	public void setOn(boolean b) {
 		isOn = b;
 	}

@@ -14,7 +14,7 @@ import pathing.TrapAffinityPM;
 import renderEngine.DisplayManager;
 import upgrades.Upgrade;
 
-public class CursedIdol extends Trap{
+public class CursedIdol extends Trap implements TrapInterface{
 
 	//This is the upgrading power given when picked up by the explorers
 	private int value;
@@ -83,5 +83,11 @@ public class CursedIdol extends Trap{
 			newCursedIdol.upgrade(u.getId());
 		}
 		return newCursedIdol;
+	}
+
+	@Override
+	public void setTriggers() {
+		// TODO Auto-generated method stub
+		
 	}
 }

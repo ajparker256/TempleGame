@@ -16,7 +16,7 @@ import renderEngine.DisplayManager;
 import tools.MathM;
 import upgrades.Upgrade;
 
-public class TikiTrap extends Trap{
+public class TikiTrap extends Trap implements TrapInterface{
 	
 	//protected int level; level is controlled by arraylist.size() of centralized upgrades arraylist
 	protected Animation firing;
@@ -107,7 +107,7 @@ public class TikiTrap extends Trap{
 		return guiTexture;
 	}
 	
-	private void setTriggers(){
+	public void setTriggers(){
 		
 
 		for(int j=1;j<=4;j++){
