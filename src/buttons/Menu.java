@@ -8,7 +8,7 @@ import gui.GuiTexture;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
 
-public class Menu {
+public class Menu extends Linkable{
 
 	protected Button[] options; //These are the hitboxes for the menu
 	
@@ -25,7 +25,7 @@ public class Menu {
 	
 	protected boolean isOn;
 	
-	protected String title;
+	//protected String title; inherited
 	
 	public Menu(Vector2f loc, Vector2f size, String[] menuLabels, String title) {
 		location = loc;

@@ -8,7 +8,7 @@ import gui.GuiTexture;
 import librarys.StringLibrary;
 import renderEngine.DisplayManager;
 
-public class Page {
+public class Page extends Linkable{
 	
 	protected Vector2f location; //Bottom Right
 	
@@ -16,7 +16,7 @@ public class Page {
 
 	protected String description; //AKA Summary of the item, written in centered makeItFitC style within the size brackets
 	
-	protected String title; //Goes at the top of the page as a header for the rest (Possibly bolded while others are not)
+	//protected String title; (Inherited) Goes at the top of the page as a header for the rest (Possibly bolded while others are not)
 	
 	protected Vector2f titleTextSize = new Vector2f(.02f, .04f);
 	
