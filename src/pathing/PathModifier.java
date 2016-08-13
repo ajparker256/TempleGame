@@ -15,7 +15,7 @@ public class PathModifier {
 		PathModifier(Squad s) {
 			id = -1;
 			squad = s;
-			numberOfThisType = 0;
+			numberOfThisType = 1;
 		}
 		
 		public void addModifier(HashMap<Integer, PathModifier> modifications) {

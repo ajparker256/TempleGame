@@ -208,7 +208,21 @@ public static void main(String[] args) throws FileNotFoundException {
 	state = 0; //Title Screen State
 	//state = 1; //Gameplay state
 	//state = 2; //Pause
-	
+//	Testing the instanceof keyword as it applies to extended objects within lists
+/*
+ 	String[] testList = {"1", "2"};
+	Menu test = new Menu(new Vector2f(), new Vector2f(), testList, "Title");
+	Linkable testPage = new Page(new Vector2f(), new Vector2f(), "Title", "Description");
+	Linkable[] testArray = new Linkable[2];
+	testArray[0] = test;
+	testArray[1] = testPage;
+	boolean b = test instanceof Menu;
+	boolean b2 = testArray[0] instanceof Menu;
+	boolean b3 = testArray[1] instanceof Menu;
+	System.out.println("Test is an instance of Menu. This statement is " + b);
+	System.out.println("TestArray[0] is an instance of Menu. This statement is " + b2);
+	System.out.println("TestArray[1] is an instance of Menu. This statement is " + b3);
+	*/
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;

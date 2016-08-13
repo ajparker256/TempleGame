@@ -102,7 +102,7 @@ public class Squad {
 				total += k;
 				individualOdds[x] += k;
 				x++;
-			}
+			} 
 		}
 		/*
 		for(Tile currentTile : moves) { 

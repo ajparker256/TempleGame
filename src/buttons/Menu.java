@@ -10,14 +10,14 @@ import renderEngine.DisplayManager;
 
 public class Menu extends Linkable{
 
-	protected Button[] options; //These are the hitboxes for the menu
+	protected ArrayList<Button> options; //These are the hitboxes for the menu
 	
 	protected Vector2f location; //This is the bottom right loc.
 	
 	protected Vector2f size; //This is the all incapsulating size, nothing exceeds this
 
 	//PRECONDITION: LABELS.WIDTH < SIZE.X!!!
-	protected String[] menuLabels; //These are the words that go on the menu, added to list via name fields of referenced pages
+	protected ArrayList<String> menuLabels; //These are the words that go on the menu, added to list via name fields of referenced pages
 	
 	protected Vector2f textSize = new Vector2f(.02f, .04f); //Text size used for the menu options, varies with specifics
 	
@@ -31,28 +31,35 @@ public class Menu extends Linkable{
 		location = loc;
 		this.size = size;
 		this.title = title;
-		this.menuLabels = menuLabels;
+		this.options = new ArrayList<Button>();
+		this.menuLabels = new ArrayList<String>();
+		for(String s : menuLabels)
+			this.menuLabels.add(s);
 		isVertical = size.y>size.x*DisplayManager.getAspectratio();
 		setHitboxes();
 		isOn = false;
 	}
 	
-	public void setHitboxes() {
-		options = new Button[menuLabels.length];
+	public void addEntry(String newEntry) {
+		menuLabels.add(newEntry);
+		setHitboxes();
+	}
+	
+	private void setHitboxes() {
 		StringLibrary.setSize(textSize);
 		if(isVertical)
-			for(int i = 0; i<menuLabels.length; i++) {
-				options[i] = new Button(new Vector2f(location.x+size.x/menuLabels.length/2-StringLibrary.getWidth(menuLabels[i])/2,
-													 location.y+i*size.y/menuLabels.length+size.y/menuLabels.length/2+StringLibrary.getSize().y/2),
-										new Vector2f(location.x+size.x/menuLabels.length/2+StringLibrary.getWidth(menuLabels[i])/2,
-													 location.y+i*size.y/menuLabels.length+size.y/menuLabels.length/2-StringLibrary.getSize().y/2));
+			for(int i = 0; i<menuLabels.size(); i++) {
+				options.add(new Button(new Vector2f(location.x+size.x/menuLabels.size()/2-StringLibrary.getWidth(menuLabels.get(i))/2,
+													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2),
+										new Vector2f(location.x+size.x/menuLabels.size()/2+StringLibrary.getWidth(menuLabels.get(i))/2,
+													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2-StringLibrary.getSize().y/2)));
 			}
 		else
-			for(int i = 0; i<menuLabels.length; i++) {
-				options[i] = new Button(new Vector2f(location.x+i*size.x/menuLabels.length+size.x/menuLabels.length-StringLibrary.getWidth(menuLabels[i])/2,
-						 							 location.y+size.y/menuLabels.length/2+StringLibrary.getSize().y/2),
-										new Vector2f(location.x+i*size.x/menuLabels.length+size.x/menuLabels.length+StringLibrary.getWidth(menuLabels[i])/2,
-													 location.y+size.y/menuLabels.length/2-StringLibrary.getSize().y/2));
+			for(int i = 0; i<menuLabels.size(); i++) {
+				options.add(new Button(new Vector2f(location.x+i*size.x/menuLabels.size()+size.x/menuLabels.size()-StringLibrary.getWidth(menuLabels.get(i))/2,
+						 							 location.y+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2),
+										new Vector2f(location.x+i*size.x/menuLabels.size()+size.x/menuLabels.size()+StringLibrary.getWidth(menuLabels.get(i))/2,
+													 location.y+size.y/menuLabels.size()/2-StringLibrary.getSize().y/2)));
 			}
 	}
 	
@@ -76,14 +83,14 @@ public class Menu extends Linkable{
 		StringLibrary.setSize(textSize);
 		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y), size.y));
 		if(isVertical)
-		for(int i = 0; i<menuLabels.length; i++) {
-			dynamicGuis.addAll(StringLibrary.makeItFitC(menuLabels[i], new Vector2f(location.x+size.x/menuLabels.length/2-StringLibrary.getWidth(menuLabels[i])/2,
-					 location.y-StringLibrary.getSize().y+i*size.y/menuLabels.length+size.y/menuLabels.length/2+StringLibrary.getSize().y/2), size.x));
+		for(int i = 0; i<menuLabels.size(); i++) {
+			dynamicGuis.addAll(StringLibrary.makeItFitC(menuLabels.get(i), new Vector2f(location.x+size.x/menuLabels.size()/2-StringLibrary.getWidth(menuLabels.get(i))/2,
+					 location.y-StringLibrary.getSize().y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2), size.x));
 		}
 		else
-		for(int i = 0; i<menuLabels.length; i++) {
-			dynamicGuis.addAll(StringLibrary.makeItFitC(menuLabels[i], new Vector2f(location.x+i*size.x/menuLabels.length+size.x/menuLabels.length/2-StringLibrary.getWidth(menuLabels[i])/2,
-					 location.y+size.y/menuLabels.length/2+StringLibrary.getSize().y/2), size.x));
+		for(int i = 0; i<menuLabels.size(); i++) {
+			dynamicGuis.addAll(StringLibrary.makeItFitC(menuLabels.get(i), new Vector2f(location.x+i*size.x/menuLabels.size()+size.x/menuLabels.size()/2-StringLibrary.getWidth(menuLabels.get(i))/2,
+					 location.y+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2), size.x));
 		}
 	}
 	
@@ -92,7 +99,7 @@ public class Menu extends Linkable{
 		int i = 0;
 		for(Button b : options) {
 			if(b.isClicked(mouseX, mouseY))
-				return menuLabels[i];
+				return menuLabels.get(i);
 			i++;
 		}
 		return null;
