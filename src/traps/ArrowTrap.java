@@ -58,8 +58,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		rotatable = true;
 		super.animation = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		super.animation.setDelay(25);
-		setTriggers();
-		
+
 		damage = 5;
 		range = 4;
 		defense = 0;
@@ -73,12 +72,15 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		accuracy = .9;
 		cooldown = 0;
 		maxCd = 1;
+		
+		setTriggers();
 	}
 	@Override
 	public void whenTriggered(Point p){
 		for(Upgrade u : onTrigger) {
 			u.upgrade(this);
 		}
+		System.out.println("ArrowTrap has been triggered");
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up
@@ -90,6 +92,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 						break;
 					}
 				}
+				//Right
 			} else if(direction == 2 && p.x-x<range) {
 				fire = true;
 				for(int i = x+1; i<p.x; i++) {
@@ -98,6 +101,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 						break;
 					}
 				}
+				//Down
 			} else if(direction == 3 && y-p.y <range) {
 				fire = true;
 				for(int i = y-1; i>p.y; i--) {
@@ -106,6 +110,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 						break;
 					}
 				}
+				//Left
 			} else if(direction == 4 && x-p.x<range) {
 				fire = true;
 				for(int i = x-1; i>p.x; i--) {
@@ -127,13 +132,9 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		}
 	}
 	
-	public void trigger(){
-	
-	}
-	
 	@Override
 	public Tile copy() {
-		Tile copiedArrowTrap = new ArrowTrap(x, y, size, direction, floor);
+		ArrowTrap copiedArrowTrap = new ArrowTrap(x, y, size, direction, floor);
 		copiedArrowTrap.setTrapRefs(trapRefs);
 		for(Upgrade u: allUpgrades) {
 			copiedArrowTrap.upgrade(u.getId());
@@ -144,13 +145,14 @@ public class ArrowTrap extends Trap implements TrapInterface{
 
  	public void setTriggers(){
 		int i=1;
+
 		switch(direction){
-		case 1:while(y+i<=9&&i<range){
+		case 1:while(y+i<Main.gridsReadOnly.get(floor).getWidth()&&i<=range){
 			Main.gridsReadOnly.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
-		case 2:while(x+i<=9&&i<range){
+		case 2:while(x+i<Main.gridsReadOnly.get(floor).getWidth()&&i<=range){
 			Main.gridsReadOnly.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}

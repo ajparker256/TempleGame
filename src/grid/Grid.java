@@ -189,7 +189,10 @@ public class Grid {
 			for(Tile[]line:grid){
 				for(Tile tile:line){
 					//UNCOMMENT BELOW FOR TRIPPY THINGS XD (Used for testing occupied tiles)
+					//Reveals occupied tiles 
 					//if(tile.isOccupied() != -1)
+					//Reveals booby trapped tiles below
+					//if(!tile.getTrapRefs().isEmpty())
 					toRender.add(tile.drawTile());
 				}
 			}
