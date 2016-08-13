@@ -146,22 +146,22 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		int i=1;
 		switch(direction){
 		case 1:while(y+i<=9&&i<range){
-			Main.grids.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 		case 2:while(x+i<=9&&i<range){
-			Main.grids.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 		case 3:while(y-i>=0&&i<range){
-			Main.grids.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
 		case 4:while(x-i>=0&&i<range){
-			Main.grids.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
+			Main.gridsReadOnly.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
 			i++;
 		}
 		break;
