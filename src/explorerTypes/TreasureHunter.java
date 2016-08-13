@@ -8,7 +8,6 @@ import pathing.Group;
 
 public class TreasureHunter extends Explorer{
 
-	//IMPORTANT!!! SQUADS SHOULD BE LIMITED TO 1 TREASUREHUNTER!!! (ONLY ONE WILL AFFECT PATHFINDING)
 	
 	public TreasureHunter(Group group) {
 		super(group);

@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
+import librarys.PageLibrary;
 import librarys.ShopItemLibrary;
 import librarys.SoundLibrary;
 import librarys.StringLibrary;
@@ -86,6 +87,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	GuiLibrary.init(loader);
 	UpgradeLibrary.init();
 	SoundLibrary.init();
+	PageLibrary.init(new Vector2f(-.9f, -.8f), new Vector2f(.4f, 1.6f));
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5+i, i));
@@ -226,6 +228,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	while(!Display.isCloseRequested()){
 	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;
+		
 		if(state == 0) {
 			if(counter < 1000) {
 				dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
@@ -297,6 +300,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			
 			
 		}
+		PageLibrary.trapMenu.render(dynamicGuis);
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		guiRenderer.render(guis);
