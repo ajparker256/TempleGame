@@ -56,7 +56,7 @@ public class Grid {
 		//D.x + Size.x/2 - A.x*floor/2, D.y+size.y/2-A.x*AspectRatio*floor/2
 		//Where D = bottomleftcorner of screen and A = size of a single tile (in total)
 		//D + size/2 cancels since size/2 = 1 and d = -1
-		this.location = new Vector2f(-size*(rows), -size*(float)DisplayManager.getAspectratio()*(rows-1f));
+		this.location = new Vector2f(-size*(rows)+size, -size*(float)DisplayManager.getAspectratio()*(rows-1f));
 		
 	//	this.location = location;
 		
