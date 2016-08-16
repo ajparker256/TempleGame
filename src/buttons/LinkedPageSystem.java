@@ -50,6 +50,10 @@ public class LinkedPageSystem {
 	}
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
+		dynamicGuis.add(background);
+		if(!history.isEmpty()) {
+			dynamicGuis.add(backIcon);
+		}
 		screens.get(currentScreenId).render(dynamicGuis);
 	}
 	
