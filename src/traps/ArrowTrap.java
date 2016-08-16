@@ -58,7 +58,8 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		rotatable = true;
 		super.animation = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 		super.animation.setDelay(25);
-
+ 
+		
 		damage = 5;
 		range = 4;
 		defense = 0;
