@@ -71,7 +71,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		warmUpTime = 0;
 		accuracy = .9;
 		cooldown = 0;
-		maxCd = 1;
+		maxCd = 1000;
 		
 		setTriggers();
 	}
@@ -80,7 +80,6 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		for(Upgrade u : onTrigger) {
 			u.upgrade(this);
 		}
-		System.out.println("ArrowTrap has been triggered");
 		if(cooldown<=0){
 			boolean fire = false;
 			//Up

@@ -73,12 +73,14 @@ public class Projectile {
 		for(Group group: squad.getGroups()){
 			if(group.getRealLoc().equals(new Point(x,y))){
 				group.damage(new boolean[]{true,true,true,true}, damage);
-				this.kill=true;
+				this.kill = true;
+				return false;	//this.kill=true;
 			}
 		}
 	}
-			if(x>9||x<0||y>9||y<0||(!Main.grids.get(Main.gridToBeRendered).getTile(x, y).isPassable())){
-				this.kill=true;
+			if(x>Main.grids.get(floor).getWidth()||x<0||y>Main.grids.get(floor).getWidth()||y<0||(!Main.grids.get(Main.gridToBeRendered).getTile(x, y).isPassable())){
+				this.kill = true;
+				return false; 	//this.kill=true;
 			}
 		}
 		return true;
