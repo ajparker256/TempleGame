@@ -18,4 +18,8 @@ public abstract class Linkable {
 		//Stub
 	}
 	
+	public void addEntry(String s) {
+		//Stub
+	}
+	
 }

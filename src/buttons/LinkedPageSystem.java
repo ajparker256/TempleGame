@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.lwjgl.util.vector.Vector2f;
 
 import gui.GuiTexture;
+import renderEngine.DisplayManager;
 
 public class LinkedPageSystem {
 	
@@ -17,6 +18,12 @@ public class LinkedPageSystem {
 	
 	private Vector2f size; //All encompassing
 	
+	private GuiTexture background;
+	
+	private GuiTexture backIcon;
+	
+	private Button backButton;
+	
 	private ArrayList<String> history; //Used for back button to go back to original linked page
 	
 	private String currentScreenId;
@@ -24,6 +31,12 @@ public class LinkedPageSystem {
 	public LinkedPageSystem(Vector2f location, Vector2f size) {
 		screens = new HashMap<String, Linkable>();
 		history = new ArrayList<String>();
+		this.location = location;
+		this.size = size;
+		background = new GuiTexture(0, location, size); //ADD BACKGROUND IMAGE FOR SHOP AND SUCH HERE!!!
+		float iconSize = .05f;
+		backIcon = new GuiTexture(0, new Vector2f(location.x+iconSize/2, location.y+size.y-iconSize/2*(float)DisplayManager.getAspectratio()), new Vector2f(iconSize, iconSize*(float)DisplayManager.getAspectratio()));
+		
 	}
 	
 	public void goBack() {
@@ -50,8 +63,8 @@ public class LinkedPageSystem {
 		screens.put(newMenu.getTitle(), newMenu);
 	}
 	
-	public void addLinkToMenu(String titleOfMenu, Linkable link) {
-		screens.get(titleOfMenu); //TODO add link to the menu, recalc locs and all that or maybe redraw the menu completely
+	public void addLinkToMenu(String titleOfMenu, String linkTitle) {
+		screens.get(titleOfMenu).addEntry(linkTitle); //TODO add link to the menu, recalc locs and all that or maybe redraw the menu completely
 	}
 	
 	

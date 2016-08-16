@@ -180,9 +180,9 @@ public static void init(Loader loader) {
 		GuiLibrary.explorerWalkingR = loader.loadTexture("Explorers/Basic/BasicExplorer Walking2");
 
 		
-		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/1");
-		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/2");
-		GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/3");
+		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/miner");
+		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/miner");
+		GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/miner");
 		
 		GuiLibrary.test1=loader.loadTexture("Explorers/Test/1");
 		GuiLibrary.test2=loader.loadTexture("Explorers/Test/2");
