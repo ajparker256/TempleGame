@@ -22,4 +22,13 @@ public abstract class Linkable {
 		//Stub
 	}
 	
+	public String getClickedName(float mouseX, float mouseY) {
+		//Stub
+		return null;
+	}
+	
+	public boolean isMenuOptionClicked(float mouseX, float mouseY) {
+		return false;
+	}
+	
 }

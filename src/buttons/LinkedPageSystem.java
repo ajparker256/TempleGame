@@ -36,13 +36,16 @@ public class LinkedPageSystem {
 		background = new GuiTexture(0, location, size); //ADD BACKGROUND IMAGE FOR SHOP AND SUCH HERE!!!
 		float iconSize = .05f;
 		backIcon = new GuiTexture(0, new Vector2f(location.x+iconSize/2, location.y+size.y-iconSize/2*(float)DisplayManager.getAspectratio()), new Vector2f(iconSize, iconSize*(float)DisplayManager.getAspectratio()));
-		
+		backButton = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+backIcon.getScale().x*2, location.y+size.y-backIcon.getScale().y*2));
 	}
 	
-	public void goBack() {
-		if(!history.isEmpty()) {
+	private void goBack() {
 			currentScreenId = history.remove(history.size()-1);
-		}
+	}
+	
+	private void backPressed(float mouseX, float mouseY) {
+		if(backButton.isClicked(mouseX, mouseY) && !history.isEmpty());
+			goBack();
 	}
 	
 	public void addNewPage(Page newPage) {
@@ -55,6 +58,24 @@ public class LinkedPageSystem {
 			dynamicGuis.add(backIcon);
 		}
 		screens.get(currentScreenId).render(dynamicGuis);
+	}
+	
+	public void checkForMouseEvents(float mouseX, float mouseY) {
+		backPressed(mouseX, mouseY);
+		String newName = menuSelection(mouseX, mouseY);
+		if(newName != null) {
+			history.add(currentScreenId);
+			currentScreenId = newName;
+		}
+	}
+	
+	public String menuSelection(float mouseX, float mouseY) {
+		Linkable current = screens.get(currentScreenId);
+		if(current.isMenuOptionClicked(mouseX, mouseY)) { //If it is a normal page, the menu option will return false
+			return current.getClickedName(mouseX, mouseY);
+		}
+		System.out.println("Error in menu selection logic of LinkedPageSystem");
+		return null;		
 	}
 	
 	public void addNewPages(ArrayList<Page> newPages) {
