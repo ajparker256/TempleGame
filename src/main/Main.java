@@ -299,7 +299,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller.render(dynamicGuis);
 			}
 			
-			testPageSystem.render(dynamicGuis);
+	//		testPageSystem.render(dynamicGuis);
 	//		PageLibrary.categoriesMenu.render(dynamicGuis);
 	//		PageLibrary.explorerMenu.render(dynamicGuis);
 	//		PageLibrary.trapMenu.render(dynamicGuis);
@@ -307,7 +307,12 @@ public static void main(String[] args) throws FileNotFoundException {
 	//		PageLibrary.traps.get(1).render(dynamicGuis);
 	//		PageLibrary.traps.get(2).render(dynamicGuis);
 	//		PageLibrary.traps.get(3).render(dynamicGuis);
-			
+					PageLibrary.explorers.get(0).render(dynamicGuis);
+			//		PageLibrary.explorers.get(1).render(dynamicGuis);
+			//		PageLibrary.explorers.get(2).render(dynamicGuis);
+			//		PageLibrary.explorers.get(3).render(dynamicGuis);
+			//		PageLibrary.explorers.get(4).render(dynamicGuis);
+					
 			
 		}
 		//PageLibrary.trapMenu.render(dynamicGuis);

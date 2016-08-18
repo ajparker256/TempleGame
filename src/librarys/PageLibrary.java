@@ -70,7 +70,7 @@ public class PageLibrary {
 				+ " They are the drill sergeants of the squad. The speed of everyone is increased when they join the party.", GuiLibrary.minerStanding);
 		miner = new Page(location, size, "Miner", "This person excels at breaking down dirt. That's it.", GuiLibrary.minerStanding);
 		treasureFinder = new Page(location, size, "Treasure Finder", "Born with a passion for money, the treasure finder is a person dedicated to greed"
-				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", GuiLibrary.explorerStanding);
+				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", GuiLibrary.treasureFinderStanding);
 		exploder = new Page(location, size, "Demolition Expert", "If you thought deadly traps weren't enough, this guy enjoys firing explosives" 
 				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure", GuiLibrary.explorerStanding);
 		

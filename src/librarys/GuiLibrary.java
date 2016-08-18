@@ -25,6 +25,8 @@ public static int minerStanding;
 public static int minerWalkingL;
 public static int minerWalkingR;
 
+public static int treasureFinderStanding;
+
 public static int test1;
 public static int test2;
 public static int test3;
@@ -183,6 +185,8 @@ public static void init(Loader loader) {
 		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/miner");
 		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/miner");
 		GuiLibrary.minerWalkingR = loader.loadTexture("Explorers/Miner/miner");
+		
+		GuiLibrary.treasureFinderStanding = loader.loadTexture("Explorers/Treasure Finder/TreasureFinderIdle");
 		
 		GuiLibrary.test1=loader.loadTexture("Explorers/Test/1");
 		GuiLibrary.test2=loader.loadTexture("Explorers/Test/2");
