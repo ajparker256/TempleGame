@@ -299,14 +299,14 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller.render(dynamicGuis);
 			}
 			
-			//testPageSystem.render(dynamicGuis);
-//			PageLibrary.categoriesMenu.render(dynamicGuis);
+			testPageSystem.render(dynamicGuis);
+	//		PageLibrary.categoriesMenu.render(dynamicGuis);
 	//		PageLibrary.explorerMenu.render(dynamicGuis);
 	//		PageLibrary.trapMenu.render(dynamicGuis);
 	//		PageLibrary.traps.get(0).render(dynamicGuis);
 	//		PageLibrary.traps.get(1).render(dynamicGuis);
 	//		PageLibrary.traps.get(2).render(dynamicGuis);
-			PageLibrary.traps.get(3).render(dynamicGuis);
+	//		PageLibrary.traps.get(3).render(dynamicGuis);
 			
 			
 		}
@@ -397,7 +397,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	private static void populateLeftMenu(LinkedPageSystem linkedSystem) {
 		ArrayList<String> derivativeLinks = PageLibrary.categoriesMenu.getEntries();
 		linkedSystem.addNewMenu((Menu)PageLibrary.categoriesMenu);
-		linkedSystem.setCurrentScreenId(PageLibrary.categoriesMenu.getTitle());
+		linkedSystem.setCurrentScreenId("Traps");
 		ArrayList<String> moreLinks = new ArrayList<String>();
 		while(!derivativeLinks.isEmpty()) {
 		for(String key : derivativeLinks) {
