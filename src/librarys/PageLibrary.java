@@ -72,7 +72,7 @@ public class PageLibrary {
 		treasureFinder = new Page(location, size, "Treasure Finder", "Born with a passion for money, the treasure finder is a person dedicated to greed"
 				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", GuiLibrary.explorerStanding);
 		exploder = new Page(location, size, "Demolition Expert", "If you thought deadly traps weren't enough, this guy enjoys firing explosives" 
-				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure");
+				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure", GuiLibrary.explorerStanding);
 		
 		explorers.add(basicExplorer);
 		explorers.add(athlete);
@@ -105,6 +105,8 @@ public class PageLibrary {
 		String[] labels = new String[menuOptions.size()];
 		for(int i = 0; i<menuOptions.size(); i++) {
 			labels[i] = menuOptions.get(i).getTitle();
+			if(menuOptions.get(i) instanceof Menu)
+			System.out.println("The menu that was created has an option of " + labels[i]);
 			allPages.put(labels[i], menuOptions.get(i));
 		}
 		Menu newMenu = new Menu(location, size, labels, title);

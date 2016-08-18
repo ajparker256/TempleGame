@@ -42,6 +42,11 @@ public class Menu extends Linkable{
 		isOn = false;
 	}
 	
+	@Override
+	public String getTitle() {
+		return title;
+	}
+	
 	public void addEntry(String newEntry) {
 		menuLabels.add(newEntry);
 		setHitboxes();

@@ -299,7 +299,14 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller.render(dynamicGuis);
 			}
 			
-			testPageSystem.render(dynamicGuis);
+			//testPageSystem.render(dynamicGuis);
+//			PageLibrary.categoriesMenu.render(dynamicGuis);
+	//		PageLibrary.explorerMenu.render(dynamicGuis);
+	//		PageLibrary.trapMenu.render(dynamicGuis);
+	//		PageLibrary.traps.get(0).render(dynamicGuis);
+	//		PageLibrary.traps.get(1).render(dynamicGuis);
+	//		PageLibrary.traps.get(2).render(dynamicGuis);
+			PageLibrary.traps.get(3).render(dynamicGuis);
 			
 			
 		}
@@ -370,17 +377,9 @@ public static void main(String[] args) throws FileNotFoundException {
 		floorSelect(mouseX, mouseY);
 		
 		testPageSystem.checkForMouseEvents(mouseX, mouseY);
-		
+
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
-	}
-	
-	private static Linkable test() {
-		String[] hello = new String[2];
-		hello[0] = "Hello";
-		hello[1] = " World";
-		Menu newMenu = new Menu(new Vector2f(), new Vector2f(), hello, "");
-		return newMenu;
 	}
 	
 	private static void waveInitiationLogic(float mouseX, float mouseY) {
@@ -402,17 +401,17 @@ public static void main(String[] args) throws FileNotFoundException {
 		ArrayList<String> moreLinks = new ArrayList<String>();
 		while(!derivativeLinks.isEmpty()) {
 		for(String key : derivativeLinks) {
-			Linkable option = PageLibrary.getLinkable(key);
-			if(option instanceof Menu) {
-				ArrayList<String> links = ((Menu) option).getEntries();
+			
+			if(PageLibrary.getLinkable(key) instanceof Menu) {
+				ArrayList<String> links = ((Menu) PageLibrary.getLinkable(key)).getEntries();
 				for(String link : links) {
 					if(!derivativeLinks.contains(link)) {
 						moreLinks.add(link);
 					}
 				}
-				linkedSystem.addNewMenu((Menu)option);
-			} else if(option instanceof Page) {
-				linkedSystem.addNewPage((Page)option);
+				linkedSystem.addNewMenu((Menu)PageLibrary.getLinkable(key));
+			} else if(PageLibrary.getLinkable(key) instanceof Page) {
+				linkedSystem.addNewPage((Page)PageLibrary.getLinkable(key));
 			} else {
 				System.out.println("ERROR IN POPULATION OF LEFT MENU");
 			}

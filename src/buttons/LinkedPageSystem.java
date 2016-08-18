@@ -83,20 +83,8 @@ public class LinkedPageSystem {
 		return null;		
 	}
 	
-	public void addNewPages(ArrayList<Page> newPages) {
-		for(Page p : newPages) {
-			addNewPage(p);
-		}
-	}
-	
 	public void addNewMenu(Menu newMenu) {
 		screens.put(newMenu.getTitle(), newMenu);
-	}
-	
-	public void addNewMenus(ArrayList<Menu> newMenus) {
-		for(Menu newMenu : newMenus) {
-			screens.put(newMenu.getTitle(), newMenu);
-		}
 	}
 	
 	public void addLinkToMenu(String titleOfMenu, String linkTitle) {
