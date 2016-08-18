@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.lwjgl.util.vector.Vector2f;
 
 import gui.GuiTexture;
+import librarys.GuiLibrary;
 import renderEngine.DisplayManager;
 
 public class LinkedPageSystem {
@@ -33,19 +34,21 @@ public class LinkedPageSystem {
 		history = new ArrayList<String>();
 		this.location = location;
 		this.size = size;
-		background = new GuiTexture(0, location, size); //ADD BACKGROUND IMAGE FOR SHOP AND SUCH HERE!!!
+		background = new GuiTexture(GuiLibrary.ladder, location, new Vector2f(size.x/2, size.y/2)); //ADD BACKGROUND IMAGE FOR SHOP AND SUCH HERE!!!
 		float iconSize = .05f;
-		backIcon = new GuiTexture(0, new Vector2f(location.x+iconSize/2, location.y+size.y-iconSize/2*(float)DisplayManager.getAspectratio()), new Vector2f(iconSize, iconSize*(float)DisplayManager.getAspectratio()));
+		backIcon = new GuiTexture(GuiLibrary.ladderTop, new Vector2f(location.x+iconSize/2, location.y+size.y-iconSize/2*(float)DisplayManager.getAspectratio()), new Vector2f(iconSize, iconSize*(float)DisplayManager.getAspectratio()));
 		backButton = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+backIcon.getScale().x*2, location.y+size.y-backIcon.getScale().y*2));
 	}
 	
-	private void goBack() {
-			currentScreenId = history.remove(history.size()-1);
+	public void setCurrentScreenId(String name) {
+		currentScreenId = name;
 	}
 	
+	
+	
 	private void backPressed(float mouseX, float mouseY) {
-		if(backButton.isClicked(mouseX, mouseY) && !history.isEmpty());
-			goBack();
+		if(backButton.isClicked(mouseX, mouseY) && !history.isEmpty())
+			currentScreenId = history.remove(history.size()-1);
 	}
 	
 	public void addNewPage(Page newPage) {
@@ -62,10 +65,12 @@ public class LinkedPageSystem {
 	
 	public void checkForMouseEvents(float mouseX, float mouseY) {
 		backPressed(mouseX, mouseY);
-		String newName = menuSelection(mouseX, mouseY);
-		if(newName != null) {
-			history.add(currentScreenId);
-			currentScreenId = newName;
+		if(screens.get(currentScreenId).isMenuOptionClicked(mouseX, mouseY)) {
+			String newName = menuSelection(mouseX, mouseY);
+			if(newName != null) {
+				history.add(currentScreenId);
+				currentScreenId = newName;
+			}
 		}
 	}
 	
@@ -86,6 +91,12 @@ public class LinkedPageSystem {
 	
 	public void addNewMenu(Menu newMenu) {
 		screens.put(newMenu.getTitle(), newMenu);
+	}
+	
+	public void addNewMenus(ArrayList<Menu> newMenus) {
+		for(Menu newMenu : newMenus) {
+			screens.put(newMenu.getTitle(), newMenu);
+		}
 	}
 	
 	public void addLinkToMenu(String titleOfMenu, String linkTitle) {

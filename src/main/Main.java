@@ -70,6 +70,7 @@ public static UpgradeRoller upgradeRoller;
 public static int state;
 public static boolean isEditPhase;
 public static Button startWave;
+public static LinkedPageSystem testPageSystem;
 public static void main(String[] args) throws FileNotFoundException {
 	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
@@ -104,6 +105,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	Sound.loopSound(SoundLibrary.music);	
 	AnimationLibrary.init(loader);
 	
+	testPageSystem = new LinkedPageSystem(new Vector2f(-.8f, -.4f), new Vector2f(.4f, .8f));
+	populateLeftMenu(testPageSystem);
 	
 	startWave = new Button(new Vector2f(.8f, -.09f), new Vector2f(1, -1));
 	
@@ -185,8 +188,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	Vector2f leftSideMenuSize = new Vector2f(.4f, 1.2f);
 	
 
-	Page credits = new Page(leftSideMenuLoc, leftSideMenuSize, "Credits", "These are the credits, this was done by AJ Parker and Jackson Mills, with art collaboration from Hunter Ferrell.");
-	Page story = new Page(leftSideMenuLoc, leftSideMenuSize, "Story", "There once was a king by the name of VERYLONGNAME, he lived in a verylongkingdom with many verylongwords", GuiLibrary.rareBackground);
+	//Page credits = new Page(leftSideMenuLoc, leftSideMenuSize, "Credits", "These are the credits, this was done by AJ Parker and Jackson Mills, with art collaboration from Hunter Ferrell.");
+	//Page story = new Page(leftSideMenuLoc, leftSideMenuSize, "Story", "There once was a king by the name of VERYLONGNAME, he lived in a verylongkingdom with many verylongwords", GuiLibrary.rareBackground);
 	
 	ShopItemLibrary.init();
 	ShopItem[][] traps = new ShopItem[2][ShopItemLibrary.getItems().size()/2];
@@ -238,8 +241,6 @@ public static void main(String[] args) throws FileNotFoundException {
 			}
 		}
 		if(state == 1 && !isEditPhase) {
-			//TODO add for each grid, and inside only do the tihngs that are on the right grid
-			//if(squad1.getGroups().size() != 0) CAUSES WEIRD BUG, ONLY FIRST GROUP RENDERS
 			for(Squad s : squads) {
 				s.tick((int)milli,grids.get(s.getGroups().get(s.getGroups().size()-1).getFloor()));
 			}
@@ -287,7 +288,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				if(projectile.canRender())
 					dynamicGuis.add(projectile.render());
 			}
-			story.render(dynamicGuis);
+		//	story.render(dynamicGuis);
 			if(epicShopofEpicness.isOn()) {
 				epicShopofEpicness.render(dynamicGuis);
 			}
@@ -298,9 +299,11 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller.render(dynamicGuis);
 			}
 			
+			testPageSystem.render(dynamicGuis);
+			
 			
 		}
-		PageLibrary.trapMenu.render(dynamicGuis);
+		//PageLibrary.trapMenu.render(dynamicGuis);
 		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		guiRenderer.render(guis);
@@ -344,10 +347,6 @@ public static void main(String[] args) throws FileNotFoundException {
 				//Recall units or push them all out then stall somehow
 				timeInRound = 0;
 			}
-		//TODO Test traps
-		//TODO Update Explorer AI
-		//TODO Update player input such as placing traps
-		//TODO Update ArrayLists of explorers, traps, Tiles, etc. if not already done so.
 	}
 	
 	public static void updateMouse(ArrayList<GuiTexture> dynamicGuis) {
@@ -370,8 +369,18 @@ public static void main(String[] args) throws FileNotFoundException {
 		//Floor Select / Purchasing Floors Logic (TODO)
 		floorSelect(mouseX, mouseY);
 		
+		testPageSystem.checkForMouseEvents(mouseX, mouseY);
+		
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.
+	}
+	
+	private static Linkable test() {
+		String[] hello = new String[2];
+		hello[0] = "Hello";
+		hello[1] = " World";
+		Menu newMenu = new Menu(new Vector2f(), new Vector2f(), hello, "");
+		return newMenu;
 	}
 	
 	private static void waveInitiationLogic(float mouseX, float mouseY) {
@@ -383,6 +392,34 @@ public static void main(String[] args) throws FileNotFoundException {
 					grids.remove(i+1);
 					i++;
 			}
+		}
+	}
+//TODO optimize if necessary	
+	private static void populateLeftMenu(LinkedPageSystem linkedSystem) {
+		ArrayList<String> derivativeLinks = PageLibrary.categoriesMenu.getEntries();
+		linkedSystem.addNewMenu((Menu)PageLibrary.categoriesMenu);
+		linkedSystem.setCurrentScreenId(PageLibrary.categoriesMenu.getTitle());
+		ArrayList<String> moreLinks = new ArrayList<String>();
+		while(!derivativeLinks.isEmpty()) {
+		for(String key : derivativeLinks) {
+			Linkable option = PageLibrary.getLinkable(key);
+			if(option instanceof Menu) {
+				ArrayList<String> links = ((Menu) option).getEntries();
+				for(String link : links) {
+					if(!derivativeLinks.contains(link)) {
+						moreLinks.add(link);
+					}
+				}
+				linkedSystem.addNewMenu((Menu)option);
+			} else if(option instanceof Page) {
+				linkedSystem.addNewPage((Page)option);
+			} else {
+				System.out.println("ERROR IN POPULATION OF LEFT MENU");
+			}
+		}
+		derivativeLinks.clear();
+		derivativeLinks.addAll(moreLinks);
+		moreLinks.clear();
 		}
 	}
 	

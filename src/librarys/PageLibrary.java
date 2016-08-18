@@ -52,10 +52,14 @@ public class PageLibrary {
 		
 	}
 	
+	public static Linkable getLinkable(String key) {
+		return allPages.get(key);
+	}
+	
 	private static void initializeCategories(Vector2f location, Vector2f size) {
 		categories.add(trapMenu);
 		categories.add(explorerMenu);
-		categoriesMenu = createMenu(location, size, "Info-pedia", categories);
+		categoriesMenu = createMenu(location, size, "Infopedia", categories);
 	}
 	
 	private static void initializeExplorers(Vector2f location, Vector2f size) {

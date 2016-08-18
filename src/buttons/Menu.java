@@ -33,8 +33,10 @@ public class Menu extends Linkable{
 		this.title = title;
 		this.options = new ArrayList<Button>();
 		this.menuLabels = new ArrayList<String>();
-		for(String s : menuLabels)
+		for(String s : menuLabels) {
 			this.menuLabels.add(s);
+			System.out.println(s);
+		}
 		isVertical = size.y>size.x*DisplayManager.getAspectratio();
 		setHitboxes();
 		isOn = false;
@@ -54,13 +56,14 @@ public class Menu extends Linkable{
 										new Vector2f(location.x+size.x/menuLabels.size()/2+StringLibrary.getWidth(menuLabels.get(i))/2,
 													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2-StringLibrary.getSize().y/2)));
 			}
-		else
+		
+		/*else
 			for(int i = 0; i<menuLabels.size(); i++) {
 				options.add(new Button(new Vector2f(location.x+i*size.x/menuLabels.size()+size.x/menuLabels.size()-StringLibrary.getWidth(menuLabels.get(i))/2,
 						 							 location.y+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2),
 										new Vector2f(location.x+i*size.x/menuLabels.size()+size.x/menuLabels.size()+StringLibrary.getWidth(menuLabels.get(i))/2,
 													 location.y+size.y/menuLabels.size()/2-StringLibrary.getSize().y/2)));
-			}
+			}*/
 	}
 	
 	public void setOn(boolean b) {
@@ -71,12 +74,17 @@ public class Menu extends Linkable{
 		return isOn;
 	}
 	
+	@Override
 	public boolean isMenuOptionClicked(float mouseX, float mouseY) {
 		for(Button b : options) {
 			if(b.isClicked(mouseX, mouseY))
 				return true;
 		}
 		return false;
+	}
+	
+	public ArrayList<String> getEntries() {
+		return menuLabels;
 	}
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
@@ -94,6 +102,7 @@ public class Menu extends Linkable{
 		}
 	}
 	
+	@Override
 	//Returns the name of the menu item clicked, so references the name field of the objects linked
 	public String getClickedName(float mouseX, float mouseY) {
 		int i = 0;
