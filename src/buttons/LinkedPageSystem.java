@@ -34,7 +34,7 @@ public class LinkedPageSystem {
 		history = new ArrayList<String>();
 		this.location = location;
 		this.size = size;
-		background = new GuiTexture(GuiLibrary.ladder, new Vector2f(location.x + size.x/2, location.y+size.y/2), new Vector2f(size.x/2, size.y/2)); //ADD BACKGROUND IMAGE FOR SHOP AND SUCH HERE!!!
+		background = new GuiTexture(GuiLibrary.selectionOutline, new Vector2f(location.x + size.x/2, location.y+size.y/2), new Vector2f(size.x/2, size.y/2)); //ADD BACKGROUND IMAGE FOR SHOP AND SUCH HERE!!!
 		float iconSize = .025f;
 		backIcon = new GuiTexture(GuiLibrary.ladderTop, new Vector2f(location.x+iconSize, location.y+size.y-iconSize*(float)DisplayManager.getAspectratio()), new Vector2f(iconSize, iconSize*(float)DisplayManager.getAspectratio()));
 		backButton = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+backIcon.getScale().x*2, location.y+size.y-backIcon.getScale().y*2));
