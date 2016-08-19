@@ -29,6 +29,10 @@ public class LinkedPageSystem {
 	
 	private String currentScreenId;
 	
+	private double lastInteractionTime;
+	
+	private double interactionDelay;
+	
 	public LinkedPageSystem(Vector2f location, Vector2f size) {
 		screens = new HashMap<String, Linkable>();
 		history = new ArrayList<String>();
@@ -38,6 +42,9 @@ public class LinkedPageSystem {
 		float iconSize = .025f;
 		backIcon = new GuiTexture(GuiLibrary.ladderTop, new Vector2f(location.x+iconSize, location.y+size.y-iconSize*(float)DisplayManager.getAspectratio()), new Vector2f(iconSize, iconSize*(float)DisplayManager.getAspectratio()));
 		backButton = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+backIcon.getScale().x*2, location.y+size.y-backIcon.getScale().y*2));
+		lastInteractionTime = 0;
+		interactionDelay = 200;
+	
 	}
 	
 	public void setCurrentScreenId(String name) {
@@ -47,8 +54,9 @@ public class LinkedPageSystem {
 	
 	
 	private void backPressed(float mouseX, float mouseY) {
-		if(backButton.isClicked(mouseX, mouseY) && !history.isEmpty())
+		if(backButton.isClicked(mouseX, mouseY) && !history.isEmpty()) {
 			currentScreenId = history.remove(history.size()-1);
+		}
 	}
 	
 	public void addNewPage(Page newPage) {
@@ -64,13 +72,16 @@ public class LinkedPageSystem {
 	}
 	
 	public void checkForMouseEvents(float mouseX, float mouseY) {
-		backPressed(mouseX, mouseY);
-		if(screens.get(currentScreenId).isMenuOptionClicked(mouseX, mouseY)) {
-			String newName = menuSelection(mouseX, mouseY);
-			if(newName != null) {
-				history.add(currentScreenId);
-				currentScreenId = newName;
+		if(lastInteractionTime + interactionDelay <= System.currentTimeMillis()) {
+			backPressed(mouseX, mouseY);
+			if(screens.get(currentScreenId).isMenuOptionClicked(mouseX, mouseY)) {
+				String newName = menuSelection(mouseX, mouseY);
+				if(newName != null) {
+					history.add(currentScreenId);
+					currentScreenId = newName;
+				}
 			}
+			lastInteractionTime = System.currentTimeMillis();
 		}
 	}
 	

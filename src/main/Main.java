@@ -405,9 +405,14 @@ public static void main(String[] args) throws FileNotFoundException {
 	}
 //TODO optimize if necessary	
 	private static void populateLeftMenu(LinkedPageSystem linkedSystem) {
-		ArrayList<String> derivativeLinks = PageLibrary.categoriesMenu.getEntries();
+		ArrayList<String> derivativeLinks = new ArrayList<String>();
+		for(String s : PageLibrary.categoriesMenu.getEntries()){
+			derivativeLinks.add(s);
+		}
+		System.out.println(derivativeLinks);
 		linkedSystem.addNewMenu((Menu)PageLibrary.categoriesMenu);
-		linkedSystem.setCurrentScreenId("Traps");
+		System.out.println(PageLibrary.categoriesMenu.getEntries());
+		linkedSystem.setCurrentScreenId(PageLibrary.categoriesMenu.getTitle());
 		ArrayList<String> moreLinks = new ArrayList<String>();
 		while(!derivativeLinks.isEmpty()) {
 		for(String key : derivativeLinks) {
