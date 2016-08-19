@@ -59,7 +59,6 @@ public class PageLibrary {
 	private static void initializeCategories(Vector2f location, Vector2f size) {
 		categories.add(trapMenu);
 		categories.add(explorerMenu);
-		categories.add(exploder);
 		categoriesMenu = createMenu(location, size, "Infopedia", categories);
 	}
 	
