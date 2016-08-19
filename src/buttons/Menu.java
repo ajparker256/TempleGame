@@ -58,9 +58,9 @@ public class Menu extends Linkable{
 		if(isVertical)
 			for(int i = 0; i<menuLabels.size(); i++) {
 				options.add(new Button(new Vector2f(location.x+size.x/2-StringLibrary.getWidth(menuLabels.get(i))/2,
-													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2),
+													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2),
 										new Vector2f(location.x+size.x/2+StringLibrary.getWidth(menuLabels.get(i))/2,
-													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2-StringLibrary.getSize().y*3/2)));
+													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2-StringLibrary.getSize().y*2)));
 			}
 		
 		/*else

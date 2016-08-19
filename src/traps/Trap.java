@@ -53,6 +53,10 @@ public class Trap extends Tile{
 		return level;
 	}
 	
+	public ArrayList<Upgrade> getAllUpgrades() {
+		return allUpgrades;
+	}
+	
 	public void setLevel(int i) {
 		damage = i;
 	}
@@ -205,7 +209,6 @@ public class Trap extends Tile{
 		if(triggerLoc == 5) 
 			onDeath.add(powerUp);
 		level++;
-		System.out.println(damage);
 	}
 
 }

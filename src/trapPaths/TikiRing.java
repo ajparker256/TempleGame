@@ -11,9 +11,13 @@ public class TikiRing extends TikiTrap{
 
 	public TikiRing(int x, int y, float size, int floor) {
 		super(x, y, size, floor);
+		damage *= 1.5;
+		hp *= 1.5;
+		defense *= 1.5;
 		//guiTexture = insert the new texture here, or fragments of it based on level here.
 	}
 	
+	@Override
 	public void setTriggers(){
 		
 		for(int i = -1; i<2; i++) {
@@ -54,6 +58,12 @@ public class TikiRing extends TikiTrap{
 				}
 				cooldown=maxCd; 
 			}
+		}
+	}
+	
+	public void claimUpgrades(TikiTrap trapBeingUpgraded) {
+		for(Upgrade u : trapBeingUpgraded.getAllUpgrades()) {
+			this.upgrade(u);
 		}
 	}
 }
