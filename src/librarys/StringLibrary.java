@@ -190,7 +190,7 @@ public class StringLibrary {
 				char nextChar = s.charAt(i+1);
 				if(nextChar == 'w' || nextChar == 'm') {
 					spacing = size.x*8/9;
-				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i') {
+				} else if(nextChar == 'l' || nextChar == 'j' || nextChar == 'f' || nextChar == 'i' || nextChar == '\'' || nextChar == ',') {
 					spacing = size.x/4;
 				} else {
 					spacing = size.x/2;
@@ -349,6 +349,8 @@ public class StringLibrary {
 			return size.x*70/113;
 		if(c == ',') 
 			return size.x*40/113;
+		if(c == '\'') 
+			return size.x*40/113;
 		
 		
 		return 0;
@@ -501,6 +503,8 @@ public class StringLibrary {
 			return GuiLibrary.questionMark;
 		if(c == ',') 
 			return GuiLibrary.comma;
+		if(c == '\'')
+			return GuiLibrary.apostrophe;
 		
 		//Else return -1 showing error
 		return -1;

@@ -157,6 +157,7 @@ public static int period;
 public static int exclamationPoint;
 public static int questionMark;
 public static int comma;
+public static int apostrophe;
 
 public static int blank;
 public static int dirt0;
@@ -307,6 +308,7 @@ public static void init(Loader loader) {
 		GuiLibrary.exclamationPoint = loader.loadTexture("letters/exclamationPoint");
 		GuiLibrary.questionMark = loader.loadTexture("letters/questionMark");
 		GuiLibrary.comma = loader.loadTexture("letters/comma");
+		GuiLibrary.apostrophe = loader.loadTexture("letters/apostrophe");
 
 		GuiLibrary.blank = loader.loadTexture("tiles/Blank");
 		GuiLibrary.dirt0 = loader.loadTexture("tiles/Dirt2");
