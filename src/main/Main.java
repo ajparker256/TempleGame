@@ -88,7 +88,12 @@ public static void main(String[] args) throws FileNotFoundException {
 	GuiLibrary.init(loader);
 	UpgradeLibrary.init();
 	SoundLibrary.init();
-	PageLibrary.init(new Vector2f(-.9f, -.8f), new Vector2f(.4f, 1.6f));
+	Vector2f locationOfLeftMenu = new Vector2f(-.9f, -.8f);
+	Vector2f sizeOfLeftMenu = new Vector2f(.4f, 1.6f);
+	PageLibrary.init(locationOfLeftMenu, sizeOfLeftMenu);
+	
+	testPageSystem = new LinkedPageSystem(locationOfLeftMenu, sizeOfLeftMenu);
+	populateLeftMenu(testPageSystem);
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5+i, i));
@@ -105,8 +110,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	Sound.loopSound(SoundLibrary.music);	
 	AnimationLibrary.init(loader);
 	
-	testPageSystem = new LinkedPageSystem(new Vector2f(-.8f, -.4f), new Vector2f(.4f, .8f));
-	populateLeftMenu(testPageSystem);
+
 	
 	startWave = new Button(new Vector2f(.8f, -.09f), new Vector2f(1, -1));
 	
@@ -299,7 +303,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				upgradeRoller.render(dynamicGuis);
 			}
 			
-	//		testPageSystem.render(dynamicGuis);
+			testPageSystem.render(dynamicGuis);
 	//		PageLibrary.categoriesMenu.render(dynamicGuis);
 	//		PageLibrary.explorerMenu.render(dynamicGuis);
 	//		PageLibrary.trapMenu.render(dynamicGuis);

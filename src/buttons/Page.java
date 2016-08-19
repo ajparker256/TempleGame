@@ -48,7 +48,7 @@ public class Page extends Linkable{
 			imageSize = new Vector2f(size.x/3, size.x/3*(float)DisplayManager.getAspectratio());
 		else 
 			imageSize = new Vector2f(size.y/(float)DisplayManager.getAspectratio()/3, size.y/3);
-		this.image = new GuiTexture(imageId, new Vector2f(location.x+size.x/2, location.y+size.y-4*titleTextSize.y-imageSize.y/2), imageSize);
+		this.image = new GuiTexture(imageId, new Vector2f(location.x+size.x/2, location.y+size.y-5*titleTextSize.y-imageSize.y/2), imageSize);
 		scrollDisp = 0;
 		isOn = false;
 	}
@@ -80,7 +80,7 @@ public class Page extends Linkable{
 		} else {
 			if(image.getPosition().y+image.getScale().y/2 < location.y+size.y)
 				dynamicGuis.add(image);
-			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x, location.y-titleTextSize.y*3/2+size.y-2*image.getScale().y+scrollDisp), size.x, size.y-titleTextSize.y*3/2-2*image.getScale().y, scrollDisp));
+			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x, image.getPosition().y-image.getScale().y+scrollDisp), size.x, size.y-titleTextSize.y*3/2-2*image.getScale().y, scrollDisp));
 		}
 	}
 	

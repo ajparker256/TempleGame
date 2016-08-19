@@ -57,10 +57,10 @@ public class Menu extends Linkable{
 		StringLibrary.setSize(textSize);
 		if(isVertical)
 			for(int i = 0; i<menuLabels.size(); i++) {
-				options.add(new Button(new Vector2f(location.x+size.x/menuLabels.size()/2-StringLibrary.getWidth(menuLabels.get(i))/2,
+				options.add(new Button(new Vector2f(location.x+size.x/2-StringLibrary.getWidth(menuLabels.get(i))/2,
 													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2+StringLibrary.getSize().y/2),
-										new Vector2f(location.x+size.x/menuLabels.size()/2+StringLibrary.getWidth(menuLabels.get(i))/2,
-													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2-StringLibrary.getSize().y/2)));
+										new Vector2f(location.x+size.x/2+StringLibrary.getWidth(menuLabels.get(i))/2,
+													 location.y+i*size.y/menuLabels.size()+size.y/menuLabels.size()/2-StringLibrary.getSize().y*3/2)));
 			}
 		
 		/*else
@@ -95,7 +95,7 @@ public class Menu extends Linkable{
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(textSize);
-		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y), size.x));
+		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y-textSize.y/2), size.x));
 		if(isVertical)
 		for(int i = 0; i<menuLabels.size(); i++) {
 			dynamicGuis.addAll(StringLibrary.makeItFitC(menuLabels.get(i), new Vector2f(location.x,

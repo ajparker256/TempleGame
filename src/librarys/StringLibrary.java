@@ -30,7 +30,7 @@ public class StringLibrary {
 	public static ArrayList<GuiTexture> drawString(String s, Vector2f loc) {
 		ArrayList<GuiTexture> string = new ArrayList<GuiTexture>();
 		float tempHeight = 0;
-		currentLength = 0;
+		currentLength = size.x/2;
 		for(int i = 0; i<s.length(); i++) {
 			char letter = s.charAt(i);
 			if(i!=s.length()-1) {
@@ -44,9 +44,9 @@ public class StringLibrary {
 				}
 			}
 			if(letter == 'g' || letter == 'q' || letter == 'p' || letter == 'y') {
-				tempHeight = loc.y-size.y*2/5;
+				tempHeight = loc.y-size.y*2/5-size.y/2;
 			} else {
-				tempHeight = loc.y;
+				tempHeight = loc.y-size.y/2;
 			}
 			
 			string.add(new GuiTexture(getLetter(letter), new Vector2f(loc.x+currentLength, tempHeight), new Vector2f(size.x,size.y)));
