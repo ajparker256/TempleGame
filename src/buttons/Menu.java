@@ -35,7 +35,6 @@ public class Menu extends Linkable{
 		this.menuLabels = new ArrayList<String>();
 		for(String s : menuLabels) {
 			this.menuLabels.add(s);
-			System.out.println(s);
 		}
 		isVertical = size.y>size.x*DisplayManager.getAspectratio();
 		setHitboxes();

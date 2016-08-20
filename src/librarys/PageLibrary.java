@@ -105,8 +105,9 @@ public class PageLibrary {
 		String[] labels = new String[menuOptions.size()];
 		for(int i = 0; i<menuOptions.size(); i++) {
 			labels[i] = menuOptions.get(i).getTitle();
-			if(menuOptions.get(i) instanceof Menu)
-			System.out.println("The menu that was created has an option of " + labels[i]);
+			/*if(menuOptions.get(i) instanceof Menu) {
+				System.out.println("The menu that was created has an option of " + labels[i]);
+			}*/
 			allPages.put(labels[i], menuOptions.get(i));
 		}
 		Menu newMenu = new Menu(location, size, labels, title);

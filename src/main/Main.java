@@ -90,9 +90,10 @@ public static void main(String[] args) throws FileNotFoundException {
 	SoundLibrary.init();
 	Vector2f locationOfLeftMenu = new Vector2f(-.9f, -.8f);
 	Vector2f sizeOfLeftMenu = new Vector2f(.4f, 1.6f);
-	PageLibrary.init(locationOfLeftMenu, sizeOfLeftMenu);
+	Vector2f borderSize = new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio());
+	PageLibrary.init(new Vector2f(locationOfLeftMenu.x-StringLibrary.getSize().x/2, locationOfLeftMenu.y), sizeOfLeftMenu);
 	
-	testPageSystem = new LinkedPageSystem(locationOfLeftMenu, sizeOfLeftMenu);
+	testPageSystem = new LinkedPageSystem(new Vector2f(locationOfLeftMenu.x-borderSize.x/2, locationOfLeftMenu.y-borderSize.y/2), new Vector2f(sizeOfLeftMenu.x+borderSize.x, sizeOfLeftMenu.y+borderSize.y));
 	populateLeftMenu(testPageSystem);
 	
 	for(int i = 0; i<8; i++) {
@@ -117,41 +118,38 @@ public static void main(String[] args) throws FileNotFoundException {
 	upgradeRoller = new UpgradeRoller();
 	
 	guis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(-1f, -1f), new Vector2f(1.8f, 1.8f)));
-/*	Group group1 = new Group(0);
-	group1.add(new Explorer (group1));
+	Group group1 = new Group(0);
+	group1.add(new Exploder (group1));
 	group1.add(new Miner (group1));
-	group1.add(new Explorer (group1));
+	group1.add(new Athlete (group1));
 	group1.add(new Miner (group1));
 	
-	Group group2 = new Group(0);
+	Group group2 = new Group(1);
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	
-	Group group3 = new Group(0);
+	Group group3 = new Group(2);
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	
-	Group group4 = new Group(0);
+	Group group4 = new Group(3);
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	group4.add(new Explorer (group4));
-	group4.add(new Miner (group4));*/
-	
-	Group group1 = new Group(0);
-	Group group2 = new Group(0);
-	Group group3 = new Group(0);	
-	Group group4 = new Group(2);
+	group4.add(new Miner (group4));
 
 	
 //	ArrayList<Group> squad1List=new ArrayList<Group>();
 //	squad1List.add(group1);
 	ArrayList<Group> squad2List = new ArrayList<Group>();
+	squad2List.add(group1);
 	squad2List.add(group2);
 	squad2List.add(group3);
+	squad2List.add(group4);
 //	ArrayList<Group> squad3List = new ArrayList<Group>();
 //	squad3List.add(group4);
 	/*for(Group g : squad1List) {
@@ -160,13 +158,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		g.add(new Explorer (g));
 		g.add(new TreasureHunter(g));
 		}*/
-	for(Group g : squad2List) {
-		g.add(new Miner (g));
-		g.add(new Athlete (g));
-		g.add(new Exploder (g));
-		g.add(new TreasureHunter(g));
-
-	}
 /*	for(Group g : squad3List) {
 		g.add(new Miner (g));
 		g.add(new Miner (g));
@@ -188,8 +179,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 		x++;
 	}
-	Vector2f leftSideMenuLoc = new Vector2f(-.8f, -.6f);
-	Vector2f leftSideMenuSize = new Vector2f(.4f, 1.2f);
 	
 
 	//Page credits = new Page(leftSideMenuLoc, leftSideMenuSize, "Credits", "These are the credits, this was done by AJ Parker and Jackson Mills, with art collaboration from Hunter Ferrell.");
@@ -409,9 +398,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		for(String s : PageLibrary.categoriesMenu.getEntries()){
 			derivativeLinks.add(s);
 		}
-		System.out.println(derivativeLinks);
 		linkedSystem.addNewMenu((Menu)PageLibrary.categoriesMenu);
-		System.out.println(PageLibrary.categoriesMenu.getEntries());
 		linkedSystem.setCurrentScreenId(PageLibrary.categoriesMenu.getTitle());
 		ArrayList<String> moreLinks = new ArrayList<String>();
 		while(!derivativeLinks.isEmpty()) {

@@ -178,9 +178,9 @@ public static int selectionOutline;
 public static int tikiTrap;
 
 public static void init(Loader loader) {
-		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorer");
-		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorer Walking1");
-		GuiLibrary.explorerWalkingR = loader.loadTexture("Explorers/Basic/BasicExplorer Walking2");
+		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
+		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
+		GuiLibrary.explorerWalkingR = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
 
 		
 		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/miner");
