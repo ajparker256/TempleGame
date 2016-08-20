@@ -72,7 +72,7 @@ public class PageLibrary {
 		treasureFinder = new Page(location, size, "Treasure Finder", "Born with a passion for money, the treasure finder is a person dedicated to greed"
 				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", GuiLibrary.treasureFinderStanding);
 		exploder = new Page(location, size, "Demolition Expert", "If you thought deadly traps weren't enough, this guy enjoys firing explosives" 
-				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure", GuiLibrary.explorerStanding);
+				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure", GuiLibrary.tntManStanding);
 		
 		explorers.add(basicExplorer);
 		explorers.add(athlete);

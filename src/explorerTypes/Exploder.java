@@ -15,8 +15,8 @@ public class Exploder extends Explorer{
 	public Exploder(Group group) {
 		super(group);
 		this.explosiveDamage=1000;
-		super.idle=new GuiTexture(GuiLibrary.minerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.miner,location,unitSize);
+		super.idle=new GuiTexture(GuiLibrary.tntManStanding,location,unitSize);
+		super.animation=new Animation(AnimationLibrary.tntMan,location,unitSize);
 		super.animation.setDelay(25);
 		super.damage=1;
 		this.maxCd=10000;

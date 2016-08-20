@@ -41,7 +41,7 @@ public class Explorer extends Unit{
 		this.id = -1;
 		this.lastDirection=1;
 		this.group=group;
-		unitSize=new Vector2f(0.045f,(float) (0.045f*DisplayManager.getAspectratio()));
+		unitSize=new Vector2f(0.035f,(float) (0.035f*DisplayManager.getAspectratio()));
 		position=group.getPosition();
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
 		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);

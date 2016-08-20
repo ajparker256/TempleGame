@@ -71,6 +71,14 @@ public class Squad {
 		Point nextLoc= path.get(0);
 		double rand = Math.random();
 		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*/);
+		
+		//Guarentees that the units don't miss the exit
+		for(Tile t : moves) {
+			if(t!=null && t.getId() == -2) {
+				return new Point(t.getX(), t.getY());
+			}
+		}
+		
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;

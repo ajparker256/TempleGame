@@ -124,19 +124,19 @@ public static void main(String[] args) throws FileNotFoundException {
 	group1.add(new Athlete (group1));
 	group1.add(new Miner (group1));
 	
-	Group group2 = new Group(1);
+	Group group2 = new Group(0);
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	
-	Group group3 = new Group(2);
+	Group group3 = new Group(0);
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	
-	Group group4 = new Group(3);
+	Group group4 = new Group(0);
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	group4.add(new Explorer (group4));

@@ -10,6 +10,7 @@ public class AnimationLibrary {
 	
 	public static ArrayList<Integer> explorer;
 	public static ArrayList<Integer> miner;
+	public static ArrayList<Integer> tntMan;
 	public static ArrayList<Integer> treasureFinder;
 	public static ArrayList<Integer> flame;
 	public static ArrayList<Integer> crossBowFiring;
@@ -26,6 +27,9 @@ public class AnimationLibrary {
 		miner.add(GuiLibrary.minerWalkingL);
 		miner.add(GuiLibrary.minerStanding);
 		miner.add(GuiLibrary.minerWalkingR);
+		
+		tntMan = new ArrayList<Integer>();
+		tntMan.add(GuiLibrary.tntManStanding);
 		
 		treasureFinder = new ArrayList<Integer>();
 		treasureFinder.add(GuiLibrary.treasureFinderStanding);

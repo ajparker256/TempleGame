@@ -20,6 +20,8 @@ public static int explorerStanding;
 public static int explorerWalkingL;
 public static int explorerWalkingR;
 
+public static int tntManStanding;
+
 
 public static int minerStanding;
 public static int minerWalkingL;
@@ -181,7 +183,8 @@ public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
 		GuiLibrary.explorerWalkingR = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
-
+		
+		GuiLibrary.tntManStanding = loader.loadTexture("Explorers/TNT Man/tntman");
 		
 		GuiLibrary.minerStanding = loader.loadTexture("Explorers/Miner/miner");
 		GuiLibrary.minerWalkingL = loader.loadTexture("Explorers/Miner/miner");
