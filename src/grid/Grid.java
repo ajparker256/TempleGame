@@ -47,7 +47,7 @@ public class Grid {
 	private int floor;
 	
 	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
-	public Grid(Vector2f loc, float size, int rows, int floor) {
+	public Grid( float size, int rows, int floor) {
 		
 		treasureLocs = new ArrayList<Point>();
 		
@@ -119,7 +119,7 @@ public class Grid {
 	}
 	
 	public Grid copy() {
-		Grid g = new Grid(location, size, grid.length, floor);
+		Grid g = new Grid(size, grid.length, floor);
 		for(int i=0;i<grid.length;i++){
 			for(int k=0;k<grid[0].length;k++){
 				g.setTile(k, i, grid[k][i].copy());

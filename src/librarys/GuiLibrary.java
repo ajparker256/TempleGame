@@ -179,6 +179,13 @@ public static int selectionOutline;
 
 public static int tikiTrap;
 
+public static int lockedIcon;
+public static int scrollLeft;
+public static int scrollLeftSelectable;
+public static int scrollRight;
+public static int scrollRightSelectable;
+public static int addFloorIcon;
+
 public static void init(Loader loader) {
 		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
@@ -332,6 +339,13 @@ public static void init(Loader loader) {
 		GuiLibrary.rareBackground = loader.loadTexture("rareBackground");
 		GuiLibrary.legendaryBackground = loader.loadTexture("legendaryBackground");
 		GuiLibrary.selectionOutline = loader.loadTexture("selectionOutline");
+		
+		GuiLibrary.lockedIcon = loader.loadTexture("Floor Selection/lockedIcon");
+		GuiLibrary.scrollLeft = loader.loadTexture("Floor Selection/scrollLeft");
+		GuiLibrary.scrollLeftSelectable = loader.loadTexture("Floor Selection/scrollLeftSelectable");
+		GuiLibrary.scrollRight = loader.loadTexture("Floor Selection/scrollRight");
+		GuiLibrary.scrollRightSelectable = loader.loadTexture("Floor Selection/scrollRightSelectable");
+		GuiLibrary.addFloorIcon = loader.loadTexture("Floor Selection/addFloorIcon");
 	}
 	
 

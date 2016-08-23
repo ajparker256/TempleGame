@@ -97,7 +97,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	populateLeftMenu(testPageSystem);
 	
 	for(int i = 0; i<8; i++) {
-		grids.add(new Grid(new Vector2f(-.5f,-.8f),0.05f,5+i, i));
+		grids.add(new Grid(0.05f,5+i, i));
 		gridsReadOnly.add(grids.get(i).copy());
 	}
 	rotationDialogueBox = new RotationDialogueBox();
