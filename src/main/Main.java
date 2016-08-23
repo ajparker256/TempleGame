@@ -71,6 +71,7 @@ public static int state;
 public static boolean isEditPhase;
 public static Button startWave;
 public static LinkedPageSystem testPageSystem;
+public static FloorSelect testFloorSelect;
 public static void main(String[] args) throws FileNotFoundException {
 	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
@@ -95,6 +96,8 @@ public static void main(String[] args) throws FileNotFoundException {
 	
 	testPageSystem = new LinkedPageSystem(new Vector2f(locationOfLeftMenu.x-borderSize.x/2, locationOfLeftMenu.y-borderSize.y/2), new Vector2f(sizeOfLeftMenu.x+borderSize.x, sizeOfLeftMenu.y+borderSize.y));
 	populateLeftMenu(testPageSystem);
+	
+	testFloorSelect = new FloorSelect(new Vector2f(-.8f, .8f), new Vector2f(1.6f, .2f));
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(0.05f,5+i, i));
@@ -291,7 +294,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			if(upgradeRoller.isOn()) {
 				upgradeRoller.render(dynamicGuis);
 			}
-			
+			testFloorSelect.render(dynamicGuis);
 			testPageSystem.render(dynamicGuis);
 	//		PageLibrary.categoriesMenu.render(dynamicGuis);
 	//		PageLibrary.explorerMenu.render(dynamicGuis);
@@ -374,7 +377,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		waveInitiationLogic(mouseX, mouseY);
 		//Floor Select / Purchasing Floors Logic (TODO)
 		floorSelect(mouseX, mouseY);
-		
+		testFloorSelect.mouseEvents(mouseX, mouseY);
 		testPageSystem.checkForMouseEvents(mouseX, mouseY);
 
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
@@ -436,9 +439,11 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(gridsReadOnly.get(gridToBeRendered).getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < System.currentTimeMillis() && epicShopofEpicness.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && isEditPhase) {
 			int x = (Mouse.getX()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().x-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.WIDTH/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().y-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
-			epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
-			epicShopofEpicness.setOn(true);
-			epicShopofEpicness.setLastTimeClicked(System.currentTimeMillis());
+			if(Main.gridsReadOnly.get(gridToBeRendered).getWidth()>x && Main.gridsReadOnly.get(gridToBeRendered).getWidth()>y) {
+				epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
+				epicShopofEpicness.setOn(true);
+				epicShopofEpicness.setLastTimeClicked(System.currentTimeMillis());
+			}
 		}
 	}
 	
