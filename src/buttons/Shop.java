@@ -93,29 +93,25 @@ public class Shop {
 		shopHitboxes = new Button[rY][rX];
 		for(int i = 0; i<rX; i++) {
 			for(int j = 0; j<rY; j++) {
-		//		Vector2f shopItemPosition = new Vector2f(location.x+(i-visibilityRange[0]+.5f)*(2*size.x/traps.length), location.y+(j-visibilityRange[2]+.5f)*(size.y/traps[0].length));
-		//		frames[i][j] = new GuiTexture(GuiLibrary.frame, shopItemPosition, new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 				Vector2f imageSize = traps[visibilityRange[0]+i][visibilityRange[2]+j].drawTile().getScale();
-				//THIS PART WORKS
 				shopHitboxes[j][i] = new Button(new Vector2f(location.x+size.x/rX/2-imageSize.x+i*(size.x/rX),
 						location.y+size.y/rY/2+(imageSize.y+textSize.y)+j*(size.y/rY)),
 						new Vector2f(location.x+size.x/rX/2+imageSize.x+i*(size.x/rX),
 						location.y+size.y/rY/2-(imageSize.y+textSize.y)+j*(size.y/rY)));
-				//System.out.println("TL = "+shopHitboxes[j][i].getTL());
-				//System.out.println("BR = "+shopHitboxes[j][i].getBR());
-				//System.out.println();
 			}
 		}
 		upgrade = new Button(new Vector2f(location.x+size.x/2-StringLibrary.getWidth("UPGRADE!")/2, location.y), 
 								new Vector2f(location.x+size.x/2+StringLibrary.getWidth("UPGRADE!")/2, location.y-StringLibrary.getSize().y));
-		updateShopPosition();
-		upArrow = new GuiTexture(GuiLibrary.upArrow, new Vector2f(location.x+size.x/2, location.y+size.y+.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+		
+		upArrow = new GuiTexture(GuiLibrary.upArrow, new Vector2f(location.x+size.x/2, location.y+size.y+.05f*(float)DisplayManager.getAspectratio()),
+				new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 		
 		upArrowHitbox = new Button(new Vector2f(upArrow.getPosition().x-upArrow.getScale().x/2, upArrow.getPosition().y+upArrow.getScale().y/2),
 				new Vector2f(upArrow.getPosition().x+upArrow.getScale().x/2, upArrow.getPosition().y-upArrow.getScale().y/2));
 		
 		
-		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-StringLibrary.getSize().y-.05f*(float)DisplayManager.getAspectratio()), new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-StringLibrary.getSize().y-.05f*(float)DisplayManager.getAspectratio()), 
+				new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
 		
 		downArrowHitbox = new Button(new Vector2f(downArrow.getPosition().x-downArrow.getScale().x/2, downArrow.getPosition().y+downArrow.getScale().y/2),
 				new Vector2f(downArrow.getPosition().x+downArrow.getScale().x/2, downArrow.getPosition().y-downArrow.getScale().y/2));
@@ -124,10 +120,10 @@ public class Shop {
 				location.y+size.y+StringLibrary.getSize().y), 
 				new Vector2f(location.x+size.x, 
 				location.y+size.y-StringLibrary.getSize().y));
-		shopHitbox = new Button(new Vector2f(location.x, 
-											location.y+size.y), 
-								new Vector2f(location.x+size.x,
-											location.y));
+		
+		shopHitbox = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+size.x, location.y));
+		
+		updateShopPosition();
 	}
 	
 	public boolean isUpgradeClicked(float mouseX, float mouseY) {

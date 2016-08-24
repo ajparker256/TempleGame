@@ -404,24 +404,24 @@ public static void main(String[] args) throws FileNotFoundException {
 		linkedSystem.setCurrentScreenId(PageLibrary.categoriesMenu.getTitle());
 		ArrayList<String> moreLinks = new ArrayList<String>();
 		while(!derivativeLinks.isEmpty()) {
-		for(String key : derivativeLinks) {
-			if(PageLibrary.getLinkable(key) instanceof Menu) {
-				ArrayList<String> links = ((Menu) PageLibrary.getLinkable(key)).getEntries();
-				for(String link : links) {
-					if(!derivativeLinks.contains(link)) {
-						moreLinks.add(link);
+			for(String key : derivativeLinks) {
+				if(PageLibrary.getLinkable(key) instanceof Menu) {
+					ArrayList<String> links = ((Menu) PageLibrary.getLinkable(key)).getEntries();
+					for(String link : links) {
+						if(!derivativeLinks.contains(link)) {
+							moreLinks.add(link);
+						}
 					}
+					linkedSystem.addNewMenu((Menu)PageLibrary.getLinkable(key));
+				} else if(PageLibrary.getLinkable(key) instanceof Page) {
+					linkedSystem.addNewPage((Page)PageLibrary.getLinkable(key));
+				} else {
+					System.out.println("ERROR IN POPULATION OF LEFT MENU");
 				}
-				linkedSystem.addNewMenu((Menu)PageLibrary.getLinkable(key));
-			} else if(PageLibrary.getLinkable(key) instanceof Page) {
-				linkedSystem.addNewPage((Page)PageLibrary.getLinkable(key));
-			} else {
-				System.out.println("ERROR IN POPULATION OF LEFT MENU");
 			}
-		}
-		derivativeLinks.clear();
-		derivativeLinks.addAll(moreLinks);
-		moreLinks.clear();
+			derivativeLinks.clear();
+			derivativeLinks.addAll(moreLinks);
+			moreLinks.clear();
 		}
 	}
 	

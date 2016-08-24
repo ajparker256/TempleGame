@@ -96,7 +96,6 @@ public class FloorSelect {
 			} else {
 				icons[i] = new GuiTexture(StringLibrary.getLetter(getFloorChar(gridsAssignedToHitboxes[i-offsetRight])), new Vector2f(location.x+(i+.5f)*maxSize.y+extraSpace/2, 
 							location.y + maxSize.y/2), sizeOfLevelIcon);
-				System.out.println("setFloorIcons should currently be assigning a char to the correct spot");
 			}
 		}
 	}
@@ -187,12 +186,11 @@ public class FloorSelect {
 		floorsReadOnly.put(nextGridNumber, g);
 		nextGridNumber++;
 		assignButtons();
-		System.out.println("YOU JUST BOUGHT A FLOOR!");
 		return cost;
 	}
 	
 	private boolean isValidFloor(int id) {
-		return id > 0;
+		return id >= 0;
 	}
 	
 	//Potential optimization if locked is the start of a non-working set always
