@@ -59,8 +59,6 @@ public class UIControl {
 		return floors;		
 	}
 	
-	
-	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		trapShop.render(dynamicGuis);
 		infoPages.render(dynamicGuis);

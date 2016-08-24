@@ -183,10 +183,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		x++;
 	}
 	
-
-	//Page credits = new Page(leftSideMenuLoc, leftSideMenuSize, "Credits", "These are the credits, this was done by AJ Parker and Jackson Mills, with art collaboration from Hunter Ferrell.");
-	//Page story = new Page(leftSideMenuLoc, leftSideMenuSize, "Story", "There once was a king by the name of VERYLONGNAME, he lived in a verylongkingdom with many verylongwords", GuiLibrary.rareBackground);
-	
 	ShopItemLibrary.init();
 	ShopItem[][] traps = new ShopItem[2][ShopItemLibrary.getItems().size()/2];
 	ArrayList<ShopItem> items = ShopItemLibrary.getItems();
@@ -239,18 +235,11 @@ public static void main(String[] args) throws FileNotFoundException {
 				
 			
 			}
-			//		credits.render(dynamicGuis);
 			
 		}
 		if(state == 1 || state == 2) {
 			update(dynamicGuis, milli);
 			dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
-			//General Knowledge about rendering
-			//Renders from TOP TO BOTTOM!
-			//RENDERS FROM CENTER OF IMAGE! (90% certain)
-			//The screen is -1 to 1 for x and 0 to -1 for y in floats
-			
-			//Determines which of the grids to render
 			if(isEditPhase)
 				dynamicGuis.addAll(gridsReadOnly.get(gridToBeRendered).render());
 			else
@@ -320,7 +309,6 @@ public static void main(String[] args) throws FileNotFoundException {
 						g.getTile(p.x, p.y).getIncome();
 					}
 				}
-				//Recall units or push them all out then stall somehow
 				timeInRound = 0;
 			}
 	}
@@ -394,7 +382,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	}
 	
 	private static void shopInitiationLogic(float mouseX, float mouseY) {
-		if(gridsReadOnly.get(gridToBeRendered).getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < System.currentTimeMillis() && epicShopofEpicness.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && isEditPhase) {
+		if(gridsReadOnly.get(gridToBeRendered).isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < System.currentTimeMillis() && epicShopofEpicness.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && isEditPhase) {
 			int x = (Mouse.getX()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().x-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.WIDTH/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.WIDTH);
 			int y = (Mouse.getY()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().y-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
 			if(Main.gridsReadOnly.get(gridToBeRendered).getWidth()>x && Main.gridsReadOnly.get(gridToBeRendered).getWidth()>y) {

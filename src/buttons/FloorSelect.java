@@ -203,8 +203,6 @@ public class FloorSelect {
 		return -1;
 	}
 	
-
-	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		for(GuiTexture currentIcon : icons) {
 			dynamicGuis.add(currentIcon);
@@ -214,12 +212,16 @@ public class FloorSelect {
 		}
 	}
 	
-	public Grid getGridToBeRendered() {
+	private Grid getGridToBeRendered() {
 		if(isEditState) {
 			return floorsReadOnly.get(renderedGridId);
 		} else {
 			return floorsWritable.get(renderedGridId);
 		}
+	}
+	
+	public boolean isGridClicked(float mouseX, float mouseY) {
+		return getGridToBeRendered().isClicked(mouseX, mouseY);
 	}
 	
 }

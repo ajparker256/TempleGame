@@ -148,8 +148,8 @@ public class Grid {
 		return goalReacher;
 	}
 	
-	public Button getGridButton() {
-		return gridClicked;
+	public boolean isClicked(float mouseX, float mouseY) {
+		return gridClicked.isClicked(mouseX, mouseY);
 	}
 	
 	public float getSize() {

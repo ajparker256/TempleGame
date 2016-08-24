@@ -191,6 +191,11 @@ public class Trap extends Tile{
 		}
 	}
 	
+	protected boolean isInBounds(Point currentLoc) {
+		int width = Main.grids.get(floor).getWidth();
+		return currentLoc.x<width && currentLoc.y<width && currentLoc.x>=0 && currentLoc.y>=0;
+	}
+	
 	public void upgrade(Upgrade powerUp) {
 		int triggerLoc = powerUp.getTriggerLoc();
 		//This is for copying from read only to non-readonly
