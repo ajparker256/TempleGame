@@ -28,6 +28,8 @@ public class TileLibrary {
 			return new ArrowTrap(x, y, size, 4, Main.gridToBeRendered);
 		if(id == 9) 
 			return new TikiTrap(x, y, size, Main.gridToBeRendered);
+		if(id == 10)
+			return new PatrolArrow(x, y, size, Main.gridToBeRendered);
 		
 		if(id == -2)
 			return new Exit(x, y, size, Main.gridToBeRendered);

@@ -20,6 +20,8 @@ public class ShopItemLibrary {
 		allItems.add(new CursedIdolSI(new Vector2f(-2,-2), size));
 		allItems.add(new TreasureSI(new Vector2f(-2,-2), size));
 		allItems.add(new ExitSI(new Vector2f(-2,-2), size));
+		allItems.add(new ArrowPatrolSI(new Vector2f(-2,-2), size));
+		allItems.add(new BlankSI(new Vector2f(-2, -2), size));
 		//Filler
 		if(allItems.size()%2 != 0) {
 			allItems.add(new BlankSI(new Vector2f(-2,-2), size));
@@ -39,6 +41,8 @@ public class ShopItemLibrary {
 			return new ArrowTrapSI(new Vector2f(-2,-2), size);
 		if(id == 9)
 			return new TikiSI(new Vector2f(-2,-2), size);
+		if(id == 10)
+			return new ArrowPatrolSI(new Vector2f(-2,-2), size);
 		return null;
 	}
 	

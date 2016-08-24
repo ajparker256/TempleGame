@@ -8,6 +8,7 @@ import gui.GuiTexture;
 import librarys.PageLibrary;
 import librarys.ShopItemLibrary;
 import shopItems.ShopItem;
+import upgrades.UpgradeRoller;
 
 public class UIControl {
 	
@@ -15,6 +16,7 @@ public class UIControl {
 	private RotationDialogueBox rotationMenu;
 	private LinkedPageSystem infoPages;
 	private FloorSelect floorSelect;
+	private UpgradeRoller upgradeSelect;
 	
 	public UIControl() {
 		trapShop = shopInit();
@@ -57,10 +59,16 @@ public class UIControl {
 		return floors;		
 	}
 	
+	
+	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		trapShop.render(dynamicGuis);
 		infoPages.render(dynamicGuis);
 		floorSelect.render(dynamicGuis);
+	}
+	
+	public void doMouseEvents(float mouseX, float mouseY) {
+		//TODO
 	}
 
 }
