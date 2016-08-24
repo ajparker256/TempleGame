@@ -44,7 +44,7 @@ public class Explorer extends Unit{
 		unitSize=new Vector2f(0.035f,(float) (0.035f*DisplayManager.getAspectratio()));
 		position=group.getPosition();
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.explorer,location,unitSize);
+		super.animation=new Animation(AnimationLibrary.explorerRunning,location,unitSize);
 		super.animation.setDelay(delay);
 		floor = Main.grids.get(0).getFloor();
 		damage = 1;

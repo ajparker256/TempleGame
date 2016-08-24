@@ -67,7 +67,7 @@ public class PageLibrary {
 				+ " With no exceptional abilities of any kind, they are just there to steal the glory. As time passes though, they develop" 
 				+ " useful skills.", GuiLibrary.explorerStanding);
 		athlete = new Page(location, size, "Athlete", "After years of hard work, this person has learned how to get moving."
-				+ " They are the drill sergeants of the squad. The speed of everyone is increased when they join the party.", GuiLibrary.minerStanding);
+				+ " They are the drill sergeants of the squad. The speed of everyone is increased when they join the party.", GuiLibrary.athleteStanding);
 		miner = new Page(location, size, "Miner", "This person excels at breaking down dirt. That's it.", GuiLibrary.minerStanding);
 		treasureFinder = new Page(location, size, "Treasure Finder", "Born with a passion for money, the treasure finder is a person dedicated to greed"
 				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", GuiLibrary.treasureFinderStanding);

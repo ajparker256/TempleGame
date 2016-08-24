@@ -12,7 +12,7 @@ public class TreasureHunter extends Explorer{
 	public TreasureHunter(Group group) {
 		super(group);
 		super.idle=new GuiTexture(GuiLibrary.treasureFinderStanding,location,unitSize);
-		super.animation=new Animation(AnimationLibrary.treasureFinder,location,unitSize);
+		super.animation=new Animation(AnimationLibrary.treasureFinderRunning,location,unitSize);
 		super.setDelay(25);
 
 		this.id = 3;

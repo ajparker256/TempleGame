@@ -97,7 +97,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	testPageSystem = new LinkedPageSystem(new Vector2f(locationOfLeftMenu.x-borderSize.x/2, locationOfLeftMenu.y-borderSize.y/2), new Vector2f(sizeOfLeftMenu.x+borderSize.x, sizeOfLeftMenu.y+borderSize.y));
 	populateLeftMenu(testPageSystem);
 	
-	testFloorSelect = new FloorSelect(new Vector2f(-.8f, .8f), new Vector2f(1.6f, .2f));
+	testFloorSelect = new FloorSelect(new Vector2f(-.4f, .8f), new Vector2f(.8f, .1f));
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(0.05f,5+i, i));

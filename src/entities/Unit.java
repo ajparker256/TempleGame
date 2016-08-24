@@ -52,7 +52,7 @@ public class Unit {
 		this.kill=false;
 		tempVelocity=new Vector2f(0, 0);
 		location = new Vector2f(-2,-2);
-		this.animation=new Animation(AnimationLibrary.explorer,location,size);
+		this.animation=new Animation(AnimationLibrary.explorerRunning,location,size);
 		velocity=new Vector2f(0.1f,(float) (0.1f*DisplayManager.getAspectratio()));
 		location = group.getLocation();
 		isAlive = true;
