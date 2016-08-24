@@ -427,14 +427,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 	}
 	
-	private static void shopExitLogic(float mouseX, float mouseY) {
-		if(epicShopofEpicness.isExitClicked(mouseX, mouseY) || !isEditPhase) {
-			epicShopofEpicness.setOn(false);
-			rotationDialogueBox.setOn(false);
-			upgradeRoller.setOn(false);
-		}
-	}
-	
 	private static void shopInitiationLogic(float mouseX, float mouseY) {
 		if(gridsReadOnly.get(gridToBeRendered).getGridButton().isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < System.currentTimeMillis() && epicShopofEpicness.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && isEditPhase) {
 			int x = (Mouse.getX()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().x-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.WIDTH/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.WIDTH);
@@ -443,22 +435,6 @@ public static void main(String[] args) throws FileNotFoundException {
 				epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
 				epicShopofEpicness.setOn(true);
 				epicShopofEpicness.setLastTimeClicked(System.currentTimeMillis());
-			}
-		}
-	}
-	
-	private static void upgradeRollerInitiationLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
-		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
-			if(Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
-				Trap trap = (Trap) Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
-				int levelCost = trap.getLevel()*100+50;
-				if(money-levelCost>-0) {
-					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
-					money-=levelCost;
-				}
-				else {
-					dynamicGuis.addAll(StringLibrary.makeItFitC("Insufficient Funds",new Vector2f(epicShopofEpicness.getLoc().x, epicShopofEpicness.getLoc().y-.2f), epicShopofEpicness.getSize().x));
-				}
 			}
 		}
 	}
@@ -473,8 +449,6 @@ public static void main(String[] args) throws FileNotFoundException {
 					Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
 					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
 					
-					//REMOVE WHEN READ ONLY IMPLEMENTED FULLY
-					//grid.setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					gridsReadOnly.get(gridToBeRendered).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					epicShopofEpicness.setOn(false);
 					rotationDialogueBox.setOn(false);
@@ -499,6 +473,32 @@ public static void main(String[] args) throws FileNotFoundException {
 			}
 		}
 	}
+	
+	private static void shopExitLogic(float mouseX, float mouseY) {
+		if(epicShopofEpicness.isExitClicked(mouseX, mouseY) || !isEditPhase) {
+			epicShopofEpicness.setOn(false);
+			rotationDialogueBox.setOn(false);
+			upgradeRoller.setOn(false);
+		}
+	}
+
+	private static void upgradeRollerInitiationLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
+		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
+			if(Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
+				Trap trap = (Trap) Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
+				int levelCost = trap.getLevel()*100+50;
+				if(money-levelCost>-0) {
+					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
+					money-=levelCost;
+				}
+				else {
+					dynamicGuis.addAll(StringLibrary.makeItFitC("Insufficient Funds",new Vector2f(epicShopofEpicness.getLoc().x, epicShopofEpicness.getLoc().y-.2f), epicShopofEpicness.getSize().x));
+				}
+			}
+		}
+	}
+	
+
 	
 	private static void upgradeSelection(float mouseX, float mouseY) {
 		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < System.currentTimeMillis()) {

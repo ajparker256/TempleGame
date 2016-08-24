@@ -58,26 +58,24 @@ public class FloorSelect {
 		maxSize = sizeOfEntireBar;
 		icons = new GuiTexture[hitBoxes.length];
 		interactionDelayMillis = 300; 
-		setHitboxes();
 		assignButtons();
-		renderedGridId = 0;
-		System.out.println(extraSpace);
+		setHitboxes();
 	}
 	
 	
 	private void setHitboxes() {
 		for(int i = 0; i<hitBoxes.length; i++) {
-			hitBoxes[i] = (new Button(new Vector2f(location.x+extraSpace/2+i*maxSize.y+(maxSize.y-sizeOfLevelIcon.x)/2, location.y+maxSize.y/2+sizeOfLevelIcon.y/2),
-				new Vector2f(location.x+extraSpace/2+(i+1)*maxSize.y-(maxSize.y-sizeOfLevelIcon.x)/2, location.y+maxSize.y/2-sizeOfLevelIcon.y/2)));
+			hitBoxes[i] = Button.makeButtonWithCenterLoc(icons[i].getPosition(), icons[i].getScale());
+			
 		}
 	}
 	
 	private void assignButtons() {
 		for(int i = visibilityRange[0]; i<visibilityRange[1]; i++) {
 			if(i<floorsReadOnly.size())
-				gridsAssignedToHitboxes[i] = i; //Puts the displayed floors there
+				gridsAssignedToHitboxes[i-visibilityRange[0]] = i; //Puts the displayed floors there
 			else 
-				gridsAssignedToHitboxes[i] = LOCKED_ID;
+				gridsAssignedToHitboxes[i-visibilityRange[0]] = LOCKED_ID;
 		}	
 		setIcons();
 	}
@@ -90,16 +88,21 @@ public class FloorSelect {
 	}
 	
 	private void setFloorIcons() {
-		for(int i = 1; i<icons.length-2; i++) {
-			if(gridsAssignedToHitboxes[i-1] == -1) {
+		int offsetRight = 1;
+		for(int i = offsetRight; i<icons.length-2; i++) {
+			if(gridsAssignedToHitboxes[i-offsetRight] == LOCKED_ID) {
 				icons[i] = new GuiTexture(GuiLibrary.lockedIcon, new Vector2f(location.x+(i+.5f)*maxSize.y+extraSpace/2, 
 						location.y+maxSize.y/2), sizeOfLevelIcon);
 			} else {
-				icons[i] = new GuiTexture(StringLibrary.getLetter((char)gridsAssignedToHitboxes[i-1]), new Vector2f(location.x+(i+.5f)*maxSize.y+extraSpace/2, 
+				icons[i] = new GuiTexture(StringLibrary.getLetter(getFloorChar(gridsAssignedToHitboxes[i-offsetRight])), new Vector2f(location.x+(i+.5f)*maxSize.y+extraSpace/2, 
 							location.y + maxSize.y/2), sizeOfLevelIcon);
 				System.out.println("setFloorIcons should currently be assigning a char to the correct spot");
 			}
 		}
+	}
+	
+	private char getFloorChar(int floorId) {
+		return (""+floorId).charAt(0);
 	}
 	
 	private void setLeftScrollIcon() {
@@ -107,7 +110,7 @@ public class FloorSelect {
 			icons[0] =  new GuiTexture(GuiLibrary.scrollLeftSelectable,new Vector2f(location.x+(.5f)*maxSize.y/(float)DisplayManager.getAspectratio()+extraSpace/2, 
 					location.y+maxSize.y/2), sizeOfLevelIcon);
 		} else {
-			icons[0] = new GuiTexture(GuiLibrary.tntManStanding,new Vector2f(location.x+(.5f)*maxSize.y/(float)DisplayManager.getAspectratio()+extraSpace/2, 
+			icons[0] = new GuiTexture(GuiLibrary.scrollLeft,new Vector2f(location.x+(.5f)*maxSize.y/(float)DisplayManager.getAspectratio()+extraSpace/2, 
 					location.y+maxSize.y/2), sizeOfLevelIcon);
 		}
 	}
@@ -157,7 +160,7 @@ public class FloorSelect {
 	}
 	
 	private void scrollIfClicked(float mouseX, float mouseY) {
-		int scrollDistance = 3;
+		int scrollDistance = gridsAssignedToHitboxes.length;
 		int remainingGridsLength = floorsReadOnly.size()-visibilityRange[0];
 		int locationOfRightScrollIcon = availableDynamicSpace+1;
 		if(remainingGridsLength>availableDynamicSpace && hitBoxes[locationOfRightScrollIcon].isClicked(mouseX, mouseY)) {
@@ -188,14 +191,15 @@ public class FloorSelect {
 	}
 	
 	private boolean isValidFloor(int id) {
-		return id < 0;
+		return id > 0;
 	}
 	
 	//Potential optimization if locked is the start of a non-working set always
 	private int getFloorClicked(float mouseX, float mouseY) {
+		int offsetRight = 1;
 		for(int i = 0; i<gridsAssignedToHitboxes.length; i++) {
-			if(!isLocked(gridsAssignedToHitboxes[i]) && hitBoxes[i].isClicked(mouseX, mouseY))
-				return i;
+			if(!isLocked(gridsAssignedToHitboxes[i]) && hitBoxes[i+offsetRight].isClicked(mouseX, mouseY))
+				return gridsAssignedToHitboxes[i];
 		}
 		return -1;
 	}

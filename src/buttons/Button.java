@@ -16,6 +16,12 @@ public class Button {
 			hitBoxesBR = BottomRight;
 		}
 		
+		public static Button makeButtonWithCenterLoc(Vector2f center, Vector2f halfSize) {
+			Vector2f hitBoxesTL = new Vector2f(center.x - halfSize.x, center.y+halfSize.y);
+			Vector2f hitBoxesBR = new Vector2f(center.x + halfSize.x, center.y-halfSize.y);
+			return new Button(hitBoxesTL, hitBoxesBR);
+		}
+		
 		public void setTL(Vector2f tl) {
 			hitBoxesTL = tl;
 		}

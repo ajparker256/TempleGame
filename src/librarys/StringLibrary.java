@@ -507,6 +507,7 @@ public class StringLibrary {
 			return GuiLibrary.apostrophe;
 		
 		//Else return -1 showing error
+		System.out.println("ERROR IN STRINGLIBRARY GETCHAR");
 		return -1;
 	}
 		
