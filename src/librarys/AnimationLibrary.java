@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import renderEngine.Loader;
 
 public class AnimationLibrary {
-
 	
 	
 	public static ArrayList<Integer> explorerRunning;

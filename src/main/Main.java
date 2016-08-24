@@ -375,9 +375,8 @@ public static void main(String[] args) throws FileNotFoundException {
 		rotationDialogueBoxLogic(mouseX, mouseY);
 		
 		waveInitiationLogic(mouseX, mouseY);
-		//Floor Select / Purchasing Floors Logic (TODO)
 		floorSelect(mouseX, mouseY);
-		testFloorSelect.mouseEvents(mouseX, mouseY);
+		testFloorSelect.doMouseEvents(mouseX, mouseY);
 		testPageSystem.checkForMouseEvents(mouseX, mouseY);
 
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
@@ -406,7 +405,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		ArrayList<String> moreLinks = new ArrayList<String>();
 		while(!derivativeLinks.isEmpty()) {
 		for(String key : derivativeLinks) {
-			
 			if(PageLibrary.getLinkable(key) instanceof Menu) {
 				ArrayList<String> links = ((Menu) PageLibrary.getLinkable(key)).getEntries();
 				for(String link : links) {

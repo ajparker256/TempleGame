@@ -135,8 +135,9 @@ public class FloorSelect {
 		return id == LOCKED_ID;
 	}
 	
-	
-	public void changeBetweenEditAndPlayState() {
+
+	@SuppressWarnings("unused") //TODO
+	private void changeBetweenEditAndPlayState() {
 		if(isEditState) {
 			for(int i = 0; i<floorsReadOnly.size(); i++) {
 				floorsWritable.put(i, floorsReadOnly.get(i).copy());
@@ -144,7 +145,7 @@ public class FloorSelect {
 		}
 	}
 	
-	public void mouseEvents(float mouseX, float mouseY) {
+	public void doMouseEvents(float mouseX, float mouseY) {
 		if(lastInteractionTimeMillis + interactionDelayMillis <= System.currentTimeMillis()) {
 			scrollIfClicked(mouseX, mouseY);
 			if(hitBoxes[hitBoxes.length-1].isClicked(mouseX, mouseY)) {
