@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import gui.GuiTexture;
 import librarys.GuiLibrary;
+import librarys.PageLibrary;
 import renderEngine.DisplayManager;
 
 public class LinkedPageSystem {
@@ -100,6 +101,36 @@ public class LinkedPageSystem {
 	
 	public void addLinkToMenu(String titleOfMenu, String linkTitle) {
 		screens.get(titleOfMenu).addEntry(linkTitle); //TODO add link to the menu, recalc locs and all that or maybe redraw the menu completely
+	}
+	
+	public void populate(Menu initialMenu) {
+		ArrayList<String> derivativeLinks = new ArrayList<String>();
+		for(String s : initialMenu.getEntries()){
+			derivativeLinks.add(s);
+		}
+		addNewMenu((Menu)initialMenu);
+		setCurrentScreenId(initialMenu.getTitle());
+		ArrayList<String> moreLinks = new ArrayList<String>();
+		while(!derivativeLinks.isEmpty()) {
+			for(String key : derivativeLinks) {
+				if(PageLibrary.getLinkable(key) instanceof Menu) {
+					ArrayList<String> links = ((Menu) PageLibrary.getLinkable(key)).getEntries();
+					for(String link : links) {
+						if(!derivativeLinks.contains(link)) {
+							moreLinks.add(link);
+						}
+					}
+					addNewMenu((Menu)PageLibrary.getLinkable(key));
+				} else if(PageLibrary.getLinkable(key) instanceof Page) {
+					addNewPage((Page)PageLibrary.getLinkable(key));
+				} else {
+					System.out.println("ERROR IN POPULATION OF LEFT MENU");
+				}
+			}
+			derivativeLinks.clear();
+			derivativeLinks.addAll(moreLinks);
+			moreLinks.clear();
+		}
 	}
 	
 	

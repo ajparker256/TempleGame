@@ -78,7 +78,7 @@ public class Projectile {
 			}
 		}
 	}
-			if(x>Main.grids.get(floor).getWidth()||x<0||y>Main.grids.get(floor).getWidth()||y<0||(!Main.grids.get(Main.gridToBeRendered).getTile(x, y).isPassable())){
+			if(x>=Main.grids.get(floor).getWidth()||x<0||y>=Main.grids.get(floor).getWidth()||y<0||(!Main.grids.get(Main.gridToBeRendered).getTile(x, y).isPassable())){
 				this.kill = true;
 				return false; 	//this.kill=true;
 			}

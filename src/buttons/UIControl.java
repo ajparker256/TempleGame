@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import gui.GuiTexture;
+import librarys.PageLibrary;
 import librarys.ShopItemLibrary;
 import shopItems.ShopItem;
 
@@ -16,6 +18,8 @@ public class UIControl {
 	
 	public UIControl() {
 		trapShop = shopInit();
+		infoPages = infoPageInit();
+		floorSelect = floorSelectInit();
 	}
 	
 	private Shop shopInit() {
@@ -36,6 +40,27 @@ public class UIControl {
 			}
 		}
 		return traps;
+	}
+	
+	private LinkedPageSystem infoPageInit() {
+		Vector2f locationOfInfoPages = new Vector2f();
+		Vector2f maxSizeOfInfoPages = new Vector2f();
+		LinkedPageSystem infoPagesLocal = new LinkedPageSystem(locationOfInfoPages, maxSizeOfInfoPages);
+		infoPagesLocal.populate((Menu)PageLibrary.categoriesMenu);
+		return infoPagesLocal;
+	}
+	
+	private FloorSelect floorSelectInit() {
+		Vector2f locationOfBottomLeft = new Vector2f(-.4f, .8f);
+		Vector2f totalSize = new Vector2f(.8f, .1f);
+		FloorSelect floors = new FloorSelect(locationOfBottomLeft, totalSize);
+		return floors;		
+	}
+	
+	public void render(ArrayList<GuiTexture> dynamicGuis) {
+		trapShop.render(dynamicGuis);
+		infoPages.render(dynamicGuis);
+		floorSelect.render(dynamicGuis);
 	}
 
 }

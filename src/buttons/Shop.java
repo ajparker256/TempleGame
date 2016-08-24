@@ -192,9 +192,7 @@ public class Shop {
 		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
 			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
 				
-			//	guis.add(frames[j][i]);
 				guis.add(traps[j][i].drawTile());
-				//Currently possible fixed solution, does not scale optimally
 				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(location.x+StringLibrary.getWidth(' ')+(j-visibilityRange[0])*size.x/(visibilityRange[1]-visibilityRange[0]), 
 						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y-textSize.y/2), size.x/(visibilityRange[1]-visibilityRange[0])));
 			}

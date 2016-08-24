@@ -198,34 +198,16 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 	}
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.25f, .5f), traps);
-	//Makes the background white
 	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 
 	
-	//projectiles.add(new Projectile(3, 1, 9, 0));
-	//projectiles.add(new Projectile(3, 1, 8, 0));
 	double counter = 0;
 	milli = System.currentTimeMillis();
 	state = 0; //Title Screen State
 	//state = 1; //Gameplay state
 	//state = 2; //Pause
-//	Testing the instanceof keyword as it applies to extended objects within lists
-/*
- 	String[] testList = {"1", "2"};
-	Menu test = new Menu(new Vector2f(), new Vector2f(), testList, "Title");
-	Linkable testPage = new Page(new Vector2f(), new Vector2f(), "Title", "Description");
-	Linkable[] testArray = new Linkable[2];
-	testArray[0] = test;
-	testArray[1] = testPage;
-	boolean b = test instanceof Menu;
-	boolean b2 = testArray[0] instanceof Menu;
-	boolean b3 = testArray[1] instanceof Menu;
-	System.out.println("Test is an instance of Menu. This statement is " + b);
-	System.out.println("TestArray[0] is an instance of Menu. This statement is " + b2);
-	System.out.println("TestArray[1] is an instance of Menu. This statement is " + b3);
-	*/
+
 	while(!Display.isCloseRequested()){
-	//	guis.add(background);
 		milli = System.currentTimeMillis() - milli;
 		
 		if(state == 0) {
@@ -284,7 +266,6 @@ public static void main(String[] args) throws FileNotFoundException {
 				if(projectile.canRender())
 					dynamicGuis.add(projectile.render());
 			}
-		//	story.render(dynamicGuis);
 			if(epicShopofEpicness.isOn()) {
 				epicShopofEpicness.render(dynamicGuis);
 			}
@@ -296,24 +277,10 @@ public static void main(String[] args) throws FileNotFoundException {
 			}
 			testFloorSelect.render(dynamicGuis);
 			testPageSystem.render(dynamicGuis);
-	//		PageLibrary.categoriesMenu.render(dynamicGuis);
-	//		PageLibrary.explorerMenu.render(dynamicGuis);
-	//		PageLibrary.trapMenu.render(dynamicGuis);
-	//		PageLibrary.traps.get(0).render(dynamicGuis);
-	//		PageLibrary.traps.get(1).render(dynamicGuis);
-	//		PageLibrary.traps.get(2).render(dynamicGuis);
-	//		PageLibrary.traps.get(3).render(dynamicGuis);
-	//		PageLibrary.explorers.get(0).render(dynamicGuis);
-	//		PageLibrary.explorers.get(1).render(dynamicGuis);
-	//		PageLibrary.explorers.get(2).render(dynamicGuis);
-	//		PageLibrary.explorers.get(3).render(dynamicGuis);
-	//		PageLibrary.explorers.get(4).render(dynamicGuis);
 			
 					
 			
 		}
-		//PageLibrary.trapMenu.render(dynamicGuis);
-		//Reinitialize milli after all methods that call it are done. Then render and do other stuff.
 		milli = System.currentTimeMillis();
 		guiRenderer.render(guis);
 		guiRenderer.render(dynamicGuis);
@@ -394,7 +361,8 @@ public static void main(String[] args) throws FileNotFoundException {
 			}
 		}
 	}
-//TODO optimize if necessary	
+
+//TODO REMOVE AFTER UI CONTROL IS DONE	
 	private static void populateLeftMenu(LinkedPageSystem linkedSystem) {
 		ArrayList<String> derivativeLinks = new ArrayList<String>();
 		for(String s : PageLibrary.categoriesMenu.getEntries()){

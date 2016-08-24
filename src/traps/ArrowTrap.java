@@ -77,44 +77,44 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		setTriggers();
 	}
 	@Override
-	public void whenTriggered(Point p){
+	public void whenTriggered(Point targetPoint){
 		for(Upgrade u : onTrigger) {
 			u.upgrade(this);
 		}
 		if(cooldown<=0){
 			boolean fire = false;
-			//Up
-			if(direction == 1 && p.y-y<range) {
+			//UtargetPoint
+			if(direction == 1 && targetPoint.y-y<range) {
 				fire = true;
-				for(int i = y+1; i<p.y; i++) {
+				for(int i = y+1; i<targetPoint.y; i++) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
 						fire = false;
 						break;
 					}
 				}
 				//Right
-			} else if(direction == 2 && p.x-x<range) {
+			} else if(direction == 2 && targetPoint.x-x<range) {
 				fire = true;
-				for(int i = x+1; i<p.x; i++) {
+				for(int i = x+1; i<targetPoint.x; i++) {
 					if(Main.grids.get(floor).getTile(i, y).getId() != 0) {
 						fire = false;
 						break;
 					}
 				}
 				//Down
-			} else if(direction == 3 && y-p.y <range) {
+			} else if(direction == 3 && y-targetPoint.y <range) {
 				fire = true;
-				for(int i = y-1; i>p.y; i--) {
+				for(int i = y-1; i>targetPoint.y; i--) {
 					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
 						fire = false;
 						break;
 					}
 				}
 				//Left
-			} else if(direction == 4 && x-p.x<range) {
+			} else if(direction == 4 && x-targetPoint.x<range) {
 				fire = true;
-				for(int i = x-1; i>p.x; i--) {
-					if(Main.grids.get(floor).getTile(x, i).getId() != 0) {
+				for(int i = x-1; i>targetPoint.x; i--) {
+					if(Main.grids.get(floor).getTile(i, y).getId() != 0) {
 						fire = false;
 						break;
 					}
@@ -124,8 +124,8 @@ public class ArrowTrap extends Trap implements TrapInterface{
 				for(Upgrade u : onFire) {
 					u.upgrade(this);
 				}
-				double tempDamage = getRealDamage();
-				Main.projectiles.add(new Projectile(direction,x,y,super.floor, tempDamage));
+				double temtargetPointDamage = getRealDamage();
+				Main.projectiles.add(new Projectile(direction,x,y,super.floor, temtargetPointDamage));
 				isFiring = true;
 				cooldown=maxCd; 
 			}
