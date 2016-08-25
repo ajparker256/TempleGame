@@ -160,6 +160,10 @@ public class Grid {
 		return isOn;
 	}
 	
+	public Vector2f getTotalSize() {
+		return new Vector2f(size*getWidth()*2, size*getWidth()*2*(float)DisplayManager.getAspectratio());
+	}
+	
 	public void setIsOn(boolean b) {
 		isOn = b;
 	}

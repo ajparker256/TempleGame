@@ -181,27 +181,29 @@ public class Shop {
 	
 	//This renders all traps in the shop at their given locations.
 	public void render(ArrayList<GuiTexture> guis) {
-		if(visibilityRange[2] != 0) {
-			guis.add(downArrow);
-		}
-		if(visibilityRange[2] != traps[0].length-(visibilityRange[3]-visibilityRange[2])) {
-			guis.add(upArrow);
-		} 
-		guis.add(selectionOutline);
-		StringLibrary.setSize(textSize);
-		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
-			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
-				
-				guis.add(traps[j][i].drawTile());
-				guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(location.x+StringLibrary.getWidth(' ')+(j-visibilityRange[0])*size.x/(visibilityRange[1]-visibilityRange[0]), 
-						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y-textSize.y/2), size.x/(visibilityRange[1]-visibilityRange[0])));
+		if(isOn) {
+			if(visibilityRange[2] != 0) {
+				guis.add(downArrow);
 			}
+			if(visibilityRange[2] != traps[0].length-(visibilityRange[3]-visibilityRange[2])) {
+				guis.add(upArrow);
+			} 
+			guis.add(selectionOutline);
+			StringLibrary.setSize(textSize);
+			for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
+				for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
+					
+					guis.add(traps[j][i].drawTile());
+					guis.addAll(StringLibrary.makeItFitC(traps[j][i].toString(), new Vector2f(location.x+StringLibrary.getWidth(' ')+(j-visibilityRange[0])*size.x/(visibilityRange[1]-visibilityRange[0]), 
+							traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y-textSize.y/2), size.x/(visibilityRange[1]-visibilityRange[0])));
+				}
+			}
+			StringLibrary.setSize(new Vector2f(.02f, .04f));
+			if(Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)getGridLoc().x, (int)getGridLoc().y).getId() > 1)
+			guis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
+			guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x-StringLibrary.getWidth('X'),
+					location.y+size.y)));
 		}
-		StringLibrary.setSize(new Vector2f(.02f, .04f));
-		if(Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)getGridLoc().x, (int)getGridLoc().y).getId() > 1)
-		guis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
-		guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x-StringLibrary.getWidth('X'),
-				location.y+size.y)));
 	}
 	
 	public Vector2f getGridLoc() {

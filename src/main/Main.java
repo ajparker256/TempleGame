@@ -72,6 +72,7 @@ public static boolean isEditPhase;
 public static Button startWave;
 public static LinkedPageSystem testPageSystem;
 public static FloorSelect testFloorSelect;
+private static UIControl userInterface;
 public static void main(String[] args) throws FileNotFoundException {
 	gridsReadOnly = new ArrayList<Grid>();
 	grids = new ArrayList<Grid>();
@@ -89,15 +90,17 @@ public static void main(String[] args) throws FileNotFoundException {
 	GuiLibrary.init(loader);
 	UpgradeLibrary.init();
 	SoundLibrary.init();
-	Vector2f locationOfLeftMenu = new Vector2f(-.9f, -.8f);
-	Vector2f sizeOfLeftMenu = new Vector2f(.4f, 1.6f);
-	Vector2f borderSize = new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio());
-	PageLibrary.init(new Vector2f(locationOfLeftMenu.x-StringLibrary.getSize().x/2, locationOfLeftMenu.y), sizeOfLeftMenu);
+	//Vector2f locationOfLeftMenu = new Vector2f(-.9f, -.8f);
+	//Vector2f sizeOfLeftMenu = new Vector2f(.4f, 1.6f);
+	//Vector2f borderSize = new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio());
+	//PageLibrary.init(new Vector2f(locationOfLeftMenu.x-StringLibrary.getSize().x/2, locationOfLeftMenu.y), sizeOfLeftMenu);
 	
-	testPageSystem = new LinkedPageSystem(new Vector2f(locationOfLeftMenu.x-borderSize.x/2, locationOfLeftMenu.y-borderSize.y/2), new Vector2f(sizeOfLeftMenu.x+borderSize.x, sizeOfLeftMenu.y+borderSize.y));
-	populateLeftMenu(testPageSystem);
+	//testPageSystem = new LinkedPageSystem(new Vector2f(locationOfLeftMenu.x-borderSize.x/2, locationOfLeftMenu.y-borderSize.y/2), new Vector2f(sizeOfLeftMenu.x+borderSize.x, sizeOfLeftMenu.y+borderSize.y));
+	//populateLeftMenu(testPageSystem);
 	
-	testFloorSelect = new FloorSelect(new Vector2f(-.4f, .8f), new Vector2f(.8f, .1f));
+	//testFloorSelect = new FloorSelect(new Vector2f(-.4f, .8f), new Vector2f(.8f, .1f));
+	
+	userInterface = new UIControl();
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(0.05f,5+i, i));
@@ -255,7 +258,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				if(projectile.canRender())
 					dynamicGuis.add(projectile.render());
 			}
-			if(epicShopofEpicness.isOn()) {
+		/*	if(epicShopofEpicness.isOn()) {
 				epicShopofEpicness.render(dynamicGuis);
 			}
 			if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
@@ -263,10 +266,10 @@ public static void main(String[] args) throws FileNotFoundException {
 			}
 			if(upgradeRoller.isOn()) {
 				upgradeRoller.render(dynamicGuis);
-			}
+			} 
 			testFloorSelect.render(dynamicGuis);
-			testPageSystem.render(dynamicGuis);
-			
+			testPageSystem.render(dynamicGuis);*/
+			userInterface.render(dynamicGuis);
 					
 			
 		}
@@ -319,20 +322,21 @@ public static void main(String[] args) throws FileNotFoundException {
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
 		
-		shopInitiationLogic(mouseX, mouseY);
-		shopSelectionLogic(mouseX, mouseY, dynamicGuis);
-		epicShopofEpicness.scrollLogic(mouseX, mouseY);
-		shopExitLogic(mouseX, mouseY);
+		//shopInitiationLogic(mouseX, mouseY);
+		//shopSelectionLogic(mouseX, mouseY, dynamicGuis);
+		//epicShopofEpicness.scrollLogic(mouseX, mouseY);
+		//shopExitLogic(mouseX, mouseY);
 		
-		upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
-		upgradeSelection(mouseX, mouseY);
+		//upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
+		//upgradeSelection(mouseX, mouseY);
 		
-		rotationDialogueBoxLogic(mouseX, mouseY);
+		//rotationDialogueBoxLogic(mouseX, mouseY);
 		
 		waveInitiationLogic(mouseX, mouseY);
-		floorSelect(mouseX, mouseY);
-		testFloorSelect.doMouseEvents(mouseX, mouseY);
-		testPageSystem.checkForMouseEvents(mouseX, mouseY);
+		//floorSelect(mouseX, mouseY);
+		//testFloorSelect.doMouseEvents(mouseX, mouseY);
+		//testPageSystem.checkForMouseEvents(mouseX, mouseY);
+		userInterface.doMouseEvents(mouseX, mouseY, dynamicGuis);
 
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
 		//Test each possible button individually here. Tried to make classes and use a for loop, but they were too individualized.

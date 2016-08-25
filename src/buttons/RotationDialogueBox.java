@@ -88,24 +88,26 @@ public class RotationDialogueBox extends Shop{
 	}
 	
 	public void render(ArrayList<GuiTexture> guis) {
-		int k = 1;
-		guis.add(background);
-		for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
-			for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
-				
-				guis.add(traps[j][i].drawTile());
-				
-				guis.addAll(StringLibrary.makeItFitC(k+"", new Vector2f(traps[j][i].drawTile().getPosition().x, 
-						traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
-				k++;
+		if(isOn) {
+			int k = 1;
+			guis.add(background);
+			for(int i = visibilityRange[2]; i<visibilityRange[3]; i++) {
+				for(int j = visibilityRange[0]; j<visibilityRange[1]; j++) {
+					
+					guis.add(traps[j][i].drawTile());
+					
+					guis.addAll(StringLibrary.makeItFitC(k+"", new Vector2f(traps[j][i].drawTile().getPosition().x, 
+							traps[j][i].drawTile().getPosition().y-traps[j][i].drawTile().getScale().y+StringLibrary.getSize().y), size.x/traps[0].length));
+					k++;
+				}
 			}
+			guis.addAll(StringLibrary.makeItFitC(message, new Vector2f(location.x, location.y+size.y+.1f), size.x));
+			
+			guis.addAll(StringLibrary.drawString("Confirm", new Vector2f(location.x,
+					location.y+StringLibrary.getSize().y/2)));
+			guis.addAll(StringLibrary.drawString("Cancel", new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth("Cancel"),
+					location.y+StringLibrary.getSize().y/2)));
 		}
-		guis.addAll(StringLibrary.makeItFitC(message, new Vector2f(location.x, location.y+size.y+.1f), size.x));
-		
-		guis.addAll(StringLibrary.drawString("Confirm", new Vector2f(location.x,
-				location.y+StringLibrary.getSize().y/2)));
-		guis.addAll(StringLibrary.drawString("Cancel", new Vector2f(location.x+size.x*(.5f * (visibilityRange[1]-visibilityRange[0]))-StringLibrary.getWidth("Cancel"),
-				location.y+StringLibrary.getSize().y/2)));
 	}
 	
 	@Override

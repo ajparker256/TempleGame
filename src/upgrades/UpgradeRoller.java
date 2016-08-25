@@ -55,8 +55,7 @@ public class UpgradeRoller {
 			}
 			roll();
 			isOn = true;
-			sinceOpened
-			= System.currentTimeMillis();
+			sinceOpened	= System.currentTimeMillis();
 		}
 		
 		public double getTimeOpened() {
@@ -77,7 +76,8 @@ public class UpgradeRoller {
 		
 		public void render(ArrayList<GuiTexture> dynamicGuis) {
 			//dynamicGuis.add(background);
-			dynamicGuis.addAll(optionsTextures);
+			if(isOn)
+				dynamicGuis.addAll(optionsTextures);
 		}
 		
 		public void roll() {

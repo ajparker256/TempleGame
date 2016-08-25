@@ -16,7 +16,7 @@ public class FloorSelect {
 	//The last spot is always + floor icon
 	//The second to last spot is always scroll, but may not be highlighted as usable
 	//The first position is also always scroll same as above
-	private static int LOCKED_ID = -1;
+	private static final int LOCKED_ID = -1;
 	private int nextGridNumber;
 	private int renderedGridId;
 	private HashMap<Integer, Grid> floorsReadOnly;
@@ -30,6 +30,7 @@ public class FloorSelect {
 	private float extraSpace;
 	private Button[] hitBoxes;
 	private GuiTexture[] icons;
+	private boolean isOn;
 	
 	private int visibilityRange[];
 	private int availableDynamicSpace;
@@ -58,8 +59,10 @@ public class FloorSelect {
 		maxSize = sizeOfEntireBar;
 		icons = new GuiTexture[hitBoxes.length];
 		interactionDelayMillis = 300; 
+		addFloor();
 		assignButtons();
 		setHitboxes();
+		isOn = true;
 	}
 	
 	
@@ -204,15 +207,21 @@ public class FloorSelect {
 	}
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
-		for(GuiTexture currentIcon : icons) {
-			dynamicGuis.add(currentIcon);
-		}
-		if(getGridToBeRendered() != null) {
-			getGridToBeRendered().render();
+		if(isOn) {
+			for(GuiTexture currentIcon : icons) {
+				dynamicGuis.add(currentIcon);
+			}
+			if(getGridToBeRendered() != null) {
+				getGridToBeRendered().render();
+			}
 		}
 	}
 	
-	private Grid getGridToBeRendered() {
+	public void setOn(boolean b) {
+		isOn = b;
+	}
+	
+	public Grid getGridToBeRendered() {
 		if(isEditState) {
 			return floorsReadOnly.get(renderedGridId);
 		} else {
@@ -220,8 +229,28 @@ public class FloorSelect {
 		}
 	}
 	
+	public boolean isEditState() {
+		return isEditState;
+	}
+	
 	public boolean isGridClicked(float mouseX, float mouseY) {
 		return getGridToBeRendered().isClicked(mouseX, mouseY);
+	}
+	
+	public int getCurrentFloor() {
+		return renderedGridId;
+	}
+	
+	public Vector2f getGridLoc(int floor) {
+		return floorsReadOnly.get(floor).getLoc();
+	}
+	
+	public Vector2f getGridSize(int floor) {
+		return floorsReadOnly.get(floor).getTotalSize();
+	}
+	
+	public float getSizeOfTile() {
+		return floorsReadOnly.get(renderedGridId).getSize();
 	}
 	
 }
