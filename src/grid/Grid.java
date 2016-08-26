@@ -189,7 +189,6 @@ public class Grid {
 	public ArrayList<GuiTexture> render() {
 	
 		ArrayList<GuiTexture> toRender= new ArrayList<GuiTexture>();
-		if(floor == Main.gridToBeRendered){
 			for(Tile[]line:grid){
 				for(Tile tile:line){
 					//UNCOMMENT BELOW FOR TRIPPY THINGS XD (Used for testing occupied tiles)
@@ -201,7 +200,7 @@ public class Grid {
 				}
 			}
 		
-		}
+		
 		return toRender;
 		
 	}

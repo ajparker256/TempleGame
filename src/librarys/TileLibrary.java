@@ -8,6 +8,8 @@ public class TileLibrary {
 
 	//This is a library that creates tiles based off of id's
 	
+	private static final int FIRST_TRAP_ID = 2;
+	
 	public static Tile getTile(int x, int y, float size, int id) {
 		if(id == 0)
 			return new Blank(x, y, size, Main.grids.get(Main.gridToBeRendered).getLoc(), Main.gridToBeRendered);
@@ -35,5 +37,9 @@ public class TileLibrary {
 			return new Exit(x, y, size, Main.gridToBeRendered);
 		
 		return null;
+	}
+	
+	public static int getFirstTrapId() {
+		return FIRST_TRAP_ID;
 	}
 }

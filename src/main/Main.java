@@ -243,14 +243,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(state == 1 || state == 2) {
 			update(dynamicGuis, milli);
 			dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
-			//if(isEditPhase)
-			//	dynamicGuis.addAll(gridsReadOnly.get(gridToBeRendered).render());
-			//else
-			//	dynamicGuis.addAll(grids.get(gridToBeRendered).render());
-			
-			//for(Grid g: grids) {
-			//	dynamicGuis.addAll(g.renderFloorSelect());
-			//}
+			userInterface.render(dynamicGuis);
 			for(Squad squad : squads) {
 				dynamicGuis.addAll(squad.render());
 			}
@@ -258,18 +251,8 @@ public static void main(String[] args) throws FileNotFoundException {
 				if(projectile.canRender())
 					dynamicGuis.add(projectile.render());
 			}
-		/*	if(epicShopofEpicness.isOn()) {
-				epicShopofEpicness.render(dynamicGuis);
-			}
-			if(rotationDialogueBox != null && rotationDialogueBox.isOn()) {
-				rotationDialogueBox.render(dynamicGuis);
-			}
-			if(upgradeRoller.isOn()) {
-				upgradeRoller.render(dynamicGuis);
-			} 
-			testFloorSelect.render(dynamicGuis);
-			testPageSystem.render(dynamicGuis);*/
-			userInterface.render(dynamicGuis);
+		
+
 					
 			
 		}
@@ -322,20 +305,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		//This scales mouseY to be in the range of 1 at the top and -1 at the bottom
 		float mouseY = (float)Mouse.getY()*2/DisplayManager.HEIGHT -1;
 		
-		//shopInitiationLogic(mouseX, mouseY);
-		//shopSelectionLogic(mouseX, mouseY, dynamicGuis);
-		//epicShopofEpicness.scrollLogic(mouseX, mouseY);
-		//shopExitLogic(mouseX, mouseY);
-		
-		//upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
-		//upgradeSelection(mouseX, mouseY);
-		
-		//rotationDialogueBoxLogic(mouseX, mouseY);
-		
 		waveInitiationLogic(mouseX, mouseY);
-		//floorSelect(mouseX, mouseY);
-		//testFloorSelect.doMouseEvents(mouseX, mouseY);
-		//testPageSystem.checkForMouseEvents(mouseX, mouseY);
 		userInterface.doMouseEvents(mouseX, mouseY, dynamicGuis);
 
 		//Cursors are here http://www.flaticon.com/packs/cursors-and-pointers for changing the native cursor icon
@@ -350,150 +320,6 @@ public static void main(String[] args) throws FileNotFoundException {
 					grids.add(i, g.copy());
 					grids.remove(i+1);
 					i++;
-			}
-		}
-	}
-
-//TODO REMOVE AFTER UI CONTROL IS DONE	
-	private static void populateLeftMenu(LinkedPageSystem linkedSystem) {
-		ArrayList<String> derivativeLinks = new ArrayList<String>();
-		for(String s : PageLibrary.categoriesMenu.getEntries()){
-			derivativeLinks.add(s);
-		}
-		linkedSystem.addNewMenu((Menu)PageLibrary.categoriesMenu);
-		linkedSystem.setCurrentScreenId(PageLibrary.categoriesMenu.getTitle());
-		ArrayList<String> moreLinks = new ArrayList<String>();
-		while(!derivativeLinks.isEmpty()) {
-			for(String key : derivativeLinks) {
-				if(PageLibrary.getLinkable(key) instanceof Menu) {
-					ArrayList<String> links = ((Menu) PageLibrary.getLinkable(key)).getEntries();
-					for(String link : links) {
-						if(!derivativeLinks.contains(link)) {
-							moreLinks.add(link);
-						}
-					}
-					linkedSystem.addNewMenu((Menu)PageLibrary.getLinkable(key));
-				} else if(PageLibrary.getLinkable(key) instanceof Page) {
-					linkedSystem.addNewPage((Page)PageLibrary.getLinkable(key));
-				} else {
-					System.out.println("ERROR IN POPULATION OF LEFT MENU");
-				}
-			}
-			derivativeLinks.clear();
-			derivativeLinks.addAll(moreLinks);
-			moreLinks.clear();
-		}
-	}
-	
-	private static void shopInitiationLogic(float mouseX, float mouseY) {
-		if(gridsReadOnly.get(gridToBeRendered).isClicked(mouseX, mouseY) && !rotationDialogueBox.isOn() && epicShopofEpicness.getLastTimeClosed()+250 < System.currentTimeMillis() && epicShopofEpicness.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && isEditPhase) {
-			int x = (Mouse.getX()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().x-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.WIDTH/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.WIDTH);
-			int y = (Mouse.getY()-(int)((gridsReadOnly.get(gridToBeRendered).getLoc().y-gridsReadOnly.get(gridToBeRendered).getSize()+1f)*DisplayManager.HEIGHT/2))/(int)(gridsReadOnly.get(gridToBeRendered).getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
-			if(Main.gridsReadOnly.get(gridToBeRendered).getWidth()>x && Main.gridsReadOnly.get(gridToBeRendered).getWidth()>y) {
-				epicShopofEpicness.setGridLoc(new Vector2f((float)x, (float)y));
-				epicShopofEpicness.setOn(true);
-				epicShopofEpicness.setLastTimeClicked(System.currentTimeMillis());
-			}
-		}
-	}
-	
-	private static void shopSelectionLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
-		if(epicShopofEpicness.isOn() && epicShopofEpicness.shopIsClicked(mouseX, mouseY)) {
-			Tile oldTile=gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
-			int selection = epicShopofEpicness.getShopItem(mouseX, mouseY);
-			if(selection != -1) {
-				ShopItem selectedItem = ShopItemLibrary.getItem(selection);
-				if(selectedItem.getCost()<=money && oldTile.getId() != selectedItem.getId() && !selectedItem.isRotatable()) {
-					Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
-					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
-					
-					gridsReadOnly.get(gridToBeRendered).setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
-					epicShopofEpicness.setOn(false);
-					rotationDialogueBox.setOn(false);
-					upgradeRoller.setOn(false);
-					epicShopofEpicness.setLastTimeClosed(System.currentTimeMillis());
-					money -= selectedItem.getCost();
-				} else if(selectedItem.getCost()>money) {
-					dynamicGuis.addAll(StringLibrary.makeItFit("Insufficient Funds", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*2), epicShopofEpicness.getSize().x*1.6f));
-				} else if(oldTile.getId() == selectedItem.getId()) {
-					dynamicGuis.addAll(StringLibrary.makeItFitC("That trap is already there!", new Vector2f(epicShopofEpicness.getLoc().getX(), epicShopofEpicness.getLoc().y-StringLibrary.getSize().y*6), epicShopofEpicness.getSize().x*1.6f));
-				} else if(selectedItem.isRotatable()) {
-					Vector2f size1 = new Vector2f(.8f, .8f);
-					ShopItem[][] rotations = new ShopItem[2][2];
-					for(int i = 0; i<2; i++) {
-						for(int j = 0; j<2; j++) {
-							rotations[i][j] = ShopItemLibrary.getItem(selectedItem.getId());
-							rotations[i][j].drawTile().setScale(new Vector2f(.06f, .06f*(float)DisplayManager.getAspectratio()));
-						}
-					}
-					rotationDialogueBox = new RotationDialogueBox(new Vector2f(-size1.x/2, -size1.y/2), size1, rotations,  "Which way should it point?");
-				}
-			}
-		}
-	}
-	
-	private static void shopExitLogic(float mouseX, float mouseY) {
-		if(epicShopofEpicness.isExitClicked(mouseX, mouseY) || !isEditPhase) {
-			epicShopofEpicness.setOn(false);
-			rotationDialogueBox.setOn(false);
-			upgradeRoller.setOn(false);
-		}
-	}
-
-	private static void upgradeRollerInitiationLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
-		if(epicShopofEpicness.isOn() && epicShopofEpicness.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
-			if(Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y).getId() > 1) {
-				Trap trap = (Trap) Main.gridsReadOnly.get(gridToBeRendered).getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y);
-				int levelCost = trap.getLevel()*100+50;
-				if(money-levelCost>-0) {
-					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
-					money-=levelCost;
-				}
-				else {
-					dynamicGuis.addAll(StringLibrary.makeItFitC("Insufficient Funds",new Vector2f(epicShopofEpicness.getLoc().x, epicShopofEpicness.getLoc().y-.2f), epicShopofEpicness.getSize().x));
-				}
-			}
-		}
-	}
-	
-
-	
-	private static void upgradeSelection(float mouseX, float mouseY) {
-		if(upgradeRoller.isOn() && upgradeRoller.getTimeOpened()+250 < System.currentTimeMillis()) {
-			if(upgradeRoller.itemIsClicked(mouseX, mouseY)) {
-				upgradeRoller.getTrap().upgrade(upgradeRoller.getClickedUpgrade(mouseX, mouseY));
-				upgradeRoller.setOn(false);
-				epicShopofEpicness.setOn(false);
-				epicShopofEpicness.setLastTimeClosed(System.currentTimeMillis());
-			}
-		}
-	}
-	
-	private static void rotationDialogueBoxLogic(float mouseX, float mouseY) {
-		if(rotationDialogueBox.isOn() && rotationDialogueBox.shopIsClicked(mouseX, mouseY)) {
-			int selected = rotationDialogueBox.getShopItem(mouseX, mouseY);
-			if(selected != 0) {
-				rotationDialogueBox.setSelection(selected);
-			}
-			if(rotationDialogueBox.getSelection() != 0 /*&& rotationDialogueBox.isConfirmed(mouseX, mouseY)*/) {
-				gridsReadOnly.get(gridToBeRendered).setTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, TileLibrary.getTile((int)epicShopofEpicness.getGridLoc().x, (int)epicShopofEpicness.getGridLoc().y, .05f, rotationDialogueBox.getGivenTile().getId()+rotationDialogueBox.getSelection()-1));
-				rotationDialogueBox.setSelection(0);
-				rotationDialogueBox.setOn(false);
-				epicShopofEpicness.setOn(false);
-				epicShopofEpicness.setLastTimeClosed(System.currentTimeMillis());
-			}
-			if(rotationDialogueBox.isCanceled(mouseX, mouseY)) {
-				rotationDialogueBox.setOn(false);
-			}
-		}
-	}
-	
-	private static void floorSelect(float mouseX, float mouseY) {
-		for(Grid g : grids) {
-			if(g.isLevelSelected(mouseX, mouseY) && gridToBeRendered != g.getFloor()) {
-				gridToBeRendered = g.getFloor();
-				epicShopofEpicness.setOn(false);
-				break;
 			}
 		}
 	}

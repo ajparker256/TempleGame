@@ -1,17 +1,20 @@
 package buttons;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
 
+import grid.Grid;
 import grid.Tile;
 import gui.GuiRenderer;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
+import librarys.TileLibrary;
 import main.Main;
 import renderEngine.DisplayManager;
 import shopItems.ShopItem;
@@ -19,7 +22,7 @@ import shopItems.ShopItem;
 public class Shop {
 	
 	//This is the tile clicked on to initialize the shop. It is where the traps are placed on the grid
-	private Vector2f locationOfTrapPlacement;
+	private Point locationOfTrapPlacement;
 	
 	//This is the bottom left corner of the shop
 	protected Vector2f location;
@@ -73,7 +76,7 @@ public class Shop {
 		this.size = size;
 		//buttons = new Button[numberOfRows][numberOfColumns];
 		//this.frames = new GuiTexture[traps.length][traps[0].length];
-		this.locationOfTrapPlacement = new Vector2f(0,0);
+		locationOfTrapPlacement = new Point();
 		visibilityRange = new int[4];
 		if(traps.length<2) {
 			visibilityRange[1] = traps.length;
@@ -199,14 +202,16 @@ public class Shop {
 				}
 			}
 			StringLibrary.setSize(new Vector2f(.02f, .04f));
-			if(Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)getGridLoc().x, (int)getGridLoc().y).getId() > 1)
-			guis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
 			guis.addAll(StringLibrary.drawString("X", new Vector2f(location.x+size.x-StringLibrary.getWidth('X'),
 					location.y+size.y)));
 		}
 	}
+	public void renderUpgradeOption(ArrayList<GuiTexture> dynamicGuis) {
+			dynamicGuis.addAll(StringLibrary.makeItFitC("UPGRADE!", new Vector2f(location.x, location.y), size.y/2));
+	}
 	
-	public Vector2f getGridLoc() {
+	
+	public Point getGridLoc() {
 		return locationOfTrapPlacement;
 	}
 	
@@ -291,11 +296,10 @@ public class Shop {
 		return isOn;
 	}
 	
-	public void setGridLoc(Vector2f locationOnGrid) {
+	public void setGridLoc(Point locationOnGrid, Grid currentFloor) {
 		locationOfTrapPlacement = locationOnGrid;
-		selectionOutline = new GuiTexture(GuiLibrary.selectionOutline, Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)locationOfTrapPlacement.x, 
-				(int)locationOfTrapPlacement.y).getLocation(), new Vector2f(Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)locationOfTrapPlacement.x,
-						(int)locationOfTrapPlacement.y).getSize(), Main.gridsReadOnly.get(Main.gridToBeRendered).getTile((int)locationOfTrapPlacement.x,(int)locationOfTrapPlacement.y).getSize()*(float)DisplayManager.getAspectratio()));
+		float size = currentFloor.getSize();
+		selectionOutline = new GuiTexture(GuiLibrary.selectionOutline, currentFloor.getTile(locationOfTrapPlacement.x, locationOfTrapPlacement.y).getLocation(), new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
 	}
 
 }

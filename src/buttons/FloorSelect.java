@@ -31,6 +31,8 @@ public class FloorSelect {
 	private Button[] hitBoxes;
 	private GuiTexture[] icons;
 	private boolean isOn;
+	private int debt;
+	private boolean exitShop;
 	
 	private int visibilityRange[];
 	private int availableDynamicSpace;
@@ -153,12 +155,16 @@ public class FloorSelect {
 			if(hitBoxes[hitBoxes.length-1].isClicked(mouseX, mouseY)) {
 				addFloor(money);
 			}
-			int clickedFloorId = getFloorClicked(mouseX, mouseY);
-			if(isValidFloor(clickedFloorId)) {
-				renderedGridId = clickedFloorId;
-				System.out.println(clickedFloorId);
-			}
+			doFloorChanges(mouseX, mouseY);
 			lastInteractionTimeMillis = System.currentTimeMillis();
+		}
+	}
+	
+	public void doFloorChanges(float mouseX, float mouseY) {
+		int clickedFloorId = getFloorClicked(mouseX, mouseY);
+		if(isValidFloor(clickedFloorId)) {
+			renderedGridId = clickedFloorId;
+			exitShop = true;
 		}
 	}
 	
@@ -183,19 +189,28 @@ public class FloorSelect {
 		}
 	}
 	
-	public int addFloor(int money) {
-		int cost = nextGridNumber*nextGridNumber*baseCost; //Quadratic growth
+	public void addFloor(int money) {
+		int cost = nextGridNumber*baseCost;
 		if(money>=cost) {
 			Grid g = new Grid(0.05f,5+nextGridNumber, nextGridNumber);
 			floorsReadOnly.put(nextGridNumber, g);
 			nextGridNumber++;
 			assignButtons();
-			return cost;
+			addToDebt(cost);
 		}
-		return 0;
 	}
 	
-	private boolean isValidFloor(int id) {
+	public int getDebt() {
+		int tempDebt = debt;
+		debt = 0;
+		return tempDebt;
+	}
+	
+	private void addToDebt(int lostMoney) {
+		debt += lostMoney;
+	}
+	
+	public boolean isValidFloor(int id) {
 		return id >= 0;
 	}
 	
@@ -214,9 +229,9 @@ public class FloorSelect {
 			for(GuiTexture currentIcon : icons) {
 				dynamicGuis.add(currentIcon);
 			}
-	//		if(getGridToBeRendered() != null) {
-				getGridToBeRendered().render();
-	//		}
+			if(getGridToBeRendered() != null) {
+				dynamicGuis.addAll(getGridToBeRendered().render());
+			}
 		}
 	}
 	
@@ -254,6 +269,15 @@ public class FloorSelect {
 	
 	public float getSizeOfTile() {
 		return floorsReadOnly.get(renderedGridId).getSize();
+	}
+	
+	public boolean shouldExitShop() {
+		if(exitShop) {
+			exitShop = false;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }

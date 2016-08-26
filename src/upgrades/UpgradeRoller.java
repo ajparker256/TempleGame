@@ -9,6 +9,7 @@ import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import librarys.StringLibrary;
+import librarys.TileLibrary;
 import librarys.UpgradeLibrary;
 import traps.Trap;
 
@@ -78,6 +79,10 @@ public class UpgradeRoller {
 			//dynamicGuis.add(background);
 			if(isOn)
 				dynamicGuis.addAll(optionsTextures);
+		}
+		
+		public boolean isUpgradable(Tile currentlySelected) {
+			return currentlySelected.getId() >= TileLibrary.getFirstTrapId();
 		}
 		
 		public void roll() {

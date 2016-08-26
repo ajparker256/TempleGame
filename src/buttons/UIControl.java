@@ -1,5 +1,6 @@
 package buttons;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
@@ -24,13 +25,17 @@ public class UIControl {
 	private LinkedPageSystem infoPages;
 	private FloorSelect floorSelect;
 	private UpgradeRoller upgradeRoller;
+	private Vector2f locationOfMoney;
+	private Vector2f sizeOfMoney;
 	
 	public UIControl() {
 		money = 2000;
+		locationOfMoney = new Vector2f(0.6f,-0.9f);
+		sizeOfMoney = new Vector2f(.025f, .05f);
 		rotationMenu = rotationMenuInit();
-		trapShop = shopInit();
 		infoPages = infoPageInit();
 		floorSelect = floorSelectInit();
+		trapShop = shopInit();
 		upgradeRoller = upgradeRollerInit();
 	}
 	
@@ -42,7 +47,8 @@ public class UIControl {
 		ShopItemLibrary.init();
 		Vector2f maxSize = new Vector2f(.25f, .5f);
 		Vector2f locationOfShop = new Vector2f(.5f, -.1f);
-		return new Shop(locationOfShop, maxSize, populateShop());
+		Shop toBeMade = new Shop(locationOfShop, maxSize, populateShop());
+		return toBeMade;
 	}
 	
 	private ShopItem[][] populateShop() {
@@ -85,20 +91,36 @@ public class UIControl {
 		infoPages.render(dynamicGuis);
 		rotationMenu.render(dynamicGuis);
 		upgradeRoller.render(dynamicGuis);
+		renderUpgradeOption(dynamicGuis);
+		renderMoney(dynamicGuis);
+	}
+	
+	private void renderUpgradeOption(ArrayList<GuiTexture> dynamicGuis) {
+		if(trapShop.isOn() && floorSelect.getGridToBeRendered().getTile(trapShop.getGridLoc().x, trapShop.getGridLoc().y).getId()>=TileLibrary.getFirstTrapId()) {
+			trapShop.renderUpgradeOption(dynamicGuis);
+		}
+	}
+	
+	private void renderMoney(ArrayList<GuiTexture> dynamicGuis) {
+		StringLibrary.setSize(sizeOfMoney);
+		dynamicGuis.addAll(StringLibrary.makeItFitC(money+"", locationOfMoney, 1-locationOfMoney.x));
 	}
 	
 	public void doMouseEvents(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
+		floorSelect.doMouseEvents(mouseX, mouseY, money);
+		shopExitLogic(mouseX, mouseY);
+		money -= floorSelect.getDebt();
+		
 		shopInitiationLogic(mouseX, mouseY);
 		shopSelectionLogic(mouseX, mouseY, dynamicGuis);
 		trapShop.scrollLogic(mouseX, mouseY);
-		shopExitLogic(mouseX, mouseY);
 		
 		rotationMenuLogic(mouseX, mouseY);
 		
 		upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
 		upgradeSelectionLogic(mouseX, mouseY);
 		
-		floorSelect.doMouseEvents(mouseX, mouseY, money);
+		
 		
 		infoPages.checkForMouseEvents(mouseX, mouseY);
 	}
@@ -109,7 +131,7 @@ public class UIControl {
 			int y = (Mouse.getY()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).y-floorSelect.getSizeOfTile()+1f)*DisplayManager.HEIGHT/2))/((int)(floorSelect.getSizeOfTile()*DisplayManager.HEIGHT*DisplayManager.getAspectratio()));
 			int width = floorSelect.getGridToBeRendered().getWidth();
 			if(width>x && width>y) {
-				trapShop.setGridLoc(new Vector2f((float)x, (float)y));
+				trapShop.setGridLoc(new Point(x, y), floorSelect.getGridToBeRendered());
 				trapShop.setOn(true);
 				trapShop.setLastTimeClicked(System.currentTimeMillis());
 			}
@@ -151,7 +173,7 @@ public class UIControl {
 	}
 	
 	private void shopExitLogic(float mouseX, float mouseY) {
-		if(trapShop.isExitClicked(mouseX, mouseY) || floorSelect.isEditState()) {
+		if(trapShop.isExitClicked(mouseX, mouseY) || !floorSelect.isEditState() || floorSelect.shouldExitShop()) {
 			trapShop.setOn(false);
 			rotationMenu.setOn(false);
 			upgradeRoller.setOn(false);
