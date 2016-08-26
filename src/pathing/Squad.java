@@ -82,25 +82,7 @@ public class Squad {
 		int total = 0;
 		int[] individualOdds = new int[4];
 		int i = 0;
-		//TODO add a win-condition event here, where they backtrack to start and head for the stairs
-		//For each tile type, add the appropriate odds and total them
-		/*boolean[] groupsWithTreasureFinder = new boolean[groups.size()];
-		int num = 0;
-		int treasureFloor = -1;
-		for(int j = 0; j<groups.size(); j++) {
-			Group g = groups.get(j);
-			boolean hasTreasureFinder = false;
-			for(int k = 0; k<g.getGroup().size(); k++) {
-				if(g.getGroup().get(k).getId() == 3) {
-					hasTreasureFinder = true;
-					num++;
-					treasureFloor = g.getFloor();
-				}
-			}
-			groupsWithTreasureFinder[j] = hasTreasureFinder;
-		}*/
-		
-		//TO FUTURE ME, WORKING ON MOVING THE PATHING SYSTEM OVER TO HASHMAP TODO
+
 		Collection<PathModifier> allMods = modifications.values();
 		Iterator<PathModifier> iterator = allMods.iterator();
 		for(int j = 0; j<modifications.size(); j++) {
@@ -112,27 +94,7 @@ public class Squad {
 				x++;
 			} 
 		}
-		/*
-		for(Tile currentTile : moves) { 
-			if(currentTile == null) {
-				i++;
-				continue;
-				//Adds 10 odds if its a blank tile
-			} else if(currentTile.getId() == -2) {
-				return new Point(currentTile.getX(), currentTile.getY());
-			} else if(currentTile.getId() == 0) {
-				individualOdds[i] += 10;
-			} else if(currentTile.getId() == 1) {
-				individualOdds[i] += 50;
-			} else if(currentTile.getId() == 2) {
-				individualOdds[i] += 300;
-			} else if(currentTile.getId() == 4) {
-				individualOdds[i] += 600;
-			}
-			individualOdds[i] += treasureFinderOdds[i];
-			total+=individualOdds[i];
-			i++;
-		}*/
+	
 		rand *= total;
 		
 		//Evaluate which one random fell into
@@ -167,7 +129,7 @@ public class Squad {
 		}
 	}
 	
-	public void tick(int milli, Grid grid){
+	public void tick(int milli, Grid givenFloor){
 		for(Group group:groups){
 			for (Explorer explorer: group.getGroup()){
 				explorer.tick(milli);
@@ -190,7 +152,7 @@ public class Squad {
 		boolean go=true;
 	if(!groups.isEmpty())	{
 		for(Group group:groups){
-			if(group.move(milli, Main.grids.get(group.getFloor()))){
+			if(group.move(milli, givenFloor)){
 				for(Group group2: groups){
 					group2.setIdle();
 				}
@@ -201,7 +163,7 @@ public class Squad {
 				go=false;
 			}
 			
-			}
+		}
 		
 		if(go){
 			if(rotating){

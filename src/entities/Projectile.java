@@ -43,8 +43,8 @@ public class Projectile {
 
 	}
 	
-	public boolean canRender() {
-		return Main.gridToBeRendered == floor;
+	public boolean canRender(int currentFloor) {
+		return currentFloor == floor;
 	}
 	
 	public GuiTexture render(){

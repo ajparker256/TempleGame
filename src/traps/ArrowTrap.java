@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.vector.Vector2f;
 
 import entities.Projectile;
+import grid.Grid;
 import grid.Tile;
 import gui.Animation;
 import gui.GuiTexture;
@@ -45,7 +46,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 	
 
 	public ArrowTrap(int x, int y, float size,int direction, int floor) {
-		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
+		super(x, y, size, Main.gridsReadOnly.get(floor).getLoc(), floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.direction=direction;

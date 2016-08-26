@@ -242,13 +242,12 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 		if(state == 1 || state == 2) {
 			update(dynamicGuis, milli);
-			dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
 			userInterface.render(dynamicGuis);
 			for(Squad squad : squads) {
 				dynamicGuis.addAll(squad.render());
 			}
 			for(Projectile projectile : projectiles){
-				if(projectile.canRender())
+				if(projectile.canRender(Main.gridToBeRendered))
 					dynamicGuis.add(projectile.render());
 			}
 		

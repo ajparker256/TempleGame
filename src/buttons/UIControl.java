@@ -12,6 +12,7 @@ import librarys.PageLibrary;
 import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
 import librarys.TileLibrary;
+import pathing.Squad;
 import renderEngine.DisplayManager;
 import shopItems.ShopItem;
 import traps.Trap;
@@ -226,5 +227,11 @@ public class UIControl {
 			}
 		}
 	}
-
+	
+	public void tickSquads(double milli, ArrayList<Squad> allSquads) {
+		for(Squad currentSquad : allSquads) {
+			currentSquad.tick((int)milli, floorSelect.getFloor(currentSquad.getGroups().get(currentSquad.getGroups().size()-1).getFloor()));
+		}
+	}
+	
 }

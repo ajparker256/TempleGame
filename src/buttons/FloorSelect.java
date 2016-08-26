@@ -293,4 +293,12 @@ public class FloorSelect {
 		}
 	}
 	
+	public Grid getFloor(int floor) {
+		if(isEditState) {
+			return floorsReadOnly.get(floor);
+		} else {
+			return floorsWritable.get(floor);
+		}
+	}
+	
 }
