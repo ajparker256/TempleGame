@@ -40,31 +40,44 @@ public class FloorSelect {
 	private double lastInteractionTimeMillis;
 	private double interactionDelayMillis;
 	
+	private WaveStarter waveStarter;
+	
 	public FloorSelect(Vector2f loc, Vector2f sizeOfEntireBar) {
 		floorsReadOnly = new HashMap<Integer, Grid>();
 		floorsWritable = new HashMap<Integer, Grid>();
-		isEditState = true;
+		nextGridNumber = 0;
+		renderedGridId = 0;
+
+		
+		location = loc;
+		maxSize = sizeOfEntireBar;
+		extraSpace = sizeOfEntireBar.x%sizeOfEntireBar.y;	
 		
 		int availableIconSpots = (int)(sizeOfEntireBar.x/sizeOfEntireBar.y);		
-		int numberOfConstantIcons = 3; // 1 for the "Add Floor" button, 2 for one scroll icon on each of the sides		
+		int numberOfConstantIcons = 3; // 1 for the "Add Floor" button, 2 for one scroll icon on each of the sides
+		
 		availableDynamicSpace = availableIconSpots-numberOfConstantIcons;
 		gridsAssignedToHitboxes = new int[availableDynamicSpace]; 		
-		extraSpace = sizeOfEntireBar.x%sizeOfEntireBar.y;	
+
 		hitBoxes = new Button[(int)(sizeOfEntireBar.x/sizeOfEntireBar.y)];		
 		visibilityRange = new int[2];
 		visibilityRange[1] = gridsAssignedToHitboxes.length;		
-		nextGridNumber = 0;
-		renderedGridId = 0;
+
 		baseCost = 200;
-		location = loc;
+		
 		sizeOfLevelIcon = new Vector2f(sizeOfEntireBar.y*4/5/(float)DisplayManager.getAspectratio(), sizeOfEntireBar.y*4/5);
-		maxSize = sizeOfEntireBar;
+
 		icons = new GuiTexture[hitBoxes.length];
 		interactionDelayMillis = 300; 
 		addFloor(0);
 		assignButtons();
 		setHitboxes();
 		isOn = true;
+		isEditState = true;
+		
+		Vector2f locationOfWaveButton = new Vector2f();
+		
+		//waveStarter = new WaveStarter
 	}
 	
 	

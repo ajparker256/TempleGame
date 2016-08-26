@@ -67,7 +67,7 @@ public class UIControl {
 	private LinkedPageSystem infoPageInit() {
 		Vector2f locationOfInfoPages = new Vector2f(-.9f, -.8f);
 		Vector2f maxSizeOfInfoPages = new Vector2f(.4f, 1.6f);
-		PageLibrary.init(new Vector2f(locationOfInfoPages.x-StringLibrary.getSize().x/2, locationOfInfoPages.y), maxSizeOfInfoPages);
+		PageLibrary.init(new Vector2f(locationOfInfoPages.x, locationOfInfoPages.y), maxSizeOfInfoPages);
 		LinkedPageSystem infoPagesLocal = new LinkedPageSystem(locationOfInfoPages, maxSizeOfInfoPages);
 		infoPagesLocal.populate((Menu)PageLibrary.categoriesMenu);
 		return infoPagesLocal;
@@ -140,6 +140,7 @@ public class UIControl {
 	
 	private void shopSelectionLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
 		if(trapShop.isOn() && trapShop.shopIsClicked(mouseX, mouseY)) {
+			System.out.println(floorSelect.getCurrentFloor());
 			Tile oldTile=floorSelect.getGridToBeRendered().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y);
 			int selection = trapShop.getShopItem(mouseX, mouseY);
 			if(selection != -1) {
