@@ -98,15 +98,15 @@ public class UIControl {
 		upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
 		upgradeSelectionLogic(mouseX, mouseY);
 		
-		floorSelect.doMouseEvents(mouseX, mouseY);
+		floorSelect.doMouseEvents(mouseX, mouseY, money);
 		
 		infoPages.checkForMouseEvents(mouseX, mouseY);
 	}
 	
 	private void shopInitiationLogic(float mouseX, float mouseY) {
 		if(floorSelect.isGridClicked(mouseX, mouseY) && !rotationMenu.isOn() && trapShop.getLastTimeClosed()+250 < System.currentTimeMillis() && trapShop.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && floorSelect.isEditState()) {
-			int x = Mouse.getX()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).x-floorSelect.getSizeOfTile()+1)*DisplayManager.WIDTH/2)/(int)(floorSelect.getSizeOfTile()*DisplayManager.WIDTH);
-			int y = Mouse.getY()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).y-floorSelect.getSizeOfTile()+1)*DisplayManager.HEIGHT/2)/(int)(floorSelect.getSizeOfTile()*DisplayManager.HEIGHT*DisplayManager.getAspectratio());
+			int x = (Mouse.getX()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).x-floorSelect.getSizeOfTile()+1f)*DisplayManager.WIDTH/2))/((int)(floorSelect.getSizeOfTile()*DisplayManager.WIDTH));
+			int y = (Mouse.getY()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).y-floorSelect.getSizeOfTile()+1f)*DisplayManager.HEIGHT/2))/((int)(floorSelect.getSizeOfTile()*DisplayManager.HEIGHT*DisplayManager.getAspectratio()));
 			int width = floorSelect.getGridToBeRendered().getWidth();
 			if(width>x && width>y) {
 				trapShop.setGridLoc(new Vector2f((float)x, (float)y));

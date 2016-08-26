@@ -243,14 +243,14 @@ public static void main(String[] args) throws FileNotFoundException {
 		if(state == 1 || state == 2) {
 			update(dynamicGuis, milli);
 			dynamicGuis.addAll(MathM.printNumber(money,new Vector2f(0.6f,-0.9f),0.05f));
-			if(isEditPhase)
-				dynamicGuis.addAll(gridsReadOnly.get(gridToBeRendered).render());
-			else
-				dynamicGuis.addAll(grids.get(gridToBeRendered).render());
+			//if(isEditPhase)
+			//	dynamicGuis.addAll(gridsReadOnly.get(gridToBeRendered).render());
+			//else
+			//	dynamicGuis.addAll(grids.get(gridToBeRendered).render());
 			
-			for(Grid g: grids) {
-				dynamicGuis.addAll(g.renderFloorSelect());
-			}
+			//for(Grid g: grids) {
+			//	dynamicGuis.addAll(g.renderFloorSelect());
+			//}
 			for(Squad squad : squads) {
 				dynamicGuis.addAll(squad.render());
 			}

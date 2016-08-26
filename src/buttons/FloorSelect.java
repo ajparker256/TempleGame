@@ -59,7 +59,7 @@ public class FloorSelect {
 		maxSize = sizeOfEntireBar;
 		icons = new GuiTexture[hitBoxes.length];
 		interactionDelayMillis = 300; 
-		addFloor();
+		addFloor(0);
 		assignButtons();
 		setHitboxes();
 		isOn = true;
@@ -147,11 +147,11 @@ public class FloorSelect {
 		}
 	}
 	
-	public void doMouseEvents(float mouseX, float mouseY) {
+	public void doMouseEvents(float mouseX, float mouseY, int money) {
 		if(lastInteractionTimeMillis + interactionDelayMillis <= System.currentTimeMillis()) {
 			scrollIfClicked(mouseX, mouseY);
 			if(hitBoxes[hitBoxes.length-1].isClicked(mouseX, mouseY)) {
-				addFloor();
+				addFloor(money);
 			}
 			int clickedFloorId = getFloorClicked(mouseX, mouseY);
 			if(isValidFloor(clickedFloorId)) {
@@ -183,13 +183,16 @@ public class FloorSelect {
 		}
 	}
 	
-	public int addFloor() {
+	public int addFloor(int money) {
 		int cost = nextGridNumber*nextGridNumber*baseCost; //Quadratic growth
-		Grid g = new Grid(0.05f,5+nextGridNumber, nextGridNumber);
-		floorsReadOnly.put(nextGridNumber, g);
-		nextGridNumber++;
-		assignButtons();
-		return cost;
+		if(money>=cost) {
+			Grid g = new Grid(0.05f,5+nextGridNumber, nextGridNumber);
+			floorsReadOnly.put(nextGridNumber, g);
+			nextGridNumber++;
+			assignButtons();
+			return cost;
+		}
+		return 0;
 	}
 	
 	private boolean isValidFloor(int id) {
@@ -211,9 +214,9 @@ public class FloorSelect {
 			for(GuiTexture currentIcon : icons) {
 				dynamicGuis.add(currentIcon);
 			}
-			if(getGridToBeRendered() != null) {
+	//		if(getGridToBeRendered() != null) {
 				getGridToBeRendered().render();
-			}
+	//		}
 		}
 	}
 	
