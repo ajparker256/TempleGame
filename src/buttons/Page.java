@@ -69,8 +69,6 @@ public class Page extends Linkable{
 		isOn = b;
 	}
 	
-	//TODO MAKE THE IMAGE SCROLL AND RENDER CORRECTLY!!!!!!!!!! Currently stops rendering if any part exceeds bounds, but should only
-	//not render the PART that exceeds bounds, not the whole image, ask aj later.
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(titleTextSize);
 		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y), size.x));

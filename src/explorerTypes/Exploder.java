@@ -33,7 +33,7 @@ public class Exploder extends Explorer{
 		
 	}
 	@Override 
-	public void tick(int milli){
+	public void tick(long milli){
 		cd-=milli;
 	}
 

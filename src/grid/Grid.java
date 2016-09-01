@@ -2,7 +2,6 @@ package grid;
 
 import gui.GuiTexture;
 import librarys.StringLibrary;
-import main.Main;
 import pathing.Group;
 
 import java.awt.Point;
@@ -26,9 +25,11 @@ public class Grid {
 	
 	private Button levelSelect;
 	
+	private static final int MINIMUM_WIDTH = 5;
+	private static final int MAXIMUM_WIDTH = 9;
+	private static final Vector2f UNIT_SIZE = new Vector2f(0.2f,0.2f);
+	private static final float SIZE = .05f;
 	
-	public static final Vector2f UNITSIZE = new Vector2f(0.2f,0.2f);
-
 	//This is the boolean that determines if groups redirect to the path of the group that made it to the end
 	private boolean goalReached;
 	
@@ -42,23 +43,19 @@ public class Grid {
 	
 	private Button gridClicked;
 	
-	private float size;
 	
 	private int floor;
 	
-	//makes a grid of boolean values with length r and height r along with a raw size of s at location l.
-	public Grid( float size, int rows, int floor) {
+	public Grid(float siz, int rows, int floor) {
 		
 		treasureLocs = new ArrayList<Point>();
 		
 		trapLocs = new ArrayList<Point>();
 	
-		//D.x + Size.x/2 - A.x*floor/2, D.y+size.y/2-A.x*AspectRatio*floor/2
-		//Where D = bottomleftcorner of screen and A = size of a single tile (in total)
-		//D + size/2 cancels since size/2 = 1 and d = -1
-		this.location = new Vector2f(-size*(rows)+size, -size*(float)DisplayManager.getAspectratio()*(rows-1f));
-		
-	//	this.location = location;
+		//D.x + SIZE.x/2 - A.x*floor/2, D.y+SIZE.y/2-A.x*AspectRatio*floor/2
+		//Where D = bottomleftcorner of screen and A = SIZE of a single tile (in total)
+		//D + SIZE/2 cancels since SIZE/2 = 1 and d = -1
+		this.location = new Vector2f(-SIZE * (rows) + SIZE, -SIZE*(float)DisplayManager.getAspectratio()*(rows-1f));
 		
 		isOn = false;
 		
@@ -74,29 +71,45 @@ public class Grid {
 		
 		goalReacher = null;
 		
-		gridClicked = new Button(new Vector2f(location.x-size, location.y+rows*size*2*(float)DisplayManager.getAspectratio()-2*size), new Vector2f(location.x-size+2*size*rows-.005f, location.y-2*size));
-		
-		this.size = size;
+		gridClicked = new Button(new Vector2f(location.x-SIZE, location.y+rows*SIZE*2*(float)DisplayManager.getAspectratio()-2*SIZE), new Vector2f(location.x-SIZE+2*SIZE*rows-.005f, location.y-2*SIZE));
 		
 		this.floor = floor;
 		
 		grid = new Tile[rows][rows];
 		for(int i=0;i<rows;i++){
 			for(int k=0;k<rows;k++){
-				grid[k][i]=new Dirt(k,i,size,location, floor);
-				//grid[k][i].upgrade(0);
+				grid[k][i]=new Dirt(k,i,SIZE, floor);
 			}
 		}
 		for(int i = 0; i<10+floor*5; i++) {
 			int randX = (int)(Math.random() * grid[0].length);
 			int randY = (int)(Math.random() * grid.length);
-			if(floor<7)
-				grid[randY][randX].upgrade(floor+1);
-			else
-				grid[randY][randX].upgrade(7);
-			
+			if(floor<7) {
+				int level = (int)((floor+1)*Math.random())+1;
+				grid[randY][randX].upgrade(level);
+				
+			} else {
+				int level = (int)(7*Math.random())+1;
+				grid[randY][randX].upgrade(level);
+			}			
 		
 		}
+	}
+	
+	public static int getMinimumWidth() {
+		return MINIMUM_WIDTH;
+	}
+	
+	public static int getMaximumWidth() {
+		return MAXIMUM_WIDTH;
+	}
+	
+	public static Vector2f getUnitSize() {
+		return UNIT_SIZE;
+	}
+	
+	public static float getTileSize() {
+		return SIZE;
 	}
 	
 	public ArrayList<GuiTexture> renderFloorSelect() {
@@ -119,7 +132,7 @@ public class Grid {
 	}
 	
 	public Grid copy() {
-		Grid g = new Grid(size, grid.length, floor);
+		Grid g = new Grid(SIZE, grid.length, floor);
 		for(int i=0;i<grid.length;i++){
 			for(int k=0;k<grid[0].length;k++){
 				g.setTile(k, i, grid[k][i].copy());
@@ -153,15 +166,11 @@ public class Grid {
 	}
 	
 	public float getSize() {
-		return size;
+		return SIZE;
 	}
 	
 	public boolean isOn() {
 		return isOn;
-	}
-	
-	public Vector2f getTotalSize() {
-		return new Vector2f(size*getWidth()*2, size*getWidth()*2*(float)DisplayManager.getAspectratio());
 	}
 	
 	public void setIsOn(boolean b) {
@@ -186,9 +195,8 @@ public class Grid {
 		grid[x][y]=tile;
 	}
 	
-	public ArrayList<GuiTexture> render() {
+	public void render(ArrayList<GuiTexture> dynamicGuis) {
 	
-		ArrayList<GuiTexture> toRender= new ArrayList<GuiTexture>();
 			for(Tile[]line:grid){
 				for(Tile tile:line){
 					//UNCOMMENT BELOW FOR TRIPPY THINGS XD (Used for testing occupied tiles)
@@ -196,12 +204,9 @@ public class Grid {
 					//if(tile.isOccupied() != -1)
 					//Reveals booby trapped tiles below
 					//if(!tile.getTrapRefs().isEmpty())
-					toRender.add(tile.drawTile());
+					dynamicGuis.add(tile.drawTile());
 				}
 			}
-		
-		
-		return toRender;
 		
 	}
 	
@@ -260,5 +265,11 @@ public class Grid {
 			adjacents[0] = getTile((int)locationInGrid.x, (int)locationInGrid.y);
 		}
 		return adjacents;
+	}
+	
+	public void addTrapRefsForTrap(ArrayList<Point> locationsThatRefToOrigin, Point originTrap) {
+		for(Point locOnGrid : locationsThatRefToOrigin) {
+			this.getTile(locOnGrid.x, locOnGrid.y).addTrapRef(originTrap);
+		}
 	}
 }

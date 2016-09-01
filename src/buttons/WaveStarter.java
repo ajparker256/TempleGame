@@ -21,17 +21,18 @@ public class WaveStarter {
 	
 	public WaveStarter(Vector2f locationBL, Vector2f totalSize) {
 		start = new Button(new Vector2f(locationBL.x, locationBL.y+totalSize.y), new Vector2f(locationBL.x+totalSize.x, locationBL.y));
-		Vector2f center = new Vector2f(locationBL.x+totalSize.x, locationBL.y+totalSize.y);
-		startIconNotClicked = new GuiTexture(GuiLibrary.exclamationPoint, center, totalSize);
-		startIconClicked = new GuiTexture(GuiLibrary.nextWave, center, totalSize);
-		durationOfClickedIconMilli = 100;
+		Vector2f center = new Vector2f(locationBL.x+totalSize.x/2, locationBL.y+totalSize.y/2);
+		startIconNotClicked = new GuiTexture(GuiLibrary.nextWaveUnclicked, center, new Vector2f(totalSize.x/2, totalSize.y/2));
+		startIconClicked = new GuiTexture(GuiLibrary.nextWaveClicked, center, new Vector2f(totalSize.x/2, totalSize.y/2));
+		durationOfClickedIconMilli = 300;
 		wasClicked = false;
 		
-		isOn = false;
+		isOn = true;
 	}
 	
 	public boolean isStartWaveClicked(float mouseX, float mouseY) {
-		if(start.isClicked(mouseX, mouseY) && isOn) {
+		checkIfStillClicked(mouseX, mouseY);
+		if(start.isClicked(mouseX, mouseY) && isOn && !wasClicked) {
 			wasClicked = true;
 			timeClickedMilli = System.currentTimeMillis();
 			return true;
@@ -39,10 +40,17 @@ public class WaveStarter {
 		return false;
 	}
 	
+	private void checkIfStillClicked(float mouseX, float mouseY) {
+		checkTime();
+		if(wasClicked && start.isClicked(mouseX, mouseY)) {
+			timeClickedMilli = System.currentTimeMillis();
+		}
+	}
+	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		if(isOn) {
-			checkTime();
 			if(wasClicked) {
+				checkTime();
 				dynamicGuis.add(startIconClicked);
 			} else {
 				dynamicGuis.add(startIconNotClicked);

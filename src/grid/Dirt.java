@@ -10,21 +10,10 @@ import renderEngine.DisplayManager;
 
 public class Dirt extends Tile{
 	
-	protected int level;
+	protected int level;	
 	
 	public Dirt(int x, int y, float size, int floor) {
-		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
-		super.passable=false;
-		super.canInteract=true;
-		this.texture=1;
-		this.guiTexture=(new GuiTexture(GuiLibrary.dirt0,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
-		this.name = "Dirt!";
-		id = 1;
-	}
-	
-	
-	public Dirt(int x, int y, float size, Vector2f location, int floor) {
-		super(x, y, size, location, floor);
+		super(x, y, size, floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.hp=100;
@@ -37,7 +26,7 @@ public class Dirt extends Tile{
 	
 	@Override
 	public Tile copy() {
-		Tile t = new Dirt(x, y, size, location, floor);
+		Tile t = new Dirt(x, y, size, floor);
 		t.setTrapRefs(trapRefs);
 		t.upgrade(level);
 		return t;

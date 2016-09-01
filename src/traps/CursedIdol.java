@@ -1,5 +1,6 @@
 package traps;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
@@ -44,7 +45,7 @@ public class CursedIdol extends Trap implements TrapInterface{
 	
 	
 	public CursedIdol(int x, int y, float size, int floor) {
-		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
+		super(x, y, size, floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.value = 100;
@@ -55,8 +56,6 @@ public class CursedIdol extends Trap implements TrapInterface{
 		id = 2;
 	}
 	
-	//TODO make this into its functional self, currently money is added to player but SHOULD be going towards the explorers
-	//ALSO the curse is not implemented, needs some thought there too.
 	@Override
 	public void interact(Group g){
 		if(value%5 == 0) {
@@ -64,7 +63,7 @@ public class CursedIdol extends Trap implements TrapInterface{
 		}
 		value--;
 		if(value<=0){
-			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
+			Blank blank = new Blank(super.x, super.y, super.size, floor);
 			blank.setTrapRefs(trapRefs);
 			TrapAffinityPM attractedToDanger = new TrapAffinityPM(Main.squads.get(g.getSquadId()));
 			attractedToDanger.addModifier(Main.squads.get(g.getSquadId()).getPathMods());
@@ -86,8 +85,7 @@ public class CursedIdol extends Trap implements TrapInterface{
 	}
 
 	@Override
-	public void setTriggers() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Point> getTriggerLocations() {
+		return null;
 	}
 }

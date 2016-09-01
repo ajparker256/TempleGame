@@ -47,7 +47,7 @@ public class TikiTrap extends Trap implements TrapInterface{
 	protected ArrayList<Upgrade> onTrigger;*/
 	
 	public TikiTrap(int x, int y, float size, int floor) {
-		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
+		super(x, y, size, floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.guiTexture=(new GuiTexture(GuiLibrary.tikiTrap,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
@@ -56,7 +56,7 @@ public class TikiTrap extends Trap implements TrapInterface{
 		id = 9;
 		range = 1;
 		rotatable = false;
-		setTriggers();
+		//setTriggers(); TODO DEAL WITH THIS THING 
 		
 		damage = 1;
 		range = 1;
@@ -107,34 +107,34 @@ public class TikiTrap extends Trap implements TrapInterface{
 		return guiTexture;
 	}
 	
-	public void setTriggers(){
-		
-
+	public ArrayList<Point> getTriggerLocations(){
+		ArrayList<Point> allTriggers = new ArrayList<Point>();
 		for(int j=1;j<=4;j++){
 			int i=1;
-		switch(j){
-		case 1:while(y+i<Main.grids.get(floor).getWidth()&&i<=range){
-			Main.gridsReadOnly.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
-			i++;
+			switch(j){
+				case 1:while(y + i < getWidthOfGrid() && i <= range){
+					allTriggers.add(new Point(x, y+i));
+					i++;
+				}
+				break;
+				case 2:while(x+i < getWidthOfGrid() && i<=range){
+					allTriggers.add(new Point(x+i, y));;
+					i++;
+				}
+				break;
+				case 3:while(y-i >= 0 && i <= range){
+					allTriggers.add(new Point(x, y-i));
+					i++;
+				}
+				break;
+				case 4:while(x-i >= 0 && i <= range){
+					allTriggers.add(new Point(x, y+i));
+					i++;
+				}
+				break;
+			}
 		}
-		break;
-		case 2:while(x+i<Main.grids.get(floor).getWidth()&&i<=range){
-			Main.gridsReadOnly.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
-			i++;
-		}
-		break;
-		case 3:while(y-i>=0&&i<=range){
-			Main.gridsReadOnly.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
-			i++;
-		}
-		break;
-		case 4:while(x-i>=0&&i<=range){
-			Main.gridsReadOnly.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
-			i++;
-		}
-		break;
-		}
-		}	
+		return allTriggers;
 	}
 	
 	@Override

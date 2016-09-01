@@ -351,6 +351,8 @@ public class StringLibrary {
 			return size.x*40/113;
 		if(c == '\'') 
 			return size.x*40/113;
+		if(c == '%') 
+			return size.x*90/113;
 		
 		
 		return 0;
@@ -505,6 +507,8 @@ public class StringLibrary {
 			return GuiLibrary.comma;
 		if(c == '\'')
 			return GuiLibrary.apostrophe;
+		if(c == '%')
+			return GuiLibrary.percent;
 		
 		//Else return -1 showing error
 		System.out.println("ERROR IN STRINGLIBRARY GETCHAR");

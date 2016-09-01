@@ -30,7 +30,6 @@ public class DisplayManager {
 			Display.setTitle("Temple Game of Legend");
 			AL.create();
 		} catch (LWJGLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		GL11.glViewport(0,0,WIDTH,HEIGHT);

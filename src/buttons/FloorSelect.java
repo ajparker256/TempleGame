@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import grid.FloorCollection;
 import grid.Grid;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
@@ -13,15 +14,10 @@ import renderEngine.DisplayManager;
 
 public class FloorSelect {
 	
-	//The last spot is always + floor icon
-	//The second to last spot is always scroll, but may not be highlighted as usable
-	//The first position is also always scroll same as above
 	private static final int LOCKED_ID = -1;
-	private int nextGridNumber;
-	private int renderedGridId;
-	private HashMap<Integer, Grid> floorsReadOnly;
-	private HashMap<Integer, Grid> floorsWritable;
-	private boolean isEditState;
+	
+	private int currentFloorId;
+	private int numberOfFloors;
 	private int baseCost;
 	private int[] gridsAssignedToHitboxes;
 	private Vector2f location;
@@ -40,14 +36,8 @@ public class FloorSelect {
 	private double lastInteractionTimeMillis;
 	private double interactionDelayMillis;
 	
-	private WaveStarter waveStarter;
-	
 	public FloorSelect(Vector2f loc, Vector2f sizeOfEntireBar) {
-		floorsReadOnly = new HashMap<Integer, Grid>();
-		floorsWritable = new HashMap<Integer, Grid>();
-		nextGridNumber = 0;
-		renderedGridId = 0;
-
+		numberOfFloors = 1;
 		
 		location = loc;
 		maxSize = sizeOfEntireBar;
@@ -69,15 +59,11 @@ public class FloorSelect {
 
 		icons = new GuiTexture[hitBoxes.length];
 		interactionDelayMillis = 300; 
-		addFloor(0);
+
 		assignButtons();
 		setHitboxes();
 		isOn = true;
-		isEditState = true;
 		
-		Vector2f locationOfWaveButton = new Vector2f();
-		
-		//waveStarter = new WaveStarter
 	}
 	
 	
@@ -90,7 +76,7 @@ public class FloorSelect {
 	
 	private void assignButtons() {
 		for(int i = visibilityRange[0]; i<visibilityRange[1]; i++) {
-			if(i<floorsReadOnly.size())
+			if(i<numberOfFloors)
 				gridsAssignedToHitboxes[i-visibilityRange[0]] = i; //Puts the displayed floors there
 			else 
 				gridsAssignedToHitboxes[i-visibilityRange[0]] = LOCKED_ID;
@@ -134,7 +120,7 @@ public class FloorSelect {
 	
 	private void setRightScrollIcon() {
 		int indexInHitboxes = icons.length-2;
-		if(visibilityRange[1] < floorsReadOnly.size()) {
+		if(visibilityRange[1] < numberOfFloors) {
 			icons[icons.length-2] = new GuiTexture(GuiLibrary.scrollRightSelectable, new Vector2f(location.x+(indexInHitboxes+.5f)*maxSize.y+extraSpace/2, 
 					location.y+maxSize.y/2), sizeOfLevelIcon);	
 		} else {
@@ -152,38 +138,13 @@ public class FloorSelect {
 		return id == LOCKED_ID;
 	}
 	
+	public boolean canInteract() {
+		return lastInteractionTimeMillis+interactionDelayMillis <= System.currentTimeMillis();
+	}
 
-	@SuppressWarnings("unused") //TODO
-	private void changeBetweenEditAndPlayState() {
-		if(isEditState) {
-			for(int i = 0; i<floorsReadOnly.size(); i++) {
-				floorsWritable.put(i, floorsReadOnly.get(i).copy());
-			}
-		}
-	}
-	
-	public void doMouseEvents(float mouseX, float mouseY, int money) {
-		if(lastInteractionTimeMillis + interactionDelayMillis <= System.currentTimeMillis()) {
-			scrollIfClicked(mouseX, mouseY);
-			if(hitBoxes[hitBoxes.length-1].isClicked(mouseX, mouseY)) {
-				addFloor(money);
-			}
-			doFloorChanges(mouseX, mouseY);
-			lastInteractionTimeMillis = System.currentTimeMillis();
-		}
-	}
-	
-	public void doFloorChanges(float mouseX, float mouseY) {
-		int clickedFloorId = getFloorClicked(mouseX, mouseY);
-		if(isValidFloor(clickedFloorId)) {
-			renderedGridId = clickedFloorId;
-			exitShop = true;
-		}
-	}
-	
-	private void scrollIfClicked(float mouseX, float mouseY) {
+	public void scrollIfClicked(float mouseX, float mouseY) {
 		int scrollDistance = gridsAssignedToHitboxes.length;
-		int remainingGridsLength = floorsReadOnly.size()-visibilityRange[0];
+		int remainingGridsLength = numberOfFloors-visibilityRange[0];
 		int locationOfRightScrollIcon = availableDynamicSpace+1;
 		if(remainingGridsLength>availableDynamicSpace && hitBoxes[locationOfRightScrollIcon].isClicked(mouseX, mouseY)) {
 			visibilityRange[0] += scrollDistance;
@@ -201,30 +162,36 @@ public class FloorSelect {
 			assignButtons();
 		}
 	}
+		
 	
-	public void addFloor(int money) {
-		int cost = nextGridNumber*baseCost;
-		if(money>=cost) {
-			Grid g = new Grid(0.05f,5+nextGridNumber, nextGridNumber);
-			floorsReadOnly.put(nextGridNumber, g);
-			nextGridNumber++;
-			assignButtons();
-			addToDebt(cost);
+	public int tryToBuyFloor(float mouseX, float mouseY, int money) {
+		if(hitBoxes[hitBoxes.length-1].isClicked(mouseX, mouseY)) {
+			int cost = numberOfFloors*baseCost;
+			if(money>=cost) {
+				numberOfFloors++;
+				assignButtons();
+				return cost;
+			} 
 		}
+		return 0;
 	}
 	
-	public int getDebt() {
-		int tempDebt = debt;
-		debt = 0;
-		return tempDebt;
-	}
-	
-	private void addToDebt(int lostMoney) {
-		debt += lostMoney;
+	public int changeFloor(float mouseX, float mouseY) {
+		int clickedFloorId = getFloorClicked(mouseX, mouseY);
+		if(isValidFloor(clickedFloorId)) {
+			currentFloorId = clickedFloorId;
+			exitShop = true;
+		}
+		return currentFloorId;
 	}
 	
 	public boolean isValidFloor(int id) {
 		return id >= 0;
+	}
+	
+
+	public void setLastInteractTimeToNow() {
+		lastInteractionTimeMillis = System.currentTimeMillis();
 	}
 	
 	//Potential optimization if locked is the start of a non-working set always
@@ -242,9 +209,6 @@ public class FloorSelect {
 			for(GuiTexture currentIcon : icons) {
 				dynamicGuis.add(currentIcon);
 			}
-			if(getGridToBeRendered() != null) {
-				dynamicGuis.addAll(getGridToBeRendered().render());
-			}
 		}
 	}
 	
@@ -252,36 +216,8 @@ public class FloorSelect {
 		isOn = b;
 	}
 	
-	public Grid getGridToBeRendered() {
-		if(isEditState) {
-			return floorsReadOnly.get(renderedGridId);
-		} else {
-			return floorsWritable.get(renderedGridId);
-		}
-	}
-	
-	public boolean isEditState() {
-		return isEditState;
-	}
-	
-	public boolean isGridClicked(float mouseX, float mouseY) {
-		return getGridToBeRendered().isClicked(mouseX, mouseY);
-	}
-	
 	public int getCurrentFloor() {
-		return renderedGridId;
-	}
-	
-	public Vector2f getGridLoc(int floor) {
-		return floorsReadOnly.get(floor).getLoc();
-	}
-	
-	public Vector2f getGridSize(int floor) {
-		return floorsReadOnly.get(floor).getTotalSize();
-	}
-	
-	public float getSizeOfTile() {
-		return floorsReadOnly.get(renderedGridId).getSize();
+		return currentFloorId;
 	}
 	
 	public boolean shouldExitShop() {
@@ -290,14 +226,6 @@ public class FloorSelect {
 			return true;
 		} else {
 			return false;
-		}
-	}
-	
-	public Grid getFloor(int floor) {
-		if(isEditState) {
-			return floorsReadOnly.get(floor);
-		} else {
-			return floorsWritable.get(floor);
 		}
 	}
 	

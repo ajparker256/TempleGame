@@ -19,23 +19,19 @@ import gui.GuiTexture;
 //This is the parent object for all entities including Trap enemies such as Zombies and Explorers
 public class Unit {
 	
-	//This is the amount of damage a unit can take before dying.
+	protected static final int FIRST_FLOOR = 0;
+	
 	protected double hp;
 	
-	//This is a unit's location relative to the screen in floats
 	protected Vector2f location;
 	
-	//This is a unit's speed in x and y on the screen.
 	protected Vector2f velocity;
 	
-	//This is the size of the unit on the screen in x and y
 	protected Vector2f size;
 	
-	//This dictates functions that happen while alive/while dead
 	protected boolean isAlive;
 	protected int xInGrid;
 	protected int yInGrid;
-	private int formation;
 	protected Animation animation;
 
 	protected GuiTexture idle;
@@ -44,9 +40,6 @@ public class Unit {
 	
 	protected boolean kill;
 
-	
-	
-	//Create a Unit that is alive, has hp, an id, and capabilities for moving/rendering
 	public Unit(Group group) {
 		this.hp=20;
 		this.kill=false;
@@ -56,12 +49,11 @@ public class Unit {
 		velocity=new Vector2f(0.1f,(float) (0.1f*DisplayManager.getAspectratio()));
 		location = group.getLocation();
 		isAlive = true;
-		this.size = Main.grids.get(Main.gridToBeRendered).UNITSIZE;	
+		this.size = Grid.getUnitSize();	
 	}
 	
 	//Move according to the velocity of the unit relative to time passed
 	public void move(int milli,Grid grid) {
-		System.out.println(velocity);
 		Vector2f destination=grid.getTile(xInGrid, yInGrid).getLocation();
 		 tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){

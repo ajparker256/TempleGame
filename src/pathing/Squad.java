@@ -21,8 +21,8 @@ public class Squad {
 	private ArrayList<Group> groups;
 	private HashMap<Integer, PathModifier> modifications;
 	private boolean rotating;
-	private boolean firstTime;
 	private Point toBeRemoved;
+	private boolean isNotFirstTime;
 	public Squad(ArrayList<Group> groups, int squadId){
 		float speedBonus=0;
 		for(Group group:groups){
@@ -36,7 +36,6 @@ public class Squad {
 			}
 		}
 		rotating=true;
-		firstTime = true;
 		modifications = new HashMap<Integer, PathModifier>(10, .8f);
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
@@ -53,16 +52,17 @@ public class Squad {
 			}
 		}
 		toBeRemoved = new Point(-1,-1);
+		isNotFirstTime = false;
 	}
 	
 	public ArrayList<Group> getGroups() {
 		return groups;
 	}
 	
-	public ArrayList<GuiTexture> render() {
+	public ArrayList<GuiTexture> render(int currentlyViewedFloor) {
 		ArrayList<GuiTexture> toBeRendered = new ArrayList<GuiTexture>();
 		for(Group g : groups) {
-			toBeRendered.addAll(g.render());
+			toBeRendered.addAll(g.render(currentlyViewedFloor));
 		}
 		return toBeRendered;
 	}
@@ -81,7 +81,6 @@ public class Squad {
 		
 		int total = 0;
 		int[] individualOdds = new int[4];
-		int i = 0;
 
 		Collection<PathModifier> allMods = modifications.values();
 		Iterator<PathModifier> iterator = allMods.iterator();
@@ -96,8 +95,7 @@ public class Squad {
 		}
 	
 		rand *= total;
-		
-		//Evaluate which one random fell into
+		int i = 0;
 		for(int currentOdds : individualOdds) {
 			if(rand < currentOdds) {
 				return new Point(moves[i].getX(), moves[i].getY());
@@ -121,6 +119,16 @@ public class Squad {
 		return modifications;
 	}
 	
+	public int getFurthestFloorFromEnd() {
+		int indexOfLastGroup = groups.size()-1;
+		return groups.get(indexOfLastGroup).getFloor();
+	}
+	
+	public boolean isTransitioning() {
+		return groups.get(0) != groups.get(groups.size()-1);
+	}
+	
+	
 	public void deathTriggers(Explorer e) {
 		//Removes any path modifiers that were added by the dead explorers
 		PathModifier toBeRemoved = modifications.get(e.getId());
@@ -129,12 +137,102 @@ public class Squad {
 		}
 	}
 	
-	public void tick(int milli, Grid givenFloor){
+	public void tick(long milli, Grid givenFloor){
+		tickExplorers(milli);
+		removeDead();
+		
+		
+		boolean go=true;
+		if(!groups.isEmpty())	{
+			for(Group group:groups){
+				if(group.move(milli, givenFloor)){
+					for(Group group2: groups){
+						group2.setIdle();
+					}
+					go=false;
+					break;
+				}
+				if(group.isBusy()){
+					go=false;
+				}
+				
+			}
+			
+			if(go){
+				if(rotating){
+					//TODO remove this,but include a way to get the proper grid, since 2 are needed during transition, maybe secondary method with boolean... if(inTransition) do transitionMove() with 2 params.
+					Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
+					if(isNotFirstTime) {
+						path.add(0,tempNextLoc);
+					} else {
+						isNotFirstTime = true;
+					}
+					//Flee code
+					if(path.size()>groups.size()+2){
+						if(Mouse.isButtonDown(1)){
+							path.remove(0);
+							toBeRemoved = path.remove(0);
+							for(Group group:groups){
+								group.setFlee(true);
+							}
+						}else{
+							toBeRemoved = new Point(-1,-1);
+							for(Group group:groups){
+								group.setFlee(false);
+							}
+						}
+					}
+					
+					for(Group group: groups){
+						//This removes the status of occupied from the tail end of the squad
+						//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
+						if(groups.size()+2<path.size() && !group.getFlee() && Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
+							Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
+						} else if(group.getFlee() && toBeRemoved.x != -1) {
+							Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
+							toBeRemoved = new Point();
+						}else break;
+					}
+				
+					int i=0;
+					for(Group group:groups){
+						rotating=true;
+						if(i<path.size()){
+							if(i+1<path.size()){
+								group.rotate(path.get(i+1));
+							}else 
+								group.rotate(path.get(i));
+							}
+						i++;
+						rotating=false;
+					}
+					
+				}else{
+					rotating=true;
+					int i=0;
+					for(Group group: groups){
+						i++;
+						if(i<path.size()){
+							group.setNextLoc(path.get(i));
+							group.setWait(false);
+						}
+					}
+						
+				}
+				previousFloor = groups.get(groups.size()-1).getFloor();
+			}
+		}
+	}
+	
+	private void tickExplorers(long milli) {
 		for(Group group:groups){
 			for (Explorer explorer: group.getGroup()){
 				explorer.tick(milli);
 			}
 		}
+	}
+	
+	private void removeDead() {
 		ArrayList<Group> toRemove=new ArrayList<Group>(); 
 		for(Group group:groups){
 			for(int i=0;i<group.getGroup().size();i++){
@@ -149,83 +247,9 @@ public class Squad {
 			}
 		}
 		groups.removeAll(toRemove);
-		boolean go=true;
-	if(!groups.isEmpty())	{
-		for(Group group:groups){
-			if(group.move(milli, givenFloor)){
-				for(Group group2: groups){
-					group2.setIdle();
-				}
-				go=false;
-				break;
-			}
-			if(group.isBusy()){
-				go=false;
-			}
-			
-		}
-		
-		if(go){
-			if(rotating){
-				Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
-				if(!firstTime) {
-					path.add(0,tempNextLoc);
-				}
-				firstTime = false;
-				//Flee code
-				if(path.size()>groups.size()+2){
-					if(Mouse.isButtonDown(1)){
-						path.remove(0);
-						toBeRemoved = path.remove(0);
-						for(Group group:groups){
-							group.setFlee(true);
-						}
-					}else{
-						toBeRemoved = new Point(-1,-1);
-						for(Group group:groups){
-							group.setFlee(false);
-						}
-					}
-				}
-				
-				for(Group group: groups){
-					//This removes the status of occupied from the tail end of the squad
-					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
-					if(groups.size()+2<path.size() && !group.getFlee() && Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
-						Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
-					} else if(group.getFlee() && toBeRemoved.x != -1) {
-						Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
-						toBeRemoved = new Point();
-					}else break;
-				}
-			
-				int i=0;
-				for(Group group:groups){
-					rotating=true;
-					if(i<path.size()){
-						if(i+1<path.size()){
-							group.rotate(path.get(i+1));
-						}else 
-							group.rotate(path.get(i));
-						}
-					i++;
-					rotating=false;
-				}
-				
-				}else{
-					rotating=true;
-					int i=0;
-					for(Group group: groups){
-						i++;
-						if(i<path.size()){
-							group.setNextLoc(path.get(i));
-							group.setWait(false);
-						}
-					}
-					
-				}
-			previousFloor = groups.get(groups.size()-1).getFloor();
-			}
-		}
+	}
+	
+	public void findNextLoc(boolean canGo) {
+		//TODO
 	}
 }

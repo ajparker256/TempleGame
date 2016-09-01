@@ -18,8 +18,6 @@ public class TreasureTrap extends Trap implements TrapInterface{
 	
 	private int reward;
 	
-	private int round;
-	
 	//Inherited traits that can be set/modified.
 /*	protected int damage;
 	protected int range;
@@ -44,11 +42,9 @@ public class TreasureTrap extends Trap implements TrapInterface{
 	protected ArrayList<Upgrade> onTrigger;*/
 	
 	public TreasureTrap(int x, int y, float size, int floor) {
-		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
+		super(x, y, size, floor);
 		id = 4;
-		round = Main.round;
 		this.floor = floor;
-		Main.grids.get(floor).getTreasureLocs().add(new Point(x,y));
 		super.passable=false;
 		super.canInteract=true;
 		this.reward=100;
@@ -76,8 +72,8 @@ public class TreasureTrap extends Trap implements TrapInterface{
 		if(reward<=0) {
 			passable = true;
 			canInteract = false;
-			Main.grids.get(g.getFloor()).getTreasureLocs().remove(new Point(x, y));
-			Blank blank = new Blank(super.x, super.y, super.size, Main.grids.get(floor).getLoc(), floor);
+			//To be implemented correctly elsewhere : Main.grids.get(g.getFloor()).getTreasureLocs().remove(new Point(x, y));
+			Blank blank = new Blank(super.x, super.y, super.size, floor);
 			blank.setTrapRefs(trapRefs);
 			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
 		} else {
@@ -88,16 +84,9 @@ public class TreasureTrap extends Trap implements TrapInterface{
 	public void getIncome() {
 		Main.money += reward;
 	}
-	
-	public void restore() {
-		guiTexture = new GuiTexture(GuiLibrary.treasureClosed, position, new Vector2f(size, size*(float)DisplayManager.getAspectratio()));
-		reward = 100;
-		Main.grids.get(floor).setTile(x, y, this);
-	}
 
 	@Override
-	public void setTriggers() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Point> getTriggerLocations() {
+		return null;
 	}
 }

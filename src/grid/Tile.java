@@ -43,10 +43,11 @@ public class Tile {
 	protected boolean hasAnimation;
 	
 	//creates a tile in location loc, give location in column then row
-	public Tile(int x, int y, float size, Vector2f location, int floor){
+	public Tile(int x, int y, float size, int floor){
+		trapRefs = new ArrayList<Point>();
 		this.hp=100;
 		this.canInteract=false;
-		this.location=location;
+		this.location=getGridLocation(floor);
 		trapRefs=new ArrayList<Point>();
 		this.size=size;
 		this.x=x;
@@ -58,6 +59,18 @@ public class Tile {
 		id = -1;
 		occupied = -1;
 		this.floor = floor;
+	}
+	
+	//this.location = new Vector2f(-size*(rows)+size, -size*(float)DisplayManager.getAspectratio()*(rows-1f));
+	
+	public static Vector2f getGridLocation(int floor) {
+		int rows = 9;
+		float size = .05f;
+		if(floor<4) {
+			rows = floor+5;
+		} 		
+		Vector2f loc = new Vector2f(-size*(rows)+size, -size*(float)DisplayManager.getAspectratio()*(rows-1f));
+		return loc;
 	}
 	
 	public ArrayList<Point> getTrapRefs() {
@@ -149,7 +162,7 @@ public class Tile {
 	}
 	
 	public Tile copy() {
-		Tile t = new Tile(x, y, size, location, floor);
+		Tile t = new Tile(x, y, size, floor);
 		t.setTrapRefs(trapRefs);
 		return t;
 	}
@@ -211,7 +224,7 @@ public class Tile {
 	public void damage(double damage){
 		hp-=damage;
 		if(hp<=0){
-			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(floor).getLoc(), floor);
+			Blank blank = new Blank(this.x, this.y, this.size, floor);
 			blank.setTrapRefs(trapRefs);
 			Main.grids.get(floor).setTile(this.x, this.y, blank);
 		}

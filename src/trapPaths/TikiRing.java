@@ -1,6 +1,7 @@
 package trapPaths;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import main.Main;
 import traps.Fire;
@@ -18,17 +19,18 @@ public class TikiRing extends TikiTrap{
 	}
 	
 	@Override
-	public void setTriggers(){
-		
+	public ArrayList<Point> getTriggerLocations(){
+		ArrayList<Point> allTriggers = new ArrayList<Point>();
 		for(int i = -1; i<2; i++) {
 			for(int j = -1; j<2; j++) {
-				if(i+x > 0 && i+x<Main.gridsReadOnly.get(floor).getWidth() && j+y > 0 && j+y <Main.gridsReadOnly.get(floor).getWidth()) {
+				if(i+x > 0 && i+x<getWidthOfGrid() && j+y > 0 && j+y <getWidthOfGrid()) {
 					if(j != 0 && i != 0) {
-						Main.gridsReadOnly.get(floor).getTile(x+i, y+j).addTrapRef(new Point(this.x, this.y));
+						allTriggers.add(new Point(x+i, y+j));
 					}
 				}
 			}
 		}
+		return allTriggers;
 	}
 	
 	@Override

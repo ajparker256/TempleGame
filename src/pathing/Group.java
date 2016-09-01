@@ -20,7 +20,7 @@ public class Group {
 	private ArrayList<Explorer> group;
 	private ArrayList<Integer> groupIds;
 	//This is the room on a tile for members to exist (generally 2-4 explorers or 1 big thing like a drill)
-	private final int MAX_SIZE;
+	private static final int MAX_SIZE = 4;
 	private Point nextLoc;
 	private Vector2f location;
 	private Vector2f velocity;
@@ -52,11 +52,11 @@ public class Group {
 		return wait;
 	}
 
-	public Group(int id) {
+	public Group(int id, Vector2f loc) {
 		this.speedBonus=0;
 		this.flee=false;
 		this.speedMod=1f;
-		location=new Vector2f(Main.grids.get(Main.gridToBeRendered).getTile(0,0).getLocation().x,Main.grids.get(Main.gridToBeRendered).getTile(0,0).getLocation().y);
+		location=new Vector2f(loc.x, loc.y);
 		location.y-=0.1f;
 		wait=false;
 		busy=false;
@@ -67,7 +67,6 @@ public class Group {
 		speed=0.1f;
 		velocity=new Vector2f(speed,(float)(speed*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
-		MAX_SIZE = 4;
 		squadId = id;
 		floor = Main.gridToBeRendered;
 		setNextLoc(nextLoc);
@@ -75,35 +74,34 @@ public class Group {
 	
 
 
-	public boolean move(int milli,Grid grid) {
-		//Interacts if possible
-		if(grid.getTile(nextLoc.x, nextLoc.y).canInteract()){
-			interact(grid);
-			return true;
+	public boolean move(long milli, Grid currentFloor) {
+		boolean isCurrentlyInteracting = true;
+		
+		if(currentFloor.getTile(nextLoc.x, nextLoc.y).canInteract()){
+			interact(currentFloor);
+			
+			return isCurrentlyInteracting;
 		}
-		//moves explorers within group
 		for(Explorer explorer:group){
 			explorer.moveTo(nextLoc,milli);
 		}
-		//triggers the tile that the group is on
-		Main.grids.get(floor).getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
-		//sets the tile the group is on to occupied
-		if(grid.getTile(nextLoc.x, nextLoc.y).getOccupied()>-2)
-			grid.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
-		//real loc is what is used for hitboxes for getting hit
+		currentFloor.getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
+		if(currentFloor.getTile(nextLoc.x, nextLoc.y).getOccupied()>-2)
+			currentFloor.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		realLoc=nextLoc;
 		//destination is set so the group can start moving towards it
-		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
+		Vector2f destination=currentFloor.getTile(nextLoc.x, nextLoc.y).getLocation();
 		//Does movement if not at destination
-		if(!(location.x==destination.x&&location.y==destination.y)){
-			moveTo(grid, milli);
+		if(location.x != destination.x || location.y != destination.y){
+			moveTo(milli, currentFloor);
 			return false;
 		}
 		//if done with everything resets busy to false so squad can move on
-			busy=false;
-			wait=true;
-		return false;
-		}
+		busy=false;
+		wait=true;
+		
+		return !isCurrentlyInteracting;
+	}
 	
 	//Interacts with the tile with both the explorers and the group
 	private void interact(Grid grid){
@@ -114,7 +112,7 @@ public class Group {
 		 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
 	}
 	//Basic movement based on destination and current location
-	private void moveTo(Grid grid, int milli){
+	private void moveTo(long milli, Grid grid){
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		speedMod=1f;
@@ -173,10 +171,10 @@ public class Group {
 		}
 	}
 		//calls render on all the explorers
-	public ArrayList<GuiTexture> render(){
+	public ArrayList<GuiTexture> render(int currentlyViewedFloor){
 		ArrayList<GuiTexture> toRender = new ArrayList<GuiTexture>();
 		for(Explorer explorer:group){
-			if(this.floor == Main.gridToBeRendered)
+			if(currentlyViewedFloor ==  floor)
 			toRender.add(explorer.render());
 		}
 		return toRender;

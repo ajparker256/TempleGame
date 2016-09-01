@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 import explorerTypes.Explorer;
 import upgrades.*;
 import grid.Blank;
+import grid.Grid;
 import grid.Tile;
 import librarys.TileLibrary;
 import main.Main;
@@ -36,8 +37,8 @@ public class Trap extends Tile{
 	protected ArrayList<Upgrade> onInteract;
 	protected ArrayList<Upgrade> onTrigger;
 	
-	public Trap(int x, int y, float size, Vector2f location, int floor) {
-		super(x, y, size, location, floor);
+	public Trap(int x, int y, float size, int floor) {
+		super(x, y, size, floor);
 		allUpgrades = new ArrayList<Upgrade>();
 		onHit = new ArrayList<Upgrade>();
 		onFire = new ArrayList<Upgrade>();
@@ -185,15 +186,17 @@ public class Trap extends Tile{
 			for(Upgrade u : onDeath) {
 				u.upgrade(this);
 			}
-			Blank blank = new Blank(this.x, this.y, this.size, Main.grids.get(g.getFloor()).getLoc(), floor);
+			Blank blank = new Blank(this.x, this.y, this.size, floor);
 			blank.setTrapRefs(trapRefs);
 			Main.grids.get(g.getFloor()).setTile(this.x, this.y, blank);
 		}
 	}
 	
-	protected boolean isInBounds(Point currentLoc) {
-		int width = Main.grids.get(floor).getWidth();
-		return currentLoc.x<width && currentLoc.y<width && currentLoc.x>=0 && currentLoc.y>=0;
+	protected int getWidthOfGrid() {
+		if(floor<=Grid.getMaximumWidth()-Grid.getMinimumWidth()) {
+			return floor+Grid.getMinimumWidth();
+		}
+		else return Grid.getMaximumWidth();
 	}
 	
 	public void upgrade(Upgrade powerUp) {

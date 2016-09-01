@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
 
+import grid.SandTemple;
 import grid.Tile;
 import gui.GuiTexture;
 import librarys.PageLibrary;
 import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
 import librarys.TileLibrary;
-import pathing.Squad;
 import renderEngine.DisplayManager;
 import shopItems.ShopItem;
 import traps.Trap;
@@ -26,18 +26,22 @@ public class UIControl {
 	private LinkedPageSystem infoPages;
 	private FloorSelect floorSelect;
 	private UpgradeRoller upgradeRoller;
+	private SandTemple temple;
+	private WaveStarter waveStarter;
 	private Vector2f locationOfMoney;
 	private Vector2f sizeOfMoney;
 	
 	public UIControl() {
-		money = 2000;
+		money = 100000;
 		locationOfMoney = new Vector2f(0.6f,-0.9f);
 		sizeOfMoney = new Vector2f(.025f, .05f);
 		rotationMenu = rotationMenuInit();
 		infoPages = infoPageInit();
+		temple = templeInit();
 		floorSelect = floorSelectInit();
 		trapShop = shopInit();
 		upgradeRoller = upgradeRollerInit();
+		waveStarter = waveStarterInit();
 	}
 	
 	private RotationDialogueBox rotationMenuInit() {
@@ -77,27 +81,38 @@ public class UIControl {
 	private FloorSelect floorSelectInit() {
 		Vector2f locationOfBottomLeft = new Vector2f(-.4f, .8f);
 		Vector2f totalSize = new Vector2f(.8f, .1f);
-		FloorSelect floors = new FloorSelect(locationOfBottomLeft, totalSize);
-		return floors;		
+		FloorSelect floorSelect = new FloorSelect(locationOfBottomLeft, totalSize);
+		return floorSelect;		
 	}
 	
 	private UpgradeRoller upgradeRollerInit() {
 		return new UpgradeRoller();
 	}
 	
+	private SandTemple templeInit() {
+		return new SandTemple();
+	}
+	
+	private WaveStarter waveStarterInit() {
+		Vector2f locationBL = new Vector2f(.7f, -.9f);
+		Vector2f totalSize = new Vector2f(.2f, .2f);
+		return new WaveStarter(locationBL, totalSize);
+	}
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		floorSelect.render(dynamicGuis);
+		temple.render(dynamicGuis);
 		trapShop.render(dynamicGuis);
 		infoPages.render(dynamicGuis);
 		rotationMenu.render(dynamicGuis);
 		upgradeRoller.render(dynamicGuis);
 		renderUpgradeOption(dynamicGuis);
+		waveStarter.render(dynamicGuis);
 		renderMoney(dynamicGuis);
 	}
 	
 	private void renderUpgradeOption(ArrayList<GuiTexture> dynamicGuis) {
-		if(trapShop.isOn() && floorSelect.getGridToBeRendered().getTile(trapShop.getGridLoc().x, trapShop.getGridLoc().y).getId()>=TileLibrary.getFirstTrapId()) {
+		if(trapShop.isOn() && temple.getCurrentFloor().getTile(trapShop.getGridLoc().x, trapShop.getGridLoc().y).getId()>=TileLibrary.getFirstTrapId()) {
 			trapShop.renderUpgradeOption(dynamicGuis);
 		}
 	}
@@ -108,9 +123,8 @@ public class UIControl {
 	}
 	
 	public void doMouseEvents(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
-		floorSelect.doMouseEvents(mouseX, mouseY, money);
+		floorSelectLogic(mouseX, mouseY);
 		shopExitLogic(mouseX, mouseY);
-		money -= floorSelect.getDebt();
 		
 		shopInitiationLogic(mouseX, mouseY);
 		shopSelectionLogic(mouseX, mouseY, dynamicGuis);
@@ -121,18 +135,31 @@ public class UIControl {
 		upgradeRollerInitiationLogic(mouseX, mouseY, dynamicGuis);
 		upgradeSelectionLogic(mouseX, mouseY);
 		
-		
-		
 		infoPages.checkForMouseEvents(mouseX, mouseY);
+		
+		waveStarterLogic(mouseX, mouseY);
+	}
+	
+	private void floorSelectLogic(float mouseX, float mouseY) {
+		if(floorSelect.canInteract()) {
+			floorSelect.scrollIfClicked(mouseX, mouseY);
+			int cost = floorSelect.tryToBuyFloor(mouseX, mouseY, money);
+			if(cost>0) {
+				temple.addFloor();
+				money -= cost;
+			}
+			temple.setFloor(floorSelect.changeFloor(mouseX, mouseY));
+			floorSelect.setLastInteractTimeToNow();
+		}
 	}
 	
 	private void shopInitiationLogic(float mouseX, float mouseY) {
-		if(floorSelect.isGridClicked(mouseX, mouseY) && !rotationMenu.isOn() && trapShop.getLastTimeClosed()+250 < System.currentTimeMillis() && trapShop.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && floorSelect.isEditState()) {
-			int x = (Mouse.getX()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).x-floorSelect.getSizeOfTile()+1f)*DisplayManager.WIDTH/2))/((int)(floorSelect.getSizeOfTile()*DisplayManager.WIDTH));
-			int y = (Mouse.getY()-(int)((floorSelect.getGridLoc(floorSelect.getCurrentFloor()).y-floorSelect.getSizeOfTile()+1f)*DisplayManager.HEIGHT/2))/((int)(floorSelect.getSizeOfTile()*DisplayManager.HEIGHT*DisplayManager.getAspectratio()));
-			int width = floorSelect.getGridToBeRendered().getWidth();
+		if(temple.getCurrentFloor().isClicked(mouseX, mouseY) && !rotationMenu.isOn() && trapShop.getLastTimeClosed()+250 < System.currentTimeMillis() && trapShop.getLastTimeClicked()+500<System.currentTimeMillis() && !upgradeRoller.isOn() && temple.isEditState()) {
+			int x = (Mouse.getX()-(int)((temple.getCurrentFloor().getLoc().x-temple.getCurrentFloor().getSize()+1f)*DisplayManager.WIDTH/2))/((int)(temple.getCurrentFloor().getSize()*DisplayManager.WIDTH));
+			int y = (Mouse.getY()-(int)((temple.getCurrentFloor().getLoc().y-temple.getCurrentFloor().getSize()+1f)*DisplayManager.HEIGHT/2))/((int)(temple.getCurrentFloor().getSize()*DisplayManager.HEIGHT*DisplayManager.getAspectratio()));
+			int width = temple.getCurrentFloor().getWidth();
 			if(width>x && width>y) {
-				trapShop.setGridLoc(new Point(x, y), floorSelect.getGridToBeRendered());
+				trapShop.setGridLoc(new Point(x, y), temple.getCurrentFloor());
 				trapShop.setOn(true);
 				trapShop.setLastTimeClicked(System.currentTimeMillis());
 			}
@@ -141,15 +168,15 @@ public class UIControl {
 	
 	private void shopSelectionLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
 		if(trapShop.isOn() && trapShop.shopIsClicked(mouseX, mouseY)) {
-			System.out.println(floorSelect.getCurrentFloor());
-			Tile oldTile=floorSelect.getGridToBeRendered().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y);
+			Tile oldTile=temple.getCurrentFloor().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y);
 			int selection = trapShop.getShopItem(mouseX, mouseY);
 			if(selection != -1) {
 				ShopItem selectedItem = ShopItemLibrary.getItem(selection);
 				if(selectedItem.getCost()<=money && oldTile.getId() != selectedItem.getId() && !selectedItem.isRotatable()) {
-					Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), oldTile.getSize(), selection);
-					selectedTrap.setTrapRefs(oldTile.getTrapRefs());
-					floorSelect.getGridToBeRendered().setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
+					//Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), selection, temple.getCurrentFloor().getFloor());
+					//selectedTrap.setTrapRefs(oldTile.getTrapRefs());
+					//temple.getCurrentFloor().setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
+					temple.addTrapToCurrentFloor(trapShop.getGridLoc(), selection);
 					trapShop.setOn(false);
 					rotationMenu.setOn(false);
 					upgradeRoller.setOn(false);
@@ -175,7 +202,7 @@ public class UIControl {
 	}
 	
 	private void shopExitLogic(float mouseX, float mouseY) {
-		if(trapShop.isExitClicked(mouseX, mouseY) || !floorSelect.isEditState() || floorSelect.shouldExitShop()) {
+		if(trapShop.isExitClicked(mouseX, mouseY) || !temple.isEditState() || floorSelect.shouldExitShop()) {
 			trapShop.setOn(false);
 			rotationMenu.setOn(false);
 			upgradeRoller.setOn(false);
@@ -184,8 +211,8 @@ public class UIControl {
 	
 	private void upgradeRollerInitiationLogic(float mouseX, float mouseY, ArrayList<GuiTexture> dynamicGuis) {
 		if(trapShop.isOn() && trapShop.isUpgradeClicked(mouseX, mouseY) && !upgradeRoller.isOn()) {
-			if(floorSelect.getGridToBeRendered().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y).getId() > 1) {
-				Trap trap = (Trap) floorSelect.getGridToBeRendered().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y);
+			if(temple.getCurrentFloor().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y).getId() > 1) {
+				Trap trap = (Trap) temple.getCurrentFloor().getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y);
 				int levelCost = trap.getLevel()*100+50;
 				if(money-levelCost>-0) {
 					upgradeRoller = new UpgradeRoller(new Vector2f(-.53f, -.8f), new Vector2f(.8f, .4f), trap);
@@ -216,7 +243,7 @@ public class UIControl {
 				rotationMenu.setSelection(selected);
 			}
 			if(rotationMenu.getSelection() != 0 /*&& rotationMenu.isConfirmed(mouseX, mouseY)*/) {
-				floorSelect.getGridToBeRendered().setTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y, TileLibrary.getTile((int)trapShop.getGridLoc().x, (int)trapShop.getGridLoc().y, .05f, rotationMenu.getGivenTile().getId()+rotationMenu.getSelection()-1));
+				temple.addTrapToCurrentFloor(trapShop.getGridLoc(), rotationMenu.getGivenTile().getId()+rotationMenu.getSelection()-1);
 				rotationMenu.setSelection(0);
 				rotationMenu.setOn(false);
 				trapShop.setOn(false);
@@ -228,10 +255,14 @@ public class UIControl {
 		}
 	}
 	
-	public void tickSquads(double milli, ArrayList<Squad> allSquads) {
-		for(Squad currentSquad : allSquads) {
-			currentSquad.tick((int)milli, floorSelect.getFloor(currentSquad.getGroups().get(currentSquad.getGroups().size()-1).getFloor()));
+	private void waveStarterLogic(float mouseX, float mouseY) {
+		if(waveStarter.isStartWaveClicked(mouseX, mouseY)) {
+			temple.changeEditState();
 		}
+	}
+	
+	public void tick(long milli) {
+		temple.tick(milli);
 	}
 	
 }

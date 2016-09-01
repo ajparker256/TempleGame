@@ -46,7 +46,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 	
 
 	public ArrowTrap(int x, int y, float size,int direction, int floor) {
-		super(x, y, size, Main.gridsReadOnly.get(floor).getLoc(), floor);
+		super(x, y, size, floor);
 		super.passable=false;
 		super.canInteract=true;
 		this.direction=direction;
@@ -75,7 +75,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 		cooldown = 0;
 		maxCd = 1000;
 		
-		setTriggers();
+	//	setTriggers(); TODO deal with this ... later
 	}
 	@Override
 	public void whenTriggered(Point targetPoint){
@@ -144,33 +144,35 @@ public class ArrowTrap extends Trap implements TrapInterface{
 	}
 	
 
- 	public void setTriggers(){
+ 	public ArrayList<Point> getTriggerLocations(){
 		int i=1;
-
+		ArrayList<Point> allTriggers = new ArrayList<Point>();
 		switch(direction){
-		case 1:while(y+i<Main.gridsReadOnly.get(floor).getWidth()&&i<=range){
-			Main.gridsReadOnly.get(floor).getTile(x, y+i).addTrapRef(new Point(this.x,this.y));
-			i++;
+			case 1:while(y+i < getWidthOfGrid() && i <= range){
+				allTriggers.add(new Point(x, y+i));
+				i++;
+			}
+			break;
+			case 2:while(x+i < getWidthOfGrid() && i <= range){
+				allTriggers.add(new Point(x+i, y));
+				i++;
+			}
+			break;
+			case 3:while(y-i >= 0 && i <= range){
+				allTriggers.add(new Point(x, y-i));
+				i++;
+			}
+			break;
+			case 4:while(x-i >= 0 && i <= range){
+				allTriggers.add(new Point(x-i, y));
+				i++;
+			}
+			break;
 		}
-		break;
-		case 2:while(x+i<Main.gridsReadOnly.get(floor).getWidth()&&i<=range){
-			Main.gridsReadOnly.get(floor).getTile(x+i, y).addTrapRef(new Point(this.x,this.y));
-			i++;
-		}
-		break;
-		case 3:while(y-i>=0&&i<range){
-			Main.gridsReadOnly.get(floor).getTile(x, y-i).addTrapRef(new Point(this.x,this.y));
-			i++;
-		}
-		break;
-		case 4:while(x-i>=0&&i<range){
-			Main.gridsReadOnly.get(floor).getTile(x-i, y).addTrapRef(new Point(this.x,this.y));
-			i++;
-		}
-		break;
-	}
 		
+		return allTriggers;
 	}
+ 	
 	@Override
 	public void tick(double milli){
 		cooldown-=milli;

@@ -12,7 +12,7 @@ import renderEngine.DisplayManager;
 public class Exit extends Tile{
 	
 	public Exit(int x, int y, float size, int floor) {
-		super(x, y, size, Main.grids.get(floor).getLoc(), floor);
+		super(x, y, size, floor);
 		this.guiTexture=(new GuiTexture(GuiLibrary.ladder,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));
 		passable = true;
 		canInteract = true;

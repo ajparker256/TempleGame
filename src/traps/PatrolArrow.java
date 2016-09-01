@@ -1,6 +1,7 @@
 package traps;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import librarys.AnimationLibrary;
 import librarys.GuiLibrary;
@@ -17,8 +18,8 @@ import gui.Animation;
 import gui.GuiTexture;
 public class PatrolArrow extends Trap implements TrapInterface{
 public PatrolArrow(int x, int y, float size, int floor) {
-	super(x, y, size, Main.grids.get(floor).getLoc(), floor);
-	super.passable=false;
+	super(x, y, size, floor);
+	super.passable=false; 
 	super.canInteract=true;
 	this.guiTexture=(new GuiTexture(GuiLibrary.arrowTrap1,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 	this.name = "Arrow Trap";
@@ -27,7 +28,7 @@ public PatrolArrow(int x, int y, float size, int floor) {
 	rotatable = true;
 	super.animation = new Animation(AnimationLibrary.crossBowFiring, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio())));
 	super.animation.setDelay(25);
-	setTriggers();
+	//setTriggers();
 	damage = 5;
 	range = 4;
 	defense = 0;
@@ -65,12 +66,14 @@ public Tile copy() {
 }
 
 
-	public void setTriggers(){
+	public ArrayList<Point> getTriggerLocations(){
+		ArrayList<Point> allTriggers = new ArrayList<Point>();
 		for(int i=range*-1;i<=range;i++){
 			for(int k=range*-1;k<=range;k++){
-		Main.gridsReadOnly.get(floor).getTile(x+i, y+k).addTrapRef(new Point(this.x,this.y));
+				allTriggers.add(new Point(k+i, y+k));
 			}
 		}
+		return allTriggers;
 
 
 }

@@ -47,6 +47,7 @@ import sound.Sound;
 import tools.MathM;
 import traps.Trap;
 import upgrades.UpgradeRoller;
+import zUITests.FloorCollectionTest;
 //Main game loop
 public class Main {
 	//Amount of ambient light
@@ -90,22 +91,14 @@ public static void main(String[] args) throws FileNotFoundException {
 	GuiLibrary.init(loader);
 	UpgradeLibrary.init();
 	SoundLibrary.init();
-	//Vector2f locationOfLeftMenu = new Vector2f(-.9f, -.8f);
-	//Vector2f sizeOfLeftMenu = new Vector2f(.4f, 1.6f);
-	//Vector2f borderSize = new Vector2f(.1f, .1f*(float)DisplayManager.getAspectratio());
-	//PageLibrary.init(new Vector2f(locationOfLeftMenu.x-StringLibrary.getSize().x/2, locationOfLeftMenu.y), sizeOfLeftMenu);
-	
-	//testPageSystem = new LinkedPageSystem(new Vector2f(locationOfLeftMenu.x-borderSize.x/2, locationOfLeftMenu.y-borderSize.y/2), new Vector2f(sizeOfLeftMenu.x+borderSize.x, sizeOfLeftMenu.y+borderSize.y));
-	//populateLeftMenu(testPageSystem);
-	
-	//testFloorSelect = new FloorSelect(new Vector2f(-.4f, .8f), new Vector2f(.8f, .1f));
-	
+	AnimationLibrary.init(loader);
 	userInterface = new UIControl();
 	
 	for(int i = 0; i<8; i++) {
 		grids.add(new Grid(0.05f,5+i, i));
 		gridsReadOnly.add(grids.get(i).copy());
 	}
+	System.out.println(grids.get(0).getLoc());
 	rotationDialogueBox = new RotationDialogueBox();
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
@@ -115,7 +108,6 @@ public static void main(String[] args) throws FileNotFoundException {
 
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);	
-	AnimationLibrary.init(loader);
 	
 
 	
@@ -124,25 +116,25 @@ public static void main(String[] args) throws FileNotFoundException {
 	upgradeRoller = new UpgradeRoller();
 	
 	guis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(-1f, -1f), new Vector2f(1.8f, 1.8f)));
-	Group group1 = new Group(0);
+	Group group1 = new Group(0, grids.get(0).getLoc());
 	group1.add(new Exploder (group1));
 	group1.add(new Miner (group1));
 	group1.add(new Athlete (group1));
 	group1.add(new Miner (group1));
 	
-	Group group2 = new Group(0);
+	Group group2 = new Group(0, grids.get(0).getLoc());
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	group2.add(new Explorer (group2));
 	group2.add(new Miner (group2));
 	
-	Group group3 = new Group(0);
+	Group group3 = new Group(0, grids.get(0).getLoc());
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	group3.add(new Explorer (group3));
 	group3.add(new Miner (group3));
 	
-	Group group4 = new Group(0);
+	Group group4 = new Group(0, grids.get(0).getLoc());
 	group4.add(new Explorer (group4));
 	group4.add(new Miner (group4));
 	group4.add(new Explorer (group4));
@@ -217,8 +209,8 @@ public static void main(String[] args) throws FileNotFoundException {
 				state = 1;
 			}
 		}
-		if(state == 1 && !isEditPhase) {
-			for(Squad s : squads) {
+		if(state == 1) {
+			/*for(Squad s : squads) {
 				s.tick((int)milli,grids.get(s.getGroups().get(s.getGroups().size()-1).getFloor()));
 			}
 			
@@ -237,19 +229,20 @@ public static void main(String[] args) throws FileNotFoundException {
 					projectiles.remove(projectile);
 				
 			
-			}
+			} */
+			userInterface.tick(milli);
 			
 		}
 		if(state == 1 || state == 2) {
 			update(dynamicGuis, milli);
 			userInterface.render(dynamicGuis);
-			for(Squad squad : squads) {
+			/*for(Squad squad : squads) {
 				dynamicGuis.addAll(squad.render());
 			}
 			for(Projectile projectile : projectiles){
 				if(projectile.canRender(Main.gridToBeRendered))
 					dynamicGuis.add(projectile.render());
-			}
+			}*/
 		
 
 					

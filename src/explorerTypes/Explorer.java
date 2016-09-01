@@ -46,28 +46,22 @@ public class Explorer extends Unit{
 		super.idle=new GuiTexture(GuiLibrary.explorerStanding,location,unitSize);
 		super.animation=new Animation(AnimationLibrary.explorerRunning,location,unitSize);
 		super.animation.setDelay(delay);
-		floor = Main.grids.get(0).getFloor();
+		floor = FIRST_FLOOR;
 		damage = 1;
 		switch(position){
-		case 1:location=new Vector2f(location.x-0.025f+0.01f,location.y+0.04f);
+		case 1:location=new Vector2f(location.x-0.025f+0.01f,location.y+0.025f*(float)DisplayManager.getAspectratio());
 		break;
-		case 2:location=new Vector2f(location.x+0.025f+0.01f,location.y+0.04f);
+		case 2:location=new Vector2f(location.x+0.025f+0.01f,location.y+0.025f*(float)DisplayManager.getAspectratio());
 		break;
-		case 3:location=new Vector2f(location.x-0.025f+0.01f,location.y-0.04f);
+		case 3:location=new Vector2f(location.x-0.025f+0.01f,location.y-0.025f*(float)DisplayManager.getAspectratio());
 		break;
-		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.04f);
+		case 4:location=new Vector2f(location.x+0.025f+0.01f,location.y-0.025f*(float)DisplayManager.getAspectratio());
 		break;
 		}
 		
 	}
 	
-	//This finds if the explorer has an interaction with the given tile
 	public boolean canInteract(int r, int c, Grid gr) {
-		//TODO Stub, to be implemented individually to determine if with specialty can disarm the trap
-		//if(gr.get(r,c).equals(null)) {
-		//	return false;
-		//}
-		//else 
 		return true;
 	}
 	
@@ -461,7 +455,7 @@ public class Explorer extends Unit{
 	}
 
 
-	public void moveTo(Point nextLoc, int milli){
+	public void moveTo(Point nextLoc, long milli){
 		Vector2f destination=Main.grids.get(floor).getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		switch(position){
@@ -547,7 +541,7 @@ public class Explorer extends Unit{
 		
 	}
 
-	public void tick(int milli) {
+	public void tick(long milli) {
 		
 		
 	}

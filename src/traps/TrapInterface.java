@@ -1,6 +1,7 @@
 package traps;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import grid.Tile;
 import gui.GuiTexture;
@@ -13,7 +14,7 @@ public interface TrapInterface {
 
 			public Tile copy();
 
-			public void setTriggers();
+			public ArrayList<Point> getTriggerLocations();
 
 			public void tick(double milli);
 		

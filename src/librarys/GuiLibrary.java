@@ -12,7 +12,8 @@ public static GuiTexture crosshair;
 public static int bulletTexture;
 public static int background;
 public static int shop;
-public static int nextWave;
+public static int nextWaveUnclicked;
+public static int nextWaveClicked;
 public static int health;
 
 //Explorer's basic images for standing and walking
@@ -161,6 +162,7 @@ public static int exclamationPoint;
 public static int questionMark;
 public static int comma;
 public static int apostrophe;
+public static int percent;
 
 public static int blank;
 public static int dirt0;
@@ -188,6 +190,9 @@ public static int scrollRightSelectable;
 public static int addFloorIcon;
 
 public static void init(Loader loader) {
+		GuiLibrary.nextWaveUnclicked = loader.loadTexture("Wave Button/nextWaveUnclicked");
+		GuiLibrary.nextWaveClicked = loader.loadTexture("Wave Button/nextWaveClicked");
+	
 		GuiLibrary.explorerStanding = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
 		GuiLibrary.explorerWalkingL = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
 		GuiLibrary.explorerWalkingR = loader.loadTexture("Explorers/Basic/BasicExplorerStanding");
@@ -288,7 +293,6 @@ public static void init(Loader loader) {
 		GuiLibrary.Z = loader.loadTexture("letters/Z");
 		
 		//Loads lowercase letters
-		//TODO Make special sizes for thin letters so that they can be printed closer together. Also make a getWidth(char c) method.
 		GuiLibrary.la = loader.loadTexture("letters/la");
 		GuiLibrary.lb = loader.loadTexture("letters/lb");
 		GuiLibrary.lc = loader.loadTexture("letters/lc");
@@ -322,6 +326,7 @@ public static void init(Loader loader) {
 		GuiLibrary.questionMark = loader.loadTexture("letters/questionMark");
 		GuiLibrary.comma = loader.loadTexture("letters/comma");
 		GuiLibrary.apostrophe = loader.loadTexture("letters/apostrophe");
+		GuiLibrary.percent = loader.loadTexture("letters/%");
 
 		GuiLibrary.blank = loader.loadTexture("tiles/Blank");
 		GuiLibrary.dirt0 = loader.loadTexture("tiles/Dirt2");

@@ -14,8 +14,6 @@ public class LinkedPageSystem {
 	
 	private HashMap<String, Linkable> screens;
 	
-	//TODO find a way of dealing with Menu's on one hand, but then only pages on the other.
-	
 	private Vector2f location; //Bottom Left
 	
 	private Vector2f size; //All encompassing
@@ -100,7 +98,7 @@ public class LinkedPageSystem {
 	}
 	
 	public void addLinkToMenu(String titleOfMenu, String linkTitle) {
-		screens.get(titleOfMenu).addEntry(linkTitle); //TODO add link to the menu, recalc locs and all that or maybe redraw the menu completely
+		screens.get(titleOfMenu).addEntry(linkTitle);
 	}
 	
 	public void populate(Menu initialMenu) {

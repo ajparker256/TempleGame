@@ -9,8 +9,8 @@ import renderEngine.DisplayManager;
 
 public class Blank extends Tile {
 	//Location should be the grid's location!!!
-	public Blank(int x, int y, float size, Vector2f location, int floor) {
-		super(x, y, size, location, floor);
+	public Blank(int x, int y, float size, int floor) {
+		super(x, y, size, floor);
 		super.canInteract=false;
 		super.passable=true;
 		this.guiTexture=(new GuiTexture(GuiLibrary.blank,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
@@ -20,7 +20,7 @@ public class Blank extends Tile {
 	
 	@Override
 	public Tile copy() {
-		Blank newTile = new Blank(x, y, size, location, floor);
+		Blank newTile = new Blank(x, y, size, floor);
 		newTile.setTrapRefs(trapRefs);
 		return newTile;
 	}
