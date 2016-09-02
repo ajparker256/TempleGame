@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.vector.Vector2f;
 
 import grid.Blank;
+import grid.Grid;
 import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
@@ -50,7 +51,6 @@ public class TreasureTrap extends Trap implements TrapInterface{
 		this.reward=100;
 		this.guiTexture=(new GuiTexture(GuiLibrary.treasureClosed,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Treasure";
-		setPrice(200);
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class TreasureTrap extends Trap implements TrapInterface{
 	}
 	
 	@Override
-	public void interact(Group g) {
+	public void interact(Group g, Grid currentFloor) {
 		for(Upgrade u : onInteract) {
 			u.upgrade(this);
 		}
@@ -69,15 +69,11 @@ public class TreasureTrap extends Trap implements TrapInterface{
 			guiTexture = new GuiTexture(GuiLibrary.treasureOpen, position, new Vector2f(size, (float)(size*DisplayManager.getAspectratio()))) ;
 		}
 		
-		if(reward<=0) {
-			passable = true;
-			canInteract = false;
+		if(isDead()) {
 			//To be implemented correctly elsewhere : Main.grids.get(g.getFloor()).getTreasureLocs().remove(new Point(x, y));
-			Blank blank = new Blank(super.x, super.y, super.size, floor);
-			blank.setTrapRefs(trapRefs);
-			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
+			replaceWithBlank(currentFloor);
 		} else {
-			reward --;
+			hp--;
 		}
 	}
 	

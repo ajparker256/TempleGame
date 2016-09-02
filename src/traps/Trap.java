@@ -178,7 +178,7 @@ public class Trap extends Tile{
 	}
 	
 	@Override
-	public void interact(Group g) {
+	public void interact(Group g, Grid currentFloor) {
 		for(Explorer e : g.getGroup()) {
 			hp -= e.getDamage()*100/(double)(100+defense);
 		}

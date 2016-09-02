@@ -7,10 +7,12 @@ import renderEngine.DisplayManager;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import buttons.FloorSelect;
 import explorerTypes.Explorer;
 
 import java.awt.Point;
 
+import grid.FloorCollection;
 import grid.Grid;
 import gui.GuiTexture;
 
@@ -19,6 +21,7 @@ public class Group {
 	//This is the group of explorers traveling together on a tile
 	private ArrayList<Explorer> group;
 	private ArrayList<Integer> groupIds;
+	private ArrayList<PathModifier> collectedModifiers;
 	//This is the room on a tile for members to exist (generally 2-4 explorers or 1 big thing like a drill)
 	private static final int MAX_SIZE = 4;
 	private Point nextLoc;
@@ -53,6 +56,7 @@ public class Group {
 	}
 
 	public Group(int id, Vector2f loc) {
+		collectedModifiers = new ArrayList<PathModifier>();
 		this.speedBonus=0;
 		this.flee=false;
 		this.speedMod=1f;
@@ -68,7 +72,7 @@ public class Group {
 		velocity=new Vector2f(speed,(float)(speed*DisplayManager.getAspectratio()));
 		group = new ArrayList<Explorer>();
 		squadId = id;
-		floor = Main.gridToBeRendered;
+		floor = 0; 
 		setNextLoc(nextLoc);
 	}
 	
@@ -85,7 +89,7 @@ public class Group {
 		for(Explorer explorer:group){
 			explorer.moveTo(nextLoc,milli);
 		}
-		currentFloor.getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y);
+		currentFloor.getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y, currentFloor);
 		if(currentFloor.getTile(nextLoc.x, nextLoc.y).getOccupied()>-2)
 			currentFloor.getTile(nextLoc.x, nextLoc.y).setOccupied(squadId);
 		realLoc=nextLoc;
@@ -93,7 +97,7 @@ public class Group {
 		Vector2f destination=currentFloor.getTile(nextLoc.x, nextLoc.y).getLocation();
 		//Does movement if not at destination
 		if(location.x != destination.x || location.y != destination.y){
-			moveTo(milli, currentFloor);
+			moveTowards(milli, currentFloor);
 			return false;
 		}
 		//if done with everything resets busy to false so squad can move on
@@ -104,15 +108,15 @@ public class Group {
 	}
 	
 	//Interacts with the tile with both the explorers and the group
-	private void interact(Grid grid){
+	private void interact(Grid currentFloor){
 		for(Explorer e: group){
 			busy=true;
 			e.interact();
 		}
-		 grid.getTile(nextLoc.x, nextLoc.y).interact(this);
+		 currentFloor.getTile(nextLoc.x, nextLoc.y).interact(this, currentFloor);
 	}
-	//Basic movement based on destination and current location
-	private void moveTo(long milli, Grid grid){
+	
+	private void moveTowards(long milli, Grid grid){
 		Vector2f destination=grid.getTile(nextLoc.x, nextLoc.y).getLocation();
 		Vector2f tempVelocity= new Vector2f();
 		speedMod=1f;
@@ -185,7 +189,7 @@ public class Group {
 
 //to hit is an array that gives what members of the squad to hit, d is damage
 	public void damage(boolean[] toHit,double d) {
-			for(Explorer explorer:group){
+		for(Explorer explorer:group){
 			if(toHit[0]&&explorer.getPosition()==1){
 				explorer.damage(d);
 			}
@@ -198,7 +202,7 @@ public class Group {
 			if(toHit[3]&&explorer.getPosition()==4){
 				explorer.damage(d);
 			}
-			}
+		}
 		
 	}
 
@@ -221,7 +225,7 @@ public class Group {
 			}
 		
 	}
-	private void setLoc(Vector2f location) {
+	public void setLoc(Vector2f location) {
 		this.location=location;
 		
 	}
@@ -282,14 +286,6 @@ public class Group {
 		return MAX_SIZE;
 	}
 	
-	public void setInitialLocation(Vector2f newLoc) {
-		location = newLoc;
-	}
-	
-	public Vector2f getInitialLocation() {
-		return location;
-	}
-	
 	public ArrayList<Explorer> getGroup() {
 		return group;
 	}
@@ -314,6 +310,17 @@ public class Group {
 	public void setFlee(boolean flee) {
 		this.flee=flee;
 		
+	}
+	
+	public void addPathModifier(PathModifier pm) {
+		collectedModifiers.add(pm);
+	}
+	
+	public ArrayList<PathModifier> collectPathModifiers() {
+		ArrayList<PathModifier> modifiers = new ArrayList<PathModifier>();
+		modifiers.addAll(collectedModifiers);
+		collectedModifiers.clear();
+		return modifiers;
 	}
 
 

@@ -52,7 +52,7 @@ public class SandTemple extends Temple{
 	protected void assignSquadStartPosition(Vector2f locationOnScreen) {
 		for(Squad sq : squads) {
 			for(Group gr : sq.getGroups()) {
-				gr.setInitialLocation(locationOnScreen);
+				gr.setLoc(locationOnScreen);
 			}
 		}
 		

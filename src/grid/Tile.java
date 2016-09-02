@@ -2,6 +2,7 @@ package grid;
 
 import gui.Animation;
 import gui.GuiTexture;
+import librarys.TileLibrary;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ public class Tile {
 	protected int texture;
 	protected GuiTexture guiTexture;
 	protected String name;
-	private int price;
 	protected float size;
 	protected Vector2f location;
 	protected boolean canInteract;
@@ -52,10 +52,9 @@ public class Tile {
 		this.size=size;
 		this.x=x;
 		this.y=y;
+		System.out.println(size);
 		this.position=new Vector2f (location.x+((x-size/2)*size*2),(float) (location.y+((y-size/2)*(size*2*DisplayManager.getAspectratio()))));
 		name = "Default_Name";
-		//Should be overwritten in every case below this point
-		price = -1;
 		id = -1;
 		occupied = -1;
 		this.floor = floor;
@@ -64,10 +63,10 @@ public class Tile {
 	//this.location = new Vector2f(-size*(rows)+size, -size*(float)DisplayManager.getAspectratio()*(rows-1f));
 	
 	public static Vector2f getGridLocation(int floor) {
-		int rows = 9;
-		float size = .05f;
-		if(floor<4) {
-			rows = floor+5;
+		int rows = Grid.getMaximumWidth();
+		float size = Grid.getTileSize();
+		if(floor<Grid.getMaximumWidth()-Grid.getMinimumWidth()) {
+			rows = floor+Grid.getMinimumWidth();
 		} 		
 		Vector2f loc = new Vector2f(-size*(rows)+size, -size*(float)DisplayManager.getAspectratio()*(rows-1f));
 		return loc;
@@ -121,13 +120,6 @@ public class Tile {
 
 	}
 	
-	public int getPrice() {
-		return price;
-	}
-	
-	public void setPrice(int newPrice) {
-		price = newPrice;
-	}
 	public Vector2f getLocation(){
 		return position;
 	}
@@ -186,9 +178,9 @@ public class Tile {
 	public String toString() {
 		return name;
 	}
-	public void trigger(int x, int y){
+	public void trigger(int x, int y, Grid currentFloor){
 		for(Point point:trapRefs){
-			Main.grids.get(floor).getTile(point.x,point.y).whenTriggered(new Point(this.x, this.y));
+			currentFloor.getTile(point.x,point.y).whenTriggered(new Point(this.x, this.y));
 		}
 	}
 
@@ -200,10 +192,10 @@ public class Tile {
 	}
 
 	public void tick(double milli) {
-		
+
 	}
 	
-	public void interact(Group g){
+	public void interact(Group g, Grid currrentFloor){
 		int bonusDamage = 0;
 		for(Explorer e : g.getGroup()) {
 
@@ -221,14 +213,21 @@ public class Tile {
 	public boolean isPassable() {
 		return passable;
 	}
+	
 	public void damage(double damage){
 		hp-=damage;
-		if(hp<=0){
-			Blank blank = new Blank(this.x, this.y, this.size, floor);
-			blank.setTrapRefs(trapRefs);
-			Main.grids.get(floor).setTile(this.x, this.y, blank);
-		}
 	}
+	
+	protected void replaceWithBlank(Grid currentFloor) {
+		Blank blank = new Blank(x, y, size, floor);
+		blank.setTrapRefs(trapRefs);
+		currentFloor.setTile(x, y, blank);
+	}
+	
+	protected boolean isDead() {
+		return hp<=0;
+	}
+	
 	public void explodeDamage(int damage){
 		if(y-1>=0){
 		Main.grids.get(floor).getTile(x,y-1).damage(damage);

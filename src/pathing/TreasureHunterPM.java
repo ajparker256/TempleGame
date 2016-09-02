@@ -3,6 +3,7 @@ package pathing;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import grid.Grid;
 import grid.Tile;
 import main.Main;
 
@@ -14,10 +15,10 @@ public class TreasureHunterPM extends PathModifier{
 	}
 	
 	@Override
-	public int[] modify(Tile[] adjacentTiles) {
+	public int[] modify(Tile[] adjacentTiles, Grid currentFloor) {
 		int[] treasureFinderOdds = new int[4];
 		ArrayList<Group> groups	 = squad.getGroups();
-			ArrayList<Point> treasureLocs = Main.grids.get(groups.get(groups.size()-1).getFloor()).getTreasureLocs();
+			ArrayList<Point> treasureLocs = currentFloor.getTreasureLocs();
 				for(Point loc : treasureLocs) {
 					
 					int xRange = loc.x - groups.get(groups.size()-1).getNextLoc().x;

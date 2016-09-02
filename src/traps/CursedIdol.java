@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.vector.Vector2f;
 
 import grid.Blank;
+import grid.Grid;
 import grid.Tile;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
@@ -50,27 +51,24 @@ public class CursedIdol extends Trap implements TrapInterface{
 		super.canInteract=true;
 		this.value = 100;
 		this.texture=1;
+		this.hp = 200;
 		this.guiTexture=(new GuiTexture(GuiLibrary.idolOnBlank,position,new Vector2f(size,(float) (size*DisplayManager.getAspectratio()))));	
 		this.name = "Idol!";
-		this.setPrice(100);
 		id = 2;
 	}
 	
 	@Override
-	public void interact(Group g){
-		if(value%5 == 0) {
-			Main.money++;
-		}
-		value--;
-		if(value<=0){
-			Blank blank = new Blank(super.x, super.y, super.size, floor);
-			blank.setTrapRefs(trapRefs);
+	public void interact(Group g, Grid currentFloor){
+		
+		if(isDead()){
+			replaceWithBlank(currentFloor);
 			TrapAffinityPM attractedToDanger = new TrapAffinityPM(Main.squads.get(g.getSquadId()));
 			attractedToDanger.addModifier(Main.squads.get(g.getSquadId()).getPathMods());
-			Main.grids.get(g.getFloor()).setTile(super.x, super.y, blank);
 			for(Upgrade u : onDeath) {
 				u.upgrade(this);
 			}
+		} else {
+			hp--;
 		}
 	}
 	

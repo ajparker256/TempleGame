@@ -2,9 +2,10 @@ package pathing;
 
 import java.util.HashMap;
 
+import grid.Grid;
 import grid.Tile;
 
-public class PathModifier {
+public abstract class PathModifier {
 
 		protected Squad squad;
 		
@@ -38,10 +39,7 @@ public class PathModifier {
 			return id;
 		}
 		
-		public int[] modify(Tile[] adjacentTiles) {
-			//Stub
-			return null;
-		}
+		public abstract int[] modify(Tile[] adjacentTiles, Grid currentFloor);
 		
 		public void cleanUp() {
 			HashMap<Integer, PathModifier> mods = squad.getPathMods();

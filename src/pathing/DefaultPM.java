@@ -1,5 +1,6 @@
 package pathing;
 
+import grid.Grid;
 import grid.Tile;
 
 public class DefaultPM extends PathModifier{
@@ -10,7 +11,7 @@ public class DefaultPM extends PathModifier{
 	}
 	
 	@Override
-	public int[] modify(Tile[] adjacentTiles) {
+	public int[] modify(Tile[] adjacentTiles, Grid currentFloor) {
 		int i = 0;
 		int[] individualOdds = new int[4];
 		for(Tile currentTile : adjacentTiles) { 

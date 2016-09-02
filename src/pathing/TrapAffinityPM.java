@@ -3,8 +3,8 @@ package pathing;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import grid.Grid;
 import grid.Tile;
-import main.Main;
 
 public class TrapAffinityPM extends PathModifier{
 	
@@ -13,12 +13,12 @@ public class TrapAffinityPM extends PathModifier{
 		id = 4;
 	}
 	
-	public int[] modify(Tile[] adjacentTiles) {
+	@Override
+	public int[] modify(Tile[] adjacentTiles, Grid currentFloor) {
 		int[] trapModifier = new int[4];
 		ArrayList<Group> groups = squad.getGroups();
-			ArrayList<Point> treasureLocs = Main.grids.get(groups.get(groups.size()-1).getFloor()).getTrapLocs();
+			ArrayList<Point> treasureLocs = currentFloor.getTrapLocs();
 				for(Point loc : treasureLocs) {
-					
 					int xRange = loc.x - groups.get(groups.size()-1).getNextLoc().x;
 					int yRange = loc.y - groups.get(groups.size()-1).getNextLoc().y;
 					int maxOdds = 200;

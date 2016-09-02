@@ -170,13 +170,13 @@ public static void main(String[] args) throws FileNotFoundException {
 	squads.add(squad2);
 	//squads.add(squad3);
 	
-	int x = 0;
+	/*int x = 0;
 	for(Squad sq : squads) {
 		for(Group gr : sq.getGroups()) {
 			gr.setInitialLocation(new Vector2f(gr.getInitialLocation().x-.1f*x, gr.getInitialLocation().y));
 		}
 		x++;
-	}
+	} */
 	
 	ShopItemLibrary.init();
 	ShopItem[][] traps = new ShopItem[2][ShopItemLibrary.getItems().size()/2];
