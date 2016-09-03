@@ -199,6 +199,10 @@ public class Trap extends Tile{
 		else return Grid.getMaximumWidth();
 	}
 	
+	public ArrayList<Point> getTriggerLocations() {
+		return new ArrayList<Point>();
+	}
+	
 	public void upgrade(Upgrade powerUp) {
 		int triggerLoc = powerUp.getTriggerLoc();
 		//This is for copying from read only to non-readonly

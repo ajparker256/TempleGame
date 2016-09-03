@@ -83,7 +83,6 @@ public class Group {
 			interact(currentFloor);
 			return isCurrentlyInteracting;
 		}
-		System.out.println("WE DID IT FAM!");
 		for(Explorer explorer:group){
 			explorer.moveTo(currentFloor.getTile(nextLoc.x, nextLoc.y).getLocation(),milli);
 		}

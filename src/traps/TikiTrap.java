@@ -56,7 +56,6 @@ public class TikiTrap extends Trap implements TrapInterface{
 		id = 9;
 		range = 1;
 		rotatable = false;
-		//setTriggers(); TODO DEAL WITH THIS THING 
 		
 		damage = 1;
 		range = 1;
@@ -107,6 +106,7 @@ public class TikiTrap extends Trap implements TrapInterface{
 		return guiTexture;
 	}
 	
+	@Override
 	public ArrayList<Point> getTriggerLocations(){
 		ArrayList<Point> allTriggers = new ArrayList<Point>();
 		for(int j=1;j<=4;j++){
@@ -128,7 +128,7 @@ public class TikiTrap extends Trap implements TrapInterface{
 				}
 				break;
 				case 4:while(x-i >= 0 && i <= range){
-					allTriggers.add(new Point(x, y+i));
+					allTriggers.add(new Point(x-i, y));
 					i++;
 				}
 				break;

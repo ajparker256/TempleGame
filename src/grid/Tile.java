@@ -52,7 +52,6 @@ public class Tile {
 		this.size=size;
 		this.x=x;
 		this.y=y;
-		System.out.println(size);
 		this.position=new Vector2f (location.x+((x-size/2)*size*2),(float) (location.y+((y-size/2)*(size*2*DisplayManager.getAspectratio()))));
 		name = "Default_Name";
 		id = -1;

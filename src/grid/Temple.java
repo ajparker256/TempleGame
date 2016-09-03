@@ -55,13 +55,13 @@ public abstract class Temple {
 	public void addTrapToCurrentFloor(Point coordinates, int trapId) {
 		Grid currentFloor = allFloors.getFloorToBeRendered();
 		ArrayList<Point> oldTrapRefs = currentFloor.getTile(coordinates.x, coordinates.y).getTrapRefs();
-		Tile newTile = TileLibrary.getTile(coordinates.x, coordinates.y, trapId, currentFloor.getFloor());
-		if(newTile instanceof TrapInterface) { 
+		if(TileLibrary.getTile(coordinates.x, coordinates.y, trapId, currentFloor.getFloor()) instanceof TrapInterface) { 
 			Trap newTrap = (Trap)TileLibrary.getTile(coordinates.x, coordinates.y, trapId, currentFloor.getFloor());
-			currentFloor.addTrapRefsForTrap(newTile.getTrapRefs(),  coordinates);
+			currentFloor.addTrapRefsForTrap(newTrap.getTriggerLocations(),  coordinates);
 			newTrap.setTrapRefs(oldTrapRefs);
 			currentFloor.setTile(coordinates.x, coordinates.y, newTrap);
 		} else {
+			Tile newTile = TileLibrary.getTile(coordinates.x, coordinates.y, trapId, currentFloor.getFloor());
 			newTile.setTrapRefs(oldTrapRefs);
 			currentFloor.setTile(coordinates.x, coordinates.y, newTile);
 		}

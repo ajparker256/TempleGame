@@ -175,9 +175,6 @@ public class UIControl {
 			if(selection != -1) {
 				ShopItem selectedItem = ShopItemLibrary.getItem(selection);
 				if(selectedItem.getCost()<=money && oldTile.getId() != selectedItem.getId() && !selectedItem.isRotatable()) {
-					//Tile selectedTrap = TileLibrary.getTile(oldTile.getX(), oldTile.getY(), selection, temple.getCurrentFloor().getFloor());
-					//selectedTrap.setTrapRefs(oldTile.getTrapRefs());
-					//temple.getCurrentFloor().setTile(oldTile.getX(), oldTile.getY(), selectedTrap);
 					temple.addTrapToCurrentFloor(trapShop.getGridLoc(), selection);
 					trapShop.setOn(false);
 					rotationMenu.setOn(false);
