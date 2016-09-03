@@ -2,19 +2,17 @@ package pathing;
 
 import java.util.ArrayList;
 
-import main.Main;
 import renderEngine.DisplayManager;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import buttons.FloorSelect;
 import explorerTypes.Explorer;
 
 import java.awt.Point;
 
-import grid.FloorCollection;
 import grid.Grid;
 import gui.GuiTexture;
+import main.Main;
 
 public class Group {
 
@@ -83,11 +81,11 @@ public class Group {
 		
 		if(currentFloor.getTile(nextLoc.x, nextLoc.y).canInteract()){
 			interact(currentFloor);
-			
 			return isCurrentlyInteracting;
 		}
+		System.out.println("WE DID IT FAM!");
 		for(Explorer explorer:group){
-			explorer.moveTo(nextLoc,milli);
+			explorer.moveTo(currentFloor.getTile(nextLoc.x, nextLoc.y).getLocation(),milli);
 		}
 		currentFloor.getTile(realLoc.x, realLoc.y).trigger(nextLoc.x,nextLoc.y, currentFloor);
 		if(currentFloor.getTile(nextLoc.x, nextLoc.y).getOccupied()>-2)

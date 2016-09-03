@@ -455,8 +455,8 @@ public class Explorer extends Unit{
 	}
 
 
-	public void moveTo(Point nextLoc, long milli){
-		Vector2f destination=Main.grids.get(floor).getTile(nextLoc.x, nextLoc.y).getLocation();
+	public void moveTo(Vector2f nextLoc, long milli){
+		Vector2f destination=nextLoc;
 		Vector2f tempVelocity= new Vector2f();
 		switch(position){
 		case 1:destination=new Vector2f(destination.x-0.025f+0.01f,destination.y+0.04f);

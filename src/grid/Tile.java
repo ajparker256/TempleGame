@@ -195,7 +195,7 @@ public class Tile {
 
 	}
 	
-	public void interact(Group g, Grid currrentFloor){
+	public void interact(Group g, Grid currentFloor){
 		int bonusDamage = 0;
 		for(Explorer e : g.getGroup()) {
 
@@ -208,6 +208,9 @@ public class Tile {
 			}
 		}
 		damage(bonusDamage);
+		if(isDead()) {
+			replaceWithBlank(currentFloor);
+		}
 	}
 
 	public boolean isPassable() {

@@ -13,10 +13,9 @@ import explorerTypes.Explorer;
 import grid.Grid;
 import grid.Tile;
 import gui.GuiTexture;
-import main.Main;
 
 public class Squad {
-	private int previousFloor;
+	private Grid previousFloor;
 	private ArrayList<Point> path;
 	private ArrayList<Group> groups;
 	private HashMap<Integer, PathModifier> modifications;
@@ -40,7 +39,6 @@ public class Squad {
 		path= new ArrayList<Point>();
 		path.add(new Point(0,0));
 		this.groups=groups;
-		previousFloor = 0;
 		DefaultPM defaultAI = new DefaultPM(this);
 		defaultAI.addModifier(modifications);
 		for(Group g : groups) {
@@ -68,6 +66,7 @@ public class Squad {
 	}
 	
 	public Point getNextLoc(Grid currentFloor) {
+		System.out.println("Squad is finding nextLoc");
 		Point nextLoc= path.get(0);
 		double rand = Math.random();
 		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*/);
@@ -119,13 +118,9 @@ public class Squad {
 		return modifications;
 	}
 	
-	public int getFurthestFloorFromEnd() {
-		int indexOfLastGroup = groups.size()-1;
-		return groups.get(indexOfLastGroup).getFloor();
-	}
-	
-	public boolean isTransitioning() {
-		return groups.get(0) != groups.get(groups.size()-1);
+	public int getFurthestFloor() {
+		int indexOfFirstGroup = 0;
+		return groups.get(indexOfFirstGroup).getFloor();
 	}
 	
 	
@@ -137,29 +132,23 @@ public class Squad {
 		}
 	}
 	
+	//given floor is from the front of the squad
 	public void tick(long milli, Grid givenFloor){
-		boolean go=true;
+		if(previousFloor == null) {
+			previousFloor = givenFloor;
+		}
+		//Squad is in fact ticking TODO remove this comment
 		for(Group currentGroup : groups) {	
 			tickExplorers(milli, currentGroup);
 			removeDead(currentGroup);
-			if(currentGroup.move(milli, givenFloor)){
-				for(Group group2: groups){
-					group2.setIdle();
-				}
-				go=false;
-				break;
-			}
-			if(currentGroup.isBusy()){
-				go=false;
-			}
+			gatherNewPathModifiers(currentGroup);
 		}
-		
 
-//		if(!groups.isEmpty())	{ Untested removal, confirm no bugs			
-		if(go){
+		if(moveUntilCannot(milli, givenFloor)){
+			System.out.println("Should be moving");
 			if(rotating){
-				//TODO remove this,but include a way to get the proper grid, since 2 are needed during transition, maybe secondary method with boolean... if(inTransition) do transitionMove() with 2 params.
-				Point tempNextLoc=(getNextLoc(Main.grids.get(groups.get(0).getFloor())));
+				System.out.println("Should be rotating");
+				Point tempNextLoc=(getNextLoc(givenFloor));
 				if(isNotFirstTime) {
 					path.add(0,tempNextLoc);
 				} else {
@@ -184,10 +173,11 @@ public class Squad {
 				for(Group group: groups){
 					//This removes the status of occupied from the tail end of the squad
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
-					if(groups.size()+2<path.size() && !group.getFlee() && Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
-						Main.grids.get(previousFloor).getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
+					if(groups.size()+2<path.size() && !group.getFlee() && previousFloor.getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
+						previousFloor.getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
+						System.out.println("Cleaning up occupied locs");
 					} else if(group.getFlee() && toBeRemoved.x != -1) {
-						Main.grids.get(previousFloor).getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
+						previousFloor.getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
 						toBeRemoved = new Point();
 					}else break;
 				}
@@ -217,7 +207,7 @@ public class Squad {
 				}
 					
 			}
-			previousFloor = groups.get(groups.size()-1).getFloor();
+			assignPreviousFloor(givenFloor);
 		}
 		
 	}
@@ -241,6 +231,44 @@ public class Squad {
 			toRemove.add(currentGroup);
 		}
 		groups.removeAll(toRemove);
+	}
+	
+	private void gatherNewPathModifiers(Group currentGroup) {
+		ArrayList<PathModifier> newMods = currentGroup.collectPathModifiers();
+		if(newMods != null) {
+			for(PathModifier pm : newMods) {
+				pm.addModifier(modifications);
+			}
+		}
+	}
+	
+	private boolean moveUntilCannot(long milli, Grid givenFloor) {
+		boolean go = true;
+		boolean cannotStillMove;
+		for(Group currentGroup : groups) {
+			if(currentGroup.getFloor() == givenFloor.getFloor()) {
+				cannotStillMove = currentGroup.move(milli, givenFloor);
+			} else {
+				cannotStillMove = currentGroup.move(milli, previousFloor);
+			}
+			if(cannotStillMove){
+				for(Group group2: groups){
+					group2.setIdle();
+				}
+				go = false;
+				return go;
+			}
+			if(currentGroup.isBusy()){
+				go=false;
+			}
+		}
+		return go;
+	}
+	
+	private void assignPreviousFloor(Grid currentFloor) {
+		if(groups.get(groups.size()-1).getFloor() == currentFloor.getFloor()) {
+			previousFloor = currentFloor;
+		}
 	}
 	
 	public void findNextLoc(boolean canGo) {
