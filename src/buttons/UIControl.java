@@ -143,10 +143,12 @@ public class UIControl {
 	private void floorSelectLogic(float mouseX, float mouseY) {
 		if(floorSelect.canInteract()) {
 			floorSelect.scrollIfClicked(mouseX, mouseY);
-			int cost = floorSelect.tryToBuyFloor(mouseX, mouseY, money);
-			if(cost>0) {
-				temple.addFloor();
-				money -= cost;
+			if(temple.isEditState()) {
+				int cost = floorSelect.tryToBuyFloor(mouseX, mouseY, money);
+				if(cost>0) {
+					temple.addFloor();
+					money -= cost;
+				}
 			}
 			temple.setFloor(floorSelect.changeFloor(mouseX, mouseY));
 			floorSelect.setLastInteractTimeToNow();
