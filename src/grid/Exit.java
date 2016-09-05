@@ -20,16 +20,12 @@ public class Exit extends Tile{
 		id = -2;
 	}
 	
-	public void interact(Group g) {
+	@Override
+	public void interact(Group g, Grid currentFloor) {
 		g.setFloor(g.getFloor()+1);
 		for(Explorer e : g.getGroup()) {
 			e.setFloor(e.getFloor()+1);
 		}
-		if(Main.squads.get(g.getSquadId()).getPathMods().get(4) != null) {
-			Main.squads.get(g.getSquadId()).getPathMods().remove(4);//Cursed idol path modifier
-			System.out.println("HEY");
-		}
-		Main.grids.get(g.getFloor()).setTile(x, y, new ExitTop(x, y, size, floor+1));
 	}
 	
 	@Override
