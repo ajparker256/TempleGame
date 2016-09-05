@@ -269,8 +269,10 @@ public class Grid {
 	
 	public void addTrapRefsForTrap(ArrayList<Point> locationsThatRefToOrigin
 			, Point originTrap) {
-		for(Point locOnGrid : locationsThatRefToOrigin) {
-			this.getTile(locOnGrid.x, locOnGrid.y).addTrapRef(originTrap);
+		if(locationsThatRefToOrigin != null) {
+			for(Point locOnGrid : locationsThatRefToOrigin) {
+				this.getTile(locOnGrid.x, locOnGrid.y).addTrapRef(originTrap);
+			}
 		}
 	}
 }

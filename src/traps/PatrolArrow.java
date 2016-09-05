@@ -70,7 +70,10 @@ public Tile copy() {
 		ArrayList<Point> allTriggers = new ArrayList<Point>();
 		for(int i=range*-1;i<=range;i++){
 			for(int k=range*-1;k<=range;k++){
-				allTriggers.add(new Point(k+i, y+k));
+				Point currentLocation = new Point(x+i, y+k);
+				if(isInBounds(currentLocation)) {
+					allTriggers.add(currentLocation);
+				}
 			}
 		}
 		return allTriggers;

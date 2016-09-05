@@ -181,14 +181,13 @@ public class Trap extends Tile{
 	public void interact(Group g, Grid currentFloor) {
 		for(Explorer e : g.getGroup()) {
 			hp -= e.getDamage()*100/(double)(100+defense);
+			System.out.println(e.getDamage()*100/(double)(100+defense));
 		}
 		if(hp <= 0) {
 			for(Upgrade u : onDeath) {
 				u.upgrade(this);
 			}
-			Blank blank = new Blank(this.x, this.y, this.size, floor);
-			blank.setTrapRefs(trapRefs);
-			Main.grids.get(g.getFloor()).setTile(this.x, this.y, blank);
+			replaceWithBlank(currentFloor);
 		}
 	}
 	
@@ -197,6 +196,10 @@ public class Trap extends Tile{
 			return floor+Grid.getMinimumWidth();
 		}
 		else return Grid.getMaximumWidth();
+	}
+	
+	protected boolean isInBounds(Point locationOnGrid) {
+		return locationOnGrid.x>=0 && locationOnGrid.y>=0 && locationOnGrid.x<getWidthOfGrid() && locationOnGrid.y<getWidthOfGrid();
 	}
 	
 	public ArrayList<Point> getTriggerLocations() {
