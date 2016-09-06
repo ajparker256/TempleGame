@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import grid.Grid;
 import gui.GuiTexture;
 import librarys.GuiLibrary;
 import main.Main;
@@ -15,7 +16,7 @@ import tools.MathM;
 
 public class Projectile {
 
-	protected int floor;
+	protected Grid floor;
 	protected int y;
 	protected int x;
 	protected int direction;
@@ -27,11 +28,11 @@ public class Projectile {
 	protected GuiTexture image;
 	protected double damage;
 
-	public Projectile(int direction, int x, int y, int floor, double damage) {
+	public Projectile(int direction, Point coordinates, Grid floor, double damage) {
 		kill=false;
 		this.direction=direction;
-		this.x=x;
-		this.y=y;
+		this.x=coordinates.x;
+		this.y=coordinates.y;
 		this.damage = damage;
 		this.floor=floor;
 		this.texture=GuiLibrary.arrow5;
@@ -44,7 +45,7 @@ public class Projectile {
 	}
 	
 	public boolean canRender(int currentFloor) {
-		return currentFloor == floor;
+		return currentFloor == floor.getFloor();
 	}
 	
 	public GuiTexture render(){
@@ -78,7 +79,7 @@ public class Projectile {
 			}
 		}
 	}
-			if(x>=Main.grids.get(floor).getWidth()||x<0||y>=Main.grids.get(floor).getWidth()||y<0||(!Main.grids.get(Main.gridToBeRendered).getTile(x, y).isPassable())){
+			if(x>=floor.getWidth()||x<0||y>=floor.getWidth()||y<0||(!floor.getTile(x, y).isPassable())){
 				this.kill = true;
 				return false; 	//this.kill=true;
 			}
@@ -86,7 +87,7 @@ public class Projectile {
 		return true;
 	}
 	public void move(long milli){
-		Vector2f destination=Main.grids.get(Main.gridToBeRendered).getTile(x, y).getLocation();
+		Vector2f destination=floor.getTile(x, y).getLocation();
 		 Vector2f tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){
 			if(location.x<destination.x){
@@ -119,6 +120,14 @@ public class Projectile {
 		}
 		
 	}
+	
+	public void checkForCollisions(Squad currentSquad) {
+		for(Group currentGroup : currentSquad.getGroups()) {
+			if(currentGroup.getRealLoc().equals(new Point(x, y))) {
+				currentGroup.damage(new boolean[]{true,true,true,true}, damage);
+			}
+		}
+	}
 
 	private Vector2f getLoc() {
 		return this.location;
@@ -127,9 +136,7 @@ public class Projectile {
 		this.location=location;
 		this.image.setPosition(location);
 	}
-	public int getFloor(){
-		return this.floor;
-	}
+	
 	public boolean isKill() {
 		return kill;
 	}

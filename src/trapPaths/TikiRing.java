@@ -49,7 +49,7 @@ public class TikiRing extends TikiTrap{
 					for(int j = -1; j<2; j++) {
 						if(i+x > 0 && i+x<Main.gridsReadOnly.get(floor).getWidth() && j+y > 0 && j+y <Main.gridsReadOnly.get(floor).getWidth()) {
 							if(j != 0 && i != 0) {
-								Main.projectiles.add(new Fire(1, x+i, y+j, super.floor, tempDamage));
+						//		Main.projectiles.add(new Fire(1, x+i, y+j, super.floor, tempDamage));
 							}
 						}
 					}

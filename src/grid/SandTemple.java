@@ -73,6 +73,13 @@ public class SandTemple extends Temple{
 				projectiles.remove(currentProjectile);
 		}
 	}
+	
+	@Override
+	protected void checkForCollisions(Projectile currentProjectile) {
+		for(Squad currentSquad : squads) {
+			currentProjectile.checkForCollisions(currentSquad);
+		}
+	}
 
 	@Override
 	protected void tickFloors(long milli) {

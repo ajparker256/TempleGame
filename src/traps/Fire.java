@@ -10,13 +10,14 @@ import org.lwjgl.util.vector.Vector2f;
 import pathing.Group;
 import pathing.Squad;
 import entities.Projectile;
+import grid.Grid;
 import gui.GuiTexture;
 
 public class Fire extends Projectile {
 
 	private int life;
-	public Fire(int direction, int x, int y, int floor, double damage) {
-		super(direction, x, y, floor, damage);
+	public Fire(int direction, Point coordinates, Grid floor, double damage) {
+		super(direction, coordinates, floor, damage);
 		super.texture=GuiLibrary.flame1;
 		super.image = new GuiTexture(texture, location, size);
 		life=1000;

@@ -126,7 +126,7 @@ public class ArrowTrap extends Trap implements TrapInterface{
 					u.upgrade(this);
 				}
 				double temtargetPointDamage = getRealDamage();
-				Main.projectiles.add(new Projectile(direction,x,y,super.floor, temtargetPointDamage));
+				//Main.projectiles.add(new Projectile(direction,x,y,super.floor, temtargetPointDamage));
 				isFiring = true;
 				cooldown=maxCd; 
 			}

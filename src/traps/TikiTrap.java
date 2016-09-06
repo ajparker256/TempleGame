@@ -83,14 +83,14 @@ public class TikiTrap extends Trap implements TrapInterface{
 		
 			if(fire) {
 
-				if(x-1>=0)
+			/*	if(x-1>=0)
 				Main.projectiles.add(new Fire(1,x-1,y,super.floor, tempDamage));
 				if(x+1<=Main.grids.get(floor).getWidth()-1)
 				Main.projectiles.add(new Fire(1,x+1,y,super.floor, tempDamage));
 				if(y-1>=0)
-				Main.projectiles.add(new Fire(1,x,y-1,super.floor, tempDamage));
+				Main.projectiles.add(new Fire(1,x,y-1,super.floor, tempDamage)); TODO Fix
 				if(y+1<=Main.grids.get(floor).getWidth()-1)
-				Main.projectiles.add(new Fire(1,x,y+1,super.floor, tempDamage));
+				Main.projectiles.add(new Fire(1,x,y+1,super.floor, tempDamage)); */ 
 				
 				isFiring = true;
 				for(Upgrade u : onFire) {

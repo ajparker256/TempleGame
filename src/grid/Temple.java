@@ -79,6 +79,7 @@ public abstract class Temple {
 	
 	protected abstract void tickSquads(long milli);
 	protected abstract void tickProjectiles(long milli);
+	protected abstract void checkForCollisions(Projectile currentProjectile);
 	protected abstract void tickFloors(long milli);
 
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
