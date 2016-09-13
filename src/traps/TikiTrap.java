@@ -77,11 +77,9 @@ public class TikiTrap extends Trap implements TrapInterface{
 			u.upgrade(this);
 		}
 		if(cooldown<=0){
-			boolean fire = true;
 			//Up
 			double tempDamage = getRealDamage();
 		
-			if(fire) {
 
 			/*	if(x-1>=0)
 				Main.projectiles.add(new Fire(1,x-1,y,super.floor, tempDamage));
@@ -97,7 +95,6 @@ public class TikiTrap extends Trap implements TrapInterface{
 					u.upgrade(this);
 				}
 				cooldown=maxCd; 
-			}
 		}
 	}
 	

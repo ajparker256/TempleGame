@@ -14,7 +14,6 @@ import org.lwjgl.util.vector.Vector2f;
 
 import explorerTypes.Exploder;
 import explorerTypes.Explorer;
-import explorerTypes.Miner;
 import renderEngine.DisplayManager;
 
 // This is the superclass for all tiles contained in a grid
@@ -93,10 +92,6 @@ public class Tile {
 	
 	public void setRotatable(boolean b) {
 		rotatable = b;
-	}
-	
-	public void getIncome() {
-		//STUB
 	}
 	
 	public int getId() {
@@ -180,6 +175,7 @@ public class Tile {
 	public void trigger(int x, int y, Grid currentFloor){
 		for(Point point:trapRefs){
 			currentFloor.getTile(point.x,point.y).whenTriggered(new Point(this.x, this.y));
+			System.out.println("Triggered the trap at " + point.x + ", " + point.y);
 		}
 	}
 

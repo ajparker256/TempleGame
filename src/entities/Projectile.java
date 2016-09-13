@@ -36,7 +36,7 @@ public class Projectile {
 		this.damage = damage;
 		this.floor=floor;
 		this.texture=GuiLibrary.arrow5;
-		this.location=new Vector2f(Main.grids.get(Main.gridToBeRendered).getTile(x,y).getLocation());
+		this.location=new Vector2f(floor.getTile(x,y).getLocation());
 		this.size=new Vector2f(0.1f,0.1f);
 		this.velocity=new Vector2f(0.5f,0.5f);
 		this.image = new GuiTexture(texture, location, size);
@@ -51,12 +51,12 @@ public class Projectile {
 	public GuiTexture render(){
 			return image;
 	}
-	public boolean tick(long milli){
+	public boolean tick(long milli, ArrayList<Squad> squads){
 	if(kill){
 		return false;
 	}
 		move(milli);
-		if(location.equals(Main.grids.get(Main.gridToBeRendered).getTile(x, y).getLocation())){
+		if(location.equals(floor.getTile(x, y).getLocation())){
 			switch(direction){
 			case 1:
 				this.y=y+1;
@@ -70,7 +70,7 @@ public class Projectile {
 			case 4: this.x=x-1;
 			break;
 			}
-	for(Squad squad:Main.squads){
+	for(Squad squad: squads){
 		for(Group group: squad.getGroups()){
 			if(group.getRealLoc().equals(new Point(x,y))){
 				group.damage(new boolean[]{true,true,true,true}, damage);

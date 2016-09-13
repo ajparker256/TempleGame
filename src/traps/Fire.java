@@ -1,11 +1,9 @@
 package traps;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import librarys.GuiLibrary;
-import main.Main;
-
-import org.lwjgl.util.vector.Vector2f;
 
 import pathing.Group;
 import pathing.Squad;
@@ -28,7 +26,7 @@ public class Fire extends Projectile {
 		
 	}
 	@Override
-	public boolean tick(long milli){
+	public boolean tick(long milli, ArrayList<Squad> squads){
 		life-=milli;
 		if(life<=0){
 			kill=true;
@@ -38,7 +36,7 @@ public class Fire extends Projectile {
 		}
 
 
-		for(Squad squad:Main.squads){
+		for(Squad squad: squads){
 			for(Group group: squad.getGroups()){
 				if(group.getRealLoc().equals(new Point(x,y))){
 					group.damage(new boolean[]{true,true,true,true},0.01);

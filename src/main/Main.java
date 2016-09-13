@@ -279,7 +279,7 @@ public static void main(String[] args) throws FileNotFoundException {
 			state = 1;
 		}
 		//10s per round atm
-		timeInRound += milli;
+	/*	timeInRound += milli;
 			if(timeInRound/1000 > 10) {
 				round++;
 				for(Grid g : grids) {
@@ -289,6 +289,7 @@ public static void main(String[] args) throws FileNotFoundException {
 				}
 				timeInRound = 0;
 			}
+			*/
 	}
 	
 	public static void updateMouse(ArrayList<GuiTexture> dynamicGuis) {

@@ -68,7 +68,7 @@ public class SandTemple extends Temple{
 	@Override
 	protected void tickProjectiles(long milli) {
 		for(Projectile currentProjectile : projectiles) {
-			currentProjectile.tick(milli);
+			currentProjectile.tick(milli, squads);
 			if(currentProjectile.isKill())
 				projectiles.remove(currentProjectile);
 		}
