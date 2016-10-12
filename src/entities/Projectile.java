@@ -16,7 +16,7 @@ import tools.MathM;
 
 public class Projectile {
 
-	protected Grid floor;
+	protected int floor;
 	protected int y;
 	protected int x;
 	protected int direction;
@@ -27,8 +27,9 @@ public class Projectile {
 	protected boolean kill;
 	protected GuiTexture image;
 	protected double damage;
+	protected Vector2f destination;
 
-	public Projectile(int direction, Point coordinates, Grid floor, double damage) {
+	public Projectile(int direction, Point coordinates, int floor, double damage) {
 		kill=false;
 		this.direction=direction;
 		this.x=coordinates.x;
@@ -36,7 +37,6 @@ public class Projectile {
 		this.damage = damage;
 		this.floor=floor;
 		this.texture=GuiLibrary.arrow5;
-		this.location=new Vector2f(floor.getTile(x,y).getLocation());
 		this.size=new Vector2f(0.1f,0.1f);
 		this.velocity=new Vector2f(0.5f,0.5f);
 		this.image = new GuiTexture(texture, location, size);
@@ -44,32 +44,49 @@ public class Projectile {
 
 	}
 	
-	public boolean canRender(int currentFloor) {
-		return currentFloor == floor.getFloor();
+	public int getFloor(){
+		return floor;
 	}
 	
-	public GuiTexture render(){
-			return image;
+	public boolean canRender(int currentFloor) {
+		return currentFloor == floor;
 	}
-	public boolean tick(long milli, ArrayList<Squad> squads){
-	if(kill){
-		return false;
+	
+	public void render(ArrayList<GuiTexture> dynamicGuis){
+		System.out.println(location);
+		dynamicGuis.add(image);
 	}
-		move(milli);
-		if(location.equals(floor.getTile(x, y).getLocation())){
+	
+	protected void checkLoc(Grid gridFloor) {
+		if(location == null || location.x == -2) {
+			location = gridFloor.getTile(x, y).getLocation();
+			image.setPosition(location);
+		}
+		destination=gridFloor.getTile(x, y).getLocation();
+	}
+	
+	public boolean tick(long milli, ArrayList<Squad> squads, Grid gridFloor){
+		checkLoc(gridFloor);
+		if(kill){
+			return false;
+		}
+		if(location.equals(gridFloor.getTile(x, y).getLocation())){
 			switch(direction){
 			case 1:
 				this.y=y+1;
-				break;
+			break;
 			case 2:
 				this.x=x+1;
 			break;
 			case 3:
 				this.y=y-1;
-				break;
-			case 4: this.x=x-1;
 			break;
-			}
+			case 4: 
+				this.x=x-1;
+			break;
+		}
+		move(milli);
+	
 	for(Squad squad: squads){
 		for(Group group: squad.getGroups()){
 			if(group.getRealLoc().equals(new Point(x,y))){
@@ -79,7 +96,7 @@ public class Projectile {
 			}
 		}
 	}
-			if(x>=floor.getWidth()||x<0||y>=floor.getWidth()||y<0||(!floor.getTile(x, y).isPassable())){
+			if(x>=gridFloor.getWidth()||x<0||y>=gridFloor.getWidth()||y<0||(!gridFloor.getTile(x, y).isPassable())){
 				this.kill = true;
 				return false; 	//this.kill=true;
 			}
@@ -87,8 +104,8 @@ public class Projectile {
 		return true;
 	}
 	public void move(long milli){
-		Vector2f destination=floor.getTile(x, y).getLocation();
-		 Vector2f tempVelocity= new Vector2f(0, 0);
+		
+		Vector2f tempVelocity= new Vector2f(0, 0);
 		if(!location.equals(destination)){
 			if(location.x<destination.x){
 				tempVelocity.x = velocity.x;

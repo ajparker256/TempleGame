@@ -30,6 +30,7 @@ public class UIControl {
 	private WaveStarter waveStarter;
 	private Vector2f locationOfMoney;
 	private Vector2f sizeOfMoney;
+	//TODO make a money object that takes size, loc, etc. and isolates the func.
 	
 	public UIControl() {
 		money = 100000;

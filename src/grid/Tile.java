@@ -12,6 +12,7 @@ import pathing.Group;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import entities.Projectile;
 import explorerTypes.Exploder;
 import explorerTypes.Explorer;
 import renderEngine.DisplayManager;
@@ -239,6 +240,11 @@ public class Tile {
 		if(x+1<=Main.grids.get(floor).getWidth()-1){
 		Main.grids.get(floor).getTile(x+1,y).damage(damage);
 		}
+	}
+	
+	public ArrayList<Projectile> getFiredProjectiles() {
+		System.out.println("ERROR IN TILE OVERRIDE OF GET FIRED PROJECTILES");
+		return null;
 	}
 
 

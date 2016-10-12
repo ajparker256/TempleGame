@@ -112,6 +112,10 @@ public class Grid {
 		return SIZE;
 	}
 	
+	public static int getWidthOfFloor(int floorNum) {
+		return Math.min(MINIMUM_WIDTH+floorNum, MAXIMUM_WIDTH);
+	}
+	
 	public ArrayList<GuiTexture> renderFloorSelect() {
 		ArrayList<GuiTexture> iDerped = new ArrayList<GuiTexture>();
 		float totalLength = 0;

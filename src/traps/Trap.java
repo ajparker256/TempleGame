@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import entities.Projectile;
 import explorerTypes.Explorer;
 import upgrades.*;
 import grid.Blank;
@@ -28,7 +29,8 @@ public class Trap extends Tile{
 	protected double accuracy;
 	protected double cooldown;
 	protected double maxCd;
-	protected int level;	
+	protected int level;
+	protected ArrayList<Projectile> projectiles;
 	
 	protected ArrayList<Upgrade> allUpgrades;
 	protected ArrayList<Upgrade> onHit;
@@ -39,6 +41,7 @@ public class Trap extends Tile{
 	
 	public Trap(int x, int y, float size, int floor) {
 		super(x, y, size, floor);
+		projectiles = new ArrayList<Projectile>();
 		allUpgrades = new ArrayList<Upgrade>();
 		onHit = new ArrayList<Upgrade>();
 		onFire = new ArrayList<Upgrade>();
@@ -224,6 +227,15 @@ public class Trap extends Tile{
 		if(triggerLoc == 5) 
 			onDeath.add(powerUp);
 		level++;
+	}
+	
+	public ArrayList<Projectile> getFiredProjectiles() {
+		ArrayList<Projectile> temp = new ArrayList<Projectile>();
+		for(Projectile p : projectiles) {
+			temp.add(p);
+		}
+		projectiles.clear();
+		return temp;
 	}
 
 }

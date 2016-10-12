@@ -3,7 +3,9 @@ package grid;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import entities.Projectile;
 import gui.GuiTexture;
+import traps.Trap;
 
 public class FloorCollection {
 	
@@ -80,17 +82,24 @@ public class FloorCollection {
 		System.out.println("STATES HAVE SWITCHED");
 	}
 	
-	public void tick(long milli) {
+	public ArrayList<Projectile> tick(long milli) {
+		ArrayList<Projectile> newProjectiles = new ArrayList<Projectile>();
 		for(int currentFloor = 0; currentFloor<floorsWritable.size(); currentFloor++) {
-			iterateOverAllTiles(currentFloor, milli);
+			newProjectiles.addAll(iterateOverAllTiles(currentFloor, milli));
 		}
+		return newProjectiles;
 	}
 	
-	private void iterateOverAllTiles(int currentFloor, long milli) {
+	private ArrayList<Projectile> iterateOverAllTiles(int currentFloor, long milli) {
+		ArrayList<Projectile> newProjectiles = new ArrayList<Projectile>();
 		for(int row = 0; row<floorsWritable.get(currentFloor).getWidth(); row++) {
 			for(int column = 0; column<floorsWritable.get(currentFloor).getWidth(); column++) {
 				floorsWritable.get(currentFloor).getTile(row, column).tick(milli);
+				if(floorsWritable.get(currentFloor).getTile(row, column) instanceof Trap) {
+					newProjectiles.addAll(floorsWritable.get(currentFloor).getTile(row,column).getFiredProjectiles());
+				}
 			}
 		}
+		return newProjectiles;
 	}
 }

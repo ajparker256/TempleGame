@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.lwjgl.util.vector.Vector2f;
 
 import entities.Projectile;
+import grid.Grid;
 import grid.Tile;
 import gui.Animation;
 import gui.GuiTexture;
@@ -81,14 +82,14 @@ public class TikiTrap extends Trap implements TrapInterface{
 			double tempDamage = getRealDamage();
 		
 
-			/*	if(x-1>=0)
-				Main.projectiles.add(new Fire(1,x-1,y,super.floor, tempDamage));
-				if(x+1<=Main.grids.get(floor).getWidth()-1)
-				Main.projectiles.add(new Fire(1,x+1,y,super.floor, tempDamage));
+				if(x-1>=0)
+					projectiles.add(new Fire(1, new Point(x-1, y), floor, tempDamage));
+				if(x+1<=Grid.getWidthOfFloor(floor)-1)
+					projectiles.add(new Fire(1, new Point(x+1, y), floor, tempDamage));
 				if(y-1>=0)
-				Main.projectiles.add(new Fire(1,x,y-1,super.floor, tempDamage)); TODO Fix
-				if(y+1<=Main.grids.get(floor).getWidth()-1)
-				Main.projectiles.add(new Fire(1,x,y+1,super.floor, tempDamage)); */ 
+					projectiles.add(new Fire(1, new Point(x, y-1), floor, tempDamage));
+				if(y+1<=Grid.getWidthOfFloor(floor)-1)
+					projectiles.add(new Fire(1, new Point(x, y+1), floor, tempDamage));
 				
 				isFiring = true;
 				for(Upgrade u : onFire) {

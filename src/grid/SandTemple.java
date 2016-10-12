@@ -67,10 +67,14 @@ public class SandTemple extends Temple{
 
 	@Override
 	protected void tickProjectiles(long milli) {
+		ArrayList<Projectile> toKill = new ArrayList<Projectile>();
 		for(Projectile currentProjectile : projectiles) {
-			currentProjectile.tick(milli, squads);
+			currentProjectile.tick(milli, squads, allFloors.getFloor(currentProjectile.getFloor()));
 			if(currentProjectile.isKill())
-				projectiles.remove(currentProjectile);
+				toKill.add(currentProjectile);
+		}
+		for(Projectile p : toKill) {
+			projectiles.remove(p);
 		}
 	}
 	
@@ -83,7 +87,7 @@ public class SandTemple extends Temple{
 
 	@Override
 	protected void tickFloors(long milli) {
-		allFloors.tick(milli);
+		projectiles.addAll(allFloors.tick(milli));
 	}
 
 	@Override
@@ -96,8 +100,9 @@ public class SandTemple extends Temple{
 	@Override
 	protected void renderProjectiles(ArrayList<GuiTexture> dynamicGuis) {
 		for(Projectile projectile : projectiles){
-			if(projectile.canRender(allFloors.getFloorToBeRendered().getFloor()))
-				dynamicGuis.add(projectile.render());
+			if(projectile.canRender(allFloors.getFloorToBeRendered().getFloor())) {
+				projectile.render(dynamicGuis);
+			}
 		}
 		
 	}

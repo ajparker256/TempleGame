@@ -45,6 +45,7 @@ import renderEngine.Loader;
 import shopItems.ShopItem;
 import sound.Sound;
 import tools.MathM;
+import traps.Fire;
 import traps.Trap;
 import upgrades.UpgradeRoller;
 import zUITests.FloorCollectionTest;
@@ -98,7 +99,6 @@ public static void main(String[] args) throws FileNotFoundException {
 		grids.add(new Grid(0.05f,5+i, i));
 		gridsReadOnly.add(grids.get(i).copy());
 	}
-	System.out.println(grids.get(0).getLoc());
 	rotationDialogueBox = new RotationDialogueBox();
 	
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
@@ -200,7 +200,6 @@ public static void main(String[] args) throws FileNotFoundException {
 
 	while(!Display.isCloseRequested()){
 		milli = System.currentTimeMillis() - milli;
-		
 		if(state == 0) {
 			if(counter < 1000) {
 				dynamicGuis.add(new GuiTexture(GuiLibrary.backgroundDraft1, new Vector2f(0.5f, 0f), new Vector2f(1.55f, 1.2f)));
