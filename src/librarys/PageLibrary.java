@@ -13,12 +13,14 @@ public class PageLibrary {
 	public static ArrayList<Linkable> traps;
 	public static ArrayList<Linkable> explorers;
 	public static ArrayList<Linkable> categories;
+	public static ArrayList<Linkable> instructions;
 	
 	private static HashMap<String, Linkable> allPages;
 	
 	public static Menu trapMenu;
 	public static Menu categoriesMenu;
 	public static Menu explorerMenu;
+	public static Menu instructMenu;
 	
 	private static Page tikiTrap;
 	private static Page arrowTrap;
@@ -33,6 +35,13 @@ public class PageLibrary {
 	private static Page exploder;
 	//All explorer info pages
 	
+	private static Page goal;
+	private static Page shop;
+	private static Page upgrades;
+	private static Page floors;
+	private static Page waves;
+	//All instruction info pages
+	
 	//Location of menu/page area and size of it
 	public static void init(Vector2f location, Vector2f size) {
 		
@@ -40,10 +49,12 @@ public class PageLibrary {
 		traps = new ArrayList<Linkable>();
 		explorers = new ArrayList<Linkable>();
 		categories = new ArrayList<Linkable>();
+		instructions = new ArrayList<Linkable>();
 		
 		//Menus with info pages displaying on them
 		initializeTraps(location, size);
 		initializeExplorers(location, size);
+		initializeInstructions(location, size);
 		
 		//A wrapper menu, leading to the other menus
 		initializeCategories(location, size);
@@ -59,6 +70,7 @@ public class PageLibrary {
 	private static void initializeCategories(Vector2f location, Vector2f size) {
 		categories.add(trapMenu);
 		categories.add(explorerMenu);
+		categories.add(instructMenu);
 		categoriesMenu = createMenu(location, size, "Infopedia", categories);
 	}
 	
@@ -99,6 +111,22 @@ public class PageLibrary {
 		traps.add(cursedIdolTrap);
 		
 		trapMenu = createMenu(location, size, "Traps", traps);
+	}
+	
+	private static void initializeInstructions(Vector2f location, Vector2f size) {
+		goal = new Page(location, size, "Goals", "This is a tower defense game in which explorers try to infiltrate your temple. They enter from the top and work their way through to find treasure and glory. Defend yourself!");
+		shop = new Page(location, size, "Shop", "Clicking on an area will select it and open the shop. Using your money in the bottom right, purchase traps to survive each night.");
+		upgrades = new Page(location, size, "Upgrades", "By clicking on a trap, the UPGRADE Option will appear in the shop. This option will offer three random upgrades to choose from for that unit. Use this to fortify and enhance your defense.");
+		floors = new Page(location, size, "Floors", "Purchasing floors is a great tactic for slowing down explorers. Clicking the plus sign in the top of the screen will buy a floor. Clicking the floor number will navigate your view. The arrows will allow you to scroll through your floor collection.");
+		waves = new Page(location, size, "Waves", "Upon clicking the Start Wave button, the explorers will begin to enter your temple. Pay attention to how your traps interact with the intruders to better prepare for the next night. Remember that explorers grow stronger over time.");
+	
+		instructions.add(goal);
+		instructions.add(shop);
+		instructions.add(upgrades);
+		instructions.add(floors);
+		instructions.add(waves);
+		
+		instructMenu = createMenu(location, size, "Instructions", instructions);
 	}
 	
 	private static Menu createMenu(Vector2f location, Vector2f size, String title, ArrayList<Linkable> menuOptions) {

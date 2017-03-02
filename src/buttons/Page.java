@@ -71,18 +71,18 @@ public class Page extends Linkable{
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(titleTextSize);
-		float edgeSpacing = (float) 60 / 11;
+		float edgeSpacing = (float) 60 / 11 * StringLibrary.getSize().x;
 		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y-2*StringLibrary.getSize().y), size.x));
 		StringLibrary.setSize(descriptionTextSize);
 		if(image == null) {
-			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x + 2 * StringLibrary.getSize().x, 
-					location.y-titleTextSize.y*3/2+size.y+scrollDisp - edgeSpacing), size.x, size.y-titleTextSize.y*3/2, scrollDisp));
+			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x + 2 * StringLibrary.getSize().x , 
+					location.y-titleTextSize.y*2+size.y+scrollDisp -  2*StringLibrary.getSize().y), size.x - edgeSpacing * 3 / 4, size.y-titleTextSize.y*3/2, scrollDisp));
 		} else {
 			if(image.getPosition().y+image.getScale().y/2 < location.y+size.y)
 				dynamicGuis.add(image);
 			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, 
 					new Vector2f(location.x + 2 * StringLibrary.getSize().x, image.getPosition().y-image.getScale().y+scrollDisp), 
-					size.x - edgeSpacing * StringLibrary.getSize().x, size.y-titleTextSize.y*3/2-2*image.getScale().y, scrollDisp));
+					size.x - edgeSpacing , size.y-titleTextSize.y*3/2-2*image.getScale().y, scrollDisp));
 		}
 	}
 	
