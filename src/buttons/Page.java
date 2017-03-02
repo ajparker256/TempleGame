@@ -31,7 +31,7 @@ public class Page extends Linkable{
 	protected boolean isOn;
 	
 	public Page (Vector2f loc, Vector2f size, String title, String desc) {
-		location = loc;
+		location = new Vector2f(loc.x, loc.y - 2 * StringLibrary.getSize().y);
 		this.size = size;
 		description = desc;
 		this.title = title;
@@ -71,14 +71,18 @@ public class Page extends Linkable{
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(titleTextSize);
+		float edgeSpacing = (float) 60 / 11;
 		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y-2*StringLibrary.getSize().y), size.x));
 		StringLibrary.setSize(descriptionTextSize);
 		if(image == null) {
-			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x, location.y-titleTextSize.y*3/2+size.y+scrollDisp), size.x, size.y-titleTextSize.y*3/2, scrollDisp));
+			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x + 2 * StringLibrary.getSize().x, 
+					location.y-titleTextSize.y*3/2+size.y+scrollDisp - edgeSpacing), size.x, size.y-titleTextSize.y*3/2, scrollDisp));
 		} else {
 			if(image.getPosition().y+image.getScale().y/2 < location.y+size.y)
 				dynamicGuis.add(image);
-			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x, image.getPosition().y-image.getScale().y+scrollDisp), size.x, size.y-titleTextSize.y*3/2-2*image.getScale().y, scrollDisp));
+			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, 
+					new Vector2f(location.x + 2 * StringLibrary.getSize().x, image.getPosition().y-image.getScale().y+scrollDisp), 
+					size.x - edgeSpacing * StringLibrary.getSize().x, size.y-titleTextSize.y*3/2-2*image.getScale().y, scrollDisp));
 		}
 	}
 	
