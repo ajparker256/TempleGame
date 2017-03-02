@@ -21,6 +21,8 @@ public class PageLibrary {
 	public static Menu categoriesMenu;
 	public static Menu explorerMenu;
 	public static Menu instructMenu;
+	public static Page credits;
+	//category area
 	
 	private static Page tikiTrap;
 	private static Page arrowTrap;
@@ -56,6 +58,8 @@ public class PageLibrary {
 		initializeExplorers(location, size);
 		initializeInstructions(location, size);
 		
+		initializeCredits(location, size);
+		
 		//A wrapper menu, leading to the other menus
 		initializeCategories(location, size);
 		
@@ -68,9 +72,10 @@ public class PageLibrary {
 	}
 	
 	private static void initializeCategories(Vector2f location, Vector2f size) {
+		categories.add(credits);
+		categories.add(instructMenu);
 		categories.add(trapMenu);
 		categories.add(explorerMenu);
-		categories.add(instructMenu);
 		categoriesMenu = createMenu(location, size, "Infopedia", categories);
 	}
 	
@@ -129,13 +134,14 @@ public class PageLibrary {
 		instructMenu = createMenu(location, size, "Instructions", instructions);
 	}
 	
+	private static void initializeCredits(Vector2f location, Vector2f size) {
+		credits = new Page(location, size, "Credits", "Programmed by AJ Parker and Jackson Mills. Thanks to Glastellar for explorer art design.");
+	}
+	
 	private static Menu createMenu(Vector2f location, Vector2f size, String title, ArrayList<Linkable> menuOptions) {
 		String[] labels = new String[menuOptions.size()];
 		for(int i = 0; i<menuOptions.size(); i++) {
 			labels[i] = menuOptions.get(i).getTitle();
-			/*if(menuOptions.get(i) instanceof Menu) {
-				System.out.println("The menu that was created has an option of " + labels[i]);
-			}*/
 			allPages.put(labels[i], menuOptions.get(i));
 		}
 		Menu newMenu = new Menu(location, size, labels, title);

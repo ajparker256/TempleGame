@@ -105,7 +105,7 @@ public class UpgradeLibrary {
 				return getUpgradeOfType(u.getId());
 			}
 		}
-		//Error Case
+		
 		System.out.println("Error case in Upgrade Library retrieval of upgrade");
 		return null;
 		

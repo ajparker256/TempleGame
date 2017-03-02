@@ -146,9 +146,7 @@ public class Squad {
 		groups.removeAll(dead);
 
 		if(moveUntilCannot(milli, givenFloor)){
-			System.out.println("Should be moving");
 			if(rotating){
-				System.out.println("Should be rotating");
 				Point tempNextLoc=(getNextLoc(givenFloor));
 				if(isNotFirstTime) {
 					path.add(0,tempNextLoc);
