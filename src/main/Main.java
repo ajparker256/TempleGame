@@ -104,7 +104,7 @@ public static void main(String[] args) throws FileNotFoundException {
 	ArrayList<GuiTexture> guis = new ArrayList<GuiTexture>();
 	ArrayList<GuiTexture> dynamicGuis =  new ArrayList<GuiTexture>();
 	projectiles= new ArrayList<Projectile>();
-	GuiLibrary.background = loader.loadTexture("background");
+	GuiLibrary.background = loader.loadTexture("backgroundReal");
 
 	GuiRenderer guiRenderer = new GuiRenderer(loader);
 	Sound.loopSound(SoundLibrary.music);	
@@ -189,7 +189,7 @@ public static void main(String[] args) throws FileNotFoundException {
 		}
 	}
 	epicShopofEpicness = new Shop(new Vector2f(.5f, -.1f), new Vector2f(.25f, .5f), traps);
-	guis.add(new GuiTexture(loader.loadTexture("White"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
+	guis.add(new GuiTexture(loader.loadTexture("backgroundReal"), new Vector2f(.9f,-.9f), new Vector2f(2f, 2f)));
 
 	
 	double counter = 0;
