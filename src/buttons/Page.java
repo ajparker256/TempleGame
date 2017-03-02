@@ -71,7 +71,7 @@ public class Page extends Linkable{
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(titleTextSize);
-		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y), size.x));
+		dynamicGuis.addAll(StringLibrary.makeItFitC(title, new Vector2f(location.x, location.y+size.y-2*StringLibrary.getSize().y), size.x));
 		StringLibrary.setSize(descriptionTextSize);
 		if(image == null) {
 			dynamicGuis.addAll(StringLibrary.makeItFitCInBoxWithScroll(description, new Vector2f(location.x, location.y-titleTextSize.y*3/2+size.y+scrollDisp), size.x, size.y-titleTextSize.y*3/2, scrollDisp));
