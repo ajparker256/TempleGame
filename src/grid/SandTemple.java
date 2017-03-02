@@ -60,9 +60,12 @@ public class SandTemple extends Temple{
 
 	@Override
 	protected void tickSquads(long milli) {
-		for(Squad currentSquad : squads) {
-			currentSquad.tick((int)milli, allFloors.getFloor(currentSquad.getFurthestFloor()));
+		for(int i = 0; i < squads.size(); i++) {
+			squads.get(i).tick((int)milli, allFloors.getFloor(squads.get(i).getFurthestFloor()));
+			
 		}
+		
+
 	}
 
 	@Override

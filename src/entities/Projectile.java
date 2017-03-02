@@ -53,7 +53,7 @@ public class Projectile {
 	}
 	
 	public void render(ArrayList<GuiTexture> dynamicGuis){
-		System.out.println(location);
+		System.out.println("Projectile is currently at " + location);
 		dynamicGuis.add(image);
 	}
 	

@@ -137,12 +137,13 @@ public class Squad {
 		if(previousFloor == null) {
 			previousFloor = givenFloor;
 		}
-		//Squad is in fact ticking TODO remove this comment
+		ArrayList<Group> dead = new ArrayList<Group>();
 		for(Group currentGroup : groups) {	
 			tickExplorers(milli, currentGroup);
-			removeDead(currentGroup);
+			dead.add(gatherDead(currentGroup));
 			gatherNewPathModifiers(currentGroup);
 		}
+		groups.removeAll(dead);
 
 		if(moveUntilCannot(milli, givenFloor)){
 			System.out.println("Should be moving");
@@ -218,8 +219,7 @@ public class Squad {
 			}
 	}
 	
-	private void removeDead(Group currentGroup) {
-		ArrayList<Group> toRemove=new ArrayList<Group>(); 
+	private Group gatherDead(Group currentGroup) {
 		for(int i=0;i<currentGroup.getGroup().size();i++){
 			Explorer explorer=currentGroup.getGroup().get(i);
 			if(explorer.isKill()) {
@@ -228,9 +228,9 @@ public class Squad {
 			}
 		}
 		if(currentGroup.getGroup().size()==0){
-			toRemove.add(currentGroup);
+			return currentGroup;
 		}
-		groups.removeAll(toRemove);
+		return null;
 	}
 	
 	private void gatherNewPathModifiers(Group currentGroup) {

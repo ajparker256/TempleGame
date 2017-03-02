@@ -261,9 +261,6 @@ public class Shop {
 	}
 	
 	public int getShopItem(float mouseX, float mouseY) {
-		//int x = (Mouse.getX()-(int)((location.x+1f)*DisplayManager.WIDTH/2))/(int)(size.x*2/(visibilityRange[3]-visibilityRange[2])*DisplayManager.WIDTH/2);
-		//int y = (Mouse.getY()-(int)((location.y+1f)*DisplayManager.HEIGHT/2))/(int)(size.y/(visibilityRange[1]-visibilityRange[0])*DisplayManager.HEIGHT/2);
-		//return traps[x+visibilityRange[0]][y+visibilityRange[2]].getId();
 		for(int i = 0; i<shopHitboxes.length; i++) {
 			for(int j = 0; j<shopHitboxes[0].length; j++) {
 				if(shopHitboxes[i][j].isClicked(mouseX, mouseY)) {
@@ -272,20 +269,6 @@ public class Shop {
 			}
 		}
 		return -1;
-		
-		/*
-		//Goes through the buttons in the shop until it finds where it is clicked, then returns the item.
-		for(int i = 0; i<buttons.length; i++) {
-			for(int j = 0; j<buttons[0].length; j++) {
-				if(buttons[i][j].isClicked(mouseX, mouseY)) {
-					System.out.println(i+" "+j);
-					return traps[i][j].copy();
-				}
-			}
-		}
-		//Error Case
-		System.out.println("Error case in getShopItem");
-		return null;*/
 	}	
 	
 	public void setOn(boolean b) {
