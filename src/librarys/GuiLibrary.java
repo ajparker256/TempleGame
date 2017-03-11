@@ -174,6 +174,7 @@ public static int arrowTrap4;
 public static int arrowVolley;
 
 public static int backgroundDraft1;
+public static int blankBackground;
 	
 public static int commonBackground;
 public static int rareBackground;
@@ -338,6 +339,7 @@ public static void init(Loader loader) {
 		GuiLibrary.arrowVolley = loader.loadTexture("arrows");		
 		
 		GuiLibrary.backgroundDraft1 = loader.loadTexture("Title Screen/BackgroundDraft1");
+		GuiLibrary.blankBackground = loader.loadTexture("white_background");
 		
 		GuiLibrary.desertBackdrop = loader.loadTexture("DesertBackdrop");
 		

@@ -9,6 +9,7 @@ import org.lwjgl.util.vector.Vector2f;
 import grid.SandTemple;
 import grid.Tile;
 import gui.GuiTexture;
+import librarys.GuiLibrary;
 import librarys.PageLibrary;
 import librarys.ShopItemLibrary;
 import librarys.StringLibrary;
@@ -21,6 +22,7 @@ import upgrades.UpgradeRoller;
 public class UIControl {
 	
 	private int money;
+	private int maxMoneyDigits;
 	private Shop trapShop;
 	private RotationDialogueBox rotationMenu;
 	private LinkedPageSystem infoPages;
@@ -34,6 +36,7 @@ public class UIControl {
 	
 	public UIControl() {
 		money = 100000;
+		maxMoneyDigits = 7;
 		locationOfMoney = new Vector2f(0.6f,-0.9f);
 		sizeOfMoney = new Vector2f(.025f, .05f);
 		rotationMenu = rotationMenuInit();
@@ -80,7 +83,7 @@ public class UIControl {
 	}
 	
 	private FloorSelect floorSelectInit() {
-		Vector2f locationOfBottomLeft = new Vector2f(-.4f, .8f);
+		Vector2f locationOfBottomLeft = new Vector2f(-.4f, .85f);
 		Vector2f totalSize = new Vector2f(.8f, .1f);
 		FloorSelect floorSelect = new FloorSelect(locationOfBottomLeft, totalSize);
 		return floorSelect;		
@@ -95,7 +98,7 @@ public class UIControl {
 	}
 	
 	private WaveStarter waveStarterInit() {
-		Vector2f locationBL = new Vector2f(.7f, -.9f);
+		Vector2f locationBL = new Vector2f(.7f, -.85f);
 		Vector2f totalSize = new Vector2f(.2f, .2f);
 		return new WaveStarter(locationBL, totalSize);
 	}
@@ -120,6 +123,13 @@ public class UIControl {
 	
 	private void renderMoney(ArrayList<GuiTexture> dynamicGuis) {
 		StringLibrary.setSize(sizeOfMoney);
+		float width = StringLibrary.getWidth(money + "");
+		float horizConst = (float)1.7;
+		dynamicGuis.add(new GuiTexture(GuiLibrary.blankBackground, 
+				new Vector2f(locationOfMoney.x + width / 2 + (maxMoneyDigits - (int)Math.log10(money) + horizConst) * StringLibrary.getWidth("0")/2,
+						 locationOfMoney.y - sizeOfMoney.y/2), 
+				new Vector2f(width/2, sizeOfMoney.y)));
+		
 		dynamicGuis.addAll(StringLibrary.makeItFitC(money+"", locationOfMoney, 1-locationOfMoney.x));
 	}
 	

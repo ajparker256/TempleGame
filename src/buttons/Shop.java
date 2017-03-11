@@ -66,6 +66,8 @@ public class Shop {
 	
 	protected GuiTexture selectionOutline;
 	
+	private GuiTexture background;
+	
 	public Shop() {
 		
 	}
@@ -107,14 +109,14 @@ public class Shop {
 								new Vector2f(location.x+size.x/2+StringLibrary.getWidth("UPGRADE!")/2, location.y-StringLibrary.getSize().y));
 		
 		upArrow = new GuiTexture(GuiLibrary.upArrow, new Vector2f(location.x+size.x/2, location.y+size.y+.05f*(float)DisplayManager.getAspectratio()),
-				new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+				new Vector2f(.03f, .03f*(float)DisplayManager.getAspectratio()));
 		
 		upArrowHitbox = new Button(new Vector2f(upArrow.getPosition().x-upArrow.getScale().x/2, upArrow.getPosition().y+upArrow.getScale().y/2),
 				new Vector2f(upArrow.getPosition().x+upArrow.getScale().x/2, upArrow.getPosition().y-upArrow.getScale().y/2));
 		
 		
 		downArrow = new GuiTexture(GuiLibrary.downArrow, new Vector2f(location.x+size.x/2, location.y-StringLibrary.getSize().y-.05f*(float)DisplayManager.getAspectratio()), 
-				new Vector2f(.05f, .05f*(float)DisplayManager.getAspectratio()));
+				new Vector2f(.03f, .03f*(float)DisplayManager.getAspectratio()));
 		
 		downArrowHitbox = new Button(new Vector2f(downArrow.getPosition().x-downArrow.getScale().x/2, downArrow.getPosition().y+downArrow.getScale().y/2),
 				new Vector2f(downArrow.getPosition().x+downArrow.getScale().x/2, downArrow.getPosition().y-downArrow.getScale().y/2));
@@ -125,6 +127,13 @@ public class Shop {
 				location.y+size.y-StringLibrary.getSize().y));
 		
 		shopHitbox = new Button(new Vector2f(location.x, location.y+size.y), new Vector2f(location.x+size.x, location.y));
+		
+		float dispYH =  (float)(-.0108*DisplayManager.getAspectratio());
+		float mult = 11/(float)13;
+		
+		background = new GuiTexture(GuiLibrary.blankBackground, 
+				new Vector2f(location.x+size.x/2, location.y+size.y/2 + dispYH),
+				new Vector2f(size.x/2, size.y * mult));
 		
 		updateShopPosition();
 	}
@@ -185,6 +194,7 @@ public class Shop {
 	//This renders all traps in the shop at their given locations.
 	public void render(ArrayList<GuiTexture> guis) {
 		if(isOn) {
+			guis.add(background);
 			if(visibilityRange[2] != 0) {
 				guis.add(downArrow);
 			}

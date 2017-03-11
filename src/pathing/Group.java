@@ -28,7 +28,6 @@ public class Group {
 	private int nextPos;
 	private int direction;
 	private boolean busy;
-	private boolean wait;
 	private int squadId;
 	private int floor;
 	protected Point realLoc;
@@ -49,10 +48,6 @@ public class Group {
 		this.realLoc = realLoc;
 	}
 
-	public boolean getWait() {
-		return wait;
-	}
-
 	public Group(int id, Vector2f loc) {
 		collectedModifiers = new ArrayList<PathModifier>();
 		this.speedBonus=0;
@@ -60,7 +55,6 @@ public class Group {
 		this.speedMod=1f;
 		location=new Vector2f(loc.x, loc.y);
 		location.y-=0.1f;
-		wait=false;
 		busy=false;
 		nextLoc=new Point(0,0);
 		realLoc=nextLoc;
@@ -99,7 +93,6 @@ public class Group {
 		}
 		//if done with everything resets busy to false so squad can move on
 		busy=false;
-		wait=true;
 		
 		return !isCurrentlyInteracting;
 	}
@@ -249,10 +242,6 @@ public class Group {
 		return false;
 	}
 
-	public void setWait(boolean wait) {
-		this.wait=wait;
-		
-	}
 	
 	public boolean getFlee() {
 		return flee;

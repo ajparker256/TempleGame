@@ -82,14 +82,18 @@ public class PageLibrary {
 	private static void initializeExplorers(Vector2f location, Vector2f size) {
 		basicExplorer = new Page(location, size, "Explorer", "Having had an unfulfilling life so far, this person is on a quest for greatness."
 				+ " With no exceptional abilities of any kind, they are just there to steal the glory. As time passes though, they develop" 
-				+ " useful skills.", GuiLibrary.explorerStanding);
+				+ " useful skills.", GuiLibrary.explorerStanding, true);
 		athlete = new Page(location, size, "Athlete", "After years of hard work, this person has learned how to get moving."
-				+ " They are the drill sergeants of the squad. The speed of everyone is increased when they join the party.", GuiLibrary.athleteStanding);
-		miner = new Page(location, size, "Miner", "This person excels at breaking down dirt. That's it.", GuiLibrary.minerStanding);
+				+ " They are the drill sergeants of the squad. The speed of everyone is increased when they join the party.", 
+				GuiLibrary.athleteStanding, true);
+		miner = new Page(location, size, "Miner", "This person excels at breaking down dirt. That's it.", 
+				GuiLibrary.minerStanding, true);
 		treasureFinder = new Page(location, size, "Treasure Finder", "Born with a passion for money, the treasure finder is a person dedicated to greed"
-				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", GuiLibrary.treasureFinderStanding);
+				+ " Whether the treasure is behind a wall of spikes, or at the bottom of a cliff, they will pursue it no matter what.", 
+				GuiLibrary.treasureFinderStanding, true);
 		exploder = new Page(location, size, "Demolition Expert", "If you thought deadly traps weren't enough, this guy enjoys firing explosives" 
-				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure", GuiLibrary.tntManStanding);
+				+ " at close proximity to his team. Explosives deal damage to adjacent tiles dealing heavy damage, destroying anything too flimsy like treasure",
+				GuiLibrary.tntManStanding, true);
 		
 		explorers.add(basicExplorer);
 		explorers.add(athlete);
@@ -102,13 +106,17 @@ public class PageLibrary {
 	
 	private static void initializeTraps(Vector2f location, Vector2f size) {
 		tikiTrap = new Page(location, size, "Tiki Trap", "This trap releases intense bursts of heat on unwary explorers."
-				+ " It sets fire to every tile around it in its basic form. Strong area of effect unit.", GuiLibrary.tikiTrap);
+				+ " It sets fire to every tile around it in its basic form. Strong area of effect unit.", 
+				GuiLibrary.tikiTrap, false);
 		arrowTrap = new Page(location, size, "Arrow Trap", "Death, destruction, and devastation is the motto of this trap's creator."
-				+ " This trap fires at long ranges dealing moderate amounts of damage. It cannot fire through other things though.", GuiLibrary.arrowTrap1);
+				+ " This trap fires at long ranges dealing moderate amounts of damage. It cannot fire through other things though.",
+				GuiLibrary.arrowTrap1, false);
 		treasureTrap = new Page(location, size, "Treasure Chest", "This sealed vault of money will generate more over time. If an explorer" 
-				+ " reaches it though, they will have more funding for their expiditions. Treasure finders are attracted to this trap.", GuiLibrary.treasureClosed);
+				+ " reaches it though, they will have more funding for their expiditions. Treasure finders are attracted to this trap.",
+				GuiLibrary.treasureClosed, false);
 		cursedIdolTrap = new Page(location, size, "Cursed Idol", "As greedy explorers pick up this trap, a curse fills their minds. This trap"
-				+ " causes explorers to bend to your will in exchange for funding their expidition a small amount.", GuiLibrary.idolOnBlank);
+				+ " causes explorers to bend to your will in exchange for funding their expidition a small amount.",
+				GuiLibrary.idolOnBlank, false);
 		
 		traps.add(tikiTrap);
 		traps.add(arrowTrap);

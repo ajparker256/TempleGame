@@ -67,9 +67,9 @@ public class Squad {
 	
 	public Point getNextLoc(Grid currentFloor) {
 		System.out.println("Squad is finding nextLoc");
-		Point nextLoc= path.get(0);
+		Point nextLoc = path.get(0);
 		double rand = Math.random();
-		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y)/*, squadId*/);
+		Tile[] moves = currentFloor.getAdjacent(new Vector2f(nextLoc.x, nextLoc.y));
 		
 		//Guarentees that the units don't miss the exit
 		for(Tile t : moves) {
@@ -132,6 +132,14 @@ public class Squad {
 		}
 	}
 	
+	private void flee() {
+		
+		toBeRemoved = path.remove(0);
+		for(Group group:groups){
+			group.setFlee(true);
+		}
+	}
+	
 	//given floor is from the front of the squad
 	public void tick(long milli, Grid givenFloor){
 		if(previousFloor == null) {
@@ -143,13 +151,29 @@ public class Squad {
 			dead.add(gatherDead(currentGroup));
 			gatherNewPathModifiers(currentGroup);
 		}
-		groups.removeAll(dead);
+		if(!dead.isEmpty()) {
+			for(Group deadGroup : dead) {
+				int placement = groups.indexOf(deadGroup);
+				for(int i = 0; i < placement; i++) {
+					groups.get(i);
+				}
+			}
+			
+			groups.removeAll(dead);
+			
+		}
 
 		if(moveUntilCannot(milli, givenFloor)){
 			if(rotating){
-				Point tempNextLoc=(getNextLoc(givenFloor));
+				Point tempNextLoc=getNextLoc(givenFloor);
+				System.out.println("X: " + tempNextLoc.x + " Y: " + tempNextLoc.y);
 				if(isNotFirstTime) {
-					path.add(0,tempNextLoc);
+					if(!path.get(0).equals(tempNextLoc)) {
+						path.add(0,tempNextLoc);
+					} else {
+						flee();
+					}
+					
 				} else {
 					isNotFirstTime = true;
 				}
@@ -157,10 +181,7 @@ public class Squad {
 				if(path.size()>groups.size()+2){
 					if(Mouse.isButtonDown(1)){
 						path.remove(0);
-						toBeRemoved = path.remove(0);
-						for(Group group:groups){
-							group.setFlee(true);
-						}
+						flee();
 					}else{
 						toBeRemoved = new Point(-1,-1);
 						for(Group group:groups){
@@ -174,7 +195,6 @@ public class Squad {
 					//+1 is the tile the last person is currently leaving, +2 is the one that is out of use
 					if(groups.size()+2<path.size() && !group.getFlee() && previousFloor.getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).getOccupied() > -2) {
 						previousFloor.getTile(path.get(groups.size()+2).x, path.get(groups.size()+2).y).setOccupied(-1);
-						System.out.println("Cleaning up occupied locs");
 					} else if(group.getFlee() && toBeRemoved.x != -1) {
 						previousFloor.getTile(toBeRemoved.x, toBeRemoved.y).setOccupied(-1); 
 						toBeRemoved = new Point();
@@ -200,8 +220,7 @@ public class Squad {
 				for(Group group: groups){
 					i++;
 					if(i<path.size()){
-						group.setNextLoc(path.get(i));
-						group.setWait(false);
+						group.setNextLoc(path.get(i)); //PATH GETS SET HERE
 					}
 				}
 					
